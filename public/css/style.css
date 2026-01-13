@@ -1,65 +1,92 @@
+:root {
+  --primary: #00d2d4;
+  --primary-dark: #00a0a2;
+  --danger: #ff4757;
+  --text: #222;
+  --gray: #555;
+}
+
 body {
-    font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish', sans-serif;
 }
+
 .header {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-    font-size: 16px; 
-}
-.container {
-    width: 90%;
-    margin: auto;
+  z-index: 1000;
 }
 
-.header__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
+.logo-img {
+  max-height: 70px;
+  width: auto;
+}
+.logo_container {
+  padding-left: 20px; 
+}
+.header-search input:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-/* =================================================== NAV ================================================================= */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.header-search button:hover {
+  background: var(--primary-dark) !important;
+  transition: background 0.2s;
 }
-.logo img {
-    width: 134px;
-    height: auto;
-}
-.nav__menu {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-}
-.nav__menu a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 600; 
-    font-size: 16px; 
-}
-.nav__menu a:hover {
-    color: #f5a623;
-}
-.header__icons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 25px;
-    cursor: pointer;
-}
+
 .cart {
-    position: relative;
+  position: relative;
 }
-.badge {
-    position: absolute;
-    top: -6px;
-    right: -8px;
-    background: red;
-    color: #fff;
-    font-size: 13px;
-    padding: 3px 7px;
-    font-weight: 700;
-    border-radius: 50%;
+
+.cart-count {
+  top: -6px;
+  right: -10px;
+  font-size: 0.75rem;
+  min-width: 20px;
+  height: 20px;
+  line-height: 1.1;
+}
+
+.user-menu a:hover,
+.nav-link:hover,
+.dropdown-item:hover {
+  color: var(--primary) !important;
+}
+
+.nav-list {
+  height: 56px;
+}
+
+.nav-link {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.05rem;
+  padding: 0 0.75rem;
+  line-height: 56px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  animation: fadeIn 0.2s;
+}
+
+.dropdown-menu {
+  display: none;
+  min-width: 220px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 991px) {
+  .logo-img { max-height: 55px; }
+  .header-actions { justify-content: center !important; margin-top: 12px; }
+  .nav-list { 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    padding: 12px 0;
+  }
+  .nav-link { line-height: 1.8; padding: 8px 16px; }
 }
