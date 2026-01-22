@@ -27,7 +27,8 @@
   <link href="public/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Template Stylesheet -->
-  <link href="public/css/style.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!-- <link href="public/css/style.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -59,7 +60,7 @@
     </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
-        <a href="index.php" class="navbar-brand">
+        <a href="index.html" class="navbar-brand">
           <h1 class="text-primary display-6">Fruitables</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -68,9 +69,9 @@
         </button>
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="index.php" class="nav-item nav-link active">Home</a>
-            <a href="app/views/products.php" class="nav-item nav-link active">Sản phẩm</a>
-            <a href="app/views/product-detail.php" class="nav-item nav-link">Shop Detail</a>
+            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="shop.html" class="nav-item nav-link">Shop</a>
+            <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -80,7 +81,7 @@
                 <a href="404.html" class="dropdown-item">404 Page</a>
               </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+            <a href="contact.html" class="nav-item nav-link">Contact</a>
           </div>
           <div class="d-flex m-3 me-0">
             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
@@ -107,12 +108,12 @@
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content rounded-0">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tìm kiếm sản phẩm</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body d-flex align-items-center">
           <div class="input-group w-75 mx-auto d-flex">
-            <input type="search" class="form-control p-3" placeholder="Nhập từ khóa tìm kiếm..." aria-describedby="search-icon-1">
+            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
             <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
           </div>
         </div>
@@ -141,7 +142,7 @@
           <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item active rounded">
-                <img src="public/img/hero-img-1.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                <img src="public/img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                 <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
               </div>
               <div class="carousel-item rounded">
