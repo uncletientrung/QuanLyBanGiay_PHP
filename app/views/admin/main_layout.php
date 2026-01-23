@@ -1,48 +1,20 @@
-<!doctype html>
-<html lang="en">
+<?php
+require_once __DIR__ . '/inc/_global/config.php';
+require_once __DIR__ . '/inc/backend/config.php';
+$dm->assets_folder = '/QuanLyBanGiay_PHP/public/admin';
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Quản lý cửa hàng giày</title>
-    <link rel="stylesheet" id="css-main" href="<?php echo APP_PATH; ?>public/css/dashmix.min.css">
-    <link rel="stylesheet" href="<?php echo APP_PATH; ?>public/css/custom.css">
-    <script src="<?php echo APP_PATH; ?>public/js/lib/jquery.min.js"></script>
-</head>
+require __DIR__ . '/inc/_global/views/head_start.php';
+require __DIR__ . '/inc/_global/views/head_end.php';
+require __DIR__ . '/inc/_global/views/page_start.php';
 
-<body>
-    <div id="page-container" class="sidebar-o sidebar-light enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+// Kiểm tra và include nội dung
+$targetFile = __DIR__ . '/pages/' . $viewContent . '.php';
+if (file_exists($targetFile)) {
+    include $targetFile;
+} else {
+    echo "<div class='content'><h2>Trang $viewContent đang xây dựng...</h2></div>";
+}
 
-        <!-- SIDEBAR -->
-        <?php
-        // Truyền biến $page cho sidebar để active đúng menu
-        $current_page = isset($page) ? $page : 'dashboard';
-        include "partials/sidebar.php";
-        ?>
-
-        <!-- HEADER -->
-        <?php include "partials/header.php"; ?>
-
-        <!-- MAIN CONTENT -->
-        <main id="main-container">
-            <div class="content">
-                <?php
-                // Đường dẫn đầy đủ đến file trang
-                $page_path = __DIR__ . "/pages/" . $page . ".php";
-
-                if (file_exists($page_path)) {
-                    include_once $page_path;
-                } else {
-                    echo "<div class='alert alert-danger'>Trang không tồn tại!</div>";
-                }
-                ?>
-            </div>
-        </main>
-
-    </div>
-
-    <!-- SCRIPTS -->
-    <script src="<?php echo APP_PATH; ?>public/js/dashmix.app.min.js"></script>
-</body>
-
-</html>
+require __DIR__ . '/inc/_global/views/page_end.php';
+require __DIR__ . '/inc/_global/views/footer_start.php';
+require __DIR__ . '/inc/_global/views/footer_end.php';
