@@ -2,7 +2,7 @@
 Vũ trụ giày
 
 
-# Phân công nhiệm vụ bên phân User (Những thứ trước mắt cần làm)
+# Phân công nhiệm vụ bên phần User (Những thứ trước mắt cần làm)
 | Thành viên | Partial |Các Page | 
 |---------|-----|----------|
 | Nguyễn Tiến Trung | Header | Home, Giới thiệu, Product, Liên hệ, Kiểm tra đơn hàng, Đặt đơn hàng khi đang trong giỏ, Đăng nhập, đăng xuất|
