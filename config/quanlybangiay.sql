@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 09, 2026 lúc 01:23 PM
+-- Thời gian đã tạo: Th1 24, 2026 lúc 04:17 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -198,7 +198,7 @@ CREATE TABLE `sanpham` (
   `loai` int(11) NOT NULL,
   `gioitinh` int(1) NOT NULL,
   `gianhap` decimal(15,0) NOT NULL,
-  `giaxuat` decimal(15,0) NOT NULL,
+  `tyleloinhuan` double NOT NULL DEFAULT 0,
   `hang` int(11) NOT NULL,
   `mau` int(11) NOT NULL,
   `motasp` varchar(255) NOT NULL,
