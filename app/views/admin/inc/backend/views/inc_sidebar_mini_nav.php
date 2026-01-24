@@ -1,4 +1,5 @@
 <?php
+
 /**
  * backend/views/inc_sidebar_mini_nav.php
  *
@@ -41,7 +42,7 @@
       <a class="mini-nav-item" href="be_pages_generic_profile.php">
         <i class="fa fa-cog fs-sm"></i>
       </a>
-      <a class="mini-nav-item" href="op_auth_signin.php">
+      <a class="mini-nav-item" href="<?php echo APP_PATH; ?>admin/signin">
         <i class="fa fa-lock fs-sm"></i>
       </a>
     </nav>
@@ -74,7 +75,7 @@
             <i class="fa fa-toggle-off" id="sidebar-style-toggler"></i>
           </button>
           <!-- END Toggle Sidebar Style -->
-          
+
           <!-- Dark Mode -->
           <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
           <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="class-toggle" data-target="#dark-mode-toggler" data-class="far fa" onclick="Dashmix.layout('dark_mode_toggle');">

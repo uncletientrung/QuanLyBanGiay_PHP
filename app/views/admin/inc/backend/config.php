@@ -49,7 +49,7 @@ $dm->main_nav                   = array(
         'name'  => 'Dashboard',
         'icon'  => 'fa fa-location-arrow',
         'badge' => array(8, 'primary'),
-        'url'   => 'be_pages_dashboard.php'
+        'url'   => APP_PATH . 'admin/dashboard'
     ),
     array(
         'name'  => 'Page Kits',
@@ -1010,56 +1010,16 @@ $dm->main_nav                   = array(
         'icon'  => 'fa fa-user-friends',
         'sub'   => array(
             array(
-                'name'  => 'All',
-                'url'   => 'be_pages_auth_all.php'
-            ),
-            array(
                 'name'  => 'Sign In',
-                'url'   => 'op_auth_signin.php'
-            ),
-            array(
-                'name'  => 'Sign In Box',
-                'url'   => 'op_auth_signin_box.php'
-            ),
-            array(
-                'name'  => 'Sign In Box Alt',
-                'url'   => 'op_auth_signin_box_alt.php'
+                'url'   => APP_PATH . 'admin/signin'
             ),
             array(
                 'name'  => 'Sign Up',
-                'url'   => 'op_auth_signup.php'
-            ),
-            array(
-                'name'  => 'Sign Up Box',
-                'url'   => 'op_auth_signup_box.php'
-            ),
-            array(
-                'name'  => 'Sign Up Box Alt',
-                'url'   => 'op_auth_signup_box_alt.php'
-            ),
-            array(
-                'name'  => 'Lock Screen',
-                'url'   => 'op_auth_lock.php'
-            ),
-            array(
-                'name'  => 'Lock Screen Box',
-                'url'   => 'op_auth_lock_box.php'
-            ),
-            array(
-                'name'  => 'Lock Screen Box Alt',
-                'url'   => 'op_auth_lock_box_alt.php'
+                'url'   => APP_PATH . 'admin/signup'
             ),
             array(
                 'name'  => 'Pass Reminder',
-                'url'   => 'op_auth_reminder.php'
-            ),
-            array(
-                'name'  => 'Pass Reminder Box',
-                'url'   => 'op_auth_reminder_box.php'
-            ),
-            array(
-                'name'  => 'Pass Reminder Box Alt',
-                'url'   => 'op_auth_reminder_box_alt.php'
+                'url'   => APP_PATH . 'admin/reminder'
             )
         )
     ),
@@ -1068,32 +1028,8 @@ $dm->main_nav                   = array(
         'icon'  => 'fa fa-ghost',
         'sub'    => array(
             array(
-                'name'  => 'All',
-                'url'   => 'be_pages_error_all.php'
-            ),
-            array(
-                'name'  => '400',
-                'url'   => 'op_error_400.php'
-            ),
-            array(
-                'name'  => '401',
-                'url'   => 'op_error_401.php'
-            ),
-            array(
-                'name'  => '403',
-                'url'   => 'op_error_403.php'
-            ),
-            array(
-                'name'  => '404',
-                'url'   => 'op_error_404.php'
-            ),
-            array(
-                'name'  => '500',
-                'url'   => 'op_error_500.php'
-            ),
-            array(
-                'name'  => '503',
-                'url'   => 'op_error_503.php'
+                'name'  => 'Error 404',
+                'url'   => APP_PATH . 'admin/error_404'
             )
         )
     ),

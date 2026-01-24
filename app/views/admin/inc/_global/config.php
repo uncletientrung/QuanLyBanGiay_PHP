@@ -18,7 +18,7 @@ require_once __DIR__ . '/../_classes/Template.php';
 // **************************************************************************************************
 
 //                              : Name, version and assets folder's name
-$dm = new Template('Dashmix', '5.5', '/QuanLyBanGiay_PHP/public/admin');
+$dm = new Template('Dashmix', '5.5', '/QuanLyBanGiay_PHP/public');
 
 
 // **************************************************************************************************

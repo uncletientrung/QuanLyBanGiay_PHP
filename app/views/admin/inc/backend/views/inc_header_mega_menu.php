@@ -1,4 +1,5 @@
 <?php
+
 /**
  * backend/views/inc_header_mega_menu.php
  *
@@ -273,7 +274,7 @@
             <!-- END Side Overlay -->
 
             <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="op_auth_signin.php">
+            <a class="dropdown-item" href="<?php echo APP_PATH; ?>admin/signin">
               <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i> Sign Out
             </a>
           </div>
