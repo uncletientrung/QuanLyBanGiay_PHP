@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 25, 2026 at 07:00 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th1 24, 2026 lúc 04:17 AM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `quanlybangiay`
+-- Cơ sở dữ liệu: `quanlybangiay`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Cấu trúc bảng cho bảng `admin`
 --
 
 CREATE TABLE `admin` (
@@ -38,14 +38,13 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ctdonhang`
+-- Cấu trúc bảng cho bảng `ctdonhang`
 --
 
 CREATE TABLE `ctdonhang` (
   `madh` int(11) NOT NULL,
   `masp` int(11) NOT NULL,
   `masize` int(11) NOT NULL,
-  `mamau` int(11) NOT NULL,
   `soluong` int(11) NOT NULL,
   `dongia` decimal(12,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -53,7 +52,7 @@ CREATE TABLE `ctdonhang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ctphieunhap`
+-- Cấu trúc bảng cho bảng `ctphieunhap`
 --
 
 CREATE TABLE `ctphieunhap` (
@@ -67,7 +66,7 @@ CREATE TABLE `ctphieunhap` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donhang`
+-- Cấu trúc bảng cho bảng `donhang`
 --
 
 CREATE TABLE `donhang` (
@@ -83,21 +82,19 @@ CREATE TABLE `donhang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `giohang`
+-- Cấu trúc bảng cho bảng `giohang`
 --
 
 CREATE TABLE `giohang` (
   `makh` int(11) NOT NULL,
   `masp` int(11) NOT NULL,
-  `mamau` int(11) NOT NULL,
-  `masize` int(11) NOT NULL,
   `soluong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hang`
+-- Cấu trúc bảng cho bảng `hang`
 --
 
 CREATE TABLE `hang` (
@@ -109,33 +106,20 @@ CREATE TABLE `hang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hinhanh`
+-- Cấu trúc bảng cho bảng `hinhanh`
 --
 
 CREATE TABLE `hinhanh` (
   `mahinhanh` int(11) NOT NULL,
   `masp` int(11) NOT NULL,
   `path` varchar(255) NOT NULL,
-  `ismain` int(1) NOT NULL,
-  `mamau` int(11) DEFAULT NULL
+  `ismain` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Triggers `hinhanh`
---
-DELIMITER $$
-CREATE TRIGGER `trg_hinhanh_ismain` BEFORE UPDATE ON `hinhanh` FOR EACH ROW BEGIN
-  IF NEW.ismain = 1 THEN
-    UPDATE hinhanh SET ismain = 0 WHERE masp = NEW.masp AND mahinhanh != NEW.mahinhanh;
-  END IF;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `khachhang`
+-- Cấu trúc bảng cho bảng `khachhang`
 --
 
 CREATE TABLE `khachhang` (
@@ -152,7 +136,7 @@ CREATE TABLE `khachhang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loai`
+-- Cấu trúc bảng cho bảng `loai`
 --
 
 CREATE TABLE `loai` (
@@ -164,7 +148,7 @@ CREATE TABLE `loai` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mau`
+-- Cấu trúc bảng cho bảng `mau`
 --
 
 CREATE TABLE `mau` (
@@ -176,7 +160,7 @@ CREATE TABLE `mau` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nhacungcap`
+-- Cấu trúc bảng cho bảng `nhacungcap`
 --
 
 CREATE TABLE `nhacungcap` (
@@ -190,7 +174,7 @@ CREATE TABLE `nhacungcap` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `phieunhap`
+-- Cấu trúc bảng cho bảng `phieunhap`
 --
 
 CREATE TABLE `phieunhap` (
@@ -205,7 +189,7 @@ CREATE TABLE `phieunhap` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanpham`
+-- Cấu trúc bảng cho bảng `sanpham`
 --
 
 CREATE TABLE `sanpham` (
@@ -216,56 +200,45 @@ CREATE TABLE `sanpham` (
   `gianhap` decimal(15,0) NOT NULL,
   `tyleloinhuan` double NOT NULL DEFAULT 0,
   `hang` int(11) NOT NULL,
-  `motasp` text NOT NULL,
+  `mau` int(11) NOT NULL,
+  `motasp` varchar(255) NOT NULL,
+  `soluongtonkho` int(11) NOT NULL,
+  `soluongdaban` int(11) NOT NULL,
   `trangthai` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanphambienthe`
---
-
-CREATE TABLE `sanphambienthe` (
-  `id` int(11) NOT NULL,
-  `masp` int(11) NOT NULL,
-  `mamau` int(11) NOT NULL,
-  `masize` int(11) NOT NULL,
-  `soluongtonkho` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `size`
+-- Cấu trúc bảng cho bảng `size`
 --
 
 CREATE TABLE `size` (
   `masize` int(11) NOT NULL,
-  `tensize` int(11) NOT NULL
+  `masp` int(11) NOT NULL,
+  `soluong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `admin`
+-- Chỉ mục cho bảng `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`maadmin`);
 
 --
--- Indexes for table `ctdonhang`
+-- Chỉ mục cho bảng `ctdonhang`
 --
 ALTER TABLE `ctdonhang`
   ADD KEY `FK_ctdonhang_dh` (`madh`),
   ADD KEY `FK_ctdonhang_sp` (`masp`),
-  ADD KEY `FK_ctdonhang_size` (`masize`),
-  ADD KEY `FK_ctdonhang_mau` (`mamau`);
+  ADD KEY `FK_ctdonhang_size` (`masize`);
 
 --
--- Indexes for table `ctphieunhap`
+-- Chỉ mục cho bảng `ctphieunhap`
 --
 ALTER TABLE `ctphieunhap`
   ADD KEY `FK_ctphieunhap_phieunhap` (`mapn`),
@@ -273,61 +246,57 @@ ALTER TABLE `ctphieunhap`
   ADD KEY `FK_ctphieunhap_size` (`masize`);
 
 --
--- Indexes for table `donhang`
+-- Chỉ mục cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   ADD PRIMARY KEY (`madh`),
   ADD KEY `FK_donhang_khachhang` (`makh`);
 
 --
--- Indexes for table `giohang`
+-- Chỉ mục cho bảng `giohang`
 --
 ALTER TABLE `giohang`
-  ADD PRIMARY KEY (`makh`,`masp`,`mamau`,`masize`),
   ADD KEY `FK_giohang_khachhang` (`makh`),
-  ADD KEY `FK_giohang_sanpham` (`masp`),
-  ADD KEY `FK_giohang_mau` (`mamau`),
-  ADD KEY `FK_giohang_size` (`masize`);
+  ADD KEY `FK_giohang_sanpham` (`masp`);
 
 --
--- Indexes for table `hang`
+-- Chỉ mục cho bảng `hang`
 --
 ALTER TABLE `hang`
   ADD PRIMARY KEY (`mahang`);
 
 --
--- Indexes for table `hinhanh`
+-- Chỉ mục cho bảng `hinhanh`
 --
 ALTER TABLE `hinhanh`
-  ADD PRIMARY KEY (`mahinhanh`),
-  ADD KEY `fk_hinhanh_mau` (`mamau`);
+  ADD PRIMARY KEY (`mahinhanh`);
 
 --
--- Indexes for table `khachhang`
+-- Chỉ mục cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`makh`);
 
 --
--- Indexes for table `loai`
+-- Chỉ mục cho bảng `loai`
 --
 ALTER TABLE `loai`
   ADD PRIMARY KEY (`maloai`);
 
 --
--- Indexes for table `mau`
+-- Chỉ mục cho bảng `mau`
 --
 ALTER TABLE `mau`
   ADD PRIMARY KEY (`mamau`);
 
 --
--- Indexes for table `nhacungcap`
+-- Chỉ mục cho bảng `nhacungcap`
 --
 ALTER TABLE `nhacungcap`
   ADD PRIMARY KEY (`mancc`);
 
 --
--- Indexes for table `phieunhap`
+-- Chỉ mục cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
   ADD PRIMARY KEY (`mapn`),
@@ -335,113 +304,95 @@ ALTER TABLE `phieunhap`
   ADD KEY `FK_phieunhap_nhacungcap` (`mancc`);
 
 --
--- Indexes for table `sanpham`
+-- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  ADD PRIMARY KEY (`masp`),
-  ADD KEY `FK_sanpham_loai` (`loai`),
-  ADD KEY `FK_sanpham_hang` (`hang`);
+  ADD PRIMARY KEY (`masp`);
 
 --
--- Indexes for table `sanphambienthe`
---
-ALTER TABLE `sanphambienthe`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uk_variant` (`masp`,`mamau`,`masize`),
-  ADD KEY `fk_spct_mau` (`mamau`),
-  ADD KEY `fk_spct_size` (`masize`);
-
---
--- Indexes for table `size`
+-- Chỉ mục cho bảng `size`
 --
 ALTER TABLE `size`
-  ADD PRIMARY KEY (`masize`);
+  ADD PRIMARY KEY (`masize`,`masp`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
   MODIFY `maadmin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `donhang`
+-- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   MODIFY `madh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hang`
+-- AUTO_INCREMENT cho bảng `hang`
 --
 ALTER TABLE `hang`
   MODIFY `mahang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `hinhanh`
+-- AUTO_INCREMENT cho bảng `hinhanh`
 --
 ALTER TABLE `hinhanh`
   MODIFY `mahinhanh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `khachhang`
+-- AUTO_INCREMENT cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
   MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `loai`
+-- AUTO_INCREMENT cho bảng `loai`
 --
 ALTER TABLE `loai`
   MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `mau`
+-- AUTO_INCREMENT cho bảng `mau`
 --
 ALTER TABLE `mau`
   MODIFY `mamau` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `nhacungcap`
+-- AUTO_INCREMENT cho bảng `nhacungcap`
 --
 ALTER TABLE `nhacungcap`
   MODIFY `mancc` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `phieunhap`
+-- AUTO_INCREMENT cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
   MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sanpham`
+-- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `sanphambienthe`
---
-ALTER TABLE `sanphambienthe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `ctdonhang`
+-- Các ràng buộc cho bảng `ctdonhang`
 --
 ALTER TABLE `ctdonhang`
   ADD CONSTRAINT `FK_ctdonhang_dh` FOREIGN KEY (`madh`) REFERENCES `donhang` (`madh`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ctdonhang_mau` FOREIGN KEY (`mamau`) REFERENCES `mau` (`mamau`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ctdonhang_size` FOREIGN KEY (`masize`) REFERENCES `size` (`masize`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ctdonhang_sp` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `ctphieunhap`
+-- Các ràng buộc cho bảng `ctphieunhap`
 --
 ALTER TABLE `ctphieunhap`
   ADD CONSTRAINT `FK_ctphieunhap_phieunhap` FOREIGN KEY (`mapn`) REFERENCES `phieunhap` (`mapn`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -449,47 +400,24 @@ ALTER TABLE `ctphieunhap`
   ADD CONSTRAINT `FK_ctphieunhap_size` FOREIGN KEY (`masize`) REFERENCES `size` (`masize`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `donhang`
+-- Các ràng buộc cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   ADD CONSTRAINT `FK_donhang_khachhang` FOREIGN KEY (`makh`) REFERENCES `khachhang` (`makh`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `giohang`
+-- Các ràng buộc cho bảng `giohang`
 --
 ALTER TABLE `giohang`
   ADD CONSTRAINT `FK_giohang_khachhang` FOREIGN KEY (`makh`) REFERENCES `khachhang` (`makh`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_giohang_mau` FOREIGN KEY (`mamau`) REFERENCES `mau` (`mamau`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_giohang_sanpham` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_giohang_size` FOREIGN KEY (`masize`) REFERENCES `size` (`masize`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_giohang_sanpham` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `hinhanh`
---
-ALTER TABLE `hinhanh`
-  ADD CONSTRAINT `fk_hinhanh_mau` FOREIGN KEY (`mamau`) REFERENCES `mau` (`mamau`);
-
---
--- Constraints for table `phieunhap`
+-- Các ràng buộc cho bảng `phieunhap`
 --
 ALTER TABLE `phieunhap`
   ADD CONSTRAINT `FK_phieunhap_admin` FOREIGN KEY (`maadmin`) REFERENCES `admin` (`maadmin`) ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_phieunhap_nhacungcap` FOREIGN KEY (`mancc`) REFERENCES `nhacungcap` (`mancc`) ON UPDATE CASCADE;
-
---
--- Constraints for table `sanpham`
---
-ALTER TABLE `sanpham`
-  ADD CONSTRAINT `FK_sanpham_hang` FOREIGN KEY (`hang`) REFERENCES `hang` (`mahang`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_sanpham_loai` FOREIGN KEY (`loai`) REFERENCES `loai` (`maloai`) ON UPDATE CASCADE;
-
---
--- Constraints for table `sanphambienthe`
---
-ALTER TABLE `sanphambienthe`
-  ADD CONSTRAINT `fk_spct_mau` FOREIGN KEY (`mamau`) REFERENCES `mau` (`mamau`),
-  ADD CONSTRAINT `fk_spct_size` FOREIGN KEY (`masize`) REFERENCES `size` (`masize`),
-  ADD CONSTRAINT `fk_spct_sp` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
