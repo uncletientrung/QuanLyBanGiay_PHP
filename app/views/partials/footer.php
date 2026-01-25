@@ -47,7 +47,7 @@
             <a class="btn-link" href="">Contact Us</a>
             <a class="btn-link" href="">Privacy Policy</a>
             <a class="btn-link" href="">Terms & Condition</a>
-            <a class="btn-link" href="">Return Policy</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>chinhsachdoitra">Return Policy</a>
             <a class="btn-link" href="">FAQs & Help</a>
           </div>
         </div>

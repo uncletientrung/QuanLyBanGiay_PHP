@@ -36,4 +36,11 @@ if ($uri == 'login') {
     require VIEW_PATH_DIR . 'login.php';
     exit;
 }
+if ($uri == 'chinhsachdoitra') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'chinhsachdoitra.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+
 require VIEW_PATH_DIR . '404.php';
