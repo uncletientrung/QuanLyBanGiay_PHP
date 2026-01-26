@@ -32,10 +32,10 @@
                   <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Đăng nhập
                 </button>
                 <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
-                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/reminder">
+                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/auth/reminder">
                     <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> Quên mật khẩu
                   </a>
-                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/signup">
+                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/auth/signup">
                     <i class="fa fa-plus opacity-50 me-1"></i> Tạo tài khoản
                   </a>
                 </p>

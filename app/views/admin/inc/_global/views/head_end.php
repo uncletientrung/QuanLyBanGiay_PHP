@@ -1,4 +1,5 @@
 <?php
+
 /**
  * head_end.php
  *
@@ -12,15 +13,15 @@
  */
 ?>
 
-  <!-- Dashmix framework -->
-  <link rel="stylesheet" id="css-main" href="<?php echo $dm->assets_folder; ?>/css/dashmix.min.css">
+<!-- Dashmix framework -->
+<link rel="stylesheet" id="css-main" href="<?php echo $dm->assets_folder; ?>/css/dashmix.min.css">
 
-  <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-  <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/xwork.min.css"> -->
-  <?php if ($dm->theme) { ?>
+<!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+<!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/xwork.min.css"> -->
+<?php if ($dm->theme) { ?>
   <link rel="stylesheet" id="css-theme" href="<?php echo $dm->assets_folder; ?>/css/themes/<?php echo $dm->theme; ?>.min.css">
-  <?php } ?>
-  <!-- END Stylesheets -->
+<?php } ?>
+<!-- END Stylesheets -->
 </head>
 
 <body>

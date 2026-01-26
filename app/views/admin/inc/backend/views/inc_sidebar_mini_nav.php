@@ -42,7 +42,7 @@
       <a class="mini-nav-item" href="be_pages_generic_profile.php">
         <i class="fa fa-cog fs-sm"></i>
       </a>
-      <a class="mini-nav-item" href="<?php echo APP_PATH; ?>admin/signin">
+      <a class="mini-nav-item" href="<?php echo APP_PATH; ?>admin/auth/signin">
         <i class="fa fa-lock fs-sm"></i>
       </a>
     </nav>

@@ -38,7 +38,7 @@
                   <i class="fa fa-fw fa-plus opacity-50 me-1"></i> Đăng ký
                 </button>
                 <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
-                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/signin">
+                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/auth/signin">
                     <i class="fa fa-sign-in-alt opacity-50 me-1"></i> Đăng nhập
                   </a>
                 </p>
