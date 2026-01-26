@@ -52,6 +52,33 @@ $dm->main_nav                   = array(
         'url'   => APP_PATH . 'admin/dashboard/default'
     ),
     array(
+        'name'  => 'Quản lý khách hàng',
+        'icon'  => 'fa fa-location-arrow',
+        'badge' => array(8, 'primary'),
+        'url'   => APP_PATH . 'admin/dashboard/default'
+    ),array(
+        'name'  => 'Quản lý đơn hàng',
+        'icon'  => 'fa fa-location-arrow',
+        'badge' => array(8, 'primary'),
+        'url'   => APP_PATH . 'admin/dashboard/default'
+    ),array(
+        'name'  => 'Quản lý sản phẩm',
+        'icon'  => 'fa fa-location-arrow',
+        'badge' => array(8, 'primary'),
+        'url'   => APP_PATH . 'admin/dashboard/default'
+    ),array(
+        'name'  => 'Quản lý giá bán',
+        'icon'  => 'fa fa-location-arrow',
+        'badge' => array(8, 'primary'),
+        'url'   => APP_PATH . 'admin/dashboard/default'
+    ),array(
+        'name'  => 'Quản lý nhập hàng',
+        'icon'  => 'fa fa-location-arrow',
+        'badge' => array(8, 'primary'),
+        'url'   => APP_PATH . 'admin/dashboard/default'
+    ),
+    /*
+    array(
         'name'  => 'Page Kits',
         'icon'  => 'fa fa-clone',
         'sub'   => array(
@@ -1063,4 +1090,5 @@ $dm->main_nav                   = array(
             ),
         )
     )
+    */
 );
