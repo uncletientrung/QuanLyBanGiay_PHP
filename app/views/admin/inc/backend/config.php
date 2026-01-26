@@ -49,7 +49,7 @@ $dm->main_nav                   = array(
         'name'  => 'Dashboard',
         'icon'  => 'fa fa-location-arrow',
         'badge' => array(8, 'primary'),
-        'url'   => APP_PATH . 'admin/dashboard'
+        'url'   => APP_PATH . 'admin/dashboard/default'
     ),
     array(
         'name'  => 'Page Kits',
@@ -1011,15 +1011,15 @@ $dm->main_nav                   = array(
         'sub'   => array(
             array(
                 'name'  => 'Sign In',
-                'url'   => APP_PATH . 'admin/signin'
+                'url'   => APP_PATH . 'admin/auth/signin'
             ),
             array(
                 'name'  => 'Sign Up',
-                'url'   => APP_PATH . 'admin/signup'
+                'url'   => APP_PATH . 'admin/auth/signup'
             ),
             array(
                 'name'  => 'Pass Reminder',
-                'url'   => APP_PATH . 'admin/reminder'
+                'url'   => APP_PATH . 'admin/auth/reminder'
             )
         )
     ),

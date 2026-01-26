@@ -10,6 +10,12 @@ class App
     {
         $arr = $this->UrlProcess();
 
+        // bỏ chữ admin
+        if (isset($arr[0]) && strtolower($arr[0]) == 'admin') {
+            unset($arr[0]);
+            $arr = array_values($arr);
+        }
+
         // Controller
         if ($arr != NULL) {
             $controllerName = ucfirst($arr[0]);
