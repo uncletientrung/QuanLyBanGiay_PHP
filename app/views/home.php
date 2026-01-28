@@ -1,4 +1,3 @@
-
 <!-- Banner đầu trang -->
 <div class="container-fluid py-5 mb-5 hero-header">
   <div class="container py-5">
@@ -113,22 +112,22 @@
             </li>
             <li class="nav-item">
               <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
-                <span class="text-dark" style="width: 130px;">Vegetables</span>
+                <span class="text-dark" style="width: 130px;">NIKE</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
-                <span class="text-dark" style="width: 130px;">Fruits</span>
+                <span class="text-dark" style="width: 130px;">ADIDAS</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
-                <span class="text-dark" style="width: 130px;">Bread</span>
+                <span class="text-dark" style="width: 130px;">DEPLAO</span>
               </a>
             </li>
             <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
-                <span class="text-dark" style="width: 130px;">Meat</span>
+                <span class="text-dark" style="width: 130px;">TOONG</span>
               </a>
             </li>
           </ul>
@@ -139,7 +138,56 @@
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
-                <div class="col-md-6 col-lg-4 col-xl-3">
+                <?php foreach ($products as $sp): 
+                          $giaban = $sp['gianhap'] * (1 + $sp['tyleloinhuan']);
+                      ?>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                          <div class="rounded position-relative fruite-item product-card">
+
+                            <div class="fruite-img">
+                              <img src="<?= ROOT_URL . $sp['anhchinh'] ?>" 
+                              class="img-fluid w-100 rounded-top" alt="">
+                            </div>
+
+                            <!-- HÃNG GIÀY -->
+                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                style="top: 10px; left: 10px;">
+                              <?= strtoupper($sp['tenhang']) ?>
+                            </div>
+
+                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                              <h4><?= $sp['tensp'] ?></h4>
+
+                              <p class="text-truncate">
+                                <?= $sp['motasp'] ?>
+                              </p>
+
+                              <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">
+                                  <?= number_format($giaban) ?> ₫
+                                </p>
+
+                                <a href="cart/add/<?= $sp['masp'] ?>"
+                                  class="btn border border-secondary rounded-pill px-3 text-primary">
+                                  <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                  Add to cart
+                                </a>
+                              </div>
+                            </div>
+
+                          
+
+                          </div>
+                        </div>
+                      <?php endforeach; ?>
+
+
+
+
+
+
+
+                <!-- <div class="col-md-6 col-lg-4 col-xl-3">
                   <div class="rounded position-relative fruite-item">
                     <div class="fruite-img">
                       <img src="public/img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
@@ -282,8 +330,13 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div>-->
+              </div> 
+
+
+
+
+
             </div>
           </div>
         </div>

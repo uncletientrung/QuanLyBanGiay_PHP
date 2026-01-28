@@ -5,11 +5,17 @@ $uri = trim($uri, '/');
 
 
 if ($uri == '' || $uri == '/' || $uri == 'dashboard') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'home.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+
+    require_once APP_PATH_DIR . 'core/database.php';
+    require_once APP_PATH_DIR . 'models/ProductModel.php';
+    require_once APP_PATH_DIR . 'controllers/HomeController.php';
+
+    $controller = new HomeController();
+    $controller->index();
     exit;
 }
+
+
 if ($uri == 'products') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'products.php';

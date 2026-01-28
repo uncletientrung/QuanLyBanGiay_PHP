@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2026 at 07:18 AM
+-- Generation Time: Jan 28, 2026 at 10:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -129,10 +129,54 @@ CREATE TABLE `hinhanh` (
 --
 
 INSERT INTO `hinhanh` (`mahinhanh`, `masp`, `path`, `ismain`) VALUES
-(1, 1, 'public/img/nike-mc-trainer-main.jpg', 1),
-(2, 1, 'public/img/nike-mc-trainer-1.jpg', 0),
-(3, 1, 'public/img/nike-mc-trainer-2.jpg', 0),
-(4, 1, 'public/img/nike-mc-trainer-3.jpg', 0);
+(1, 1, 'public/img/products/nike-mc-trainer-main.jpg', 1),
+(2, 1, 'public/img/products/nike-mc-trainer-2.jpg', 0),
+(3, 1, 'public/img/products/nike-mc-trainer-3.jpg', 0),
+(4, 1, 'public/img/products/nike-mc-trainer-4.jpg', 0),
+(5, 1, 'public/img/products/nike-mc-trainer-5.jpg', 0),
+(6, 1, 'public/img/products/nike-mc-trainer-6.jpg', 0),
+(7, 2, 'public\\img\\products\\nike-quest-main.jpg', 1),
+(8, 2, 'public\\img\\products\\nike-quest-1.jpg', 0),
+(9, 2, 'public\\img\\products\\nike-quest-2.jpg', 0),
+(10, 2, 'public\\img\\products\\nike-quest-3.jpg', 0),
+(11, 2, 'public\\img\\products\\nike-quest-4.jpg', 0),
+(12, 2, 'public\\img\\products\\nike-quest-5.jpg', 0),
+(13, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-01-main.jpg', 1),
+(14, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-02.jpg', 0),
+(15, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-03.jpg', 0),
+(16, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-04.jpg', 0),
+(17, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-05.jpg', 0),
+(18, 3, 'public\\img\\products\\giay-pickleball-tennis-nike-vapor-lite-3-nam-trang-den-06.jpg', 0),
+(19, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-01-main.jpg', 1),
+(20, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-02.jpg', 0),
+(21, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-03.jpg', 0),
+(22, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-04.jpg', 0),
+(23, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-05.jpg', 0),
+(24, 4, 'public\\img\\products\\giay-nike-winflo-11-nam-trang-xanh-06.jpg', 0),
+(25, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-01-main.jpg', 1),
+(26, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-02.jpg', 0),
+(27, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-03.jpg', 0),
+(28, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-04.jpg', 0),
+(29, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-05.jpg', 0),
+(30, 7, 'public\\img\\products\\giay-nike-structure-26-nu-xam-xanh-tim-06.jpg', 0),
+(31, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-01-main.jpg', 1),
+(32, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-02.jpg', 0),
+(33, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-03.jpg', 0),
+(34, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-04.jpg', 0),
+(35, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-05.jpg', 0),
+(36, 5, 'public\\img\\products\\giay-nike-run-defy-nu-trang-hong-06.jpg', 0),
+(37, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-01-main.jpg', 1),
+(38, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-02.jpg', 0),
+(39, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-03.jpg', 0),
+(40, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-04.jpg', 0),
+(41, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-05.jpg', 0),
+(42, 6, 'public\\img\\products\\giay-nike-run-defy-nam-xanh-trang-06.jpg', 0),
+(43, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg', 1),
+(44, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-02.jpg', 0),
+(45, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-03.jpg', 0),
+(46, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-04.jpg', 0),
+(47, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-05.jpg', 0),
+(48, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-06.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -187,7 +231,13 @@ CREATE TABLE `mau` (
 --
 
 INSERT INTO `mau` (`mamau`, `tenmau`, `trangthai`) VALUES
-(1, 'Trắng', 1);
+(1, 'Trắng', 1),
+(2, 'Trắng Tím', 1),
+(3, 'Trắng Xanh', 1),
+(4, 'Trắng Đen', 1),
+(5, 'Trắng Hồng', 1),
+(6, 'Trắng Đen Xanh', 1),
+(7, 'Xám Xanh Tím', 1);
 
 -- --------------------------------------------------------
 
@@ -243,7 +293,14 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`masp`, `tensp`, `loai`, `gioitinh`, `gianhap`, `tyleloinhuan`, `hang`, `mau`, `motasp`, `soluongdaban`, `trangthai`) VALUES
-(1, 'Nike MC Trainer', 1, 1, 500000, 120, 1, 1, 'Giày cực xịn do chính tay độ mixi làm ra', 0, 1);
+(1, 'Nike MC Trainer', 1, 1, 500000, 10, 1, 1, 'Giày cực xịn do chính tay độ mixi làm ra', 0, 1),
+(2, 'Nike Quest', 1, 0, 100000, 10, 1, 2, 'Giày Nike Quest 6 là mẫu giày thể thao mang phong cách hiện đại, phù hợp cho các hoạt động hàng ngày lẫn luyện tập thể chất. Thiết kế đẹp với đai ôm ở giữa bàn chân giúp giữ chân ổn định khi bạn di chuyển, mang lại cảm giác thoải mái và an toàn.', 0, 1),
+(3, 'Nike Vapor Lite Nam 3', 1, 1, 100000, 10, 1, 4, 'Giày Nike Vapor Lite 3 là phiên bản nâng cấp vượt trội dành cho các vận động viên yêu thích bộ môn tennis và pickleball. Được thiết kế để tối ưu khả năng di chuyển trên sân cứng, đôi giày này giúp bạn bứt tốc, phanh gấp và xoay người linh hoạt mà không bị', 0, 1),
+(4, 'Nike Winflo 11', 1, 1, 100000, 10, 1, 3, 'Giày Nike Air Winflo 11 là một trong những mẫu giày thể thao tốt nhất của Nike vừa được ra mắt. Với kiểu dáng cực đẹp cùng công nghệ đỉnh cao, Nike Air Winflo 11 hứa hẹn sẽ mẫu giày cực hot của Nike trong năm nay.', 0, 1),
+(5, 'Nike Run Defy Nữ', 1, 0, 100000, 10, 1, 5, 'Nike Run Defy là đôi giày thể thao dành cho những ai muốn tự định hình phong cách và tốc độ của riêng mình. Dù bạn đang tập luyện nhẹ nhàng hay chinh phục quãng đường dài, đôi giày này mang đến sự cân bằng hoàn hảo giữa độ êm ái, thoáng khí và độ bám linh', 0, 1),
+(6, 'Nike Run Defy Nam', 1, 1, 100000, 10, 1, 3, 'Nike Run Defy là đôi giày thể thao dành cho những ai muốn tự định hình phong cách và tốc độ của riêng mình. Dù bạn đang tập luyện nhẹ nhàng hay chinh phục quãng đường dài, đôi giày này mang đến sự cân bằng hoàn hảo giữa độ êm ái, thoáng khí và độ bám linh', 0, 1),
+(7, 'Nike Structure 26 Nữ', 1, 0, 100000, 0, 1, 7, 'Nike Structure 26 là mẫu giày thể thao mới nhất nổi bật của Nike trong năm nay, được thiết kế để phục vụ các hoạt động thể chất đa dạng như: chạy bộ, tập gym, đi bộ đường dài hoặc đơn giản là di chuyển hàng ngày. Với trọng tâm là độ ổn định, nâng đỡ và êm', 0, 1),
+(8, 'Nike Metcon 10 Nam', 1, 1, 100000, 10, 1, 6, 'Giày Nike Metcon 10 là thế hệ mới nhất trong dòng giày training nổi tiếng của Nike, được thiết kế dành cho những người yêu thích tập luyện sức mạnh, crossfit và functional training cường độ cao. Phiên bản này mang đến sự ổn định vượt trội, độ linh hoạt tố', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +481,7 @@ ALTER TABLE `hang`
 -- AUTO_INCREMENT for table `hinhanh`
 --
 ALTER TABLE `hinhanh`
-  MODIFY `mahinhanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `mahinhanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -442,7 +499,7 @@ ALTER TABLE `loai`
 -- AUTO_INCREMENT for table `mau`
 --
 ALTER TABLE `mau`
-  MODIFY `mamau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mamau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `nhacungcap`
@@ -460,7 +517,7 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `size`
