@@ -1,6 +1,8 @@
 <?php
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // chỉ trả về vd /QuanLyBanGiay_Php/products
 $uri = str_replace(APP_PATH, '', $uri);
+$uri = trim($uri, '/'); 
+
 
 if ($uri == '' || $uri == '/' || $uri == 'dashboard') {
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -42,5 +44,6 @@ if ($uri == 'chinhsachdoitra') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+
 
 require VIEW_PATH_DIR . '404.php';

@@ -1,4 +1,4 @@
-  <!-- Footer Start -->
+<!-- Footer Start -->
   <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
     <div class="container py-5">
       <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
@@ -47,7 +47,7 @@
             <a class="btn-link" href="">Contact Us</a>
             <a class="btn-link" href="">Privacy Policy</a>
             <a class="btn-link" href="">Terms & Condition</a>
-            <a class="btn-link" href="<?= ROOT_URL ?>chinhsachdoitra">Return Policy</a>
+            <a class="btn-link" href="<?= ROOT_URL . 'chinhsachdoitra' ?>">Return Policy</a>
             <a class="btn-link" href="">FAQs & Help</a>
           </div>
         </div>
