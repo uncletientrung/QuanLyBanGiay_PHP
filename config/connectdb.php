@@ -1,5 +1,5 @@
 <?php
-require_once '../config/constants.php';
+require_once 'constants.php';
 try {
     $dsn = "mysql:host=" . DB_HOST . "; dbname=" . DB_NAME . "; charset=utf8";
     $conn = new PDO($dsn, DB_USER, DB_PASS);
