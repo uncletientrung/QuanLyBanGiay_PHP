@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Fruitables - Vegetable Website Template</title>
+  <title>ShoesGalaxy - Giày chính hãng & Giá tốt</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -46,19 +46,19 @@
           <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
               class="text-white">9 Đường Hoàng Hoa Thám, P. 13, Q. Tân Bình</a></small>
           <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-              class="text-white">shoesgalaxy@Example.com</a></small>
+              class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
-        <!-- <div class="top-link pe-2">
+        <div class="top-link pe-2">
           <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
           <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
           <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-        </div> -->
+        </div>
       </div>
     </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
-        <a href="index.html" class="navbar-brand">
-          <h1 class="text-primary display-6">Fruitables</h1>
+        <a href="<?= ROOT_URL ?>" class="navbar-brand">
+          <h1 class="text-primary display-6">ShoesGalaxy</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarCollapse">
@@ -66,8 +66,9 @@
         </button>
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
-            <a href="shop.html" class="nav-item nav-link">Shop</a>
+            <a href="<?= ROOT_URL ?>" class="nav-item nav-link active">Trang chủ</a>
+            <a href="<?= ROOT_URL ?>about-us" class="nav-item nav-link">Giới thiệu</a>
+            <a href="<?= ROOT_URL ?>products" class="nav-item nav-link">Sản phẩm</a>
             <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -78,18 +79,20 @@
                 <a href="404.html" class="dropdown-item">404 Page</a>
               </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="<?= ROOT_URL ?>contact" class="nav-item nav-link">Liên hệ</a>
           </div>
           <div class="d-flex m-3 me-0">
             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
               data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-            <a href="#" class="position-relative me-4 my-auto">
+            <!-- Button cart -->
+            <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
               <span
                 class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                 style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
             </a>
-            <a href="#" class="my-auto">
+            <!-- Button user -->
+            <a href="account" class="my-auto">
               <i class="fas fa-user fa-2x"></i>
             </a>
           </div>
@@ -99,7 +102,7 @@
   </div>
   <!-- NAV End -->
 
-    <!-- Thanh tìm kiếm -->
+  <!-- Thanh tìm kiếm -->
   <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content rounded-0">
@@ -117,4 +120,3 @@
     </div>
   </div>
   <!-- Modal Search End -->
-

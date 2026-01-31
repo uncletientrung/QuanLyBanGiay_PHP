@@ -112,7 +112,7 @@
                 <h4 class="mb-3">Featured products</h4>
                 <div class="d-flex align-items-center justify-content-start">
                   <div class="rounded me-4" style="width: 100px; height: 100px;">
-                    <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>featur-1.jpg" class="img-fluid rounded" alt="">
                   </div>
                   <div>
                     <h6 class="mb-2">Big Banana</h6>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-start">
                   <div class="rounded me-4" style="width: 100px; height: 100px;">
-                    <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>featur-2.jpg" class="img-fluid rounded" alt="">
                   </div>
                   <div>
                     <h6 class="mb-2">Big Banana</h6>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-start">
                   <div class="rounded me-4" style="width: 100px; height: 100px;">
-                    <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>featur-3.jpg" class="img-fluid rounded" alt="">
                   </div>
                   <div>
                     <h6 class="mb-2">Big Banana</h6>
@@ -173,7 +173,7 @@
               </div>
               <div class="col-lg-12">
                 <div class="position-relative">
-                  <img src="public/img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                  <img src="<?= IMAGE_PATH_DIR ?>banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
                   <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
                     <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
                   </div>
@@ -186,7 +186,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -202,7 +202,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -218,7 +218,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -234,7 +234,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -250,7 +250,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -266,7 +266,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -282,7 +282,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -298,7 +298,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -314,7 +314,7 @@
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
-                    <img src="img/fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                   </div>
                   <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
                   <div class="p-4 border border-secondary border-top-0 rounded-bottom">
