@@ -43,11 +43,11 @@
         <div class="col-lg-3 col-md-6">
           <div class="d-flex flex-column text-start footer-item">
             <h4 class="text-light mb-3">Shop Info</h4>
-            <a class="btn-link" href="">About Us</a>
-            <a class="btn-link" href="">Contact Us</a>
-            <a class="btn-link" href="">Privacy Policy</a>
-            <a class="btn-link" href="">Terms & Condition</a>
-            <a class="btn-link" href="<?= ROOT_URL ?>chinhsachdoitra">Return Policy</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>about-us">About Us</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>contact-us">Contact Us</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>privacy-policy">Privacy Policy</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>terms-condition">Terms & Condition</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>return-policy">Return Policy</a>
             <a class="btn-link" href="">FAQs & Help</a>
           </div>
         </div>

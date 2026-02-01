@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2026 at 10:18 AM
+-- Generation Time: Feb 01, 2026 at 10:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,7 +109,10 @@ CREATE TABLE `hang` (
 --
 
 INSERT INTO `hang` (`mahang`, `tenhang`, `trangthai`) VALUES
-(1, 'Nike', 1);
+(1, 'Nike', 1),
+(2, 'Puma', 1),
+(3, 'Adidas', 1),
+(4, 'Vans', 1);
 
 -- --------------------------------------------------------
 
@@ -176,7 +179,19 @@ INSERT INTO `hinhanh` (`mahinhanh`, `masp`, `path`, `ismain`) VALUES
 (45, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-03.jpg', 0),
 (46, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-04.jpg', 0),
 (47, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-05.jpg', 0),
-(48, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-06.jpg', 0);
+(48, 8, 'public\\img\\products\\giay-nike-metcon-10-nam-trang-den-xanh-06.jpg', 0),
+(49, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-01-main.jpg', 1),
+(50, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-02.jpg', 0),
+(51, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-03.jpg', 0),
+(52, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-04.jpg', 0),
+(53, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-05.jpg', 0),
+(54, 11, 'public\\img\\products\\giay-puma-skye-clean-distressed-nu-trang-06.jpg', 0),
+(55, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-01-main.jpg', 1),
+(56, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-02.jpg', 0),
+(57, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-03.jpg', 0),
+(58, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-04.jpg', 0),
+(59, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-05.jpg', 0),
+(60, 12, 'public\\img\\products\\giay-puma-dribble-nam-trang-den-06.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -212,7 +227,9 @@ CREATE TABLE `loai` (
 --
 
 INSERT INTO `loai` (`maloai`, `tenloai`, `trangthai`) VALUES
-(1, 'Giày thể thao', 1);
+(1, 'Giày Thể Thao', 1),
+(2, 'Giày Sneaker', 1),
+(3, 'Giày Tây', 1);
 
 -- --------------------------------------------------------
 
@@ -300,7 +317,9 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `loai`, `gioitinh`, `gianhap`, `tyleloin
 (5, 'Nike Run Defy Nữ', 1, 0, 100000, 10, 1, 5, 'Nike Run Defy là đôi giày thể thao dành cho những ai muốn tự định hình phong cách và tốc độ của riêng mình. Dù bạn đang tập luyện nhẹ nhàng hay chinh phục quãng đường dài, đôi giày này mang đến sự cân bằng hoàn hảo giữa độ êm ái, thoáng khí và độ bám linh', 0, 1),
 (6, 'Nike Run Defy Nam', 1, 1, 100000, 10, 1, 3, 'Nike Run Defy là đôi giày thể thao dành cho những ai muốn tự định hình phong cách và tốc độ của riêng mình. Dù bạn đang tập luyện nhẹ nhàng hay chinh phục quãng đường dài, đôi giày này mang đến sự cân bằng hoàn hảo giữa độ êm ái, thoáng khí và độ bám linh', 0, 1),
 (7, 'Nike Structure 26 Nữ', 1, 0, 100000, 0, 1, 7, 'Nike Structure 26 là mẫu giày thể thao mới nhất nổi bật của Nike trong năm nay, được thiết kế để phục vụ các hoạt động thể chất đa dạng như: chạy bộ, tập gym, đi bộ đường dài hoặc đơn giản là di chuyển hàng ngày. Với trọng tâm là độ ổn định, nâng đỡ và êm', 0, 1),
-(8, 'Nike Metcon 10 Nam', 1, 1, 100000, 10, 1, 6, 'Giày Nike Metcon 10 là thế hệ mới nhất trong dòng giày training nổi tiếng của Nike, được thiết kế dành cho những người yêu thích tập luyện sức mạnh, crossfit và functional training cường độ cao. Phiên bản này mang đến sự ổn định vượt trội, độ linh hoạt tố', 0, 1);
+(8, 'Nike Metcon 10 Nam', 1, 1, 100000, 10, 1, 6, 'Giày Nike Metcon 10 là thế hệ mới nhất trong dòng giày training nổi tiếng của Nike, được thiết kế dành cho những người yêu thích tập luyện sức mạnh, crossfit và functional training cường độ cao. Phiên bản này mang đến sự ổn định vượt trội, độ linh hoạt tố', 0, 1),
+(11, 'Puma Skye Clean Distressed Nữ', 2, 0, 100000, 10, 2, 1, 'Giày Puma Skye Clean Distressed là sự kết hợp hoàn hảo giữa thiết kế cổ điển và hơi thở hiện đại. Với thân giày mang phom dáng thể thao sân đấu truyền thống, các chi tiết khâu nổi bật cùng họa tiết đục lỗ tinh tế tạo nên vẻ ngoài độc đáo, dễ phối đồ và ph', 0, 1),
+(12, 'Puma Dribble Nam', 2, 1, 100000, 10, 2, 4, 'Giày Puma Dribble lấy cảm hứng từ thể thao, mang đến thiết kế hiện đại kết hợp cùng sự thoải mái tối ưu cho cuộc sống năng động. Với form dáng mid-boot cá tính, đế cao su bền bỉ và chi tiết branding đặc trưng, đây là lựa chọn hoàn hảo cho phong cách thườn', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -475,13 +494,13 @@ ALTER TABLE `donhang`
 -- AUTO_INCREMENT for table `hang`
 --
 ALTER TABLE `hang`
-  MODIFY `mahang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `mahang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hinhanh`
 --
 ALTER TABLE `hinhanh`
-  MODIFY `mahinhanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `mahinhanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -493,7 +512,7 @@ ALTER TABLE `khachhang`
 -- AUTO_INCREMENT for table `loai`
 --
 ALTER TABLE `loai`
-  MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mau`
@@ -517,7 +536,7 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT for table `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `size`

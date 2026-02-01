@@ -40,15 +40,21 @@ if ($uri == 'login') {
     require VIEW_PATH_DIR . 'login.php';
     exit;
 }
-if ($uri == 'chinhsachdoitra') {
+if ($uri == 'return-policy') {
     require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'chinhsachdoitra.php';
+    require VIEW_PATH_DIR . 'return-policy.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 if ($uri == 'about-us') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'about-us.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if ($uri == 'contact-us') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'contact.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }

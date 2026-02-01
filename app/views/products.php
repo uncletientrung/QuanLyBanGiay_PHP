@@ -1,8 +1,31 @@
+<?php
+require_once '../QuanLyBanGiay_PHP/config/connectdb.php';
+require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
+
+$spController = new SanPhamController($conn);
+//$listSP = $spController->getAll();
+$hangController = new HangController($conn);
+$hinhAnhController = new HinhAnhController($conn);
+
+// phân trang
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+
+$limit = 9;//moi trang hien thi 9 san pham
+$offset = ($page - 1) * $limit;
+$totalProducts = $spController->countAll();
+$totalPages = ceil($totalProducts / $limit);
+$listSP = $spController->getByPage($limit, $offset);
+
+
+?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Home</a></li>
     <li class="breadcrumb-item"><a href="#">Pages</a></li>
     <li class="breadcrumb-item active text-white">Shop</li>
   </ol>
@@ -182,8 +205,36 @@
             </div>
           </div>
           <div class="col-lg-9">
-            <div class="row g-4 justify-content-center">
-              <div class="col-md-6 col-lg-6 col-xl-4">
+            <div class="row g-4">
+                <?php if (!empty($listSP)): ?>
+                  <?php foreach ($listSP as $sp): ?>
+                    <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                      <div class="rounded position-relative fruite-item">
+                        <div class="fruite-img">
+                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                          <?= $hangController->getNameById($sp['hang']) ?>
+                        </div>
+                       
+                        <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                          <h4><?= $sp['tensp'] ?></h4>
+                          
+                          <div class="d-flex justify-content-between flex-lg-wrap">
+                            <p class="text-dark fs-5 fw-bold mb-0">
+                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                            </p>
+                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+
+              <!-- <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
                     <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
@@ -326,18 +377,32 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+
+
+
+
               <div class="col-12">
                 <div class="pagination d-flex justify-content-center mt-5">
-                  <a href="#" class="rounded">&laquo;</a>
-                  <a href="#" class="active rounded">1</a>
-                  <a href="#" class="rounded">2</a>
-                  <a href="#" class="rounded">3</a>
-                  <a href="#" class="rounded">4</a>
-                  <a href="#" class="rounded">5</a>
-                  <a href="#" class="rounded">6</a>
-                  <a href="#" class="rounded">&raquo;</a>
+
+                  <?php if ($page > 1): ?>
+                    <a class="rounded" href="?page=<?= $page - 1 ?>">&laquo;</a>
+                  <?php endif; ?>
+
+                  <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a
+                      href="?page=<?= $i ?>"
+                      class="rounded <?= ($i == $page) ? 'active' : '' ?>">
+                      <?= $i ?>
+                    </a>
+                  <?php endfor; ?>
+
+                  <?php if ($page < $totalPages): ?>
+                    <a class="rounded" href="?page=<?= $page + 1 ?>">&raquo;</a>
+                  <?php endif; ?>
+
                 </div>
+
               </div>
             </div>
           </div>
