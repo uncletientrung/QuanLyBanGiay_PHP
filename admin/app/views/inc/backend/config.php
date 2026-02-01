@@ -66,27 +66,45 @@ $dm->main_nav                   = array(
     ),
     array(
         'name'  => 'Thuộc tính',
-        'icon'  => 'fa fa-flask',
+        'icon'  => 'fa fa-tags',
         'url'   => APP_PATH . 'admin/attributes'
+        // 'sub'   => array(
+        //     array(
+        //         'name'  => 'Dashboard',
+        //         'url'   => 'be_pages_jobs_dashboard.php'
+        //     ),
+        //     array(
+        //         'name'  => 'Listing',
+        //         'url'   => 'be_pages_jobs_listing.php'
+        //     ),
+        //     array(
+        //         'name'  => 'Apply',
+        //         'url'   => 'be_pages_jobs_apply.php'
+        //     ),
+        //     array(
+        //         'name'  => 'Post',
+        //         'url'   => 'be_pages_jobs_post.php'
+        //     )
+        // )
     ),
     array(
         'name'  => 'Sản phẩm',
-        'icon'  => 'fa fa-grip-horizontal',
+        'icon'  => 'fa fa-boot',
         'url'   => APP_PATH . 'admin/products'
     ),
     array(
         'name'  => 'Nhập hàng',
-        'icon'  => 'fa fa-sticky-note',
+        'icon'  => 'fa fa-truck-ramp-box',
         'url'   => APP_PATH . 'admin/nhap_hang'
     ),
     array(
         'name'  => 'Đơn hàng',
-        'icon'  => 'fa fa-cog',
+        'icon'  => 'fa fa-basket-shopping',
         'url'   => APP_PATH . 'admin/don_hang'
     ),
     array(
         'name'  => 'Tồn kho',
-        'icon'  => 'fa fa-wrench',
+        'icon'  => 'fa fa-warehouse',
         'url'   => APP_PATH . 'admin/ton_kho'
     ),
     array(
@@ -95,7 +113,7 @@ $dm->main_nav                   = array(
     ),
     array(
         'name'  => 'Thống kê',
-        'icon'  => 'fa fa-rocket',
+        'icon'  => 'fa fa-chart-simple',
         'url'   => APP_PATH . 'admin/reports'
     ),
 );
