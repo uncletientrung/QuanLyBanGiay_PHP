@@ -2,10 +2,12 @@
 require_once "../QuanLyBanGiay_PHP/config/connectdb.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
 
 $spController = new SanPhamController($conn);
 $listSP = $spController->getAll();
 $hangController = new HangController($conn);
+$hinhAnhController = new HinhAnhController($conn);
 
 
 ?>
@@ -31,19 +33,19 @@ $hangController = new HangController($conn);
         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active rounded">
-              <img src="public/images/hero-img-nike.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+              <img src="public/img/hero-img-nike.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Nike</a>
             </div>
             <div class="carousel-item rounded">
-              <img src="public/images/hero-img-converse.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+              <img src="public/img/hero-img-converse.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Converse</a>
             </div>
             <div class="carousel-item rounded">
-              <img src="public/images/hero-img-clark.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+              <img src="public/img/hero-img-clark.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Clark</a>
             </div>
             <div class="carousel-item rounded">
-              <img src="public/images/hero-img-puma.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+              <img src="public/img/hero-img-puma.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Puma</a>
             </div>
           </div>
@@ -168,10 +170,13 @@ $hangController = new HangController($conn);
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="rounded position-relative fruite-item">
                         <div class="fruite-img">
-                          <img src="public/images/logo-shoe-galaxy.png" class="img-fluid w-100 rounded-top" alt="">
+                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
+                        </div>
+                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
+                          <?= $sp['masp'] ?>
                         </div>
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                           <h4><?= $sp['tensp'] ?></h4>

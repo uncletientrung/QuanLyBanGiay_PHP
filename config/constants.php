@@ -9,3 +9,4 @@ define("APP_PATH", "/QuanLyBanGiay_Php/");
 define('APP_PATH_DIR', __DIR__ . '/../app/');
 define('VIEW_PATH_DIR', APP_PATH_DIR . 'views/');
 define('IMAGE_PATH_DIR','public/img/');
+define('NO_IMAGE','public/images/no-image');
