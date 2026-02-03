@@ -541,4 +541,16 @@
   margin-bottom: 10px;
 }
 
+.custom-search-btn {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.custom-search-btn:hover {
+  background-color: #e2e6ea;
+}
 /*** Footer End ***/

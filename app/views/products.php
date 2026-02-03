@@ -3,11 +3,17 @@ require_once '../QuanLyBanGiay_PHP/config/connectdb.php';
 require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
-
+require_once "../QuanLyBanGiay_PHP/app/controllers/MauSacController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/LoaiController.php";
 $spController = new SanPhamController($conn);
-//$listSP = $spController->getAll();
 $hangController = new HangController($conn);
 $hinhAnhController = new HinhAnhController($conn);
+$mauSacController = new MauSacController($conn);
+$loaiController = new LoaiController($conn);
+$listHang = $hangController->getAll();
+$listMauSac = $mauSacController->getAll();
+$listLoai = $loaiController->getLoaivaSoluongTuongUng();
+$maxPrice = $_GET['max_price'] ?? 10000000;
 
 // phân trang
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -25,8 +31,7 @@ $listSP = $spController->getByPage($limit, $offset);
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
     <li class="breadcrumb-item active text-white">Shop</li>
   </ol>
 </div>
@@ -36,101 +41,136 @@ $listSP = $spController->getByPage($limit, $offset);
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
   <div class="container py-5">
-    <h1 class="mb-4">Fresh fruits shop</h1>
+    <h1 class="mb-4">SHOP giày Ộ i i</h1>
     <div class="row g-4">
       <div class="col-lg-12">
+       <form method="GET" action="products">
+        <input type="hidden" name="loai" value="<?= $_GET['loai'] ?? '' ?>">
         <div class="row g-4">
           <div class="col-xl-3">
             <div class="input-group w-100 mx-auto d-flex">
-              <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-              <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+              <input 
+                type="search" 
+                name="q" 
+                value="<?= $_GET['q'] ?? '' ?>" 
+                class="form-control p-3" 
+                placeholder="Tìm kiếm..." 
+                aria-describedby="search-icon-1"
+              >
+              <button 
+                type="submit" 
+                class="input-group-text p-3 custom-search-btn" 
+                id="search-icon-1"
+              >
+                <i class="fa fa-search"></i>
+              </button>
             </div>
           </div>
+          <!-- cai div col= 6 dung de cach khoang cach giua tim kiem va thuong hieu -->
           <div class="col-6"></div>
+
+<!-- bat dau bo lọc -->
           <div class="col-xl-3">
             <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-              <label for="fruits">Default Sorting:</label>
-              <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                <option value="volvo">Nothing</option>
-                <option value="saab">Popularity</option>
-                <option value="opel">Organic</option>
-                <option value="audi">Fantastic</option>
+              <label for="hanggiay">Thương hiệu</label>
+              <select id="hanggiay" name="hang" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
+                <option value="all">Tất cả</option>
+                <?php foreach($listHang as $hang): ?>
+                  <option value="<?= $hang['mahang'] ?>"
+                    <?= (($_GET['hang'] ?? '') == $hang['mahang']) ? 'selected' : '' ?>>
+                    <?= $hang['tenhang'] ?>
+                  </option>
+                <?php endforeach; ?>              
               </select>
             </div>
           </div>
+<!-- ket thuc bo loc -->
         </div>
         <div class="row g-4">
           <div class="col-lg-3">
             <div class="row g-4">
+              <!-- start loại -->
               <div class="col-lg-12">
                 <div class="mb-3">
-                  <h4>Categories</h4>
+                  <h4>Loại giày</h4>
                   <ul class="list-unstyled fruite-categorie">
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                        <span>(3)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                        <span>(5)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                        <span>(2)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                        <span>(8)</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                        <span>(5)</span>
-                      </div>
-                    </li>
+                    <?php foreach($listLoai as $loai) :?>
+                      <li>
+                        <div class="d-flex justify-content-between fruite-name">
+                          <?php
+                            $params = $_GET;
+                            unset($params['url']);
+                            $params['loai'] = $loai['maloai'];
+                            unset($params['page']); // reset về trang 1
+                            ?>
+                          <a href="?<?= http_build_query($params) ?>"><i class="fas fa-shoe-prints me-2"></i><?= $loai['tenloai'] ?></a>
+                          <span>(<?= $loai['tongsoluong'] ?>)</span>
+                        </div>
+                      </li>
+                      <?php endforeach; ?>                  
                   </ul>
                 </div>
               </div>
+              <!-- end loại -->
+
+              <!-- start gia -->
               <div class="col-lg-12">
                 <div class="mb-3">
-                  <h4 class="mb-2">Price</h4>
-                  <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
-                  <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
+                  <h4 class="mb-2">Tầm giá</h4>
+                  <input
+                    type="range"
+                    name="max_price"
+                    min="0"
+                    max="10000000"
+                    value="<?= $maxPrice ?>"
+                    class="form-range w-100"
+                    oninput="amount.value = this.value"
+                    onchange="this.form.submit()">
+
+                  <output id="amount"><?= number_format($maxPrice, 0, ',', '.') ?> ₫</output>
+
                 </div>
               </div>
+              <!-- end giá -->
+
+              <!-- start màu -->
               <div class="col-lg-12">
                 <div class="mb-3">
-                  <h4>Additional</h4>
+                  <h4>Màu sắc</h4>
+                  <?php foreach($listMauSac as $mau): ?>
+                    <div class="mb-2">
+                      <input type="checkbox" class="me-2" id="mau-<?= $mau['mamau'] ?>" name="mau[]" value="<?= $mau['mamau'] ?>" <?= in_array($mau['mamau'], $_GET['mau'] ?? []) ? 'checked' : '' ?>
+ onchange="this.form.submit()">
+                      <label for="mau-<?= $mau['mamau'] ?>"> <?= $mau['tenmau'] ?></label>
+                    </div>
+                  <?php endforeach; ?>               
+                </div>
+              </div>
+              <!-- end màu -->
+
+
+              <!-- start gioi tinh -->
+               <div class="col-lg-12">
+                <div class="mb-3">
+                  <h4>Giới tính</h4>
                   <div class="mb-2">
-                    <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                    <label for="Categories-1"> Organic</label>
+                    <input type="radio" name="gioitinh" value="nam"
+                      <?= ($_GET['gioitinh'] ?? '') == 'nam' ? 'checked' : '' ?>
+                      onchange="this.form.submit()">
+                    <label for="Categories-1"> Nam</label>
                   </div>
                   <div class="mb-2">
-                    <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                    <label for="Categories-2"> Fresh</label>
-                  </div>
-                  <div class="mb-2">
-                    <input type="radio" class="me-2" id="Categories-3" name="Categories-1" value="Beverages">
-                    <label for="Categories-3"> Sales</label>
-                  </div>
-                  <div class="mb-2">
-                    <input type="radio" class="me-2" id="Categories-4" name="Categories-1" value="Beverages">
-                    <label for="Categories-4"> Discount</label>
-                  </div>
-                  <div class="mb-2">
-                    <input type="radio" class="me-2" id="Categories-5" name="Categories-1" value="Beverages">
-                    <label for="Categories-5"> Expired</label>
+                    <input type="radio" name="gioitinh" value="nu"
+                      <?= ($_GET['gioitinh'] ?? '') == 'nu' ? 'checked' : '' ?>
+                      onchange="this.form.submit()">
+                    <label for="Categories-2"> Nữ</label>
                   </div>
                 </div>
               </div>
+
+              </form>
+
+              <!-- end gioi tinh -->
               <div class="col-lg-12">
                 <h4 class="mb-3">Featured products</h4>
                 <div class="d-flex align-items-center justify-content-start">
@@ -232,120 +272,7 @@ $listSP = $spController->getByPage($limit, $offset);
                     </div>
                   <?php endforeach; ?>
                 <?php endif; ?>
-
-
-              <!-- <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Grapes</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Grapes</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Raspberries</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Apricots</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-3.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Banana</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Oranges</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-xl-4">
-                <div class="rounded position-relative fruite-item">
-                  <div class="fruite-img">
-                    <img src="<?= IMAGE_PATH_DIR ?>fruite-item-2.jpg" class="img-fluid w-100 rounded-top" alt="">
-                  </div>
-                  <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">Fruits</div>
-                  <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                    <h4>Raspberries</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-                    <div class="d-flex justify-content-between flex-lg-wrap">
-                      <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-                      <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!--  
               <div class="col-md-6 col-lg-6 col-xl-4">
                 <div class="rounded position-relative fruite-item">
                   <div class="fruite-img">
@@ -384,22 +311,51 @@ $listSP = $spController->getByPage($limit, $offset);
 
               <div class="col-12">
                 <div class="pagination d-flex justify-content-center mt-5">
-
+                    <!-- nut pre -->
                   <?php if ($page > 1): ?>
-                    <a class="rounded" href="?page=<?= $page - 1 ?>">&laquo;</a>
+                    <?php
+                      $params = $_GET;
+                      unset($params['url']); // nếu có router
+
+                      if ($page - 1 == 1) {
+                          unset($params['page']);
+                      } else {
+                          $params['page'] = $page - 1;
+                      }
+                    ?>
+                    <a class="rounded" href="?<?= http_build_query($params) ?>">&laquo;</a>
                   <?php endif; ?>
+                  <!-- so trang -->
 
                   <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <?php
+                      $params = $_GET;
+                      unset($params['url']);
+
+                      if ($i == 1) {
+                          unset($params['page']);
+                      } else {
+                          $params['page'] = $i;
+                      }
+                    ?>
                     <a
-                      href="?page=<?= $i ?>"
+                      href="?<?= http_build_query($params) ?>"
                       class="rounded <?= ($i == $page) ? 'active' : '' ?>">
                       <?= $i ?>
                     </a>
                   <?php endfor; ?>
+                  <!-- nut next -->
 
                   <?php if ($page < $totalPages): ?>
-                    <a class="rounded" href="?page=<?= $page + 1 ?>">&raquo;</a>
+                    <?php
+                      $params = $_GET;
+                      unset($params['url']);
+
+                      $params['page'] = $page + 1;
+                    ?>
+                    <a class="rounded" href="?<?= http_build_query($params) ?>">&raquo;</a>
                   <?php endif; ?>
+
 
                 </div>
 
@@ -414,3 +370,8 @@ $listSP = $spController->getByPage($limit, $offset);
 <!-- Fruits Shop End-->
 
 
+<script>
+document.getElementById('search-icon-1').addEventListener('click', function() {
+  this.closest('form').submit();
+});
+</script>
