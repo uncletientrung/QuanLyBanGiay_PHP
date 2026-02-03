@@ -180,7 +180,7 @@ $hinhAnhController = new HinhAnhController($conn);
                         </div>
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
                           <h4><?= $sp['tensp'] ?></h4>
-                          <p><?= $sp['motasp'] ?></p>
+                          <!-- <p><?= $sp['motasp'] ?></p> -->
                           <div class="d-flex justify-content-between flex-lg-wrap">
                             <p class="text-dark fs-5 fw-bold mb-0">
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
