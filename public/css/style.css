@@ -553,4 +553,24 @@
 .custom-search-btn:hover {
   background-color: #e2e6ea;
 }
+
+.no-product-found {
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.no-product-found i {
+  color: #adb5bd;
+}
+
+.no-product-found h5 {
+  font-weight: 600;
+  color: #333;
+}
+
+.no-product-found p {
+  font-size: 14px;
+}
+
 /*** Footer End ***/
