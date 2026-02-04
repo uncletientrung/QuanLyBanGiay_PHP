@@ -17,7 +17,7 @@ $listMauSac = $mauSacController->getAll();
 $listLoai = $loaiController->getLoaivaSoluongTuongUng();
 $maxPrice = $_GET['max_price'] ?? 10000000;
 
-// lấy filter từ GET
+// xu lý filters từ GET
 $filters = [
     'q'         => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
     'hang'      => (isset($_GET['hang']) && $_GET['hang'] !== 'all' && $_GET['hang'] !== '') ? (int)$_GET['hang'] : null,
@@ -35,6 +35,7 @@ $limit = 9;
 $listSP = $spController->getProducts($filters, $page, $limit);
 $totalProducts = $spController->countProducts($filters);
 $totalPages = ceil($totalProducts / $limit);
+
 
 ?>
 <!-- Single Page Header start -->
@@ -54,7 +55,7 @@ $totalPages = ceil($totalProducts / $limit);
     <div class="row g-4">
       <div class="col-lg-12">
        <form method="GET" action="products" id="filterForm">
-        <input type="hidden" name="loai" value="<?= $_GET['loai'] ?? '' ?>">
+        <input type="hidden" name="loai" value="<?= $_GET['loai'] ?? '' ?>" id="loaiInput">
         <div class="row g-4">
           <div class="col-xl-3">
             <div class="input-group w-100 mx-auto d-flex">
@@ -97,11 +98,25 @@ $totalPages = ceil($totalProducts / $limit);
         <div class="row g-4">
           <div class="col-lg-3">
             <div class="row g-4">
-              <!-- Loại giày -->
               <div class="col-lg-12">
                 <div class="mb-3">
                   <h4>Loại giày</h4>
                   <ul class="list-unstyled fruite-categorie">
+                    <li>
+                      <div class="d-flex justify-content-between fruite-name">
+                        <?php
+                          $paramsAll = $_GET;
+                          unset($paramsAll['url']);
+                          unset($paramsAll['loai']); // Bỏ filter loại
+                          unset($paramsAll['page']); // Reset về trang 1
+                        ?>
+                        <a href="?<?= http_build_query($paramsAll) ?>" 
+                           class="<?= !isset($_GET['loai']) ? 'fw-bold text-primary' : '' ?>">
+                          <i class="fas fa-list me-2"></i>Tất cả
+                        </a>
+                      </div>
+                    </li>
+                    
                     <?php foreach($listLoai as $loai) :?>
                       <li>
                         <div class="d-flex justify-content-between fruite-name">
@@ -109,9 +124,10 @@ $totalPages = ceil($totalProducts / $limit);
                             $params = $_GET;
                             unset($params['url']);
                             $params['loai'] = $loai['maloai'];
-                            unset($params['page']);
+                            unset($params['page']); // reset về trang 1
                           ?>
-                          <a href="?<?= http_build_query($params) ?>">
+                          <a href="?<?= http_build_query($params) ?>"
+                             class="<?= (isset($_GET['loai']) && $_GET['loai'] == $loai['maloai']) ? 'fw-bold text-primary' : '' ?>">
                             <i class="fas fa-shoe-prints me-2"></i><?= htmlspecialchars($loai['tenloai']) ?>
                           </a>
                           <span>(<?= $loai['tongsoluong'] ?>)</span>
@@ -139,7 +155,7 @@ $totalPages = ceil($totalProducts / $limit);
                 </div>
               </div>
 
-          <!-- màu sắc -->
+              <!-- Màu sắc-->
               <div class="col-lg-12">
                 <div class="mb-3">
                   <h4>Màu sắc</h4>
@@ -187,7 +203,17 @@ $totalPages = ceil($totalProducts / $limit);
                   </div>
                 </div>
               </div>
+
+              <!--Nút xóa tất cả bộ lọc -->
               <div class="col-lg-12">
+                <div class="d-grid">
+                  <a href="products" class="btn btn-outline-secondary">
+                    <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
+                  </a>
+                </div>
+              </div>
+
+               <div class="col-lg-12">
                 <div class="position-relative">
                   <img src="<?= IMAGE_PATH_DIR ?>banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
                   <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
@@ -240,6 +266,7 @@ $totalPages = ceil($totalProducts / $limit);
                     </div>
                   </div>
                 <?php endif; ?>
+
 
 
               <!-- Phân trang -->
@@ -314,3 +341,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+

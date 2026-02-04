@@ -572,5 +572,9 @@
 .no-product-found p {
   font-size: 14px;
 }
-
+.fruite-categorie a.fw-bold.text-primary {
+  background-color: #f8f9fa;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 /*** Footer End ***/
