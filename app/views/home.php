@@ -169,8 +169,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
             <div class="col-lg-12">
               <div class="row g-4">
 
-                <?php if (!empty($listSP)): ?>
-                  <?php foreach ($listSP as $sp): ?>
+                <?php if (!empty($listBestSellingALL)): ?>
+                  <?php foreach ($listBestSellingALL as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="rounded position-relative fruite-item">
@@ -191,7 +191,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongtonkho'] ?>
+                              Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
@@ -236,7 +236,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongtonkho'] ?>
+                              Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
@@ -280,7 +280,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongtonkho'] ?>
+                              Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
@@ -324,7 +324,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongtonkho'] ?>
+                              Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
@@ -369,7 +369,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongtonkho'] ?>
+                              Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                                 class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>

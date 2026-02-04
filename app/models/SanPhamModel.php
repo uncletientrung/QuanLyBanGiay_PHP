@@ -16,15 +16,18 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getBestSellingProductByMaHang($maHang){
+        
         if($maHang != false){
             $sql = "SELECT * FROM sanpham WHERE trangthai = 1 AND hang = ? ORDER BY soluongdaban DESC LIMIT 8";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$maHang['mahang']]);
         }else{
+            
             $sql = "SELECT * FROM sanpham WHERE trangthai = 1 ORDER BY soluongdaban DESC LIMIT 8";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
         }
+        
         return $stmt->fetchAll(PDO::FETCH_ASSOC);   
     }
 
