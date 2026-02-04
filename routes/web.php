@@ -32,10 +32,16 @@ if ($uri == 'contact') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+// Chỗ debug
+if ($uri == 'debug') {
+    require VIEW_PATH_DIR . 'debug.php';
+    exit;
+}
 if ($uri == 'test') {
     require VIEW_PATH_DIR . 'test.php';
     exit;
 }
+// ===========================================
 if ($uri == 'login') {
     require VIEW_PATH_DIR . 'login.php';
     exit;

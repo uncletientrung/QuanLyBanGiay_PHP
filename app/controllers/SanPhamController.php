@@ -1,13 +1,16 @@
 <?php
 require_once "../QuanLyBanGiay_PHP/app/models/SanPhamModel.php";
+require_once "../QuanLyBanGiay_PHP/app/models/HangModel.php";
 
 class SanPhamController
 {
     private $model;
+    private $hangModel;
 
     public function __construct($db)
     {
         $this->model = new SanPhamModel($db);
+        $this->hangModel = new HangModel($db);
     }
 
     /**
@@ -55,6 +58,14 @@ class SanPhamController
     public function getAll()
     {
         return $this->model->getAll();
+    }
+    public function getBestSellingByName($tenHang){
+        if($tenHang == "all") $maHang = false;
+        else{
+            $maHang = $this->hangModel->getIdByName($tenHang);
+            // echo "<script>console.log(" . json_encode($maHang) . ");</script>";
+        } 
+        return $this->model->getBestSellingProductByMaHang($maHang);
     }
 
     public function countAll()
