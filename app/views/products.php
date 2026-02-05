@@ -233,7 +233,13 @@ $totalPages = ceil($totalProducts / $limit);
                     <div class="col-md-6 col-lg-6 col-xl-4">
                       <div class="rounded position-relative fruite-item">
                         <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img 
+                              src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" 
+                              class="img-fluid w-100 rounded-top" 
+                              alt=""
+                            >
+                          </a>
                         </div>
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= htmlspecialchars($hangController->getNameById($sp['hang'])) ?>

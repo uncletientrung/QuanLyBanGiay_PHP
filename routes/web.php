@@ -32,6 +32,12 @@ if ($uri == 'contact') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if($uri == 'product-detail') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'product-detail.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
 // Chỗ debug
 if ($uri == 'debug') {
     require VIEW_PATH_DIR . 'debug.php';

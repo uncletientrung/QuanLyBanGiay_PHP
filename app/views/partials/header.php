@@ -69,7 +69,7 @@
             <a href="<?= ROOT_URL ?>" class="nav-item nav-link active">Trang chủ</a>
             <a href="<?= ROOT_URL ?>about-us" class="nav-item nav-link">Giới thiệu</a>
             <a href="<?= ROOT_URL ?>products" class="nav-item nav-link">Sản phẩm</a>
-            <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>
+            <a href="<?= ROOT_URL ?>product-detail" class="nav-item nav-link">Shop Detail</a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">

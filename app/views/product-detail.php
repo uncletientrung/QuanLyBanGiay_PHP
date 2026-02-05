@@ -9,375 +9,148 @@
 </div>
 <!-- Single Page Header End -->
 
-
 <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5">
   <div class="container py-5">
     <div class="row g-4 mb-5">
-      <div class="col-lg-8 col-xl-9">
+      <div class="col-12">
         <div class="row g-4">
-          <div class="col-lg-6">
-            <div class="border rounded">
-              <a href="#">
-                <img src="img/single-item.jpg" class="img-fluid rounded" alt="Image">
-              </a>
+
+          <!-- ẢNH NHỎ -->
+          <div class="col-lg-1 d-none d-lg-block">
+            <div class="d-flex flex-column gap-2">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg" class="img-fluid rounded thumb-img active" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-02.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-03.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-04.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-05.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-06.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
             </div>
           </div>
-          <div class="col-lg-6">
-            <h4 class="fw-bold mb-3">Brocoli</h4>
-            <p class="mb-3">Category: Vegetables</p>
-            <h5 class="fw-bold mb-3">3,35 $</h5>
-            <div class="d-flex mb-4">
-              <i class="fa fa-star text-secondary"></i>
-              <i class="fa fa-star text-secondary"></i>
-              <i class="fa fa-star text-secondary"></i>
-              <i class="fa fa-star text-secondary"></i>
-              <i class="fa fa-star"></i>
+
+          <!-- ẢNH CHÍNH + MÔ TẢ NGAY BÊN DƯỚI -->
+          <div class="col-lg-5">
+            <div class=" rounded product-image-container" style="min-height: 555px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
+              <img id="mainImage" src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg" class="img-fluid rounded product-main-image" style="transition: all 0.4s ease; max-height: 470px; object-fit: contain; cursor: zoom-in;">
             </div>
-            <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-            <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
-            <div class="input-group quantity mb-5" style="width: 100px;">
-              <div class="input-group-btn">
-                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+
+            <!-- MÔ TẢ SẢN PHẨM -->
+            <div class="mt-4">
+              <h6 class="fw-bold pb-2 border-bottom">Mô tả sản phẩm</h6>
+              <p class="text-muted mt-3 mb-0" style="line-height: 1.7; font-size: 1.02rem;">
+                Nike Air Force 1 là biểu tượng không thời gian trong làng giày thể thao. Với thiết kế tinh tế, chất liệu cao cấp và đệm Air công nghệ, đôi giày này mang lại sự thoải mái tối đa cho từng bước chân. Thích hợp cho các hoạt động hàng ngày cũng như thể thao.
+              </p>
+            </div>
+          </div>
+
+          <!-- THÔNG TIN SẢN PHẨM -->
+          <div class="col-lg-6">
+            <h4 class="fw-bold mb-2">Nike Air Force 1</h4>
+            <p class="mb-1">Loại sản phẩm: <strong>Sneaker</strong></p>
+            <p class="mb-3">Thương hiệu: <strong>Nike</strong></p>
+
+            <h5 class="fw-bold mb-3 text-primary" style="font-size: 1.4rem;">2.500.000 ₫</h5>
+
+            <!-- SIZE -->
+            <div class="mb-4">
+              <p class="fw-bold mb-2">Size</p>
+              <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-outline-secondary btn-sm size-btn">38</button>
+                <button class="btn btn-outline-secondary btn-sm size-btn">39</button>
+                <button class="btn btn-outline-secondary btn-sm size-btn">40</button>
+                <button class="btn btn-outline-secondary btn-sm size-btn">41</button>
+                <button class="btn btn-outline-secondary btn-sm size-btn">42</button>
+              </div>
+            </div>
+
+            <!-- SỐ LƯỢNG + ADD TO CART -->
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="input-group quantity" style="width: 120px;">
+                <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="changeQty(-1)">
                   <i class="fa fa-minus"></i>
                 </button>
-              </div>
-              <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-              <div class="input-group-btn">
-                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1">
+                <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="changeQty(1)">
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
+
+              <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 text-primary">
+                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+              </a>
             </div>
-            <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-          <div class="col-lg-12">
-            <nav>
-              <div class="nav nav-tabs mb-3">
-                <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
-                  id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
-                  aria-controls="nav-about" aria-selected="true">Description</button>
-                <button class="nav-link border-white border-bottom-0" type="button" role="tab"
-                  id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
-                  aria-controls="nav-mission" aria-selected="false">Reviews</button>
-              </div>
-            </nav>
-            <div class="tab-content mb-5">
-              <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.
-                  Susp endisse ultricies nisi vel quam suscipit </p>
-                <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic
-                  icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
-                <div class="px-2">
-                  <div class="row g-4">
-                    <div class="col-6">
-                      <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                        <div class="col-6">
-                          <p class="mb-0">Weight</p>
-                        </div>
-                        <div class="col-6">
-                          <p class="mb-0">1 kg</p>
-                        </div>
-                      </div>
-                      <div class="row text-center align-items-center justify-content-center py-2">
-                        <div class="col-6">
-                          <p class="mb-0">Country of Origin</p>
-                        </div>
-                        <div class="col-6">
-                          <p class="mb-0">Agro Farm</p>
-                        </div>
-                      </div>
-                      <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                        <div class="col-6">
-                          <p class="mb-0">Quality</p>
-                        </div>
-                        <div class="col-6">
-                          <p class="mb-0">Organic</p>
-                        </div>
-                      </div>
-                      <div class="row text-center align-items-center justify-content-center py-2">
-                        <div class="col-6">
-                          <p class="mb-0">Сheck</p>
-                        </div>
-                        <div class="col-6">
-                          <p class="mb-0">Healthy</p>
-                        </div>
-                      </div>
-                      <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                        <div class="col-6">
-                          <p class="mb-0">Min Weight</p>
-                        </div>
-                        <div class="col-6">
-                          <p class="mb-0">250 Kg</p>
-                        </div>
-                      </div>
-                    </div>
+
+            <!-- MUA NGAY -->
+            <a href="#" class="btn btn-danger w-100 mb-4">Mua ngay</a>
+
+            <!-- ICON INFO - ĐÃ THU HẸP LẠI -->
+            <div class="row justify-content-center mb-4">
+              <div class="col-11 col-md-10 col-lg-11 rounded py-3 bg-white">
+                <div class="row text-center">
+                  <div class="col">
+                    <i class="fa fa-truck fa-2x text-primary mb-2"></i>
+                    <p class="mb-0 fw-bold">Giao hàng toàn quốc</p>
+                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">2-5 ngày</p>
                   </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                <div class="d-flex">
-                  <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                  <div class="">
-                    <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                    <div class="d-flex justify-content-between">
-                      <h5>Jason Smith</h5>
-                      <div class="d-flex mb-3">
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                      words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                  <div class="col">
+                    <i class="fa fa-tags fa-2x text-primary mb-2"></i>
+                    <p class="mb-0 fw-bold">Ưu đãi hấp dẫn</p>
+                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">Khuyến mãi liên tục</p>
                   </div>
-                </div>
-                <div class="d-flex">
-                  <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                  <div class="">
-                    <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                    <div class="d-flex justify-content-between">
-                      <h5>Sam Peters</h5>
-                      <div class="d-flex mb-3">
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                    </div>
-                    <p class="text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                      words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                  <div class="col">
+                    <i class="fa fa-truck fa-2x text-primary mb-2"></i>
+                    <p class="mb-0 fw-bold">Sản phẩm chính hãng</p>
+                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">100% chính hãng</p>
                   </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="nav-vision" role="tabpanel">
-                <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                  amet diam et eos labore. 3</p>
-                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                  Clita erat ipsum et lorem et sit</p>
-              </div>
-            </div>
-          </div>
-          <form action="#">
-            <h4 class="mb-5 fw-bold">Leave a Reply</h4>
-            <div class="row g-4">
-              <div class="col-lg-6">
-                <div class="border-bottom rounded">
-                  <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="border-bottom rounded">
-                  <input type="email" class="form-control border-0" placeholder="Your Email *">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="border-bottom rounded my-4">
-                  <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="d-flex justify-content-between py-3 mb-5">
-                  <div class="d-flex align-items-center">
-                    <p class="mb-0 me-3">Please rate:</p>
-                    <div class="d-flex align-items-center" style="font-size: 12px;">
-                      <i class="fa fa-star text-muted"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                  <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
-      </div>
-      <div class="col-lg-4 col-xl-3">
-        <div class="row g-4 fruite">
-          <div class="col-lg-12">
-            <div class="input-group w-100 mx-auto d-flex mb-4">
-              <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-              <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-            </div>
-            <div class="mb-4">
-              <h4>Categories</h4>
-              <ul class="list-unstyled fruite-categorie">
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                    <span>(3)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                    <span>(5)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                    <span>(2)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                    <span>(8)</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="d-flex justify-content-between fruite-name">
-                    <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                    <span>(5)</span>
-                  </div>
-                </li>
+
+            <!-- WHY CHOOSE -->
+            <div class="border rounded p-3 mb-4">
+              <h6 class="fw-bold mb-2">Tại sao khách hàng lựa chọn GalaxyShoes?</h6>
+              <ul class="list-unstyled mb-0">
+                <li>✓ 100% Hàng chính hãng</li>
+                <li>✓ Đổi hàng 30 ngày</li>
+                <li>✓ Uy tín hơn 9 năm</li>
+                <li>✓ 100.000+ khách hàng tin tưởng</li>
+                <li>✓ Miễn phí vận chuyển đơn trên 500.000đ</li>
               </ul>
             </div>
-          </div>
-          <div class="col-lg-12">
-            <h4 class="mb-4">Featured products</h4>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded" style="width: 100px; height: 100px;">
-                <img src="img/featur-1.jpg" class="img-fluid rounded" alt="Image">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
+
+            <!-- POLICY -->
+            <div class="mb-2">
+              <a class="fw-bold d-flex justify-content-between text-decoration-none"
+                 data-bs-toggle="collapse" href="#shippingPolicy">
+                Chính sách giao hàng
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <div class="collapse mt-2" id="shippingPolicy">
+                <p>Giao hàng toàn quốc từ 2–5 ngày.</p>
               </div>
             </div>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded" style="width: 100px; height: 100px;">
-                <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded" style="width: 100px; height: 100px;">
-                <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded me-4" style="width: 100px; height: 100px;">
-                <img src="img/vegetable-item-4.jpg" class="img-fluid rounded" alt="">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded me-4" style="width: 100px; height: 100px;">
-                <img src="img/vegetable-item-5.jpg" class="img-fluid rounded" alt="">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex align-items-center justify-content-start">
-              <div class="rounded me-4" style="width: 100px; height: 100px;">
-                <img src="img/vegetable-item-6.jpg" class="img-fluid rounded" alt="">
-              </div>
-              <div>
-                <h6 class="mb-2">Big Banana</h6>
-                <div class="d-flex mb-2">
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star text-secondary"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="d-flex mb-2">
-                  <h5 class="fw-bold me-2">2.99 $</h5>
-                  <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex justify-content-center my-4">
-              <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
-            </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="position-relative">
-              <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-              <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+
+            <div>
+              <a class="fw-bold d-flex justify-content-between text-decoration-none"
+                 data-bs-toggle="collapse" href="#returnPolicy">
+                Chính sách đổi trả
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <div class="collapse mt-2" id="returnPolicy">
+                <p>Đổi trả trong vòng 30 ngày.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <h1 class="fw-bold mb-0">Related products</h1>
+
+     <h1 class="fw-bold mb-0">Related products</h1>
     <div class="vesitable">
       <div class="owl-carousel vegetable-carousel justify-content-center">
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -391,7 +164,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -405,7 +178,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
+            <img src="public/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -419,7 +192,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -433,7 +206,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -447,7 +220,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -461,7 +234,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -475,7 +248,7 @@
         </div>
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
           <div class="p-4 pb-0 rounded-bottom">
@@ -489,6 +262,76 @@
         </div>
       </div>
     </div>
+
+
+
   </div>
 </div>
 <!-- Single Product End -->
+
+<style>
+  .thumb-img:hover {
+    transform: scale(1.08);
+    border-color: #8c9deb !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+  }
+
+  .thumb-img.active {
+    border-color: #8c9eed !important;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  .product-main-image {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .product-main-image:hover {
+  transform: scale(1.12);
+  cursor: zoom-in;
+}
+
+
+  @media (max-width: 768px) {
+    .product-image-container {
+      min-height: 350px !important;
+    }
+  }
+</style>
+
+<script>
+  function changeImage(elem) {
+    const mainImg = document.getElementById('mainImage');
+    const thumbs = document.querySelectorAll('.thumb-img');
+    
+    thumbs.forEach(img => img.classList.remove('active'));
+    elem.classList.add('active');
+    
+    mainImg.style.opacity = '0';
+    
+    setTimeout(() => {
+      mainImg.src = elem.src;
+      mainImg.style.opacity = '1';
+    }, 150);
+  }
+
+  document.querySelectorAll('.thumb-img').forEach(img => {
+    img.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.08)';
+    });
+    img.addEventListener('mouseleave', function() {
+      if (!this.classList.contains('active')) {
+        this.style.transform = 'scale(1)';
+      }
+    });
+  });
+
+  // Hàm thay đổi số lượng (nếu chưa có thì thêm)
+  function changeQty(value) {
+    let qty = document.getElementById('qty');
+    let current = parseInt(qty.value);
+    let newQty = current + value;
+    if (newQty >= 1) {
+      qty.value = newQty;
+    }
+  }
+</script>
