@@ -124,7 +124,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
 <!-- Featurs Section End -->
 
 
-<!-- Fruits Shop Start-->
+<!-- Các sản phẩm bán chạy Start-->
 <div class="container-fluid fruite py-5">
   <div class="container py-5">
     <div class="tab-class text-center">
@@ -391,7 +391,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
     </div>
   </div>
 </div>
-<!-- Fruits Shop End-->
+<!-- Các sản phẩm bán chạy End-->
 
 
 <!-- Featurs Start -->
