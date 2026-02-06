@@ -5,22 +5,21 @@ require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
 
 $spController = new SanPhamController($conn);
-$listSP = $spController->getAll();
 $hangController = new HangController($conn);
 $hinhAnhController = new HinhAnhController($conn);
+
+$listSP = $spController->getAll();
 
 $listBestSellingALL = $spController->getBestSellingByName("all");
 $listBestSellingPuma = $spController->getBestSellingByName("puma");
 $listBestSellingAdidas = $spController->getBestSellingByName("adidas");
 $listBestSellingVans = $spController->getBestSellingByName("vans");
 $listBestSellingNike = $spController->getBestSellingByName("nike");
-
 ?>
 
-
 <!-- Banner đầu trang -->
-<div class="container-fluid py-5 mb-5 hero-header">
-  <div class="container py-5">
+<div class="container-fluid py-3 mb-4 hero-header">
+  <div class="container py-3">
     <div class="row g-5 align-items-center">
       <div class="col-md-12 col-lg-7">
         <h4 class="mb-3 text-secondary">Giày chính hãng – Chất lượng cao</h4>
@@ -45,6 +44,10 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               <img src="public/img/hero-img-converse.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Converse</a>
             </div>
+            <!-- <div class="carousel-item rounded">
+              <img src="public/img/hero-img-vans.png" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+              <a href="#" class="btn px-4 py-2 text-white rounded">Vans</a>
+            </div> -->
             <div class="carousel-item rounded">
               <img src="public/img/hero-img-clark.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Clark</a>
@@ -70,9 +73,9 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
 <!-- Banner đầu trang End -->
 
 
-<!-- Các chính sách -->
-<div class="container-fluid featurs py-5">
-  <div class="container py-5">
+<!-- Các chính sách Start-->
+<div class="container-fluid featurs py-3">
+  <div class="container py-3">
     <div class="row g-4">
       <div class="col-md-6 col-lg-3">
         <div class="featurs-item text-center rounded bg-light p-4">
@@ -121,19 +124,19 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
     </div>
   </div>
 </div>
-<!-- Featurs Section End -->
+<!-- Các chính sách End -->
 
 
 <!-- Các sản phẩm bán chạy Start-->
-<div class="container-fluid fruite py-5">
-  <div class="container py-5">
+<div class="container-fluid fruite py-3">
+  <div class="container py-3">
     <div class="tab-class text-center">
       <div class="row g-4">
         <div class="col-lg-4 text-start">
           <h1>Sản phẩm bán chạy</h1>
         </div>
         <div class="col-lg-8 text-end">
-          <ul class="nav nav-pills d-inline-flex text-center mb-5">
+          <ul class="nav nav-pills d-inline-flex text-center mb-3">
             <li class="nav-item">
               <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
                 <span class="text-dark" style="width: 130px;">Tất cả</span>
@@ -168,7 +171,6 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
-
                 <?php if (!empty($listBestSellingALL)): ?>
                   <?php foreach ($listBestSellingALL as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
@@ -180,11 +182,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                          <?= $sp['masp'] ?>
-                        </div>
                         <div class="p-4 border border-secondary border-top-0">
-                          <h4><?= $sp['tensp'] ?></h4>
+                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
                           <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
                             <p class="text-dark fs-5 fw-bold mb-0">
@@ -225,11 +224,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                          <?= $sp['masp'] ?>
-                        </div>
                         <div class="p-4 border border-secondary border-top-0">
-                          <h4><?= $sp['tensp'] ?></h4>
+                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
                           <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
                             <p class="text-dark fs-5 fw-bold mb-0">
@@ -269,11 +265,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                          <?= $sp['masp'] ?>
-                        </div>
                         <div class="p-4 border border-secondary border-top-0">
-                          <h4><?= $sp['tensp'] ?></h4>
+                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
                           <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
                             <p class="text-dark fs-5 fw-bold mb-0">
@@ -313,11 +306,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                          <?= $sp['masp'] ?>
-                        </div>
                         <div class="p-4 border border-secondary border-top-0">
-                          <h4><?= $sp['tensp'] ?></h4>
+                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
                           <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
                             <p class="text-dark fs-5 fw-bold mb-0">
@@ -358,11 +348,8 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-                          <?= $sp['masp'] ?>
-                        </div>
                         <div class="p-4 border border-secondary border-top-0">
-                          <h4><?= $sp['tensp'] ?></h4>
+                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
                           <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
                             <p class="text-dark fs-5 fw-bold mb-0">
@@ -394,44 +381,58 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
 <!-- Các sản phẩm bán chạy End-->
 
 
-<!-- Featurs Start -->
-<div class="container-fluid service py-5">
-  <div class="container py-5">
+<!-- Ảnh model Start -->
+<div class="container-fluid service py-3">
+  <div class="container py-3">
+    <h1 class="mb-3">Đại sứ phong cách</h1>
     <div class="row g-4 justify-content-center">
-      <div class="col-md-6 col-lg-4">
-        <a href="#">
-          <div class="service-item bg-secondary rounded border border-secondary">
-            <img src="public/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
-            <div class="px-4 rounded-bottom">
-              <div class="service-content bg-primary text-center p-4 rounded">
-                <h5 class="text-white">Fresh Apples</h5>
-                <h3 class="mb-0">20% OFF</h3>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-lg-4">
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
         <a href="#">
           <div class="service-item bg-dark rounded border border-dark">
-            <img src="public/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
-            <div class="px-4 rounded-bottom">
-              <div class="service-content bg-light text-center p-4 rounded">
-                <h5 class="text-primary">Tasty Fruits</h5>
-                <h3 class="mb-0">Free delivery</h3>
+            <img src="public/img/model-img-2.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
+            <div class="px-4 rounded-bottom" style="height:80px;">
+              <div class="text-center py-2 rounded">
+                <h4 class="text-white">AUTHENTIC</h4>
+                <h6 class="text-white mb-0">Cam kết 100% chính hãng</h6>
               </div>
             </div>
           </div>
         </a>
       </div>
-      <div class="col-md-6 col-lg-4">
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
         <a href="#">
-          <div class="service-item bg-primary rounded border border-primary">
-            <img src="public/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
-            <div class="px-4 rounded-bottom">
-              <div class="service-content bg-secondary text-center p-4 rounded">
-                <h5 class="text-white">Exotic Vegitable</h5>
-                <h3 class="mb-0">Discount 30$</h3>
+          <div class="service-item bg-secondary rounded border border-secondary">
+            <img src="public/img/model-img-4.png" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
+            <div class="px-4 rounded-bottom" style="height:80px;">
+              <div class="text-center py-2 rounded">
+                <h4 class="text-white">PREMIUM</h4>
+                <h6 class="text-white mb-0">Chất liệu cao cấp – Gia công tỉ mỉ</h6>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <a href="#">
+          <div class="service-item bg-dark rounded border border-dark">
+            <img src="public/img/model-img-3.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
+            <div class="px-4 rounded-bottom" style="height:80px;">
+              <div class="text-center py-2 rounded">
+                <h4 class="text-white">BEST DEAL</h4>
+                <h6 class="text-white mb-0">Nhiều ưu đãi hấp dẫn</h6>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3 d-flex">
+        <a href="#">
+          <div class="service-item bg-secondary rounded border border-secondary">
+            <img src="public/img/model-img-1.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
+            <div class="px-4 rounded-bottom" style="height:80px;">
+              <div class="text-center py-2 rounded">
+                <h4 class="text-white">STYLE</h4>
+                <h6 class="text-white mb-0">Phong cách trẻ trung – Cá tính</h6>
               </div>
             </div>
           </div>
@@ -440,214 +441,43 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
     </div>
   </div>
 </div>
-<!-- Featurs End -->
+<!-- Ảnh model End -->
 
-
-<!-- Vesitable Shop Start-->
-<div class="container-fluid vesitable py-5">
-  <div class="container py-5">
-    <h1 class="mb-0">Fresh Organic Vegetables</h1>
+<!-- Danh sách sản phẩm Start-->
+<div class="container-fluid vesitable py-3 pb-1">
+  <div class="container py-3 pb-2 mb-0">
+    <h1 class="mb-2">Gợi ý sản phẩm</h1>
     <div class="owl-carousel vegetable-carousel justify-content-center">
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Parsely</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Parsely</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$4.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Banana</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Bell Papper</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Potatoes</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Parsely</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Potatoes</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-      <div class="border border-primary rounded position-relative vesitable-item">
-        <div class="vesitable-img">
-          <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-        </div>
-        <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-          Vegetable</div>
-        <div class="p-4 rounded-bottom">
-          <h4>Parsely</h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-          <div class="d-flex justify-content-between flex-lg-wrap">
-            <p class="text-dark fs-5 fw-bold mb-0">$7.99 / kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Vesitable Shop End -->
-
-
-<!-- Banner Section Start-->
-<div class="container-fluid banner bg-secondary my-5">
-  <div class="container py-5">
-    <div class="row g-4 align-items-center">
-      <div class="col-lg-6">
-        <div class="py-4">
-          <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
-          <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
-          <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition injected
-            humour, or non-characteristic words etc.</p>
-          <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="position-relative">
-          <img src="public/img/baner-1.png" class="img-fluid w-100 rounded" alt="">
-          <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute"
-            style="width: 140px; height: 140px; top: 0; left: 0;">
-            <h1 style="font-size: 100px;">1</h1>
-            <div class="d-flex flex-column">
-              <span class="h2 mb-0">50$</span>
-              <span class="h4 text-muted mb-0">kg</span>
+      <?php if (!empty($listSP)): ?>
+        <?php foreach ($listSP as $sp): ?>
+          <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
+          <div class="border border-primary rounded position-relative vesitable-item">
+            <div class="vesitable-img">
+              <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+            </div>
+            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
+              <?= $hangController->getNameById($sp['hang']) ?></div>
+            <div class="p-4 rounded-bottom">
+              <h4 class="text-start"><?= $sp['tensp'] ?></h4>
+              <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
+                <p class="text-dark fs-5 fw-bold mb-0">
+                  <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                </p>
+                <p class="text-black fs-6 mb-0">
+                  Đã bán: <?= $sp['soluongdaban'] ?>
+                </p>
+                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                    class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
+              </div>
             </div>
           </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div class="col-12 text-center">
+          <p class="text-muted fs-5">Không có sản phẩm nào</p>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>
-<!-- Banner Section End -->
-
-<!-- Fact Start -->
-<div class="container-fluid py-5">
-  <div class="container">
-    <div class="bg-light p-5 rounded">
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-6 col-lg-6 col-xl-3">
-          <div class="counter bg-white rounded p-5">
-            <i class="fa fa-users text-secondary"></i>
-            <h4>satisfied customers</h4>
-            <h1>1963</h1>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-xl-3">
-          <div class="counter bg-white rounded p-5">
-            <i class="fa fa-users text-secondary"></i>
-            <h4>quality of service</h4>
-            <h1>99%</h1>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-xl-3">
-          <div class="counter bg-white rounded p-5">
-            <i class="fa fa-users text-secondary"></i>
-            <h4>quality certificates</h4>
-            <h1>33</h1>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-6 col-xl-3">
-          <div class="counter bg-white rounded p-5">
-            <i class="fa fa-users text-secondary"></i>
-            <h4>Available Products</h4>
-            <h1>789</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Fact Start -->
+<!-- Danh sách sản phẩm Shop End -->
