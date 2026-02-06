@@ -1,14 +1,15 @@
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Tài khoản của tôi</h1>
-  <ol class="breadcrumb justify-content-center mb-0">
+  <h1 class="text-center text-white display-6">Chào mừng bạn</h1>
+  <p class="text-center text-white">Đăng nhập hoặc tạo tài khoản để tiếp tục</p>
+  <!-- <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
     <li class="breadcrumb-item active text-white">Đăng nhập</li>
-  </ol>
+  </ol> -->
 </div>
 <!-- Single Page Header End -->
 
- <!-- Form Auth Start -->
+<!-- Form Auth Start -->
 <div class="container-fluid featurs py-1">
   <div class="container py-5">
     <div class="row justify-content-center">
@@ -150,7 +151,7 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 <!-- Form Auth End -->
 
 

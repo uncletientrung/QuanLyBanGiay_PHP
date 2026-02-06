@@ -48,11 +48,11 @@
           <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
               class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
-        <div class="top-link pe-2">
+        <!-- <div class="top-link pe-2">
           <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
           <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
           <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="container px-0">
@@ -92,7 +92,7 @@
                 style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
             </a>
             <!-- Button user -->
-            <a href="account" class="my-auto">
+            <a href="<?= ROOT_URL ?>account" class="my-auto">
               <i class="fas fa-user fa-2x"></i>
             </a>
           </div>
