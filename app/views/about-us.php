@@ -15,7 +15,7 @@
         height: 6px;
         background-color: #a5e46e;
         margin: 0 auto;
-        border-radius: 10px; 
+        border-radius: 10px;
     }
 
     .content-container {
@@ -78,6 +78,12 @@
     .breadcrumb span {
         margin: 0 6px;
     }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
 </style>
 
 <div class="container breadcrumb">
@@ -106,11 +112,24 @@
     </p>
 
     <ul>
-        <li><strong>Website:</strong> https://shop.mixigaming.com/</li>
-        <li><strong>Fanpage:</strong> https://www.facebook.com/ShoesGalaxy-182674912385853/</li>
-        <li><strong>Instagram:</strong> https://www.instagram.com/mixi.shop/</li>
-        <li><strong>Email:</strong> Mixiishop@gmail.com</li>
+        <li>
+            <i class="fas fa-globe"></i>
+            <strong>Website:</strong> https://shop.shoesgalaxy.com/
+        </li>
+        <li>
+            <i class="fab fa-facebook"></i>
+            <strong>Fanpage:</strong> https://www.facebook.com/ShoesGalaxy/
+        </li>
+        <li>
+            <i class="fab fa-instagram"></i>
+            <strong>Instagram:</strong> https://www.instagram.com/shoesgalaxy/
+        </li>
+        <li>
+            <i class="fas fa-envelope"></i>
+            <strong>Email:</strong> shoesgalaxy@gmail.com
+        </li>
     </ul>
+
 
     <div class="note">
         <strong>Lưu ý:</strong>
@@ -120,13 +139,12 @@
 
     <h3>Thông tin chung</h3>
     <ul>
-        <li><strong>Tên hộ kinh doanh:</strong> Hộ kinh doanh Độ Trang</li>
+        <li><strong>Tên hộ kinh doanh:</strong> Hộ kinh doanh 3N1T</li>
         <li><strong>Địa chỉ:</strong> Số 48 ngách 26 ngõ Thái Thịnh 2, Phường Thịnh Quang, Quận Đống Đa, Thành phố Hà Nội, Việt Nam</li>
         <li><strong>Số điện thoại liên hệ:</strong> 08 2222 1992</li>
         <li><strong>Mã số hộ kinh doanh:</strong> 8372170944</li>
         <li><strong>Mã số đăng ký hộ kinh doanh:</strong> 01E8029746</li>
-        <li><strong>Đăng ký lần đầu:</strong> Ngày 12 tháng 06 năm 2020</li>
-        <li><strong>Đăng ký thay đổi lần thứ 4:</strong> Ngày 12 tháng 12 năm 2024</li>
+        <li><strong>Đăng ký lần đầu:</strong> Ngày 27 tháng 12 năm 2025</li>
     </ul>
 
     <div class="contact-box">
@@ -134,4 +152,3 @@
     </div>
 
 </div>
-
