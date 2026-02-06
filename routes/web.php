@@ -38,6 +38,18 @@ if($uri == 'product-detail') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if($uri == 'account') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'account.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if($uri == 'account/login') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'auth.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
 // Chỗ debug
 if ($uri == 'debug') {
     require VIEW_PATH_DIR . 'debug.php';
