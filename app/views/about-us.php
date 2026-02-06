@@ -63,8 +63,6 @@
           <strong>Email:</strong> shoesgalaxy@gmail.com
         </li>
       </ul>
-
-
       <div class="note">
         <strong>Lưu ý:</strong>
         ShoesGalaxy <strong>không chịu trách nhiệm</strong> với các đơn hàng phát sinh
@@ -74,7 +72,7 @@
       <h3>Thông tin chung</h3>
       <ul>
         <li><strong>Tên hộ kinh doanh:</strong> Hộ kinh doanh 3N1T</li>
-        <li><strong>Địa chỉ:</strong> Số 48 ngách 26 ngõ Thái Thịnh 2, Phường Thịnh Quang, Quận Đống Đa, Thành phố Hà Nội, Việt Nam</li>
+        <li><strong>Địa chỉ:</strong> 273 An Dương Vương, P.2, Quận 5, Thành phố Hồ Chí Minh, Việt Nam</li>
         <li><strong>Số điện thoại liên hệ:</strong> 08 2222 1992</li>
         <li><strong>Mã số hộ kinh doanh:</strong> 8372170944</li>
         <li><strong>Mã số đăng ký hộ kinh doanh:</strong> 01E8029746</li>

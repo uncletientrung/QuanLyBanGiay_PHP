@@ -44,7 +44,7 @@
       <div class="d-flex justify-content-between">
         <div class="top-info ps-2">
           <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-              class="text-white">9 Đường Hoàng Hoa Thám, P. 13, Q. Tân Bình</a></small>
+              class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
           <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
               class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
