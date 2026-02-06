@@ -252,9 +252,13 @@ $totalPages = ceil($totalProducts / $limit);
                             <p class="text-dark fs-5 fw-bold mb-0">
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
+                            
                             <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
                               <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
                             </a>
+                            <p class="text-black fs-6 mb-0">
+                              Đã bán: <?= $sp['soluongdaban'] ?>
+                            </p>
                           </div>
                         </div>
                       </div>
