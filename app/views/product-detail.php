@@ -16,42 +16,102 @@
       <div class="col-12">
         <div class="row g-4">
 
-          <!-- ẢNH NHỎ -->
-          <div class="col-lg-1 d-none d-lg-block">
-            <div class="d-flex flex-column gap-2">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg" class="img-fluid rounded thumb-img active" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-02.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-03.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-04.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-05.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
-              <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-06.jpg" class="img-fluid rounded thumb-img" onclick="changeImage(this)" style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease;">
+          <!-- Cột trái: Hình ảnh + Tabs (thu nhỏ lại thành col-lg-7) -->
+          <div class="col-lg-7">
+
+            <!-- Div mẹ chứa thumbnail + ảnh lớn -->
+            <div class="row g-3 mb-4">
+              <!-- Thumbnail nhỏ - vuông, to hơn một chút (95px) -->
+              <div class="col-2 d-none d-lg-block">
+                <div class="d-flex flex-column gap-2"> <!-- tăng gap-1 lên gap-2 để tổng chiều cao vẫn cân đối khi thumbnail to hơn -->
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg" 
+                      class="img-fluid rounded thumb-img active" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-02.jpg" 
+                      class="img-fluid rounded thumb-img" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-03.jpg" 
+                      class="img-fluid rounded thumb-img" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-04.jpg" 
+                      class="img-fluid rounded thumb-img" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-05.jpg" 
+                      class="img-fluid rounded thumb-img" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                  <img src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-06.jpg" 
+                      class="img-fluid rounded thumb-img" 
+                      onclick="changeImage(this)" 
+                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                </div>
+              </div>
+
+            <!-- Ảnh lớn - luôn có border-radius -->
+            <div class="col-10">
+              <div class="rounded product-image-container" 
+                  style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
+                <img id="mainImage"
+                    src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg"
+                    class="img-fluid product-main-image"
+                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;">  <!-- thêm border-radius ở đây -->
+              </div>
             </div>
+            </div>
+
+            <!-- Tabs mô tả - giữ sát biên trái -->
+            <div class="ps-lg-0 ps-3">
+              <nav>
+                <div class="nav nav-tabs mb-3">
+                  <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                    id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                    aria-controls="nav-about" aria-selected="true">Description</button>
+                  <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                    id="nav-shipping-tab" data-bs-toggle="tab" data-bs-target="#nav-shipping"
+                    aria-controls="nav-shipping" aria-selected="false">Chính sách giao hàng</button>
+                  <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                    id="nav-return-tab" data-bs-toggle="tab" data-bs-target="#nav-return"
+                    aria-controls="nav-return" aria-selected="false">Chính sách đổi trả</button>
+                </div>
+              </nav>
+              <div class="tab-content mb-5">
+                <!-- nội dung tab giữ nguyên -->
+                <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                  <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
+                    Susp endisse ultricies nisi vel quam suscipit </p>
+                  <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
+                    icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
+                </div>
+                <div class="tab-pane" id="nav-shipping" role="tabpanel" aria-labelledby="nav-shipping-tab">
+                  <p>Giao hàng toàn quốc từ 2–5 ngày.</p>
+                </div>
+                <div class="tab-pane" id="nav-return" role="tabpanel" aria-labelledby="nav-return-tab">
+                  <p>Đổi trả trong vòng 30 ngày.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <!-- ẢNH CHÍNH + MÔ TẢ NGAY BÊN DƯỚI -->
+          <!-- Cột phải: Thông tin sản phẩm - col-lg-5 -->
           <div class="col-lg-5">
-            <div class=" rounded product-image-container" style="min-height: 555px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
-              <img id="mainImage" src="public/img/products/giay-nike-metcon-10-nam-trang-den-xanh-01-main.jpg" class="img-fluid rounded product-main-image" style="transition: all 0.4s ease; max-height: 470px; object-fit: contain; cursor: zoom-in;">
-            </div>
-
-            <!-- MÔ TẢ SẢN PHẨM -->
-            <div class="mt-4">
-              <h6 class="fw-bold pb-2 border-bottom">Mô tả sản phẩm</h6>
-              <p class="text-muted mt-3 mb-0" style="line-height: 1.7; font-size: 1.02rem;">
-                Nike Air Force 1 là biểu tượng không thời gian trong làng giày thể thao. Với thiết kế tinh tế, chất liệu cao cấp và đệm Air công nghệ, đôi giày này mang lại sự thoải mái tối đa cho từng bước chân. Thích hợp cho các hoạt động hàng ngày cũng như thể thao.
-              </p>
-            </div>
-          </div>
-
-          <!-- THÔNG TIN SẢN PHẨM -->
-          <div class="col-lg-6">
-            <h4 class="fw-bold mb-2">Nike Air Force 1</h4>
+            <!-- Tên sản phẩm nổi bật hơn -->
+            <h4 class="fw-bold mb-2" style="font-size: 2.5rem; line-height: 1.1;">Nike Air Force 1</h4>
+            
             <p class="mb-1">Loại sản phẩm: <strong>Sneaker</strong></p>
-            <p class="mb-3">Thương hiệu: <strong>Nike</strong></p>
+            <p class="mb-2">Thương hiệu: <strong>Nike</strong></p>
+            <!-- Thêm giới tính -->
+            <p class="mb-3">Giới tính: <strong>Unisex</strong></p>
 
-            <h5 class="fw-bold mb-3 text-primary" style="font-size: 1.4rem;">2.500.000 ₫</h5>
+            <!-- Giá nổi bật hơn -->
+            <h5 class="fw-bolder mb-4 text-danger" style="font-size: 2rem; letter-spacing: -0.5px;">
+              2.500.000 ₫
+            </h5>
 
-            <!-- SIZE -->
             <div class="mb-4">
               <p class="fw-bold mb-2">Size</p>
               <div class="d-flex gap-2 flex-wrap">
@@ -63,9 +123,8 @@
               </div>
             </div>
 
-            <!-- SỐ LƯỢNG + ADD TO CART -->
-            <div class="d-flex align-items-center gap-3 mb-3">
-              <div class="input-group quantity" style="width: 120px;">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="input-group quantity" style="width: 130px;">
                 <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="changeQty(-1)">
                   <i class="fa fa-minus"></i>
                 </button>
@@ -75,72 +134,49 @@
                 </button>
               </div>
 
-              <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 text-primary">
+              <a href="#" class="btn border border-secondary rounded-pill px-5 py-2 text-primary">
                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
               </a>
             </div>
 
-            <!-- MUA NGAY -->
-            <a href="#" class="btn btn-danger w-100 mb-4">Mua ngay</a>
+            <a href="#" class="btn btn-danger w-100 mb-4 py-3 fw-bold" style="font-size: 1.2rem;">Mua ngay</a>
 
-            <!-- ICON INFO - ĐÃ THU HẸP LẠI -->
-            <div class="row justify-content-center mb-4">
-              <div class="col-11 col-md-10 col-lg-11 rounded py-3 bg-white">
-                <div class="row text-center">
-                  <div class="col">
-                    <i class="fa fa-truck fa-2x text-primary mb-2"></i>
-                    <p class="mb-0 fw-bold">Giao hàng toàn quốc</p>
-                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">2-5 ngày</p>
-                  </div>
-                  <div class="col">
-                    <i class="fa fa-tags fa-2x text-primary mb-2"></i>
-                    <p class="mb-0 fw-bold">Ưu đãi hấp dẫn</p>
-                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">Khuyến mãi liên tục</p>
-                  </div>
-                  <div class="col">
-                    <i class="fa fa-truck fa-2x text-primary mb-2"></i>
-                    <p class="mb-0 fw-bold">Sản phẩm chính hãng</p>
-                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">100% chính hãng</p>
-                  </div>
+            <!-- Khung icons info - làm dài bằng nút Mua ngay -->
+            <div class="rounded py-3 bg-white border mb-4 w-100">
+              <div class="row text-center gx-0">
+                <div class="col">
+                  <i class="fa fa-truck fa-2x text-primary mb-2"></i>
+                  <p class="mb-0 fw-bold">Giao hàng toàn quốc</p>
+                  <p class="mb-0 text-muted small">2-5 ngày</p>
+                </div>
+                <div class="col">
+                  <i class="fa fa-tags fa-2x text-primary mb-2"></i>
+                  <p class="mb-0 fw-bold">Ưu đãi hấp dẫn</p>
+                  <p class="mb-0 text-muted small">Khuyến mãi liên tục</p>
+                </div>
+                <div class="col">
+                  <i class="fa fa-check-circle fa-2x text-primary mb-2"></i>
+                  <p class="mb-0 fw-bold">Chính hãng</p>
+                  <p class="mb-0 text-muted small">100% chính hãng</p>
                 </div>
               </div>
             </div>
 
-            <!-- WHY CHOOSE -->
-            <div class="border rounded p-3 mb-4">
-              <h6 class="fw-bold mb-2">Tại sao khách hàng lựa chọn GalaxyShoes?</h6>
+            <!-- Khung Tại sao chọn GalaxyShoes - cũng dài bằng nút Mua ngay -->
+            <div class="border rounded p-4 mb-4 w-100">
+              <h6 class="fw-bold mb-3" style="font-size: 1.25rem;">Tại sao khách hàng lựa chọn GalaxyShoes?</h6>
               <ul class="list-unstyled mb-0">
-                <li>✓ 100% Hàng chính hãng</li>
-                <li>✓ Đổi hàng 30 ngày</li>
-                <li>✓ Uy tín hơn 9 năm</li>
-                <li>✓ 100.000+ khách hàng tin tưởng</li>
+                <li class="mb-2">✓ 100% Hàng chính hãng</li>
+                <li class="mb-2">✓ Đổi hàng 30 ngày</li>
+                <li class="mb-2">✓ Uy tín hơn 9 năm</li>
+                <li class="mb-2">✓ 100.000+ khách hàng tin tưởng</li>
                 <li>✓ Miễn phí vận chuyển đơn trên 500.000đ</li>
               </ul>
             </div>
 
-            <!-- POLICY -->
-            <div class="mb-2">
-              <a class="fw-bold d-flex justify-content-between text-decoration-none"
-                 data-bs-toggle="collapse" href="#shippingPolicy">
-                Chính sách giao hàng
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <div class="collapse mt-2" id="shippingPolicy">
-                <p>Giao hàng toàn quốc từ 2–5 ngày.</p>
-              </div>
-            </div>
-
-            <div>
-              <a class="fw-bold d-flex justify-content-between text-decoration-none"
-                 data-bs-toggle="collapse" href="#returnPolicy">
-                Chính sách đổi trả
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <div class="collapse mt-2" id="returnPolicy">
-                <p>Đổi trả trong vòng 30 ngày.</p>
-              </div>
-            </div>
+            <!-- Collapse chính sách nếu có - giữ nguyên -->
           </div>
+
         </div>
       </div>
     </div>
