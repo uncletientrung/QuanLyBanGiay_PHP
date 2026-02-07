@@ -82,6 +82,12 @@ if ($uri == 'contact-us') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if ($uri == 'chackout') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'chackout.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
 require VIEW_PATH_DIR . 'partials/header.php';
 require VIEW_PATH_DIR . '404.php';
 require VIEW_PATH_DIR . 'partials/footer.php';

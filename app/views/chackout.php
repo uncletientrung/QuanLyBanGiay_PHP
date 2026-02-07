@@ -3,7 +3,6 @@
   <h1 class="text-center text-white display-6">Checkout</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Pages</a></li>
     <li class="breadcrumb-item active text-white">Checkout</li>
   </ol>
 </div>
@@ -13,23 +12,13 @@
 <!-- Checkout Page Start -->
 <div class="container-fluid py-5">
   <div class="container py-5">
-    <h1 class="mb-4">Billing details</h1>
+    <h1 class="mb-4">Thông tin hóa đơn</h1>
     <form action="#">
       <div class="row g-5">
         <div class="col-md-12 col-lg-6 col-xl-7">
-          <div class="row">
-            <div class="col-md-12 col-lg-6">
-              <div class="form-item w-100">
-                <label class="form-label my-3">First Name<sup>*</sup></label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
-            <div class="col-md-12 col-lg-6">
-              <div class="form-item w-100">
-                <label class="form-label my-3">Last Name<sup>*</sup></label>
-                <input type="text" class="form-control">
-              </div>
-            </div>
+          <div class="form-item">
+            <label class="form-label my-3">Họ và Tên<sup>*</sup></label>
+            <input type="text" class="form-control">
           </div>
           <div class="form-item">
             <label class="form-label my-3">Company Name<sup>*</sup></label>
