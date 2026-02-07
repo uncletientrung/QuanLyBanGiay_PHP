@@ -1,3 +1,20 @@
+<?php
+require_once '../QuanLyBanGiay_PHP/config/connectdb.php';
+require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/MauSacController.php";
+require_once "../QuanLyBanGiay_PHP/app/controllers/LoaiController.php";
+$spController = new SanPhamController($conn);
+$hangController = new HangController($conn);
+$hinhAnhController = new HinhAnhController($conn);
+$mauSacController = new MauSacController($conn);
+$loaiController = new LoaiController($conn);
+$listHang = $hangController->getAll();
+$listMauSac = $mauSacController->getAll();
+$listLoai = $loaiController->getAll();
+$listSP = $spController->getAll();
+?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop Detail</h1>
@@ -181,121 +198,42 @@
       </div>
     </div>
 
-     <h1 class="fw-bold mb-0">Related products</h1>
+    <h1 class="fw-bold mb-0">Related products</h1>
     <div class="vesitable">
+     
       <div class="owl-carousel vegetable-carousel justify-content-center">
+
+         <?php if(!empty($listSP)) : ?>
+        <?php foreach($listSP as $sp):?>
+          <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
+
+   
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
           </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
+          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?= $hangController->getNameById($sp['hang']) ?></div>
           <div class="p-4 pb-0 rounded-bottom">
-            <h4>Parsely</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
+            <h4><?= $sp['tensp'] ?></h4>
+             
             <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+              <p class="text-dark fs-5 fw-bold"><?= number_format($giaBanSP, 0, ',', '.') ?> ₫</p>
+                 <p class="text-black fs-6 mb-0">
+                  Đã bán: <?= $sp['soluongdaban'] ?>
+                </p>
+              
             </div>
+              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
           </div>
         </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Parsely</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$4.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
+                <?php endforeach; ?>
+      <?php else: ?>
+          <div class="col-12 text-center">
+          <p class="text-muted fs-5">Không có sản phẩm nào</p>
         </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Banana</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Bell Papper</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Potatoes</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Parsely</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Potatoes</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <img src="public/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">Vegetable</div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4>Parsely</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod te incididunt</p>
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold">$7.99 / kg</p>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-            </div>
-          </div>
-        </div>
+      <?php endif; ?>
+
+
       </div>
     </div>
 
@@ -332,6 +270,34 @@
       min-height: 350px !important;
     }
   }
+
+.vesitable-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.vesitable-item .p-4 {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.vesitable-item h4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 3.6rem;
+  max-height: 3.6rem;
+  margin-bottom: 1rem;
+}
+
+.vesitable-item .d-flex {
+  margin-top: auto;
+}
+
 </style>
 
 <script>

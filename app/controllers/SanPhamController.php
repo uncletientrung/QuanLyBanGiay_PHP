@@ -44,15 +44,17 @@ class SanPhamController
     }
 
     // kiểm tra mảng filter có rỗng k
-    private function isEmptyFilters(array $filters): bool
+    public function isEmptyFilters(array $filters): bool
     {
         return empty($filters['q'])
-            && $filters['hang'] === null
-            && $filters['loai'] === null
-            && empty($filters['gioitinh'])  
+            && empty($filters['hang'])
+            && empty($filters['loai'])
+            && empty($filters['gioitinh'])
             && empty($filters['mau'])
-            && ($filters['max_price'] === null || $filters['max_price'] >= 10000000);
+            && empty($filters['price_range'])
+            && $filters['sort'] === 'default';
     }
+
 
     
     public function getAll()

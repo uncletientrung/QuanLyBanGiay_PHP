@@ -14,30 +14,30 @@ $loaiController = new LoaiController($conn);
 
 $listHang = $hangController->getAll();
 $listMauSac = $mauSacController->getAll();
-$listLoai = $loaiController->getLoaivaSoluongTuongUng();
-$maxPrice = $_GET['max_price'] ?? 10000000;
+$listLoai = $loaiController->getLoaivaSoluongTuongUng(); 
 
-// xu lý filters từ GET
+// Xử lý filters từ GET
 $filters = [
     'q'         => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
-    'hang'      => (isset($_GET['hang']) && $_GET['hang'] !== 'all' && $_GET['hang'] !== '') ? (int)$_GET['hang'] : null,
-    'loai'      => isset($_GET['loai']) && $_GET['loai'] !== '' ? (int)$_GET['loai'] : null,
+    'hang'      => !empty($_GET['hang']) ? array_map('intval', (array)$_GET['hang']) : [],
+    'loai'      => !empty($_GET['loai']) ? array_map('intval', (array)$_GET['loai']) : [],
     'gioitinh'  => !empty($_GET['gioitinh']) ? array_map('trim', (array)$_GET['gioitinh']) : [],
-    'max_price' => isset($_GET['max_price']) && is_numeric($_GET['max_price']) ? (int)$_GET['max_price'] : null,
-    'mau'       => !empty($_GET['mau']) ? array_map('intval', (array)$_GET['mau']) : [],
+    'mau'       => !empty($_GET['mau']) ? array_map('intval', (array)$_GET['mau']) : [],   
+    'price_range' => $_GET['price_range'] ?? null, // tầm giá
+    'sort'      => $_GET['sort'] ?? 'default',     // sắp xếp
 ];
 
 // Phân trang
 $page = max(1, (int)($_GET['page'] ?? 1));
 $limit = 9;
 
-// Lấy dữ liệu
+// Lấy dữ liệu sản phẩm
 $listSP = $spController->getProducts($filters, $page, $limit);
 $totalProducts = $spController->countProducts($filters);
 $totalPages = ceil($totalProducts / $limit);
-
-
+$co = $spController->isEmptyFilters($filters);
 ?>
+
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop</h1>
@@ -50,183 +50,210 @@ $totalPages = ceil($totalProducts / $limit);
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
+<!-- 
+<?php
+echo '<pre>';
+print_r($filters);
+echo '</pre>';
+
+?> -->
   <div class="container py-5">
     <h1 class="mb-4">SHOP giày</h1>
     <div class="row g-4">
       <div class="col-lg-12">
-       <form method="GET" action="products" id="filterForm">
-        <input type="hidden" name="loai" value="<?= $_GET['loai'] ?? '' ?>" id="loaiInput">
-        <div class="row g-4">
-          <div class="col-xl-3">
-            <div class="input-group w-100 mx-auto d-flex">
-              <input 
-                type="search" 
-                name="q" 
-                value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" 
-                class="form-control p-3" 
-                placeholder="Tìm kiếm..." 
-                aria-describedby="search-icon-1"
-              >
-              <button 
-                type="submit" 
-                class="input-group-text p-3 custom-search-btn" 
-                id="search-icon-1"
-              >
-                <i class="fa fa-search"></i>
-              </button>
+        <form method="GET" action="products" id="filterForm">
+          <div class="row g-4">
+            <div class="col-xl-3">
+              <div class="input-group w-100 mx-auto d-flex">
+                <input 
+                  type="search" 
+                  name="q" 
+                  value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" 
+                  class="form-control p-3" 
+                  placeholder="Tìm kiếm..." 
+                  aria-describedby="search-icon-1"
+                >
+                <button 
+                  type="submit" 
+                  class="input-group-text p-3 custom-search-btn" 
+                  id="search-icon-1"
+                >
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="col-6"></div>
+            <div class="col-6"></div>
 
-          <!-- Bộ lọc thương hiệu -->
-          <div class="col-xl-3">
-            <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
-              <label for="hanggiay">Thương hiệu</label>
-              <select id="hanggiay" name="hang" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
-                <option value="all">Tất cả</option>
-                <?php foreach($listHang as $hang): ?>
-                  <option value="<?= $hang['mahang'] ?>"
-                    <?= (($_GET['hang'] ?? '') == $hang['mahang']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($hang['tenhang']) ?>
-                  </option>
-                <?php endforeach; ?>              
-              </select>
+            <!-- Sắp xếp -->
+            <div class="col-xl-3">
+              <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
+                <label for="sort">Sắp xếp</label>
+                <select id="sort" name="sort" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
+                  <option value="default" <?= ($filters['sort'] ?? 'default') === 'default' ? 'selected' : '' ?>>Tất cả</option>
+                  <option value="price_asc" <?= $filters['sort'] === 'price_asc' ? 'selected' : '' ?>>Giá tăng dần</option>
+                  <option value="price_desc" <?= $filters['sort'] === 'price_desc' ? 'selected' : '' ?>>Giá giảm dần</option>
+                  <option value="name_asc" <?= $filters['sort'] === 'name_asc' ? 'selected' : '' ?>>Tên A → Z</option>
+                  <option value="name_desc" <?= $filters['sort'] === 'name_desc' ? 'selected' : '' ?>>Tên Z → A</option>
+                  <option value="best_seller" <?= $filters['sort'] === 'best_seller' ? 'selected' : '' ?>>Bán chạy nhất</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="row g-4">
-          <div class="col-lg-3">
-            <div class="row g-4">
-              <div class="col-lg-12">
-                <div class="mb-3">
-                  <h4>Loại giày</h4>
-                  <ul class="list-unstyled fruite-categorie">
-                    <li>
-                      <div class="d-flex justify-content-between fruite-name">
-                        <?php
-                          $paramsAll = $_GET;
-                          unset($paramsAll['url']);
-                          unset($paramsAll['loai']); // Bỏ filter loại
-                          unset($paramsAll['page']); // Reset về trang 1
-                        ?>
-                        <a href="?<?= http_build_query($paramsAll) ?>" 
-                           class="<?= !isset($_GET['loai']) ? 'fw-bold text-primary' : '' ?>">
-                          <i class="fas fa-list me-2"></i>Tất cả
-                        </a>
+
+          <div class="row g-4">
+            <div class="col-lg-3">
+              <div class="row g-2">  
+
+                <!-- Khung Loại giày -->
+                <div class="col-lg-12">
+                  <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
+                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Loại giày</h4>
+                    <?php foreach($listLoai as $loai): ?>
+                      <div class="mb-2">
+                        <input
+                          type="checkbox"
+                          class="me-2 form-check-input-custom"
+                          id="loai-<?= $loai['maloai'] ?>"
+                          name="loai[]"
+                          value="<?= $loai['maloai'] ?>"
+                          <?= in_array($loai['maloai'], $filters['loai'] ?? []) ? 'checked' : '' ?>
+                        >
+                        <label for="loai-<?= $loai['maloai'] ?>" class="form-check-label">
+                          <?= htmlspecialchars($loai['tenloai']) ?>
+                        </label>
                       </div>
-                    </li>
-                    
-                    <?php foreach($listLoai as $loai) :?>
-                      <li>
-                        <div class="d-flex justify-content-between fruite-name">
-                          <?php
-                            $params = $_GET;
-                            unset($params['url']);
-                            $params['loai'] = $loai['maloai'];
-                            unset($params['page']); // reset về trang 1
-                          ?>
-                          <a href="?<?= http_build_query($params) ?>"
-                             class="<?= (isset($_GET['loai']) && $_GET['loai'] == $loai['maloai']) ? 'fw-bold text-primary' : '' ?>">
-                            <i class="fas fa-shoe-prints me-2"></i><?= htmlspecialchars($loai['tenloai']) ?>
-                          </a>
-                          <span>(<?= $loai['tongsoluong'] ?>)</span>
-                        </div>
-                      </li>
-                    <?php endforeach; ?>                  
-                  </ul>
+                    <?php endforeach; ?>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Tầm giá -->
-              <div class="col-lg-12">
-                <div class="mb-3">
-                  <h4 class="mb-2">Tầm giá</h4>
-                  <input
-                    type="range"
-                    name="max_price"
-                    min="0"
-                    max="10000000"
-                    value="<?= $maxPrice ?>"
-                    class="form-range w-100"
-                    oninput="amount.value = Number(this.value).toLocaleString('vi-VN') + ' ₫'"
-                    onchange="this.form.submit()">
-                  <output id="amount"><?= number_format($maxPrice, 0, ',', '.') ?> ₫</output>
+                <!-- Khung Thương hiệu -->
+                <div class="col-lg-12">
+                  <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm"> 
+                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Thương hiệu</h4>
+                    <?php foreach($listHang as $hang): ?>
+                      <div class="mb-2">
+                        <input
+                          type="checkbox"
+                          class="me-2 form-check-input-custom"
+                          id="hang-<?= $hang['mahang'] ?>"
+                          name="hang[]"
+                          value="<?= $hang['mahang'] ?>"
+                          <?= in_array($hang['mahang'], $filters['hang'] ?? []) ? 'checked' : '' ?>
+                        >
+                        <label for="hang-<?= $hang['mahang'] ?>" class="form-check-label">
+                          <?= htmlspecialchars($hang['tenhang']) ?>
+                        </label>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Màu sắc-->
-              <div class="col-lg-12">
-                <div class="mb-3">
-                  <h4>Màu sắc</h4>
-                  <?php foreach($listMauSac as $mau): ?>
+                <!-- Khung Tầm giá -->
+                <div class="col-lg-12">
+                  <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
+                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Tầm giá</h4>
+                    <?php
+                    $price_ranges = [
+                      'all' => 'Tất cả',
+                      'under_500' => 'Dưới 500.000đ',
+                      '500_1000' => '500.000đ - 1.000.000đ',
+                      '1000_2000' => '1.000.000đ - 2.000.000đ',
+                      '2000_3000' => '2.000.000đ - 3.000.000đ',
+                      'over_3000' => 'Trên 3.000.000đ'
+                    ];
+                    foreach($price_ranges as $key => $label):
+                    ?>
+                      <div class="mb-2">
+                        <input
+                          type="radio"
+                          class="me-2 form-check-input-custom"
+                          id="price-<?= $key ?>"
+                          name="price_range"
+                          value="<?= $key ?>"
+                          <?= ($filters['price_range'] ?? '') === $key ? 'checked' : '' ?>
+                        >
+                        <label for="price-<?= $key ?>" class="form-check-label"><?= $label ?></label>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
+                </div>
+
+                <!-- Màu sắc -->
+                <div class="col-lg-12">
+                  <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
+                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Màu sắc</h4>
+                    <?php foreach($listMauSac as $mau): ?>
+                      <div class="mb-2">
+                        <input
+                          type="checkbox"
+                          class="me-2 color-checkbox form-check-input-custom"
+                          id="mau-<?= $mau['mamau'] ?>"
+                          name="mau[]"
+                          value="<?= $mau['mamau'] ?>"
+                          <?= in_array($mau['mamau'], $_GET['mau'] ?? []) ? 'checked' : '' ?>
+                        >
+                        <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
+                          <?= htmlspecialchars($mau['tenmau']) ?>
+                        </label>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
+                </div>
+
+                <!-- Giới tính -->
+                <div class="col-lg-12">
+                  <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
+                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Giới tính</h4>
                     <div class="mb-2">
-                      <input 
-                        type="checkbox" 
-                        class="me-2 color-checkbox" 
-                        id="mau-<?= $mau['mamau'] ?>" 
-                        name="mau[]" 
-                        value="<?= $mau['mamau'] ?>" 
-                        <?= in_array($mau['mamau'], $_GET['mau'] ?? []) ? 'checked' : '' ?>
+                      <input
+                        type="checkbox"
+                        class="me-2 gender-checkbox form-check-input-custom"
+                        id="gioitinh-nam"
+                        name="gioitinh[]"
+                        value="nam"
+                        <?= in_array('nam', (array)($_GET['gioitinh'] ?? [])) ? 'checked' : '' ?>
                       >
-                      <label for="mau-<?= $mau['mamau'] ?>"> <?= htmlspecialchars($mau['tenmau']) ?></label>
+                      <label for="gioitinh-nam" class="form-check-label">Nam</label>
                     </div>
-                  <?php endforeach; ?>               
-                </div>
-              </div>
-
-              <!-- Giới tính -->
-              <div class="col-lg-12">
-                <div class="mb-3">
-                  <h4>Giới tính</h4>
-                  <div class="mb-2">
-                    <input 
-                      type="checkbox" 
-                      class="me-2 gender-checkbox" 
-                      id="gioitinh-nam" 
-                      name="gioitinh[]" 
-                      value="nam"
-                      <?= in_array('nam', (array)($_GET['gioitinh'] ?? [])) ? 'checked' : '' ?>
-                    >
-                    <label for="gioitinh-nam">Nam</label>
-                  </div>
-                  <div class="mb-2">
-                    <input 
-                      type="checkbox" 
-                      class="me-2 gender-checkbox" 
-                      id="gioitinh-nu" 
-                      name="gioitinh[]" 
-                      value="nu"
-                      <?= in_array('nu', (array)($_GET['gioitinh'] ?? [])) ? 'checked' : '' ?>
-                    >
-                    <label for="gioitinh-nu">Nữ</label>
+                    <div class="mb-2">
+                      <input
+                        type="checkbox"
+                        class="me-2 gender-checkbox form-check-input-custom"
+                        id="gioitinh-nu"
+                        name="gioitinh[]"
+                        value="nu"
+                        <?= in_array('nu', (array)($_GET['gioitinh'] ?? [])) ? 'checked' : '' ?>
+                      >
+                      <label for="gioitinh-nu" class="form-check-label">Nữ</label>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <!--Nút xóa tất cả bộ lọc -->
-              <div class="col-lg-12">
-                <div class="d-grid">
-                  <a href="products" class="btn btn-outline-secondary">
-                    <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
-                  </a>
-                </div>
-              </div>
-
-               <div class="col-lg-12">
-                <div class="position-relative">
-                  <img src="<?= IMAGE_PATH_DIR ?>banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                  <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                    <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                <!-- Nút xóa bộ lọc -->
+                <div class="col-lg-12">
+                  <div class="d-grid">
+                    <a href="products" class="btn btn-outline-secondary">
+                      <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
+                    </a>
                   </div>
                 </div>
+
+                <!-- Banner -->
+                <div class="col-lg-12">
+                  <div class="position-relative">
+                    <img src="<?= IMAGE_PATH_DIR ?>banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
+                      <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
-          </div>
 
-          <!-- Danh sách sản phẩm -->
-          <div class="col-lg-9">
-            <div class="row g-4">
+            <!-- Danh sách sản phẩm -->
+            <div class="col-lg-9">
+              <div class="row g-4">
                 <?php if (!empty($listSP)): ?>
                   <?php foreach ($listSP as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
@@ -277,78 +304,73 @@ $totalPages = ceil($totalProducts / $limit);
                   </div>
                 <?php endif; ?>
 
+                <!-- Phân trang -->
+                <div class="col-12">
+                  <div class="pagination d-flex justify-content-center mt-5">
+                    <?php if ($page > 1): ?>
+                      <?php
+                        $params = $_GET;
+                        unset($params['url']);
+                        if ($page - 1 == 1) unset($params['page']);
+                        else $params['page'] = $page - 1;
+                      ?>
+                      <a class="rounded" href="?<?= http_build_query($params) ?>">&laquo;</a>
+                    <?php endif; ?>
 
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                      <?php
+                        $params = $_GET;
+                        unset($params['url']);
+                        if ($i == 1) unset($params['page']);
+                        else $params['page'] = $i;
+                      ?>
+                      <a href="?<?= http_build_query($params) ?>" class="rounded <?= ($i == $page) ? 'active' : '' ?>">
+                        <?= $i ?>
+                      </a>
+                    <?php endfor; ?>
 
-              <!-- Phân trang -->
-              <div class="col-12">
-                <div class="pagination d-flex justify-content-center mt-5">
-                  <?php if ($page > 1): ?>
-                    <?php
-                      $params = $_GET;
-                      unset($params['url']);
-                      if ($page - 1 == 1) {
-                          unset($params['page']);
-                      } else {
-                          $params['page'] = $page - 1;
-                      }
-                    ?>
-                    <a class="rounded" href="?<?= http_build_query($params) ?>">&laquo;</a>
-                  <?php endif; ?>
-
-                  <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <?php
-                      $params = $_GET;
-                      unset($params['url']);
-                      if ($i == 1) {
-                          unset($params['page']);
-                      } else {
-                          $params['page'] = $i;
-                      }
-                    ?>
-                    <a
-                      href="?<?= http_build_query($params) ?>"
-                      class="rounded <?= ($i == $page) ? 'active' : '' ?>">
-                      <?= $i ?>
-                    </a>
-                  <?php endfor; ?>
-
-                  <?php if ($page < $totalPages): ?>
-                    <?php
-                      $params = $_GET;
-                      unset($params['url']);
-                      $params['page'] = $page + 1;
-                    ?>
-                    <a class="rounded" href="?<?= http_build_query($params) ?>">&raquo;</a>
-                  <?php endif; ?>
+                    <?php if ($page < $totalPages): ?>
+                      <?php
+                        $params = $_GET;
+                        unset($params['url']);
+                        $params['page'] = $page + 1;
+                      ?>
+                      <a class="rounded" href="?<?= http_build_query($params) ?>">&raquo;</a>
+                    <?php endif; ?>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-       </form>
+        </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- xu ly check box -->
+<!-- Xử lý checkbox tự submit -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('filterForm');
     
-    // Xử lý checkbox màu sắc
-    document.querySelectorAll('.color-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            form.submit();
-        });
+    // Checkbox màu sắc
+    document.querySelectorAll('.color-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => form.submit());
     });
     
-    // Xử lý checkbox giới tính
-    document.querySelectorAll('.gender-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            form.submit();
-        });
+    // Checkbox giới tính
+    document.querySelectorAll('.gender-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => form.submit());
+    });
+    
+    // Checkbox loại giày & thương hiệu
+    document.querySelectorAll('input[name="loai[]"], input[name="hang[]"]').forEach(cb => {
+        cb.addEventListener('change', () => form.submit());
+    });
+    
+    // Radio tầm giá tự submit khi thay đổi
+    document.querySelectorAll('input[name="price_range"]').forEach(radio => {
+        radio.addEventListener('change', () => form.submit());
     });
 });
 </script>
-
