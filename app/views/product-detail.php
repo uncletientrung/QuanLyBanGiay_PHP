@@ -210,7 +210,13 @@ $listSP = $spController->getAll();
    
         <div class="border border-primary rounded position-relative vesitable-item">
           <div class="vesitable-img">
-            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+            <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img 
+                              src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" 
+                              class="img-fluid w-100 rounded-top" 
+                              alt=""
+                            >
+                          </a>
           </div>
           <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?= $hangController->getNameById($sp['hang']) ?></div>
           <div class="p-4 pb-0 rounded-bottom">

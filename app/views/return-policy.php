@@ -60,37 +60,21 @@
         margin-top: 30px;
     }
 
-    .breadcrumb {
-        margin-top: 150px;
-        font-size: 14px;
-        color: #666;
-    }
 
-    .breadcrumb a {
-        color: #2c7a2c;
-        text-decoration: none;
-    }
 
-    .breadcrumb a:hover {
-        text-decoration: underline;
-    }
-
-    .breadcrumb span {
-        margin: 0 6px;
-    }
 </style>
 
-<div class="container breadcrumb">
-    <a href="<?= ROOT_URL ?>">Trang chủ</a>
-    <span>/</span>
-    <span>Chính sách đổi trả</span>
-</div>
 
+  <!-- Single Page Header start -->
+  <div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Giới thiệu</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+      <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+      <li class="breadcrumb-item active text-white">Giới thiệu</li>
+    </ol>
+  </div>
+  <!-- Single Page Header End -->
 
-<div class="container policy-wrapper">
-    <h1 class="policy-title">CHÍNH SÁCH ĐỔI TRẢ</h1>
-    <div class="policy-line"></div>
-</div>
 
 <div class="content-container">
 

@@ -88,6 +88,12 @@ if ($uri == 'chackout') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if($uri == 'privacy-policy') {
+    require VIEW_PATH_DIR . 'partials/header.php';
+    require VIEW_PATH_DIR . 'privacy-policy.php';
+    require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
 require VIEW_PATH_DIR . 'partials/header.php';
 require VIEW_PATH_DIR . '404.php';
 require VIEW_PATH_DIR . 'partials/footer.php';
