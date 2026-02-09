@@ -39,7 +39,7 @@
 
     <!-- Mini User Nav -->
     <nav class="space-y-1 pb-2">
-      <a class="mini-nav-item" href="be_pages_generic_profile.php">
+      <a class="mini-nav-item" href="<?php echo APP_PATH; ?>admin/profile">
         <i class="fa fa-cog fs-sm"></i>
       </a>
       <a class="mini-nav-item" href="<?php echo APP_PATH; ?>admin/auth/signin">

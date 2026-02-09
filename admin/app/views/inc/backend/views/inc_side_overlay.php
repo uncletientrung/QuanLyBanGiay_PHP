@@ -1,4 +1,5 @@
 <?php
+
 /**
  * backend/views/inc_side_overlay.php
  *
@@ -15,14 +16,14 @@
     <div class="bg-primary-op">
       <div class="content-header">
         <!-- User Avatar -->
-        <a class="img-link me-1" href="be_pages_generic_profile.php">
+        <a class="img-link me-1" href="<?php echo APP_PATH; ?>admin/profile">
           <?php $dm->get_avatar(10, '', 48); ?>
         </a>
         <!-- END User Avatar -->
 
         <!-- User Info -->
         <div class="ms-2">
-          <a class="text-white fw-semibold" href="be_pages_generic_profile.php">George Taylor</a>
+          <a class="text-white fw-semibold" href="<?php echo APP_PATH; ?>admin/profile">George Taylor</a>
           <div class="text-white-75 fs-sm">Full Stack Developer</div>
         </div>
         <!-- END User Info -->
@@ -200,7 +201,7 @@
             <div class="block-content">
               <ul class="nav-items">
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
@@ -212,7 +213,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'male', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
@@ -224,7 +225,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
@@ -246,7 +247,7 @@
             <div class="block-content">
               <ul class="nav-items">
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-danger"></span>
@@ -268,7 +269,7 @@
             <div class="block-content">
               <ul class="nav-items">
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'male', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
@@ -280,7 +281,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
@@ -302,7 +303,7 @@
             <div class="block-content">
               <ul class="nav-items">
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'male', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
@@ -314,7 +315,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
@@ -326,7 +327,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'female', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>
@@ -338,7 +339,7 @@
                   </a>
                 </li>
                 <li>
-                  <a class="d-flex py-2" href="be_pages_generic_profile.php">
+                  <a class="d-flex py-2" href="<?php echo APP_PATH; ?>admin/profile">
                     <div class="flex-shrink-0 mx-3 overlay-container">
                       <?php $dm->get_avatar(0, 'male', 48); ?>
                       <span class="overlay-item item item-tiny item-circle border border-2 border-white bg-muted"></span>

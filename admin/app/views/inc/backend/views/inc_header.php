@@ -52,7 +52,7 @@
             User Options
           </div>
           <div class="p-2">
-            <a class="dropdown-item" href="be_pages_generic_profile.php">
+            <a class="dropdown-item" href="<?php echo APP_PATH; ?>admin/profile">
               <i class="far fa-fw fa-user me-1"></i> Profile
             </a>
             <div role="separator" class="dropdown-divider"></div>
