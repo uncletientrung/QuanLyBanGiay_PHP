@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="bg-image" style="background-image: url('<?php echo $dm->assets_folder; ?>/images/shoefly.gif');">
+<div class="bg-image" style="background-image: url('<?php echo $dm->assets_folder; ?>/images/photo5@2x.jpg');">
   <div class="row g-0" style="backdrop-filter: blur(6px); background-color: rgba(0, 0, 0, 0.3);">
     <!-- Main Section -->
     <div class="hero-static col-md-6 d-flex align-items-center bg-body-extra-light">
@@ -18,7 +18,7 @@
         <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
         <div class="row g-0 justify-content-center">
           <div class="col-sm-8 col-xl-6">
-            <form class="js-validation-reminder" action="be_pages_auth_all.php" method="POST">
+            <form class="js-validation-reminder" method="POST">
               <div class="py-3 mb-4">
                 <input type="text" class="form-control form-control-lg form-control-alt" id="reminder-credential" name="reminder-credential" placeholder="Tên tài khoản hoặc Email">
               </div>

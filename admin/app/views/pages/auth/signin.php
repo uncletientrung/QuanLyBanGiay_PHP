@@ -18,7 +18,7 @@
         <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
         <div class="row g-0 justify-content-center">
           <div class="col-sm-8 col-xl-6">
-            <form class="js-validation-signin" action="be_pages_auth_all.php" method="POST">
+            <form class="js-validation-signin" method="POST">
               <div class="py-3">
                 <div class="mb-4">
                   <input type="text" class="form-control form-control-lg form-control-alt" id="login-username" name="login-username" placeholder="Tên tài khoản">
@@ -63,3 +63,14 @@
   </div>
 </div>
 <!-- END Page Content -->
+
+<!-- jQuery (required for jQuery Validation plugin) -->
+<?php $dm->get_js('js/lib/jquery.min.js'); ?>
+
+<!-- Page JS Plugins -->
+<?php $dm->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
+
+<?php $dm->get_js('js/dashmix.app.min.js'); ?>
+
+<!-- Page JS Code -->
+<?php $dm->get_js('js/pages/signin.js'); ?>

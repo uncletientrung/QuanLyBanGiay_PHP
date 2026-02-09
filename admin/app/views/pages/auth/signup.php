@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="bg-image" style="background-image: url('<?php echo $dm->assets_folder; ?>/media/photos/photo12@2x.jpg');">
+<div class="bg-image" style="background-image: url('<?php echo $dm->assets_folder; ?>/images/photo12@2x.jpg');">
   <div class="row g-0 justify-content-center bg-black-75">
     <!-- Main Section -->
     <div class="hero-static col-md-6 d-flex align-items-center bg-body-extra-light">
@@ -18,7 +18,7 @@
         <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
         <div class="row g-0 justify-content-center">
           <div class="col-sm-8 col-xl-6">
-            <form class="js-validation-signup" action="be_pages_auth_all.php" method="POST">
+            <form class="js-validation-signup" method="POST">
               <div class="py-3">
                 <div class="mb-4">
                   <input type="text" class="form-control form-control-lg form-control-alt" id="signup-username" name="signup-username" placeholder="Tên tài khoản">
@@ -78,3 +78,14 @@
   <!-- END Terms Modal -->
 </div>
 <!-- END Page Content -->
+
+<!-- jQuery (required for jQuery Validation plugin) -->
+<?php $dm->get_js('js/lib/jquery.min.js'); ?>
+
+<!-- Page JS Plugins -->
+<?php $dm->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
+
+<?php $dm->get_js('js/dashmix.app.min.js'); ?>
+
+<!-- Page JS Code -->
+<?php $dm->get_js('js/pages/signup.js'); ?>
