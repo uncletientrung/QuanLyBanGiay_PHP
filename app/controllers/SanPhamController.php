@@ -89,4 +89,8 @@ class SanPhamController
     {
         return $this->model->countFiltered($filters);
     }
+
+    public function getSpById($masp){
+        return $this->model->getSpById($masp);
+    }
 }

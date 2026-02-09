@@ -12,6 +12,15 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+       public function getNameById($maLoai)
+        {
+            $sql = "SELECT tenloai FROM loai WHERE trangthai = 1 AND maloai = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$maLoai]);
+            return $stmt->fetchColumn(); 
+        }
+
+
     public function getLoaivaSoluongTuongUng(){
         $sql ="select l.maloai,l.tenloai,
         SUM(spsize.soluong) AS tongsoluong

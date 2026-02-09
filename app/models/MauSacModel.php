@@ -11,4 +11,11 @@ class MauSacModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+   public function getNameById($maMau)
+        {
+            $sql = "SELECT tenmau FROM mau WHERE trangthai = 1 AND mamau = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$maMau]);
+            return $stmt->fetchColumn(); 
+        }
 }

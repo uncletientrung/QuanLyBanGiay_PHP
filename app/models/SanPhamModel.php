@@ -15,6 +15,13 @@ class SanPhamModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getSpById($masp){
+        $sql = "SELECT * FROM sanpham WHERE masp = ? AND trangthai = 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$masp]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function getBestSellingProductByMaHang($maHang){
         
         if($maHang != false){

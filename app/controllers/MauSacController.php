@@ -13,4 +13,8 @@ class MauSacController
     {
         return $this->listMauSac;
     }
+
+    public function getNameById($maMau){
+        return $this->model->getNameById($maMau);
+    }
 }

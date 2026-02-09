@@ -17,6 +17,13 @@
             $stmt->execute([$tenHang]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+          public function getNameById($maHang)
+        {
+            $sql = "SELECT tenhang FROM hang WHERE trangthai = 1 AND mahang = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$maHang]);
+            return $stmt->fetchColumn(); 
+        }
     }
 
 

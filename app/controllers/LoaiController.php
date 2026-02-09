@@ -16,6 +16,10 @@ class LoaiController
         return $this->listLoai;
     }
 
+    public function getNameById($maLoai){
+        return $this->model->getNameById($maLoai);
+    }
+
     public function getLoaivaSoluongTuongUng(){
         return $this->listLoaiTheoSL;
     }

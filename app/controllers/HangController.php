@@ -21,4 +21,7 @@ class HangController
     public function getNameById($idHang) {
         return $this->hangMap[$idHang] ?? null;
     }
+    public function getNamebyid2($maHang){
+        return $this->model->getNameById($maHang);
+    }
 }

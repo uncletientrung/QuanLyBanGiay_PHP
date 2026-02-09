@@ -24,4 +24,8 @@ class HinhAnhController
         }
         return NO_IMAGE;
     }
+    public function getAllById($maHinhanh){
+        return $this->model->getImageById($maHinhanh);
+       
+    }
 }
