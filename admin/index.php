@@ -1,7 +1,7 @@
 <?php
 // D:\xampp\htdocs\QuanLyBanGiay_PHP\admin -> __DIR__
-require_once __DIR__ . "/config/constants.php";
-require_once __DIR__ . "/config/connectdb.php";
+require_once dirname(__DIR__) . "/config/constants.php";
+require_once dirname(__DIR__) . "/config/connectdb.php";
 
 // Load Core
 require_once __DIR__ . "/app/core/App.php";
