@@ -10,6 +10,8 @@ $router->get('/auth/logout', 'Auth@logout');
 
 // Account
 $router->get('/profile', 'Profile@default');
+$router->post('/profile/update', 'Profile@postUpdate');
+$router->post('/profile/change-password', 'Profile@postChangePassword');
 
 $router->get('/user', 'User@default');
 
