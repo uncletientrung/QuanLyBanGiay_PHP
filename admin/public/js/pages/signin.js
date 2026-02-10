@@ -16,23 +16,23 @@ class pageAuthSignIn {
     // Init Form Validation
     jQuery('.js-validation-signin').validate({
       rules: {
-        'login-username': {
+        'login-email': {
           required: true,
-          minlength: 3
+          emailWithDot: true
         },
         'login-password': {
           required: true,
-          minlength: 5
+          minlength: 3
         }
       },
       messages: {
-        'login-username': {
-          required: 'Vui lòng nhập tên người dùng',
-          minlength: 'Tên người dùng phải lớn hơn 3 ký tự'
+        'login-email': {
+          required: 'Vui lòng nhập địa chỉ Email',
+          emailWithDot: 'Vui lòng nhập đúng định dạng Email'
         },
         'login-password': {
           required: 'Vui lòng nhập mật khẩu',
-          minlength: 'Mật khẩu phải lớn hơn 5 ký tự'
+          minlength: 'Mật khẩu phải lớn hơn 3 ký tự'
         }
       }
     });

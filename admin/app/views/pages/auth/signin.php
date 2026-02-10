@@ -21,7 +21,7 @@
             <form class="js-validation-signin" method="POST">
               <div class="py-3">
                 <div class="mb-4">
-                  <input type="text" class="form-control form-control-lg form-control-alt" id="login-username" name="login-username" placeholder="Tên tài khoản">
+                  <input type="text" class="form-control form-control-lg form-control-alt" id="login-email" name="login-email" placeholder="Email hoặc số điện thoại">
                 </div>
                 <div class="mb-4">
                   <input type="password" class="form-control form-control-lg form-control-alt" id="login-password" name="login-password" placeholder="Mật khẩu">
@@ -31,14 +31,6 @@
                 <button type="submit" class="btn w-100 btn-lg btn-hero btn-primary">
                   <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Đăng nhập
                 </button>
-                <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
-                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/auth/reminder">
-                    <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> Quên mật khẩu
-                  </a>
-                  <a class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="<?php echo APP_PATH; ?>admin/auth/signup">
-                    <i class="fa fa-plus opacity-50 me-1"></i> Tạo tài khoản
-                  </a>
-                </p>
               </div>
             </form>
           </div>
