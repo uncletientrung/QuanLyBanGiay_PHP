@@ -13,7 +13,7 @@ class Router
         $this->routers['POST'][$this->formatUrl($sUrl)] = $action;
     }
 
-    // Hàm phụ để chuẩn hóa URL (xóa dấu / thừa)
+    // Xoá / thừa
     private function formatUrl($url)
     {
         $url = trim($url, '/');
@@ -22,31 +22,26 @@ class Router
 
     public function xulyPath($method, $url)
     {
-        $basePath = '/QuanLyBanGiay_Php/admin';
-        $url = str_replace($basePath, '', $url);
+        $url = str_replace(APP_PATH_ADMIN, '', $url);
         $url = $this->formatUrl($url);
 
-        // Tách URL thành mảng để tìm params giống App cũ
         $urlParts = explode('/', trim($url, '/'));
-
-        // 1. Kiểm tra khớp URL hoàn toàn (Ví dụ: /login, /products)
         if (isset($this->routers[$method][$url])) {
             $this->execute($this->routers[$method][$url]);
             return;
         }
 
-        // 2. Nếu không khớp hoàn toàn, thử kiểm tra khớp phần đầu (để lấy params)
-        // Ví dụ: Bạn khai báo /user nhưng khách vào /user/edit/1
+        // Params
         $checkUrl = ($urlParts[0] == '') ? '/' : '/' . $urlParts[0];
         if (isset($this->routers[$method][$checkUrl])) {
             $callback = $this->routers[$method][$checkUrl];
-            unset($urlParts[0]); // Xóa phần controller đã khớp
-            $params = array_values($urlParts); // Các phần còn lại là params
+            unset($urlParts[0]);
+            $params = array_values($urlParts);
             $this->execute($callback, $params);
             return;
         }
 
-        // 3. Nếu không khớp gì cả -> Chạy trang lỗi
+        // else
         $this->execute("Myerror@default");
     }
 
@@ -63,7 +58,6 @@ class Router
             $controller = new $controllerName;
 
             if (method_exists($controller, $actionName)) {
-                // Gọi hàm và truyền params vào y hệt App cũ
                 call_user_func_array([$controller, $actionName], $params);
             } else {
                 $this->execute("Myerror@default");
