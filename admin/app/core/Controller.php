@@ -3,8 +3,8 @@ class Controller
 {
     public function model($model)
     {
-        if (file_exists(dirname(__DIR__) . '/models/' . $model . '.php')) {
-            require_once  dirname(__DIR__) . '/models/' . $model . '.php';
+        if (file_exists(MODEL_PATH_DIR . $model . '.php')) {
+            require_once  MODEL_PATH_DIR . $model . '.php';
             if (class_exists($model)) {
                 return new $model;
             }
@@ -15,8 +15,8 @@ class Controller
     public function renderView($view, $data = [])
     {
         extract($data);
-        if (file_exists(dirname(__DIR__) . '/views/' . $view . '.php')) {
-            require_once  dirname(__DIR__) . '/views/' . $view . '.php';
+        if (file_exists(VIEW_PATH_ADMIN_DIR . $view . '.php')) {
+            require_once  VIEW_PATH_ADMIN_DIR . $view . '.php';
         }
     }
 }

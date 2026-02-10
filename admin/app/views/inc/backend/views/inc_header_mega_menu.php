@@ -246,7 +246,7 @@
       <div class="dropdown d-inline-block">
         <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-fw fa-user d-sm-none"></i>
-          <span class="d-none d-sm-inline-block">Admin</span>
+          <?php echo isset($_SESSION['admin_user']['hoten']) ? $_SESSION['admin_user']['hoten'] : 'Admin'; ?>
           <i class="fa fa-fw fa-angle-down opacity-50 ms-1 d-none d-sm-inline-block"></i>
         </button>
         <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
@@ -254,7 +254,7 @@
             User Options
           </div>
           <div class="p-2">
-            <a class="dropdown-item" href="<?php echo APP_PATH; ?>admin/profile">
+            <a class="dropdown-item" href="<?php echo APP_ADMIN_PATH; ?>profile">
               <i class="far fa-fw fa-user me-1"></i> Profile
             </a>
             <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_inbox.php">
@@ -274,7 +274,7 @@
             <!-- END Side Overlay -->
 
             <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<?php echo APP_PATH; ?>admin/auth/signin">
+            <a class="dropdown-item" href="<?php echo APP_ADMIN_PATH; ?>auth/signin">
               <i class="far fa-fw fa-arrow-alt-circle-left me-1"></i> Sign Out
             </a>
           </div>

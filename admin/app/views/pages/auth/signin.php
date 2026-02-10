@@ -58,6 +58,7 @@
 
 <!-- jQuery (required for jQuery Validation plugin) -->
 <?php $dm->get_js('js/lib/jquery.min.js'); ?>
+<?php $dm->get_js('js/plugins/bootstrap-notify/bootstrap-notify.min.js'); ?>
 
 <!-- Page JS Plugins -->
 <?php $dm->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
@@ -66,3 +67,17 @@
 
 <!-- Page JS Code -->
 <?php $dm->get_js('js/pages/signin.js'); ?>
+
+<!-- Toast -->
+<script>
+  $(function() {
+    <?php if (isset($_SESSION['error'])): ?>
+      Dashmix.helpers('jq-notify', {
+        type: 'danger',
+        icon: 'fa fa-times-circle me-1',
+        message: '<?php echo $_SESSION['error']; ?>'
+      });
+      <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+  });
+</script>

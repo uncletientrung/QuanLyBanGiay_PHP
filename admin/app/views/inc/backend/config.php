@@ -49,7 +49,7 @@ $dm->main_nav                   = array(
         'name'  => 'Dashboard',
         'icon'  => 'fa fa-location-arrow',
         // 'badge' => array(8, 'primary'),
-        'url'   => APP_PATH . 'admin/dashboard'
+        'url'   => APP_ADMIN_PATH . 'dashboard'
     ),
     array(
         'name'  => 'TÀI KHOẢN',
@@ -58,7 +58,7 @@ $dm->main_nav                   = array(
     array(
         'name'  => 'Người dùng',
         'icon'  => 'fa-solid fa-users',
-        'url'   => APP_PATH . 'admin/user'
+        'url'   => APP_ADMIN_PATH . 'user'
     ),
     array(
         'name'  => 'QUẢN LÝ',
@@ -67,7 +67,7 @@ $dm->main_nav                   = array(
     array(
         'name'  => 'Thuộc tính',
         'icon'  => 'fa fa-tags',
-        'url'   => APP_PATH . 'admin/attributes'
+        'url'   => APP_ADMIN_PATH . 'attributes'
         // 'sub'   => array(
         //     array(
         //         'name'  => 'Dashboard',
@@ -90,22 +90,22 @@ $dm->main_nav                   = array(
     array(
         'name'  => 'Sản phẩm',
         'icon'  => 'fa fa-boot',
-        'url'   => APP_PATH . 'admin/products'
+        'url'   => APP_ADMIN_PATH . 'products'
     ),
     array(
         'name'  => 'Nhập hàng',
         'icon'  => 'fa fa-truck-ramp-box',
-        'url'   => APP_PATH . 'admin/nhap_hang'
+        'url'   => APP_ADMIN_PATH . 'nhap_hang'
     ),
     array(
         'name'  => 'Đơn hàng',
         'icon'  => 'fa fa-basket-shopping',
-        'url'   => APP_PATH . 'admin/don_hang'
+        'url'   => APP_ADMIN_PATH . 'don_hang'
     ),
     array(
         'name'  => 'Tồn kho',
         'icon'  => 'fa fa-warehouse',
-        'url'   => APP_PATH . 'admin/ton_kho'
+        'url'   => APP_ADMIN_PATH . 'ton_kho'
     ),
     array(
         'name'  => 'BÁO CÁO',
@@ -114,6 +114,6 @@ $dm->main_nav                   = array(
     array(
         'name'  => 'Thống kê',
         'icon'  => 'fa fa-chart-simple',
-        'url'   => APP_PATH . 'admin/reports'
+        'url'   => APP_ADMIN_PATH . 'reports'
     ),
 );

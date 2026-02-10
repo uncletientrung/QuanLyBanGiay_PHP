@@ -4,7 +4,7 @@
     <div class="rounded border overflow-hidden push">
         <div class="bg-image pt-9" style="background-image: url('<?php echo $dm->assets_folder; ?>/images/photo12@2x.jpg');"></div>
         <div class="px-4 py-3 bg-body-extra-light d-flex flex-column flex-md-row align-items-center">
-            <a class="d-block img-link mt-n5" href="<?php echo APP_PATH; ?>admin/profile">
+            <a class="d-block img-link mt-n5" href="<?php echo APP_ADMIN_PATH; ?>profile">
                 <img class="img-avatar img-avatar96 img-avatar-thumb" src="<?php echo $dm->assets_folder; ?>/images/avatar_default.png" alt="Avatar">
             </a>
             <div class="ms-3 flex-grow-1 text-center text-md-start my-3 my-md-0">

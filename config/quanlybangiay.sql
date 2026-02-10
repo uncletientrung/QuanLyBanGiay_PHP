@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2026 at 10:50 AM
+-- Generation Time: Feb 10, 2026 at 02:26 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,10 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `maadmin` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` int(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `hoten` varchar(255) NOT NULL,
-  `sdt` int(50) NOT NULL
+  `sdt` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`maadmin`, `email`, `password`, `hoten`, `sdt`) VALUES
+(1, 'admin@gmail.com', '123', 'Trương Minh Vũ', '0912345678');
 
 -- --------------------------------------------------------
 
@@ -482,7 +489,7 @@ ALTER TABLE `size`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `maadmin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `maadmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `donhang`

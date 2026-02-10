@@ -5,7 +5,8 @@ $router->get('/dashboard', 'Dashboard@default');
 
 // Auth
 $router->get('/auth/signin', 'Auth@signin');
-$router->post('/auth/signin', 'Auth@signin');
+$router->post('/auth/signin', 'Auth@postSignin');
+$router->get('/auth/logout', 'Auth@logout');
 
 // Account
 $router->get('/profile', 'Profile@default');

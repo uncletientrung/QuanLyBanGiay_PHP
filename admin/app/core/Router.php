@@ -22,7 +22,7 @@ class Router
 
     public function xulyPath($method, $url)
     {
-        $url = str_replace(APP_PATH_ADMIN, '', $url);
+        $url = str_replace(APP_ADMIN_PATH, '', $url);
         $url = $this->formatUrl($url);
 
         $urlParts = explode('/', trim($url, '/'));

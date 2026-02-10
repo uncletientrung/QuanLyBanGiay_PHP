@@ -26,7 +26,7 @@
           <p class="fs-4 fw-medium text-muted mb-5">
             We are sorry but the page you are looking for was not found.
           </p>
-          <a class="btn btn-lg btn-alt-danger" href="<?php echo APP_PATH; ?>admin/dashboard">
+          <a class="btn btn-lg btn-alt-danger" href="<?php echo APP_ADMIN_PATH; ?>dashboard">
             <i class="fa fa-arrow-left opacity-50 me-1"></i> Back to Dashboard
           </a>
         </div>
