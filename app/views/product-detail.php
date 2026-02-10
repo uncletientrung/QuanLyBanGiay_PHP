@@ -43,12 +43,12 @@ $listSize = $sizeController->getSizeBySanPham($currentSP['masp']);
     <div class="row g-4 mb-5">
       <div class="col-12">
         <div class="row g-4">
-          <?php
+          <!-- <?php
 echo '<pre>';
 print_r($listSize);
 echo '</pre>';
 
-?>
+?> -->
 
           <!-- Cột trái: Hình ảnh + Tabs (thu nhỏ lại thành col-lg-7) -->
           <div class="col-lg-7">
@@ -231,30 +231,38 @@ echo '</pre>';
 
 
             <!-- Giá nổi bật hơn -->
-            <h5 class="fw-bolder mb-4 text-danger" style="font-size: 2rem; letter-spacing: -0.5px; margin-top: 5px;">
-              <p><?= number_format($giaBan, 0, ',', '.') ?> ₫</p>
+            <h5 class="fw-bolder mb-4 text-danger" style="font-size: 2rem; letter-spacing: -0.5px; margin-top: 15px;">
+              <p class="gia-ban" data-gia="<?= $giaBan ?>">
+                <?= number_format($giaBan, 0, ',', '.') ?> ₫
+              </p>
             </h5>
 
             <div class="mb-4">
-              <p class="fw-bold mb-2">Size</p>
-              <div class="d-flex gap-2 flex-wrap">
-                <?php foreach($listSize as $size): ?>
-                <button class="btn btn-outline-secondary btn-sm size-btn"><?= $size['tensize'] ?></button>
-                <?php endforeach ?>
-                <!-- <button class="btn btn-outline-secondary btn-sm size-btn">39</button>
-                <button class="btn btn-outline-secondary btn-sm size-btn">40</button>
-                <button class="btn btn-outline-secondary btn-sm size-btn">41</button>
-                <button class="btn btn-outline-secondary btn-sm size-btn">42</button> -->
-              </div>
+            <p class="fw-bold mb-2">Size</p>
+            <div class="d-flex gap-2 flex-wrap">
+              <?php foreach ($listSize as $size): ?>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary btn-sm size-btn
+                    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
+                  data-size="<?= $size['tensize'] ?>"
+                  data-stock="<?= $size['soluong'] ?>"
+                  <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
+                >
+                  <?= $size['tensize'] ?>
+                </button>
+              <?php endforeach ?>
             </div>
+          </div>
+
 
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="input-group quantity" style="width: 130px;">
-                <button class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="changeQty(-1)">
+                <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
                   <i class="fa fa-minus"></i>
                 </button>
-                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1">
-                <button class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="changeQty(1)">
+                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1" >
+                <button class="btn btn-sm btn-plus rounded-circle bg-light border" >
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
@@ -356,7 +364,41 @@ echo '</pre>';
   </div>
 </div>
 <!-- Single Product End -->
+<!-- MODAL THÔNG BÁO GIỎ HÀNG  -->
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
+      
+      <!-- Header nhẹ nhàng -->
+      <div class="modal-header bg-gradient-soft-green text-dark border-0 pb-0 pt-4 px-4">
+        <div class="d-flex align-items-center gap-3">
+          <div class="bg-white rounded-circle p-2 shadow-sm">
+            <i class="fa fa-check text-success fs-4"></i>
+          </div>
+          <h5 class="modal-title fw-semibold mb-0 fs-4" id="cartModalLabel">Đã thêm vào giỏ hàng</h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
+      <!-- Body chính - tone trắng + xanh nhạt -->
+      <div class="modal-body px-4 pb-4 pt-3 text-center">
+        <div id="cartMessage" class="mb-4 fs-5 fw-medium text-dark">
+          <!-- JS sẽ điền nội dung động vào đây -->
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+          <button id="continueShopping" class="btn btn-outline-secondary px-5 py-2 rounded-pill fw-medium">
+            Tiếp tục mua sắm
+          </button>
+          <a id="viewCart" href="<?= ROOT_URL ?>cart" class="btn btn-soft-green px-5 py-2 rounded-pill fw-medium text-white">
+            Xem giỏ hàng
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 <style>
   .thumb-img:hover {
     transform: scale(1.08);
@@ -466,7 +508,87 @@ echo '</pre>';
   color: #1f2937;          
 }
 
+.size-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+.size-btn.active {
+  background-color: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
 
+
+/* Modal tone dịu - pastel nhẹ nhàng */
+#cartModal .modal-content {
+  border-radius: 24px;
+  background: #ffffff;
+}
+
+#cartModal .modal-header {
+  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+  border-bottom: none !important;
+}
+
+.bg-gradient-soft-green {
+  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+}
+
+.btn-soft-green {
+  background: #4caf50;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.btn-soft-green:hover {
+  background: #43a047;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+}
+
+#cartModal .modal-body {
+  background: #fafafa;
+}
+
+#cartModal #cartMessage {
+  line-height: 1.6;
+  color: #2c3e50;
+}
+
+#cartModal .btn-outline-secondary {
+  border-color: #adb5bd;
+  color: #495057;
+  transition: all 0.25s ease;
+}
+
+#cartModal .btn-outline-secondary:hover {
+  background: #e9ecef;
+  color: #212529;
+}
+
+/* Hiệu ứng mượt khi mở modal */
+#cartModal .modal-dialog {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#cartModal.show .modal-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Mobile thân thiện */
+@media (max-width: 576px) {
+  #cartModal .modal-dialog {
+    margin: 1rem;
+  }
+  #cartModal .btn {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+  }
+}
 </style>
 
 <script>
@@ -496,13 +618,203 @@ echo '</pre>';
     });
   });
 
-  // Hàm thay đổi số lượng (nếu chưa có thì thêm)
-  function changeQty(value) {
-    let qty = document.getElementById('qty');
-    let current = parseInt(qty.value);
-    let newQty = current + value;
-    if (newQty >= 1) {
-      qty.value = newQty;
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Biến trạng thái
+    let selectedSize  = null;
+    let selectedStock = 0;
+
+    // Lấy giá gốc (giá 1 sản phẩm)
+    const giaBanElement = document.querySelector('.gia-ban');
+    const pricePerUnit  = parseFloat(giaBanElement?.dataset?.gia) || 0;
+
+    // Các phần tử DOM
+    const sizeButtons   = document.querySelectorAll('.size-btn');
+    const qtyInput      = document.getElementById('qty');
+    const btnMinus      = document.querySelector('.btn-minus');
+    const btnPlus       = document.querySelector('.btn-plus');
+    const addToCartBtn  = document.querySelector('a[href="#"][class*="border-secondary"]');
+    const buyNowBtn     = document.querySelector('.btn.btn-danger.w-100'); // nút Mua ngay
+
+    // Hàm cập nhật giá
+    function updateDisplayedPrice() {
+        if (!giaBanElement || !qtyInput) return;
+        const qty = parseInt(qtyInput.value) || 1;
+        const total = pricePerUnit * qty;
+        // ding dạng tiền
+        const formattedTotal = total.toLocaleString('vi-VN') + ' ₫';
+        giaBanElement.innerHTML = formattedTotal;
+        // chữ x
+         giaBanElement.innerHTML = formattedTotal + ` <small>(x${qty})</small>`;
     }
-  }
+
+    // chọn size
+    sizeButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            if (this.classList.contains('disabled')) return;
+
+            sizeButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            selectedSize  = this.dataset.size;
+            selectedStock = parseInt(this.dataset.stock) || 0;
+
+            if (qtyInput) qtyInput.value = 1;
+            updateDisplayedPrice();
+        });
+    });
+
+    // số lưognj
+    function changeQty(delta) {
+        if (!selectedSize) {
+            alert('Vui lòng chọn size trước!');
+            return;
+        }
+        if (!qtyInput) return;
+
+        let val = parseInt(qtyInput.value) || 1;
+        val += delta;
+
+        if (val < 1) val = 1;
+        if (val > selectedStock) {
+            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
+            val = selectedStock;
+        }
+
+        qtyInput.value = val;
+        updateDisplayedPrice();
+    }
+
+    if (btnPlus)  btnPlus.addEventListener('click',  () => changeQty(1));
+    if (btnMinus) btnMinus.addEventListener('click', () => changeQty(-1));
+
+    // trường hợp nhập input
+    if (qtyInput) {
+        qtyInput.addEventListener('input', function () {
+            this.value = this.value.replace(/[^0-9]/g, ''); // chỉ cho phép số
+        });
+
+        qtyInput.addEventListener('change', validateQty);
+        qtyInput.addEventListener('blur',   validateQty);
+    }
+
+    function validateQty() {
+        if (!selectedSize) {
+            alert('Vui lòng chọn size trước!');
+            if (qtyInput) qtyInput.value = 1;
+            updateDisplayedPrice();
+            return;
+        }
+
+        let val = parseInt(qtyInput.value) || 1;
+        if (val < 1) val = 1;
+        if (val > selectedStock) {
+            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
+            val = selectedStock;
+        }
+        qtyInput.value = val;
+        updateDisplayedPrice();
+    }
+
+    // validate trước khi mua
+    function canProceed() {
+        if (!selectedSize) {
+            alert('Vui lòng chọn size!');
+            return false;
+        }
+        if (!qtyInput) return false;
+
+        const qty = parseInt(qtyInput.value) || 1;
+        if (qty < 1 || qty > selectedStock) {
+            alert(`Số lượng không hợp lệ! Chỉ còn ${selectedStock} cái size ${selectedSize}.`);
+            qtyInput.value = Math.min(qty, selectedStock) || 1;
+            updateDisplayedPrice();
+            return false;
+        }
+        return true;
+    }
+
+    // nut them gio hang
+    // ================== ADD TO CART (Modal đẹp thay alert) ==================
+if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!canProceed()) return;
+
+        const qty = parseInt(qtyInput.value);
+        const totalPrice = pricePerUnit * qty;
+        const productName = "<?= addslashes($currentSP['tensp']) ?>"; // Tên SP từ PHP
+
+        const data = {
+            masp: "<?= $currentSP['masp'] ?? '' ?>",
+            tensp: productName,
+            size: selectedSize,
+            qty: qty,
+            totalPrice: totalPrice
+        };
+
+        // Hiển thị thông báo trong modal
+        showCartSuccess(productName, selectedSize, qty, totalPrice);
+
+        // GỬI AJAX THẬT LÊN SERVER (tùy chọn - sau này implement)
+        console.log('Add to cart data:', data);
+        // sendToCartAPI(data); // Uncomment khi có API
+
+        // Reset form (tùy chọn)
+        // qtyInput.value = 1;
+        // updateDisplayedPrice();
+    });
+}
+
+// ================== HÀM HIỂN THỊ MODAL THÀNH CÔNG ==================
+function showCartSuccess(productName, size, qty, totalPrice) {
+    const modal = new bootstrap.Modal(document.getElementById('cartModal'));
+    const messageEl = document.getElementById('cartMessage');
+    
+    const formattedTotal = totalPrice.toLocaleString('vi-VN') + ' ₫';
+    
+    messageEl.innerHTML = `
+        <div class="mb-3">
+            <strong>${productName}</strong>
+        </div>
+        <div class="mb-2">
+            Size: <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1">${size}</span>
+              × ${qty} đôi
+        </div>
+        <div class="fs-4 fw-bold text-success mb-4">
+            ${formattedTotal}
+        </div>
+        <small class="text-muted">Sản phẩm đã được thêm vào giỏ hàng của bạn</small>
+    `;
+
+    modal.show();
+
+    // Tự động đóng sau 6 giây
+    setTimeout(() => modal.hide(), 6000);
+
+    // Nút tiếp tục mua
+    document.getElementById('continueShopping').onclick = () => modal.hide();
+}
+
+    // mua ngay
+    if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (!canProceed()) return;
+
+            const data = {
+                masp: "<?= $currentSP['masp'] ?? '' ?>",
+                size: selectedSize,
+                qty: parseInt(qtyInput.value)
+            };
+            console.log('Buy now:', data);
+            alert('Đi đến thanh toán: Size ' + selectedSize + ' × ' + data.qty);
+        });
+    }
+
+    // Khởi tạo giá ban đầu
+    updateDisplayedPrice();
+
+});
+
 </script>
