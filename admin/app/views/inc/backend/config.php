@@ -49,7 +49,7 @@ $dm->main_nav                   = array(
         'name'  => 'Dashboard',
         'icon'  => 'fa fa-location-arrow',
         // 'badge' => array(8, 'primary'),
-        'url'   => APP_PATH . 'admin/dashboard/'
+        'url'   => APP_PATH . 'admin/dashboard'
     ),
     array(
         'name'  => 'TÀI KHOẢN',
