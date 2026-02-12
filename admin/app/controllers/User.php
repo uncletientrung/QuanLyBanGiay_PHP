@@ -9,7 +9,7 @@ class User extends Controller
             "Plugin"  => [
                 "datatables" => 1
             ],
-            "Script"  => "admin_user"
+            "Script"  => "user"
         ]);
     }
 }

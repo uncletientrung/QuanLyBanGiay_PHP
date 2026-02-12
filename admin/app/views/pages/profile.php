@@ -9,7 +9,7 @@
             </a>
             <div class="ms-3 flex-grow-1 text-center text-md-start my-3 my-md-0">
                 <h1 class="fs-4 fw-bold mb-1">
-                    <?php echo $user['hoten']; ?>
+                    <?php echo $user['hoten'] ?? 'Chưa đăng nhập'; ?>
                 </h1>
                 <h2 class="fs-sm fw-medium text-muted mb-0">
                     Edit Account
@@ -47,15 +47,15 @@
                         <form class="js-validation-profile" action="<?php echo ROOT_URL_ADMIN; ?>profile/update" method="POST" enctype="multipart/form-data">
                             <div class="mb-4">
                                 <label class="form-label" for="dm-profile-edit-name">Họ tên</label>
-                                <input type="text" class="form-control" id="dm-profile-edit-name" name="hoten" placeholder="Nhập tên.." value="<?php echo $user['hoten']; ?>">
+                                <input type="text" class="form-control" id="dm-profile-edit-name" name="hoten" placeholder="Nhập tên.." value="<?php echo $user['hoten'] ?? ''; ?>">
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="dm-profile-edit-email">Email</label>
-                                <input type="email" class="form-control" id="dm-profile-edit-email" name="email" placeholder="Nhập email.." value="<?php echo $user['email']; ?>">
+                                <input type="email" class="form-control" id="dm-profile-edit-email" name="email" placeholder="Nhập email.." value="<?php echo $user['email'] ?? ''; ?>">
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="dm-profile-edit-sdt">Số điện thoại</label>
-                                <input type="text" class="form-control" id="dm-profile-edit-sdt" name="sdt" placeholder="Nhập số điện thoại.." value="<?php echo $user['sdt']; ?>">
+                                <input type="text" class="form-control" id="dm-profile-edit-sdt" name="sdt" placeholder="Nhập số điện thoại.." value="<?php echo $user['sdt'] ?? ''; ?>">
                             </div>
                             <button type="submit" class="btn btn-alt-primary">
                                 <i class="fa fa-check-circle opacity-50 me-1"></i> Cập nhật

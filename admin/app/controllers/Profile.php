@@ -18,11 +18,11 @@ class Profile extends Controller
                 "jquery-validate" => 1,
                 "notify" => 1
             ],
-            "Script"  => "admin_profile"
+            "Script"  => "profile"
         ]);
     }
 
-    public function postUpdate()
+    public function update()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $maadmin = $_SESSION['admin_user']['maadmin'];
@@ -34,50 +34,33 @@ class Profile extends Controller
                 $_SESSION['admin_user']['hoten'] = $hoten;
                 $_SESSION['admin_user']['email'] = $email;
                 $_SESSION['admin_user']['sdt']   = $sdt;
-
-                $_SESSION['success'] = "Cập nhật thông tin thành công!";
+                echo json_encode(["status" => "success", "message" => "Cập nhật thông tin thành công!"]);
             } else {
-                $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại!";
+                echo json_encode(["status" => "error", "message" => "Không có thay đổi hoặc có lỗi xảy ra!"]);
             }
-            header("Location: " . ROOT_URL_ADMIN . "profile");
-            exit();
+            exit;
         }
     }
 
-    public function postChangePassword()
+    public function changePassword()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $maadmin = $_SESSION['admin_user']['maadmin'];
             $currentPassword = $_POST['current_password'] ?? '';
             $newPassword     = $_POST['new_password'] ?? '';
-            $confirmPassword = $_POST['confirm_password'] ?? '';
-
-            if (empty($currentPassword) || empty($newPassword) || empty($confirmPassword)) {
-                $_SESSION['error'] = "Vui lòng nhập đầy đủ thông tin!";
-                header("Location: " . ROOT_URL_ADMIN . "profile");
-                exit();
-            }
-
-            if ($newPassword !== $confirmPassword) {
-                $_SESSION['error'] = "Mật khẩu mới không khớp!";
-                header("Location: " . ROOT_URL_ADMIN . "profile");
-                exit();
-            }
 
             $user = $this->adminModel->getAdminById($maadmin);
 
             if ($currentPassword !== $user['password']) {
-                $_SESSION['error'] = "Mật khẩu hiện tại không chính xác!";
+                echo json_encode(["status" => "error", "message" => "Mật khẩu hiện tại không đúng!"]);
             } else {
                 if ($this->adminModel->updatePassword($maadmin, $newPassword)) {
-                    $_SESSION['success'] = "Đổi mật khẩu thành công!";
+                    echo json_encode(["status" => "success", "message" => "Đổi mật khẩu thành công!"]);
                 } else {
-                    $_SESSION['error'] = "Có lỗi xảy ra, vui lòng thử lại!";
+                    echo json_encode(["status" => "error", "message" => "Lỗi không thể cập nhật!"]);
                 }
             }
-
-            header("Location: " . ROOT_URL_ADMIN . "profile");
-            exit();
+            exit;
         }
     }
 }

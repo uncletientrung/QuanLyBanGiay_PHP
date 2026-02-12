@@ -39,27 +39,27 @@ class pageProfileAdmin {
 
         jQuery('.js-validation-password').validate({
             rules: {
-                'dm-profile-edit-password': {
+                'current_password': {
                     required: true
                 },
-                'dm-profile-edit-password-new': {
+                'new_password': {
                     required: true,
                     minlength: 3
                 },
-                'dm-profile-edit-password-new-confirm': {
+                'confirm_password': {
                     required: true,
                     equalTo: '#dm-profile-edit-password-new'
                 }
             },
             messages: {
-                'dm-profile-edit-password': {
+                'current_password': {
                     required: 'Vui lòng nhập mật khẩu hiện tại'
                 },
-                'dm-profile-edit-password-new': {
+                'new_password': {
                     required: 'Vui lòng nhập mật khẩu mới',
                     minlength: 'Mật khẩu mới phải từ 3 ký tự trở lên'
                 },
-                'dm-profile-edit-password-new-confirm': {
+                'confirm_password': {
                     required: 'Vui lòng xác nhận lại mật khẩu mới',
                     equalTo: 'Mật khẩu xác nhận không khớp'
                 }
@@ -77,3 +77,39 @@ class pageProfileAdmin {
 
 // Initialize when page loads
 Dashmix.onLoad(() => pageProfileAdmin.init());
+
+// Xử lý AJAX cho cập nhật Profile
+$(".js-validation-profile").submit(function (e) {
+    e.preventDefault();
+    if ($(this).valid()) {
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                Dashmix.helpers("jq-notify", { type: res.status, icon: "fa fa-check me-1", message: res.message });
+                if (res.status === "success") {
+                    $(".fs-4.fw-bold.mb-1").text($("input[name='hoten']").val()); // Cập nhật tên trên giao diện
+                }
+            }
+        });
+    }
+});
+
+// Xử lý AJAX cho đổi mật khẩu
+$(".js-validation-password").submit(function (e) {
+    e.preventDefault();
+    if ($(this).valid()) {
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (res) {
+                Dashmix.helpers("jq-notify", { type: res.status, icon: "fa fa-check me-1", message: res.message });
+                if (res.status === "success") $(".js-validation-password")[0].reset();
+            }
+        });
+    }
+});
