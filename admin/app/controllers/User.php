@@ -5,7 +5,11 @@ class User extends Controller
     {
         $this->renderView("main_layout", [
             "page" => "user",
-            "title" => "Quản lý người dùng"
+            "title" => "Quản lý người dùng",
+            "Plugin"  => [
+                "datatables" => 1
+            ],
+            "Script"  => "admin_user"
         ]);
     }
 }

@@ -17,33 +17,31 @@ class Auth extends Controller
 
         $this->renderView("simple_layout", [
             "page" => "auth/signin",
-            "title" => "Đăng nhập"
+            "title" => "Đăng nhập",
+            "Plugin"  => [
+                "jquery-validate" => 1,
+                "notify" => 1
+            ],
+            "Script"  => "signin"
         ]);
     }
 
     public function postSignin()
     {
-        $email = trim($_POST['login-email'] ?? '');
-        $password = trim($_POST['login-password'] ?? '');
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = trim($_POST['email'] ?? '');
+            $password = trim($_POST['password'] ?? '');
 
-        if (empty($email) || empty($password)) {
-            $_SESSION['error'] = "Vui lòng nhập đầy đủ email và mật khẩu!";
-            header("Location: " . ROOT_URL_ADMIN . "auth/signin");
-            exit();
-        }
+            $user = $this->adminModel->checkLogin($email, $password);
 
-        $user = $this->adminModel->checkLogin($email, $password);
-
-        if ($user) {
-            $_SESSION['admin_logged'] = true;
-            $_SESSION['admin_user'] = $user;
-
-            header("Location: " . ROOT_URL_ADMIN . "dashboard");
-            exit();
-        } else {
-            $_SESSION['error'] = "Email hoặc mật khẩu không chính xác!";
-            header("Location: " . ROOT_URL_ADMIN . "auth/signin");
-            exit();
+            if ($user) {
+                $_SESSION['admin_logged'] = true;
+                $_SESSION['admin_user'] = $user;
+                echo json_encode(["status" => "success"]);
+            } else {
+                echo json_encode(["status" => "error", "message" => "Email hoặc mật khẩu không chính xác!"]);
+            }
+            exit;
         }
     }
 

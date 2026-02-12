@@ -13,7 +13,12 @@ class Profile extends Controller
         $this->renderView("main_layout", [
             "page" => "profile",
             "title" => "Trang cá nhân",
-            "user" => $_SESSION['admin_user']
+            "user" => $_SESSION['admin_user'],
+            "Plugin"  => [
+                "jquery-validate" => 1,
+                "notify" => 1
+            ],
+            "Script"  => "admin_profile"
         ]);
     }
 

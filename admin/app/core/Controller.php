@@ -14,6 +14,9 @@ class Controller
 
     public function renderView($view, $data = [])
     {
+        $data['Script'] = $data['Script'] ?? null;
+        $data['Plugin'] = $data['Plugin'] ?? [];
+
         extract($data);
         if (file_exists(VIEW_PATH_ADMIN_DIR . $view . '.php')) {
             require_once  VIEW_PATH_ADMIN_DIR . $view . '.php';

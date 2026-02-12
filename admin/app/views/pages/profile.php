@@ -101,15 +101,3 @@
     <!-- END Edit Account -->
 </div>
 <!-- END Page Content -->
-
-<!-- jQuery (required for jQuery Validation plugin) -->
-<?php $dm->get_js('js/lib/jquery.min.js'); ?>
-<?php $dm->get_js('js/plugins/bootstrap-notify/bootstrap-notify.min.js'); ?>
-
-<!-- Page JS Plugins -->
-<?php $dm->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
-
-<?php $dm->get_js('js/dashmix.app.min.js'); ?>
-
-<!-- Page JS Code -->
-<?php $dm->get_js('js/pages/admin_profile.js'); ?>

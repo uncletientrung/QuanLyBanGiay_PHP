@@ -18,7 +18,7 @@
         <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
         <div class="row g-0 justify-content-center">
           <div class="col-sm-8 col-xl-6">
-            <form class="js-validation-signin" method="POST">
+            <form class="js-validation-signin">
               <div class="py-3">
                 <div class="mb-4">
                   <input type="text" class="form-control form-control-lg form-control-alt" id="login-email" name="login-email" placeholder="Email hoặc số điện thoại">
@@ -55,29 +55,3 @@
   </div>
 </div>
 <!-- END Page Content -->
-
-<!-- jQuery (required for jQuery Validation plugin) -->
-<?php $dm->get_js('js/lib/jquery.min.js'); ?>
-<?php $dm->get_js('js/plugins/bootstrap-notify/bootstrap-notify.min.js'); ?>
-
-<!-- Page JS Plugins -->
-<?php $dm->get_js('js/plugins/jquery-validation/jquery.validate.min.js'); ?>
-
-<?php $dm->get_js('js/dashmix.app.min.js'); ?>
-
-<!-- Page JS Code -->
-<?php $dm->get_js('js/pages/signin.js'); ?>
-
-<!-- Toast -->
-<script>
-  $(function() {
-    <?php if (isset($_SESSION['error'])): ?>
-      Dashmix.helpers('jq-notify', {
-        type: 'danger',
-        icon: 'fa fa-times-circle me-1',
-        message: '<?php echo $_SESSION['error']; ?>'
-      });
-      <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
-  });
-</script>

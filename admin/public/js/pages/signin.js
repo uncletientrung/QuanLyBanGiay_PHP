@@ -49,3 +49,36 @@ class pageAuthSignIn {
 
 // Initialize when page loads
 Dashmix.onLoad(() => pageAuthSignIn.init());
+
+$(".js-validation-signin").submit(function (e) {
+  e.preventDefault();
+
+  if ($(this).valid()) {
+    $.ajax({
+      type: "POST",
+      url: "signin",
+      data: {
+        email: $("#login-email").val(),
+        password: $("#login-password").val(),
+      },
+      dataType: "json",
+      success: function (response) {
+        if (response.status === "success") {
+          location.href = "../dashboard";
+        } else {
+          Dashmix.helpers("jq-notify", {
+            type: "danger",
+            icon: "fa fa-times-circle me-1",
+            message: response.message,
+          });
+        }
+      },
+      error: function () {
+        Dashmix.helpers("jq-notify", {
+          type: "danger",
+          message: "Có lỗi xảy ra, vui lòng thử lại!",
+        });
+      }
+    });
+  }
+});
