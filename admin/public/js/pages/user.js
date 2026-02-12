@@ -6,7 +6,6 @@
 Dashmix.onLoad(() =>
     class {
         static initDataTables() {
-            // Cấu hình class bootstrap 5 cho DataTable
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
                 sWrapper: "dataTables_wrapper dt-bootstrap5",
                 sFilterInput: "form-control",
@@ -68,7 +67,6 @@ Dashmix.onLoad(() =>
                 dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-6'i><'col-sm-6'p>>",
             });
 
-            // Đây là cái bạn đang dùng trong file user.php
             jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
                 pageLength: 5,

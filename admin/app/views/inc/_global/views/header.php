@@ -22,6 +22,11 @@
   <meta name="author" content="<?php echo $dm->author; ?>">
   <meta name="robots" content="<?php echo $dm->robots; ?>">
 
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Open Graph Meta -->
   <meta property="og:title" content="<?php echo $dm->title; ?>">
   <meta property="og:site_name" content="<?php echo $dm->name; ?>">
