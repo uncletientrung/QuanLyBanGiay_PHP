@@ -67,7 +67,7 @@ Dashmix.onLoad(() =>
                 dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-6'i><'col-sm-6'p>>",
             });
 
-            jQuery(".js-dataTable-responsive").DataTable({
+            const userTable = jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
                 pageLength: 5,
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
@@ -141,6 +141,128 @@ Dashmix.onLoad(() =>
                         }
                     }
                 ]
+            });
+
+            // Model Thêm
+            $("#btn-add-modal").on("click", function () {
+                $("#form-user")[0].reset();
+                $("#user_id").val("");
+                $("#modal-title").text("Thêm khách hàng");
+                $("#modal-user").modal("show");
+            });
+
+            // Thêm / Sửa
+            $("#form-user").on("submit", function (e) {
+                e.preventDefault();
+                let id = $("#user_id").val();
+                let url = id ? './user/update' : './user/add'; // Có id -> sửa : thêm
+
+                let formData = {
+                    id: id,
+                    hoten: $("#hoten").val(),
+                    email: $("#email").val(),
+                    sdt: $("#sdt").val(),
+                    diachi: $("#diachi").val(),
+                    matkhau: $("#matkhau").val(),
+                    gioitinh: $("input[name='gioitinh']:checked").val(),
+                    trangthai: $("#trangthai").is(":checked") ? 1 : 0
+                };
+
+                $.post(url, formData, function (res) {
+                    if (res.success) {
+                        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: 'Cập nhật thành công!' });
+                        $("#modal-user").modal("hide");
+                        userTable.ajax.reload();
+                    } else {
+                        Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: 'Có lỗi xảy ra!' });
+                    }
+                }, 'json');
+            });
+
+            // Modal Sửa
+            $(document).on("click", ".btn-edit-user", function () {
+                let id = $(this).data("id");
+                $.post("./user/getDetail", { id: id }, function (data) {
+                    // Đổ dữ liệu vào form
+                    $("#user_id").val(data.makh);
+                    $("#hoten").val(data.hoten);
+                    $("#email").val(data.email);
+                    $("#sdt").val(data.sdt);
+                    $("#diachi").val(data.diachi);
+                    $("#matkhau").val(data.matkhau);
+                    $(`input[name='gioitinh'][value='${data.gioitinh}']`).prop("checked", true);
+                    $("#trangthai").prop("checked", data.trangthai == 1);
+
+                    $("#modal-title").text("Chỉnh sửa khách hàng");
+                    $("#modal-user").modal("show");
+                }, 'json');
+            });
+
+            // Xoá
+            $(document).on("click", ".btn-delete-user", function (e) {
+                e.preventDefault();
+                var trid = $(this).data("id");
+
+                let swalBlock = Swal.mixin({
+                    buttonsStyling: !1,
+                    target: "#page-container",
+                    customClass: {
+                        confirmButton: "btn btn-danger m-1",
+                        cancelButton: "btn btn-secondary m-1",
+                        input: "form-control",
+                    },
+                });
+
+                swalBlock.fire({
+                    title: "Bạn có chắc chắn?",
+                    text: "Dữ liệu người dùng này sẽ bị xoá vĩnh viễn!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Vâng, tôi chắc chắn!",
+                    cancelButtonText: "Huỷ",
+                    html: !1,
+                    preConfirm: (e) =>
+                        new Promise((e) => {
+                            setTimeout(() => {
+                                e();
+                            }, 50);
+                        }),
+                }).then((t) => {
+                    if (t.value == true) {
+                        $.ajax({
+                            type: "post",
+                            url: "./user/delete",
+                            data: {
+                                id: trid,
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success) {
+                                    swalBlock.fire("Đã xoá!", "Xóa khách hàng thành công!", "success");
+                                    userTable.ajax.reload(function () {
+                                        // Sau khi load lại, kiểm tra xem trang hiện tại có record nào không
+                                        // info.recordsDisplay là tổng số record sau khi lọc/xóa
+                                        // info.start là chỉ số bắt đầu của trang hiện tại
+                                        let info = userTable.page.info();
+
+                                        // Nếu vị trí bắt đầu của trang hiện tại lớn hơn hoặc bằng tổng số record
+                                        // nghĩa là trang này đã trống hoàn toàn
+                                        if (info.recordsDisplay > 0 && info.start >= info.recordsDisplay) {
+                                            userTable.page('previous').draw('page');
+                                        }
+                                    }, false);
+                                } else {
+                                    swalBlock.fire("Lỗi!", "Không thể xoá khách hàng này.", "error");
+                                }
+                            },
+                            error: function () {
+                                swalBlock.fire("Lỗi!", "Lỗi kết nối máy chủ.", "error");
+                            }
+                        });
+                    } else {
+                        swalBlock.fire("Đã huỷ", "Dữ liệu vẫn an toàn", "error");
+                    }
+                });
             });
         }
 

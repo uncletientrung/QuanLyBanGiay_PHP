@@ -25,6 +25,11 @@ if (isset($Plugin["notify"]) && $Plugin["notify"] == 1) {
     $dm->get_js('js/plugins/bootstrap-notify/bootstrap-notify.min.js');
 }
 
+// Plugin: SweetAlert2
+if (isset($Plugin["sweetalert2"]) && $Plugin["sweetalert2"] == 1) {
+    $dm->get_js('js/plugins/sweetalert2/sweetalert2.min.js');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');

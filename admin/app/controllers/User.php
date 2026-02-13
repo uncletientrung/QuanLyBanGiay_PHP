@@ -24,9 +24,55 @@ class User extends Controller
 
     public function getData()
     {
-        $data = $this->khachHangModel->getAll();
-        header('Content-Type: application/json');
-        echo json_encode($data);
+        echo json_encode($this->khachHangModel->getAll());
+        exit;
+    }
+
+    public function getDetail()
+    {
+        $id = $_POST['id'];
+        echo json_encode($this->khachHangModel->getById($id));
+        exit;
+    }
+
+    public function add()
+    {
+        $data = [
+            'hoten'     => $_POST['hoten'],
+            'sdt'       => $_POST['sdt'],
+            'diachi'    => $_POST['diachi'],
+            'gioitinh'  => $_POST['gioitinh'],
+            'trangthai' => $_POST['trangthai'],
+            'email'     => $_POST['email'],
+            'matkhau'   => $_POST['matkhau']
+        ];
+        $result = $this->khachHangModel->add($data);
+        echo json_encode(['success' => $result]);
+        exit;
+    }
+
+    public function update()
+    {
+        $id = $_POST['id'];
+        $data = [
+            'hoten'     => $_POST['hoten'],
+            'sdt'       => $_POST['sdt'],
+            'diachi'    => $_POST['diachi'],
+            'gioitinh'  => $_POST['gioitinh'],
+            'trangthai' => $_POST['trangthai'],
+            'email'     => $_POST['email'],
+            'matkhau'   => $_POST['matkhau']
+        ];
+        $result = $this->khachHangModel->update($id, $data);
+        echo json_encode(['success' => $result]);
+        exit;
+    }
+
+    public function delete()
+    {
+        $id = $_POST['id'];
+        $result = $this->khachHangModel->delete($id);
+        echo json_encode(['success' => $result]);
         exit;
     }
 }
