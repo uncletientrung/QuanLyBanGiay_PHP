@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 10, 2026 at 02:26 PM
+-- Generation Time: Feb 13, 2026 at 05:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -216,6 +216,31 @@ CREATE TABLE `khachhang` (
   `gioitinh` int(1) NOT NULL,
   `trangthai` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `khachhang`
+--
+
+INSERT INTO `khachhang` (`makh`, `email`, `matkhau`, `sdt`, `hoten`, `diachi`, `gioitinh`, `trangthai`) VALUES
+(1, 'an.nguyen@gmail.com', '123', '0903123456', 'Nguyễn Văn An', '123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM', 1, 1),
+(2, 'bich.tran@yahoo.com', '123', '0912987654', 'Trần Thị Bích', '45 Nguyễn Trãi, Quận Thanh Xuân, Hà Nội', 0, 1),
+(3, 'nam.lehoang@gmail.com', '123', '0988111222', 'Lê Hoàng Nam', '88 Phan Chu Trinh, Quận Hải Châu, Đà Nẵng', 1, 1),
+(4, 'thao.vuthu@hotmail.com', '123', '0707888999', 'Vũ Thu Thảo', '202 Cách Mạng Tháng 8, Quận 3, TP.HCM', 0, 1),
+(5, 'tuan.pham@gmail.com', '123', '0355444333', 'Phạm Minh Tuấn', '12 Ngõ Tự Do, Quận Hai Bà Trưng, Hà Nội', 1, 1),
+(6, 'linh.buiphuong@gmail.com', '123', '0868222333', 'Bùi Phương Linh', '56 Nguyễn Văn Linh, Quận Ninh Kiều, Cần Thơ', 0, 1),
+(7, 'anh.dangquoc@gmail.com', '123', '0945666777', 'Đặng Quốc Anh', '15 Trần Phú, Lộc Thọ, Nha Trang', 1, 1),
+(8, 'van.ngothanh@gmail.com', '123', '0979333222', 'Ngô Thanh Vân', '101 Láng Hạ, Quận Đống Đa, Hà Nội', 0, 1),
+(9, 'manh.doduy@gmail.com', '123', '0932555444', 'Đỗ Duy Mạnh', '78 Quang Trung, Quận Gò Vấp, TP.HCM', 1, 1),
+(10, 'chi.trinhkim@gmail.com', '123', '0914888777', 'Trịnh Kim Chi', '34 Thống Nhất, TP. Thủ Đức, TP.HCM', 0, 1),
+(11, 'bao.lygia@gmail.com', '123', '0909112233', 'Lý Gia Bảo', '22 Hàm Nghi, Quận 1, TP.HCM', 1, 1),
+(12, 'trang.phanthu@gmail.com', '123', '0399123789', 'Phan Thu Trang', '09 Lê Hồng Phong, TP. Vinh, Nghệ An', 0, 1),
+(13, 'tho.nguyenhuu@gmail.com', '123', '0987445566', 'Nguyễn Hữu Thọ', '12B Lý Thường Kiệt, Quận Hoàn Kiếm, Hà Nội', 1, 1),
+(14, 'mai.hoangthi@gmail.com', '123', '0902889900', 'Hoàng Thị Mai', '18 Nguyễn Huệ, TP. Huế', 0, 1),
+(15, 'duc.duongvan@gmail.com', '123', '0777555666', 'Dương Văn Đức', '456 Võ Văn Kiệt, Quận 5, TP.HCM', 1, 1),
+(16, 'anh.vongoc@gmail.com', '123', '0388667788', 'Võ Ngọc Ánh', '123 Hùng Vương, TP. Pleiku, Gia Lai', 0, 1),
+(17, 'dung.dinhtien@gmail.com', '123', '0944112244', 'Đinh Tiến Dũng', '67 Xuân Thủy, Quận Cầu Giấy, Hà Nội', 1, 1),
+(18, 'lan.truongmy@gmail.com', '123', '0938776655', 'Trương Mỹ Lan', '40 Kim Mã, Quận Ba Đình, Hà Nội', 0, 1),
+(19, 'triet.hominh@gmail.com', '123', '0915334455', 'Hồ Minh Triết', '25 Phổ Quang, Quận Tân Bình, TP.HCM', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -513,7 +538,7 @@ ALTER TABLE `hinhanh`
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `loai`

@@ -14,6 +14,7 @@ $router->post('/profile/update', 'Profile@update');
 $router->post('/profile/change-password', 'Profile@changePassword');
 
 $router->get('/user', 'User@default');
+$router->get('/user/getData', 'User@getData');
 
 // Other
 $router->get('/attributes', 'Attributes@default');

@@ -73,6 +73,74 @@ Dashmix.onLoad(() =>
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 responsive: !0,
+                dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                ajax: {
+                    url: './user/getData',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: 'makh',
+                        className: 'text-center',
+                        type: 'num',
+                        render: function (data) {
+                            return `
+                                <a class="fw-semibold">
+                                    <strong>KH-${data}</strong>
+                                </a>
+                            `;
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return `
+                                <div class="fw-semibold text-primary">${row.hoten || 'N/A'}</div>
+                                <div class="text-muted small">${row.email || ''}</div>
+                            `;
+                        }
+                    },
+                    {
+                        data: 'sdt',
+                        defaultContent: "N/A",
+                        className: 'd-none d-sm-table-cell'
+                    },
+                    {
+                        data: 'diachi',
+                        defaultContent: "N/A",
+                        className: 'd-none d-lg-table-cell'
+                    },
+                    {
+                        data: 'gioitinh',
+                        className: 'text-center',
+                        render: function (data) {
+                            return data == 1 ? 'Nam' : 'Nữ';
+                        }
+                    },
+                    {
+                        data: 'trangthai',
+                        className: 'text-center',
+                        render: function (data) {
+                            let statusClass = data == 1 ? "bg-success" : "bg-danger";
+                            let statusText = data == 1 ? "Hoạt động" : "Bị khoá";
+                            return `<span class="badge ${statusClass}">${statusText}</span>`;
+                        }
+                    },
+                    {
+                        data: 'makh',
+                        className: 'text-center',
+                        render: function (data) {
+                            return `
+                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)">
+                                    <i class="fa fa-fw fa-pen-to-square text-info"></i>
+                                </a>
+                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)">
+                                    <i class="fa fa-fw fa-times text-danger"></i>
+                                </a>
+                            `;
+                        }
+                    }
+                ]
             });
         }
 
