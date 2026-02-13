@@ -5,6 +5,55 @@
  */
 Dashmix.onLoad(() =>
     class {
+        static initValidation() {
+            Dashmix.helpers('jq-validation');
+
+            jQuery('#form-user').validate({
+                rules: {
+                    'hoten': {
+                        required: true,
+                        minlength: 2
+                    },
+                    'email': {
+                        required: true,
+                        email: true
+                    },
+                    'sdt': {
+                        required: true,
+                        digits: true,
+                        minlength: 10,
+                        maxlength: 11
+                    },
+                    'matkhau': {
+                        required: function () {
+                            return $("#user_id").val() === "";
+                        },
+                        minlength: 3
+                    }
+                },
+                messages: {
+                    'hoten': {
+                        required: 'Vui lòng nhập họ tên khách hàng',
+                        minlength: 'Họ tên phải có ít nhất 2 ký tự'
+                    },
+                    'email': {
+                        required: 'Vui lòng nhập địa chỉ Email',
+                        email: 'Định dạng Email không hợp lệ'
+                    },
+                    'sdt': {
+                        required: 'Vui lòng nhập số điện thoại',
+                        digits: 'Số điện thoại chỉ được chứa chữ số',
+                        minlength: 'Số điện thoại tối thiểu 10 số',
+                        maxlength: 'Số điện thoại tối đa 11 số'
+                    },
+                    'matkhau': {
+                        required: 'Vui lòng nhập mật khẩu cho tài khoản mới',
+                        minlength: 'Mật khẩu phải từ 3 ký tự trở lên'
+                    }
+                }
+            });
+        }
+
         static initDataTables() {
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
                 sWrapper: "dataTables_wrapper dt-bootstrap5",
@@ -147,6 +196,8 @@ Dashmix.onLoad(() =>
             $("#btn-add-modal").on("click", function () {
                 $("#form-user")[0].reset();
                 $("#user_id").val("");
+                $("#form-user").validate().resetForm();
+                $("#form-user").find(".is-invalid").removeClass("is-invalid");
                 $("#modal-title").text("Thêm khách hàng");
                 $("#modal-user").modal("show");
             });
@@ -154,34 +205,41 @@ Dashmix.onLoad(() =>
             // Thêm / Sửa
             $("#form-user").on("submit", function (e) {
                 e.preventDefault();
-                let id = $("#user_id").val();
-                let url = id ? './user/update' : './user/add'; // Có id -> sửa : thêm
 
-                let formData = {
-                    id: id,
-                    hoten: $("#hoten").val(),
-                    email: $("#email").val(),
-                    sdt: $("#sdt").val(),
-                    diachi: $("#diachi").val(),
-                    matkhau: $("#matkhau").val(),
-                    gioitinh: $("input[name='gioitinh']:checked").val(),
-                    trangthai: $("#trangthai").is(":checked") ? 1 : 0
-                };
+                if ($(this).valid()) {
+                    let id = $("#user_id").val();
+                    let url = id ? './user/update' : './user/add'; // Có id -> sửa : thêm
 
-                $.post(url, formData, function (res) {
-                    if (res.success) {
-                        Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: 'Cập nhật thành công!' });
-                        $("#modal-user").modal("hide");
-                        userTable.ajax.reload();
-                    } else {
-                        Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: 'Có lỗi xảy ra!' });
-                    }
-                }, 'json');
+                    let formData = {
+                        id: id,
+                        hoten: $("#hoten").val(),
+                        email: $("#email").val(),
+                        sdt: $("#sdt").val(),
+                        diachi: $("#diachi").val(),
+                        matkhau: $("#matkhau").val(),
+                        gioitinh: $("input[name='gioitinh']:checked").val(),
+                        trangthai: $("#trangthai").is(":checked") ? 1 : 0
+                    };
+
+                    $.post(url, formData, function (res) {
+                        if (res.success) {
+                            Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: 'Cập nhật thành công!' });
+                            $("#modal-user").modal("hide");
+                            userTable.ajax.reload();
+                        } else {
+                            Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: 'Có lỗi xảy ra!' });
+                        }
+                    }, 'json');
+                }
             });
 
             // Modal Sửa
             $(document).on("click", ".btn-edit-user", function () {
                 let id = $(this).data("id");
+
+                $("#form-user").validate().resetForm();
+                $("#form-user").find(".is-invalid").removeClass("is-invalid");
+
                 $.post("./user/getDetail", { id: id }, function (data) {
                     // Đổ dữ liệu vào form
                     $("#user_id").val(data.makh);
@@ -268,6 +326,7 @@ Dashmix.onLoad(() =>
 
         static init() {
             this.initDataTables();
+            this.initValidation();
         }
     }.init()
 );

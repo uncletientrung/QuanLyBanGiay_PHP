@@ -62,7 +62,7 @@
             <div class="modal fade" id="modal-user" tabindex="-1" role="dialog" aria-labelledby="modal-user" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form id="form-user" onsubmit="return false;">
+                        <form id="form-user" onsubmit="return false;" novalidate>
                             <div class="block block-rounded block-transparent mb-0">
                                 <div class="block-header block-header-default">
                                     <h3 class="block-title" id="modal-title">Thêm khách hàng</h3>

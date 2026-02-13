@@ -16,7 +16,8 @@ class User extends Controller
             "Plugin"  => [
                 "sweetalert2" => 1,
                 "notify" => 1,
-                "datatables" => 1
+                "datatables" => 1,
+                "jquery-validate" => 1
             ],
             "Script"  => "user"
         ]);
