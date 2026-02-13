@@ -5,7 +5,12 @@ class Dashboard  extends Controller
     {
         $this->renderView("main_layout", [
             "page" => "dashboard",
-            "title" => "Trang chủ Admin"
+            "title" => "Trang chủ Admin",
+            "Plugin" => [
+                "slick" => 1,
+                "notify" => 1,
+            ],
+            "Script" => "dashboard"
         ]);
     }
 }

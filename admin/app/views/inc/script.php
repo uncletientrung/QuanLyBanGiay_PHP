@@ -30,6 +30,11 @@ if (isset($Plugin["sweetalert2"]) && $Plugin["sweetalert2"] == 1) {
     $dm->get_js('js/plugins/sweetalert2/sweetalert2.min.js');
 }
 
+// Plugin: Slick-carousel (slider)
+if (isset($Plugin["slick"]) && $Plugin["slick"] == 1) {
+    $dm->get_js('js/plugins/slick-carousel/slick.min.js');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');
