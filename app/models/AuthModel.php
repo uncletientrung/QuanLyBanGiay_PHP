@@ -11,5 +11,11 @@
             $stmt->execute([$email, $password]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        public function getUserByEmail($email){
+            $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$email]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
 
