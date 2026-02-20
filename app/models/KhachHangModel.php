@@ -25,6 +25,20 @@ class KhachHangModel
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    public function checkLogin($email, $password)
+    {
+        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email = ? AND matkhau = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$email, $password]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getUserByEmail($email)
+    {
+        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function add($data)
     {

@@ -1,6 +1,7 @@
 <?php
-require_once "../QuanLyBanGiay_PHP/app/models/AuthModel.php";
-require '../QuanLyBanGiay_PHP/config/constants.php';
+require_once __DIR__ . '/../../config/connectdb.php';
+require_once __DIR__ . '/../models/AuthModel.php';
+
 class AuthController
 {
     private $model;
@@ -10,34 +11,43 @@ class AuthController
     }
     public function checkLoginUser()
     {
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['login'])) {
+            $errors = [];
             $email = filter_var($_POST['userEmail'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $passwrod = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if (!$email) {
-                $_SESSION['login'] = "Vui lòng nhập Email người dùng";
-            } elseif (!$passwrod) {
-                $_SESSION['login'] = "Vui lòng nhập mật khẩu người dùng";
-            } else {
+            $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if (empty($email)) {
+                $errors['email'] = "Vui lòng nhập Email người dùng";
+            }
+            if (empty($password)) {
+                $errors['password'] = "Vui lòng nhập mật khẩu người dùng";
+            }
+            if (!empty($password) && !empty($email)) {
                 $khachhang = $this->model->getUserByEmail($email);
                 if ($khachhang != FALSE) { // Nếu tìm thấy khách dựa trên mail
-                    if ($khachhang['matkhau'] == $passwrod) {
+                    if ($khachhang['matkhau'] == $password) {
                         $_SESSION['user-id'] = $khachhang['makh'];
                         header('location:' . ROOT_URL);
                     } else {
-                        $_SESSION['login'] = "Vui lòng nhập đúng mật khẩu";
+                        $errors['password'] = "Vui lòng nhập đúng mật khẩu";
                     }
                 } else {
-                    $_SESSION['login'] = "Email người dùng không tồn tại";
+                    $errors['email'] = "Email người dùng không tồn tại";
                 }
             }
-            if(isset($_SESSION['login'])){
-                $_SESSION['login-data']=$_POST;
-                header('location:'.ROOT_URL.'account/login');
+            if (!empty($errors)) {
+                $_SESSION['login-errors'] = $errors;
+                $_SESSION['login-data'] = $_POST;
+                header('location:' . ROOT_URL . 'account/login');
                 die();
             }
-        }else{
-            header('location:'.ROOT_URL.'account/login');
+        } else {
+            header('location:' . ROOT_URL . 'account/login');
             die();
         }
     }
+}
+$auth = new AuthController($conn);
+if (isset($_POST['login'])) {
+    $auth->checkLoginUser();
 }
