@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2026 at 05:30 AM
+-- Generation Time: Feb 23, 2026 at 11:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -32,15 +32,16 @@ CREATE TABLE `admin` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `hoten` varchar(255) NOT NULL,
-  `sdt` varchar(15) DEFAULT NULL
+  `sdt` varchar(15) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`maadmin`, `email`, `password`, `hoten`, `sdt`) VALUES
-(1, 'admin@gmail.com', '123', 'Trương Minh Vũ', '0912345678');
+INSERT INTO `admin` (`maadmin`, `email`, `password`, `hoten`, `sdt`, `token`) VALUES
+(1, 'admin@gmail.com', '$2y$10$luxIDeVvN.cM9LIwK3y1g.CybX0ItqoK415lP6e8LHqUxvOrd6x16', 'Trương Minh Vũ', '0912345678', '5a1feed5346f5faa634dea1625c6c8d35e64aea1ab7bc9b2b7848cffbabaeb58');
 
 -- --------------------------------------------------------
 
@@ -240,7 +241,8 @@ INSERT INTO `khachhang` (`makh`, `email`, `matkhau`, `sdt`, `hoten`, `diachi`, `
 (16, 'anh.vongoc@gmail.com', '123', '0388667788', 'Võ Ngọc Ánh', '123 Hùng Vương, TP. Pleiku, Gia Lai', 0, 1),
 (17, 'dung.dinhtien@gmail.com', '123', '0944112244', 'Đinh Tiến Dũng', '67 Xuân Thủy, Quận Cầu Giấy, Hà Nội', 1, 1),
 (18, 'lan.truongmy@gmail.com', '123', '0938776655', 'Trương Mỹ Lan', '40 Kim Mã, Quận Ba Đình, Hà Nội', 0, 1),
-(19, 'triet.hominh@gmail.com', '123', '0915334455', 'Hồ Minh Triết', '25 Phổ Quang, Quận Tân Bình, TP.HCM', 1, 1);
+(19, 'triet.hominh@gmail.com', '123', '0915334455', 'Hồ Minh Triết', '25 Phổ Quang, Quận Tân Bình, TP.HCM', 1, 1),
+(20, 'sam.vanlai@gmail.com', '', '0932431029', 'Lại Văn Sâm', 'D12/9D Vĩnh Lộc B', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -538,7 +540,7 @@ ALTER TABLE `hinhanh`
 -- AUTO_INCREMENT for table `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `loai`
