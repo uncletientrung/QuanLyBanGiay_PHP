@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`maadmin`, `email`, `password`, `hoten`, `sdt`, `token`) VALUES
-(1, 'admin@gmail.com', '$2y$10$luxIDeVvN.cM9LIwK3y1g.CybX0ItqoK415lP6e8LHqUxvOrd6x16', 'Trương Minh Vũ', '0912345678', '5a1feed5346f5faa634dea1625c6c8d35e64aea1ab7bc9b2b7848cffbabaeb58');
+(1, 'admin@gmail.com', '$2y$10$luxIDeVvN.cM9LIwK3y1g.CybX0ItqoK415lP6e8LHqUxvOrd6x16', 'Trương Minh Vũ', '0912345678', 'NULL');
 
 -- --------------------------------------------------------
 
