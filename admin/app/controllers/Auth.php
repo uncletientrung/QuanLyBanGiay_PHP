@@ -31,25 +31,14 @@ class Auth extends Controller
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
-
-            $user = $this->adminModel->checkLogin($email, $password);
-
-            if ($user) {
-                $_SESSION['admin_logged'] = true;
-                $_SESSION['admin_user'] = $user;
-                echo json_encode(["status" => "success"]);
-            } else {
-                echo json_encode(["status" => "error", "message" => "Email hoặc mật khẩu không chính xác!"]);
-            }
+            echo $this->adminModel->checkLogin($email, $password);
             exit;
         }
     }
 
     public function logout()
     {
-        unset($_SESSION['admin_logged']);
-        unset($_SESSION['admin_user']);
-
+        $this->adminModel->logout();
         header("Location: " . ROOT_URL_ADMIN . "auth/signin");
         exit();
     }

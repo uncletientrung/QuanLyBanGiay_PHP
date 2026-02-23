@@ -51,6 +51,15 @@ class Router
         $controllerName = $arr[0];
         $actionName = $arr[1];
 
+        require_once __DIR__ . "/AuthCore.php";
+        if ($controllerName !== 'Auth' && $controllerName !== 'Myerror') {
+            require_once "AuthCore.php";
+            AuthCore::check();
+        }
+        if ($controllerName === 'Auth' && $actionName === 'signin') {
+            AuthCore::onLogin();
+        }
+
         $fileController = dirname(__DIR__) . "/controllers/" . $controllerName . ".php";
 
         if (file_exists($fileController)) {

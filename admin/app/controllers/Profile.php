@@ -30,14 +30,16 @@ class Profile extends Controller
             $email   = trim($_POST['email'] ?? '');
             $sdt     = trim($_POST['sdt'] ?? '');
 
-            if ($this->adminModel->updateProfile($maadmin, $hoten, $email, $sdt)) {
+            $result = $this->adminModel->updateAdminProfile($maadmin, $hoten, $email, $sdt);
+
+            $resData = json_decode($result, true);
+            if ($resData['status'] === 'success') {
                 $_SESSION['admin_user']['hoten'] = $hoten;
                 $_SESSION['admin_user']['email'] = $email;
                 $_SESSION['admin_user']['sdt']   = $sdt;
-                echo json_encode(["status" => "success", "message" => "Cập nhật thông tin thành công!"]);
-            } else {
-                echo json_encode(["status" => "error", "message" => "Không có thay đổi hoặc có lỗi xảy ra!"]);
             }
+
+            echo $result;
             exit;
         }
     }
@@ -46,20 +48,10 @@ class Profile extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $maadmin = $_SESSION['admin_user']['maadmin'];
-            $currentPassword = $_POST['current_password'] ?? '';
-            $newPassword     = $_POST['new_password'] ?? '';
+            $current = $_POST['current_password'] ?? '';
+            $new     = $_POST['new_password'] ?? '';
 
-            $user = $this->adminModel->getAdminById($maadmin);
-
-            if ($currentPassword !== $user['password']) {
-                echo json_encode(["status" => "error", "message" => "Mật khẩu hiện tại không đúng!"]);
-            } else {
-                if ($this->adminModel->updatePassword($maadmin, $newPassword)) {
-                    echo json_encode(["status" => "success", "message" => "Đổi mật khẩu thành công!"]);
-                } else {
-                    echo json_encode(["status" => "error", "message" => "Lỗi không thể cập nhật!"]);
-                }
-            }
+            echo $this->adminModel->changePassword($maadmin, $current, $new);
             exit;
         }
     }
