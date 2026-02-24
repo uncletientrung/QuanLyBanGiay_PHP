@@ -44,10 +44,6 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               <img src="public/img/hero-img-converse.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Converse</a>
             </div>
-            <!-- <div class="carousel-item rounded">
-              <img src="public/img/hero-img-vans.png" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-              <a href="#" class="btn px-4 py-2 text-white rounded">Vans</a>
-            </div> -->
             <div class="carousel-item rounded">
               <img src="public/img/hero-img-clark.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
               <a href="#" class="btn px-4 py-2 text-white rounded">Clark</a>

@@ -1,4 +1,5 @@
 <?php
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // chỉ trả về vd /QuanLyBanGiay_Php/products
 $uri = str_replace(APP_PATH, '', $uri);
 
@@ -16,7 +17,9 @@ if ($uri == 'products') {
 }
 if ($uri == 'cart') {
     require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'cart.php';
+    require APP_PATH_DIR . 'controllers/GioHangController.php';
+    $controller = new GioHangController($conn);
+    $controller->showCarts();
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
@@ -32,19 +35,19 @@ if ($uri == 'contact') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-if($uri == 'product-detail') {
+if ($uri == 'product-detail') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'product-detail.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-if($uri == 'account') {
+if ($uri == 'account') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'account.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-if($uri == 'account/login') {
+if ($uri == 'account/login') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'auth.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
@@ -88,7 +91,7 @@ if ($uri == 'chackout') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-if($uri == 'privacy-policy') {
+if ($uri == 'privacy-policy') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'privacy-policy.php';
     require VIEW_PATH_DIR . 'partials/footer.php';

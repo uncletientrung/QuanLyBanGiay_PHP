@@ -20,4 +20,13 @@ class HinhAnhModel
         $stmt->execute([$maHinhAnh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getImageMainById($masp)
+    {
+        $sql = "SELECT * FROM hinhanh WHERE masp = ? AND ismain = 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$masp]);
+        $image = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $image ? $image['path'] : NO_IMAGE;
+    }
 }

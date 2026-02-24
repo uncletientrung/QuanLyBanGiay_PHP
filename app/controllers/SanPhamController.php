@@ -33,7 +33,7 @@ class SanPhamController
         return $this->model->getFiltered($filters, $limit, $offset);
     }
 
-  //  Đếm tổng sản phẩm theo filter (hoặc tổng tất cả nếu không filter)
+    //  Đếm tổng sản phẩm theo filter (hoặc tổng tất cả nếu không filter)
     public function countProducts(array $filters = []): int
     {
         if (empty($filters) || $this->isEmptyFilters($filters)) {
@@ -56,18 +56,23 @@ class SanPhamController
     }
 
 
-    
+
     public function getAll()
     {
         return $this->model->getAll();
     }
-    public function getBestSellingByName($tenHang){
-        if($tenHang == "all") $maHang = false;
-        else{
+    public function getBestSellingByName($tenHang)
+    {
+        if ($tenHang == "all") $maHang = false;
+        else {
             $maHang = $this->hangModel->getIdByName($tenHang);
             // echo "<script>console.log(" . json_encode($maHang) . ");</script>";
-        } 
+        }
         return $this->model->getBestSellingProductByMaHang($maHang);
+    }
+    public function getSpById($masp)
+    {
+        return $this->model->getSpById($masp);
     }
 
     public function countAll()
@@ -88,9 +93,5 @@ class SanPhamController
     public function countFiltered($filters)
     {
         return $this->model->countFiltered($filters);
-    }
-
-    public function getSpById($masp){
-        return $this->model->getSpById($masp);
     }
 }
