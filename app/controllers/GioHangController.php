@@ -26,26 +26,39 @@ class GioHangController
             echo json_encode(['success' => false]);
             exit;
         }
-        $masp    = $_POST['masp'] ?? null;
-        $action  = $_POST['action'] ?? null;
-        $soluong = (int)($_POST['soluong'] ?? 0);
-        switch ($action) {
-            case 'minus':
-                if($soluong >=2) $soluong--;
+        $masp   = $_POST['masp'] ?? null;
+        $action = $_POST['action'] ?? null;
+        $cart = $this->model->getCartsByUserId_Model($user_id);
+        foreach ($cart as $item) {
+            if ($item['masp'] == $masp) {
+                $soluong = (int)$item['soluong'];
                 break;
-            case 'plus':
-                $soluong++;
-                break;
-            case 'delete':
-                $this->model->deleteItem_Model($user_id, $masp);
-                echo json_encode(['success' => true]);
-                exit;
-            default:
-                echo json_encode(['success' => false]);
-                exit;
+            }
+        }
+        if ($action === 'minus' && $soluong > 1) {
+            $soluong--;
+        } elseif ($action === 'plus') {
+            $soluong++;
         }
         $this->model->updateQuantity_Model($user_id, $masp, $soluong);
-        echo json_encode(['success' => true]);
+        $sp = $this->SanPhamModel->getSpById($masp);
+        $gia = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
+
+        // Tính lại tổng giỏ hàng
+        $carts = $this->model->getCartsByUserId_Model($user_id);
+        $tong = 0;
+        foreach ($carts as $c) {
+            $spCart = $this->SanPhamModel->getSpById($c['masp']);
+            $giaCart = $spCart['gianhap'] + ($spCart['gianhap'] * $spCart['tyleloinhuan'] / 100);
+            $tong += $giaCart * $c['soluong'];
+        }
+
+        echo json_encode([
+            'success'      => true,
+            'soluong_moi'  => $soluong,
+            'thanhtien'    => number_format($gia * $soluong) . '₫',
+            'tonggiohang'  => number_format($tong) . '₫'
+        ]);
     }
     public function showCarts()
     {

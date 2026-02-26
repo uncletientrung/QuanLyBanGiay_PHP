@@ -51,17 +51,17 @@
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-minus rounded-circle bg-light border"
                                   data-masp = "<?= $item['masp'] ?>"
-                                  data-soluong ="<?= $item['soluong'] ?>"
                           >
                             <i class="fa fa-minus"></i>
                           </button>
                         </div>
-                        <input type="text" class="form-control form-control-sm text-center border-0" 
-                          value="<?= $item['soluong'] ?>">
+                        <input type="text"
+                                id="quantity-<?= $item['masp'] ?>"
+                                class="form-control form-control-sm text-center border-0" 
+                                value="<?= $item['soluong'] ?>" readonly>
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-plus rounded-circle bg-light border"
                                   data-masp = "<?= $item['masp'] ?>"
-                                  data-soluong ="<?= $item['soluong'] ?>"
                           >
                             <i class="fa fa-plus"></i>
                           </button>
@@ -70,7 +70,9 @@
                     </td>
 
                     <td>
-                      <p class="mb-0 mt-4"><?= number_format($item['gia'] * $item['soluong']) ?>₫</p>
+                      <p class="mb-0 mt-4" id="price-<?= $item['masp'] ?>">
+                        <?= number_format($item['gia'] * $item['soluong']) ?>₫
+                      </p>
                     </td>
                     <td>
                       <button class="btn btn-md rounded-circle bg-light border mt-4">
@@ -111,7 +113,7 @@
             <h1 class="display-6 mb-4">Tổng giỏ hàng</h1>
             <div class="d-flex justify-content-between mb-4">
               <h5 class="mb-0 me-4">Tổng tạm tính:</h5>
-              <p class="mb-0"><?= number_format($total ) ?>₫</p>
+              <p class="mb-0" id="cart-total"><?= number_format($total ) ?>₫</p>
             </div>
             <div class="d-flex justify-content-between">
               <h5 class="mb-0 me-4">Phí vận chuyển:</h5>
@@ -122,7 +124,7 @@
           </div>
           <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
             <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
-            <p class="mb-0 pe-4"><?= number_format($total ) ?>₫</p>
+            <p class="mb-0 pe-4" id="cart-total-final" ><?= number_format($total ) ?>₫</p>
           </div>
           <!-- Chưa viết CHUYỂN TRANG SANG THANH TOÁN -->
           <button 

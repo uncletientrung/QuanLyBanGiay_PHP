@@ -87,8 +87,12 @@
   <script src="<?= ROOT_URL ?>public/lib/owlcarousel/owl.carousel.min.js"></script>
 
   <!-- Template Javascript -->
+  <script>
+    const ROOT_URL = "<?= ROOT_URL ?>";
+  </script>
   <script src="<?= ROOT_URL ?>public/js/main.js"></script>
   <script src="<?= ROOT_URL ?>public/js/cart.js"></script>
 
   </body>
-</html>
+
+  </html>

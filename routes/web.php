@@ -23,6 +23,12 @@ if ($uri == 'cart') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if ($uri == 'cart/update') {
+    require APP_PATH_DIR . 'controllers/GioHangController.php';
+    $controller = new GioHangController($conn);
+    $controller->updateQuantity();
+    exit;
+}
 if ($uri == 'checkout') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'checkout.php';
