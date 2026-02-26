@@ -22,14 +22,10 @@ class GioHangController
     public function updateQuantity()
     {
         $user_id = $_SESSION['user-id'] ?? null;
-        if (!$user_id) {
-            echo json_encode(['success' => false]);
-            exit;
-        }
         $masp   = $_POST['masp'] ?? null;
         $action = $_POST['action'] ?? null;
-        $cart = $this->model->getCartsByUserId_Model($user_id);
-        foreach ($cart as $item) {
+        $carts = $this->model->getCartsByUserId_Model($user_id);
+        foreach ($carts as $item) {
             if ($item['masp'] == $masp) {
                 $soluong = (int)$item['soluong'];
                 break;
@@ -45,14 +41,12 @@ class GioHangController
         $gia = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
 
         // Tính lại tổng giỏ hàng
-        $carts = $this->model->getCartsByUserId_Model($user_id);
         $tong = 0;
         foreach ($carts as $c) {
             $spCart = $this->SanPhamModel->getSpById($c['masp']);
             $giaCart = $spCart['gianhap'] + ($spCart['gianhap'] * $spCart['tyleloinhuan'] / 100);
             $tong += $giaCart * $c['soluong'];
         }
-
         echo json_encode([
             'success'      => true,
             'soluong_moi'  => $soluong,
@@ -60,13 +54,32 @@ class GioHangController
             'tonggiohang'  => number_format($tong) . '₫'
         ]);
     }
+    public function deleteCartItem()
+    {
+        $user_id = $_SESSION['user-id'] ?? NULL;
+        $masp = $_POST['masp'] ?? NULL;
+        if (!$user_id || !$masp) {
+            echo json_encode(['success' => false]);
+            exit;
+        }
+        $this->model->deleteItem_Model($user_id, $masp);
+        $carts = $this->model->getCartsByUserId_Model($user_id);
+        $tong = 0;
+        foreach ($carts as $c) {
+            $sp = $this->SanPhamModel->getSpById($c['masp']);
+            $gia = $sp['gianhap'] * (1 + $sp['tyleloinhuan'] / 100);
+            $tong += $gia * $c['soluong'];
+        }
+        echo json_encode([
+            'success'     => true,
+            'masp'        => $masp,
+            'tonggiohang' => number_format($tong) . '₫',
+            'empty'       => true
+        ]);
+    }
     public function showCarts()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;
-        if (!$user_id || $user_id == NULL) {
-            header('location:' . ROOT_URL . 'account/login');
-            exit();
-        }
         $carts = $this->model->getCartsByUserId_Model($user_id); // list sản phẩm trong giỏ
         $total = 0;
         foreach ($carts as &$item) { // Tham chiếu

@@ -2,6 +2,13 @@
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // chỉ trả về vd /QuanLyBanGiay_Php/products
 $uri = str_replace(APP_PATH, '', $uri);
+function requireLogin()
+{
+    if (empty($_SESSION['user-id'])) {
+        header('location:' . ROOT_URL . 'account/login');
+        exit;
+    }
+}
 
 if ($uri == '' || $uri == '/' || $uri == 'home') {
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -15,7 +22,9 @@ if ($uri == 'products') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+// Giỏ hàng
 if ($uri == 'cart') {
+    requireLogin();
     require VIEW_PATH_DIR . 'partials/header.php';
     require APP_PATH_DIR . 'controllers/GioHangController.php';
     $controller = new GioHangController($conn);
@@ -24,11 +33,20 @@ if ($uri == 'cart') {
     exit;
 }
 if ($uri == 'cart/update') {
+    requireLogin();
     require APP_PATH_DIR . 'controllers/GioHangController.php';
     $controller = new GioHangController($conn);
     $controller->updateQuantity();
     exit;
 }
+if ($uri == 'cart/delete') {
+    requireLogin();
+    require APP_PATH_DIR . 'controllers/GioHangController.php';
+    $controller = new GioHangController($conn);
+    $controller->deleteCartItem();
+    exit;
+}
+
 if ($uri == 'checkout') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'checkout.php';

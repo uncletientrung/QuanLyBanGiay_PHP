@@ -28,10 +28,10 @@
               </tr>
             </thead>
             <!-- Danh sách sản phẩm trong giỏ -->
-            <tbody>
+            <tbody id="cart-body">
               <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $item): ?>
-                  <tr>
+                  <tr id="cart-row-<?= $item['masp'] ?>">
                     <th scope="row">
                       <div class="d-flex align-items-center">
                         <img src=<?= $item['path'] ?> class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
@@ -42,7 +42,7 @@
                     </td>
                     <td>
                       <p class="mb-0 mt-4">
-                        <p class="mb-0 mt-4"><?= number_format($item['gia']) ?>₫</p>
+                      <p class="mb-0 mt-4"><?= number_format($item['gia']) ?>₫</p>
                       </p>
                     </td>
                     <!-- Số lượng -->
@@ -50,19 +50,20 @@
                       <div class="input-group quantity mt-4" style="width: 100px;">
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                                  data-masp = "<?= $item['masp'] ?>"
-                          >
+                            data-masp="<?= $item['masp'] ?>">
                             <i class="fa fa-minus"></i>
                           </button>
                         </div>
+
                         <input type="text"
-                                id="quantity-<?= $item['masp'] ?>"
-                                class="form-control form-control-sm text-center border-0" 
-                                value="<?= $item['soluong'] ?>" readonly>
+                          id="quantity-<?= $item['masp'] ?>"
+                          class="form-control form-control-sm text-center border-0"
+                          value="<?= $item['soluong'] ?>"
+                          readonly>
+
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                                  data-masp = "<?= $item['masp'] ?>"
-                          >
+                            data-masp="<?= $item['masp'] ?>">
                             <i class="fa fa-plus"></i>
                           </button>
                         </div>
@@ -74,8 +75,11 @@
                         <?= number_format($item['gia'] * $item['soluong']) ?>₫
                       </p>
                     </td>
+
+                    <!-- Thao tác -->
                     <td>
-                      <button class="btn btn-md rounded-circle bg-light border mt-4">
+                      <button class="btn btn-md rounded-circle bg-light border mt-4 btn-cart-delete"
+                              data-masp="<?= $item['masp'] ?>">
                         <i class="fa fa-times text-danger"></i>
                       </button>
                     </td>
@@ -113,23 +117,23 @@
             <h1 class="display-6 mb-4">Tổng giỏ hàng</h1>
             <div class="d-flex justify-content-between mb-4">
               <h5 class="mb-0 me-4">Tổng tạm tính:</h5>
-              <p class="mb-0" id="cart-total"><?= number_format($total ) ?>₫</p>
+              <p class="mb-0" id="cart-total"><?= number_format($total) ?>₫</p>
             </div>
             <div class="d-flex justify-content-between">
               <h5 class="mb-0 me-4">Phí vận chuyển:</h5>
               <div class="">
-                <p class="mb-0">Miễn phí vận chuyển</p>
+                <p class="mb-0">Free</p>
               </div>
             </div>
           </div>
           <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
             <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
-            <p class="mb-0 pe-4" id="cart-total-final" ><?= number_format($total ) ?>₫</p>
+            <p class="mb-0 pe-4" id="cart-total-final"><?= number_format($total) ?>₫</p>
           </div>
           <!-- Chưa viết CHUYỂN TRANG SANG THANH TOÁN -->
-          <button 
-          class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" 
-          type="button">
+          <button
+            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+            type="button">
             Tiến hành thanh toán
           </button>
         </div>
