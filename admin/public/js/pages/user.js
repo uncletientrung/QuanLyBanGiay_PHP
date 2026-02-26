@@ -132,7 +132,11 @@ Dashmix.onLoad(() =>
                         data: 'makh',
                         className: 'text-center',
                         type: 'num',
-                        render: function (data) {
+                        render: function (data, type) {
+                            if (type === 'sort' || type === 'type') {
+                                return parseInt(data);
+                            }
+
                             return `
                                 <a class="fw-semibold">
                                     <strong>KH-${data}</strong>
