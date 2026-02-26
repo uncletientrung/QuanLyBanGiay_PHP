@@ -131,11 +131,11 @@
             <p class="mb-0 pe-4" id="cart-total-final"><?= number_format($total) ?>₫</p>
           </div>
           <!-- Chưa viết CHUYỂN TRANG SANG THANH TOÁN -->
-          <button
+          <a
             class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-            type="button">
+            href="<?= APP_PATH . "chackout" ?>">
             Tiến hành thanh toán
-          </button>
+          </a>
         </div>
       </div>
     </div>
