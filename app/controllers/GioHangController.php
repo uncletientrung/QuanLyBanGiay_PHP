@@ -77,6 +77,11 @@ class GioHangController
             'empty'       => true
         ]);
     }
+    public function countCartItem()
+    {
+        $user_id = $_SESSION['user-id'] ?? NULL;
+        return $this->model->countCartItem_Model($user_id);
+    }
     public function showCarts()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;

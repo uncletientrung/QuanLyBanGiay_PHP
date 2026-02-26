@@ -9,6 +9,13 @@ function requireLogin()
         exit;
     }
 }
+function checkCart($conn)
+{
+    requireLogin();
+    require_once APP_PATH_DIR . 'controllers/GioHangController.php';
+    $cartController = new GioHangController($conn);
+    return $cartController->countCartItem() > 0;
+}
 
 if ($uri == '' || $uri == '/' || $uri == 'home') {
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -49,7 +56,10 @@ if ($uri == 'cart/delete') {
 // Giỏ hàng END
 // Cổng thanh toán START
 if ($uri == 'chackout') {
-    requireLogin();
+    if (!checkCart($conn)) {
+        header('location:' . ROOT_URL . 'cart');
+        exit;
+    }
     require VIEW_PATH_DIR . 'partials/header.php';
     require APP_PATH_DIR . 'controllers/ChackoutController.php';
     $chackoutController = new ChackoutController($conn);

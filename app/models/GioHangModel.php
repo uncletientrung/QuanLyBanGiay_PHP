@@ -24,4 +24,11 @@ class GioHangModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$makh, $masp]);
     }
+    public function countCartItem_Model($user_id){
+        $sql = "SELECT COUNT(*) as total FROM giohang WHERE makh =?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$user_id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'];
+    }
 }
