@@ -88,6 +88,7 @@
 
   <!-- Template Javascript -->
   <script src="<?= ROOT_URL ?>public/js/main.js"></script>
+  <script src="<?= ROOT_URL ?>public/js/cart.js"></script>
 
   </body>
 </html>

@@ -19,6 +19,34 @@ class GioHangController
     {
         return $this->model->getCartsByUserId_Model($user_id);
     }
+    public function updateQuantity()
+    {
+        $user_id = $_SESSION['user-id'] ?? null;
+        if (!$user_id) {
+            echo json_encode(['success' => false]);
+            exit;
+        }
+        $masp    = $_POST['masp'] ?? null;
+        $action  = $_POST['action'] ?? null;
+        $soluong = (int)($_POST['soluong'] ?? 0);
+        switch ($action) {
+            case 'minus':
+                if($soluong >=2) $soluong--;
+                break;
+            case 'plus':
+                $soluong++;
+                break;
+            case 'delete':
+                $this->model->deleteItem_Model($user_id, $masp);
+                echo json_encode(['success' => true]);
+                exit;
+            default:
+                echo json_encode(['success' => false]);
+                exit;
+        }
+        $this->model->updateQuantity_Model($user_id, $masp, $soluong);
+        echo json_encode(['success' => true]);
+    }
     public function showCarts()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;

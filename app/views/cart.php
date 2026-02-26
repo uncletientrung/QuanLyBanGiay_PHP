@@ -45,22 +45,30 @@
                         <p class="mb-0 mt-4"><?= number_format($item['gia']) ?>₫</p>
                       </p>
                     </td>
+                    <!-- Số lượng -->
                     <td>
                       <div class="input-group quantity mt-4" style="width: 100px;">
                         <div class="input-group-btn">
-                          <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                          <button class="btn btn-sm btn-minus rounded-circle bg-light border"
+                                  data-masp = "<?= $item['masp'] ?>"
+                                  data-soluong ="<?= $item['soluong'] ?>"
+                          >
                             <i class="fa fa-minus"></i>
                           </button>
                         </div>
                         <input type="text" class="form-control form-control-sm text-center border-0" 
                           value="<?= $item['soluong'] ?>">
                         <div class="input-group-btn">
-                          <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                          <button class="btn btn-sm btn-plus rounded-circle bg-light border"
+                                  data-masp = "<?= $item['masp'] ?>"
+                                  data-soluong ="<?= $item['soluong'] ?>"
+                          >
                             <i class="fa fa-plus"></i>
                           </button>
                         </div>
                       </div>
                     </td>
+
                     <td>
                       <p class="mb-0 mt-4"><?= number_format($item['gia'] * $item['soluong']) ?>₫</p>
                     </td>
@@ -116,7 +124,10 @@
             <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
             <p class="mb-0 pe-4"><?= number_format($total ) ?>₫</p>
           </div>
-          <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">
+          <!-- Chưa viết CHUYỂN TRANG SANG THANH TOÁN -->
+          <button 
+          class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" 
+          type="button">
             Tiến hành thanh toán
           </button>
         </div>
