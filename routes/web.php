@@ -22,7 +22,7 @@ if ($uri == 'products') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-// Giỏ hàng
+// Giỏ hàng START
 if ($uri == 'cart') {
     requireLogin();
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -46,13 +46,18 @@ if ($uri == 'cart/delete') {
     $controller->deleteCartItem();
     exit;
 }
-
-if ($uri == 'checkout') {
+// Giỏ hàng END
+// Cổng thanh toán START
+if ($uri == 'chackout') {
+    requireLogin();
     require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'checkout.php';
+    require APP_PATH_DIR . 'controllers/ChackoutController.php';
+    $chackoutController = new ChackoutController($conn);
+    $chackoutController->showChackout();
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+// Cổng thanh toán END
 if ($uri == 'contact') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'contact.php';
@@ -109,12 +114,7 @@ if ($uri == 'contact-us') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
-if ($uri == 'chackout') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'chackout.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
-    exit;
-}
+
 if ($uri == 'privacy-policy') {
     require VIEW_PATH_DIR . 'partials/header.php';
     require VIEW_PATH_DIR . 'privacy-policy.php';
