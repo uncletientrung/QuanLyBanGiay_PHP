@@ -30,6 +30,15 @@
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
 </head>
 
+<?php
+$cartCount = 0;
+if (!empty($_SESSION['user-id'])) {
+  require_once APP_PATH_DIR . 'controllers/GioHangController.php';
+  $cartController = new GioHangController($conn);
+  $cartCount = $cartController->countCartItem();
+}
+?>
+
 <body>
   <!-- Load trang -->
   <div id="spinner"
@@ -87,9 +96,13 @@
             <!-- Button cart -->
             <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
-              <span
-                class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+              <?php if (!empty($_SESSION['user-id'])): ?>
+                <span
+                  class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                  style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                  <?= $cartCount ?>
+                </span>
+              <?php endif; ?>
             </a>
             <!-- Button user -->
             <a href="<?= ROOT_URL ?>account" class="my-auto">
