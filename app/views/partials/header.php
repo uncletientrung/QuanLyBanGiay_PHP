@@ -30,15 +30,6 @@
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
 </head>
 
-<?php
-$cartCount = 0;
-if (!empty($_SESSION['user-id'])) {
-  require_once APP_PATH_DIR . 'controllers/GioHangController.php';
-  $cartController = new GioHangController($conn);
-  $cartCount = $cartController->countCartItem();
-}
-?>
-
 <body>
   <!-- Load trang -->
   <div id="spinner"
@@ -96,7 +87,7 @@ if (!empty($_SESSION['user-id'])) {
             <!-- Button cart -->
             <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
-              <?php if (!empty($_SESSION['user-id'])): ?>
+              <?php if($isLogin): ?>
                 <span
                   class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                   style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
@@ -105,7 +96,7 @@ if (!empty($_SESSION['user-id'])) {
               <?php endif; ?>
             </a>
             <!-- Button user -->
-            <a href="<?= ROOT_URL ?>account" class="my-auto">
+            <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto">
               <i class="fas fa-user fa-2x"></i>
             </a>
           </div>

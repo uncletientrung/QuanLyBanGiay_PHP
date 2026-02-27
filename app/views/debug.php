@@ -21,4 +21,4 @@ $GioHangController = new GioHangController($conn);
 //     print_r($sp);
 //     echo "</pre>";
 // }
-print_r($GioHangController->countCartItem());
+print_r($GioHangController->showCarts());

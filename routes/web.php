@@ -1,7 +1,12 @@
 <?php
+require_once APP_PATH_DIR . 'controllers/GioHangController.php';
+require_once APP_PATH_DIR . 'controllers/ChackoutController.php';
+require_once APP_PATH_DIR . 'controllers/HeaderController.php';
+require_once APP_PATH_DIR . 'controllers/AccountController.php';
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // chỉ trả về vd /QuanLyBanGiay_Php/products
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
+
 function requireLogin()
 {
     if (empty($_SESSION['user-id'])) {
@@ -16,24 +21,34 @@ function checkCart($conn)
     $cartController = new GioHangController($conn);
     return $cartController->countCartItem() > 0;
 }
-
-if ($uri == '' || $uri == '/' || $uri == 'home') {
+function render($view, $conn)
+{
+    $headerData = prepareHeader($conn);
+    extract($headerData); // Tách array thành các biến
     require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'home.php';
+    require VIEW_PATH_DIR . $view . '.php';
     require VIEW_PATH_DIR . 'partials/footer.php';
+}
+function prepareHeader($conn) // Chuẩn bị các dữ liệu cho Header
+{
+    $headerController = new HeaderController($conn);
+    return $headerController->getHeaderData();
+}
+if ($uri == '' || $uri == '/' || $uri == 'home') {
+    render('home', $conn);
     exit;
 }
 if ($uri == 'products') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'products.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('products', $conn);
     exit;
 }
+
 // Giỏ hàng START
 if ($uri == 'cart') {
     requireLogin();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
-    require APP_PATH_DIR . 'controllers/GioHangController.php';
     $controller = new GioHangController($conn);
     $controller->showCarts();
     require VIEW_PATH_DIR . 'partials/footer.php';
@@ -41,96 +56,104 @@ if ($uri == 'cart') {
 }
 if ($uri == 'cart/update') {
     requireLogin();
-    require APP_PATH_DIR . 'controllers/GioHangController.php';
+    $headerData = prepareHeader($conn);
+    extract($headerData);
     $controller = new GioHangController($conn);
     $controller->updateQuantity();
     exit;
 }
 if ($uri == 'cart/delete') {
     requireLogin();
-    require APP_PATH_DIR . 'controllers/GioHangController.php';
+    $headerData = prepareHeader($conn);
+    extract($headerData);
     $controller = new GioHangController($conn);
     $controller->deleteCartItem();
     exit;
 }
 // Giỏ hàng END
+
 // Cổng thanh toán START
 if ($uri == 'chackout') {
     if (!checkCart($conn)) {
         header('location:' . ROOT_URL . 'cart');
         exit;
     }
+    $headerData = prepareHeader($conn);
+    extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
-    require APP_PATH_DIR . 'controllers/ChackoutController.php';
     $chackoutController = new ChackoutController($conn);
     $chackoutController->showChackout();
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 // Cổng thanh toán END
+
 if ($uri == 'contact') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'contact.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('contact', $conn);
     exit;
 }
-if ($uri == 'product-detail') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'product-detail.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+if ($uri == 'product-detail') { 
+    render('product-detail', $conn);
     exit;
 }
+// Account START
 if ($uri == 'account') {
+    requireLogin();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'account.php';
+    $accountController = new AccountController($conn);
+    $accountController->showAccountPage();
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 if ($uri == 'account/login') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'auth.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('auth', $conn);
     exit;
 }
+if ($uri == 'account/logout') {
+    $accountController = new AccountController($conn);
+    $accountController->logout();
+    exit;
+}
+// Account END
+
 // Chỗ debug
 if ($uri == 'debug') {
     require VIEW_PATH_DIR . 'debug.php';
     exit;
 }
+
 if ($uri == 'test') {
     require VIEW_PATH_DIR . 'test.php';
     exit;
 }
+
 // ===========================================
+
 if ($uri == 'login') {
     require VIEW_PATH_DIR . 'login.php';
     exit;
 }
+
 if ($uri == 'return-policy') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'return-policy.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('return-policy', $conn);
     exit;
 }
+
 if ($uri == 'about-us') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'about-us.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('about-us', $conn);
     exit;
 }
+
 if ($uri == 'contact-us') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'contact.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('contact', $conn);
     exit;
 }
 
 if ($uri == 'privacy-policy') {
-    require VIEW_PATH_DIR . 'partials/header.php';
-    require VIEW_PATH_DIR . 'privacy-policy.php';
-    require VIEW_PATH_DIR . 'partials/footer.php';
+    render('privacy-policy', $conn);
     exit;
 }
-require VIEW_PATH_DIR . 'partials/header.php';
-require VIEW_PATH_DIR . '404.php';
-require VIEW_PATH_DIR . 'partials/footer.php';
+
+render('404', $conn);

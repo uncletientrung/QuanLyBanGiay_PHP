@@ -1,4 +1,7 @@
-<!-- Single Page Header start -->
+<!-- Trang ẩn Start -->
+<!-- <div class="container-fluid py-4">
+  <h1 class="text-center text-white display-6"></h1>
+</div> -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Tài khoản của tôi</h1>
   <ol class="breadcrumb justify-content-center mb-0">
@@ -6,7 +9,7 @@
     <li class="breadcrumb-item active text-white">Tài khoản của tôi</li>
   </ol>
 </div>
-<!-- Single Page Header End -->
+<!-- Trang ẩn End -->
 
 <div class="container-fluid py-5">
   <div class="container py-4">
@@ -16,7 +19,7 @@
           <h3 class="fw-bold" style="color: var(--bs-primary);">
             Tài khoản của tôi - Bảng điều khiển
           </h3>
-          <a href="<?= ROOT_URL ?>logout" class="btn border-secondary fw-bold px-4 py-2">
+          <a class="btn border-secondary fw-bold px-4 py-2" id="account-btn-logout">
             ĐĂNG XUẤT
           </a>
         </div>
@@ -35,31 +38,42 @@
               <div class="row g-3">
                 <div class="col-4 fw-bold">Họ và Tên</div>
                 <div class="col-8">
-                  <input type="text" class="form-control" value="Độ mixi" readonly>
+                  <input type="text" class="form-control" value="<?= $user['hoten'] ?>" readonly>
                 </div>
 
                 <div class="col-4 fw-bold">Email</div>
                 <div class="col-8">
-                  <input type="email" class="form-control" value="mixigaming@gmail.com" readonly>
+                  <input type="email" class="form-control" value="<?= $user['email'] ?>" readonly>
                 </div>
 
                 <div class="col-4 fw-bold">Số điện thoại</div>
                 <div class="col-8">
-                  <input type="tel" class="form-control" value="84352447642" readonly>
+                  <input type="tel" class="form-control" value="<?= $user['sdt'] ?>" readonly>
                 </div>
 
                 <div class="col-4 fw-bold">Giới tính</div>
                 <div class="col-8">
                   <div class="d-flex gap-4">
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="male" value="Nam" checked readonly>
+                      <input class="form-check-input" type="radio" name="gender" id="male"
+                        value="Nam" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> readonly>
                       <label class="form-check-label" for="male">Nam</label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gender" id="female" value="Nữ" readonly>
+                      <input class="form-check-input" type="radio" name="gender" id="female"
+                        value="Nữ" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> readonly>
                       <label class="form-check-label" for="female">Nữ</label>
                     </div>
                   </div>
+                </div>
+
+                <div class="col-4 fw-bold">Địa chỉ</div>
+                <div class="col-8">
+                  <?php if($user['diachi'] == NULL): ?>
+                    <p class="text-muted mb-4">Bạn chưa có địa chỉ nào được lưu.</p>
+                  <?php else: ?>
+                    <input type="text" class="form-control" value="<?= $user['diachi'] ?>" readonly>
+                  <?php endif ?>
                 </div>
               </div>
             </div>
@@ -78,21 +92,9 @@
               <div class="row g-3">
                 <div class="col-4 fw-bold">Mật khẩu</div>
                 <div class="col-8">
-                  <input type="password" class="form-control" value="•••••••••" readonly>
+                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>" readonly>
                 </div>
               </div>
-            </div>
-
-            <div class="border rounded shadow-sm bg-white p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
-                <h5 class="fw-bold mb-0" style="color: var(--bs-primary);">
-                  <i class="fas fa-map-marker-alt me-2"></i> SỔ ĐỊA CHỈ
-                </h5>
-              </div>
-              <p class="text-muted mb-4">Bạn chưa có địa chỉ nào được lưu.</p>
-              <button class="btn btn-dark w-100 py-3 fw-bold">
-                <i class="fas fa-plus me-2"></i> THÊM ĐỊA CHỈ MỚI
-              </button>
             </div>
           </div>
 
@@ -110,7 +112,7 @@
               <div class="row g-3">
                 <div class="col-5 fw-bold">Mật khẩu</div>
                 <div class="col-7">
-                  <input type="password" class="form-control" value="•••••••••" readonly>
+                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>" readonly>
                 </div>
               </div>
             </div>
