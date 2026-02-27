@@ -58,13 +58,11 @@ Dashmix.onLoad(() =>
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
                 sWrapper: "dataTables_wrapper dt-bootstrap5",
                 sFilterInput: "form-control",
-                sLengthSelect: "form-select",
             });
 
             // Cấu hình ngôn ngữ mặc định
             jQuery.extend(!0, jQuery.fn.dataTable.defaults, {
                 language: {
-                    lengthMenu: "_MENU_",
                     search: `
                         <div class="input-group flex-nowrap">
                             <span class="input-group-text bg-body-light"><i class="fa fa-search"></i></span>
@@ -80,6 +78,8 @@ Dashmix.onLoad(() =>
                         last: '<i class="fa fa-angle-double-right"></i>',
                     },
                 },
+                pageLength: 10,
+                lengthChange: false
             });
 
             // Cấu hình Buttons mặc định
@@ -93,14 +93,10 @@ Dashmix.onLoad(() =>
 
             // Khởi tạo các loại Table khác nhau
             jQuery(".js-dataTable-full").DataTable({
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
             });
 
             jQuery(".js-dataTable-buttons").DataTable({
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 buttons: ["copy", "csv", "excel", "pdf", "print"],
                 dom: "<'row'<'col-sm-12'<'text-center bg-body-light py-2 mb-2'B>>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
@@ -116,11 +112,9 @@ Dashmix.onLoad(() =>
 
             const userTable = jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 responsive: !0,
-                dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                dom: "<'row'<'col-sm-12 col-md-6'<'#status-filter-place'>><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './user/getData',
                     dataSrc: ''
@@ -192,6 +186,20 @@ Dashmix.onLoad(() =>
                         }
                     }
                 ]
+            });
+
+            // Lọc trạng thái
+            $("#status-filter-place").html(`
+                <select class="form-select" id="filter-status" style="width: 200px;">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="Hoạt động">Hoạt động</option>
+                    <option value="Bị khoá">Bị khoá</option>
+                </select>
+            `);
+
+            $('#filter-status').on('change', function () {
+                let val = $(this).val();
+                userTable.column(5).search(val ? '^' + val + '$' : '', true, false).draw();
             });
 
             // Model Thêm

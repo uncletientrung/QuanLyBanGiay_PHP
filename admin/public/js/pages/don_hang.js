@@ -9,13 +9,11 @@ Dashmix.onLoad(() =>
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
                 sWrapper: "dataTables_wrapper dt-bootstrap5",
                 sFilterInput: "form-control",
-                sLengthSelect: "form-select",
             });
 
             // Cấu hình ngôn ngữ mặc định
             jQuery.extend(!0, jQuery.fn.dataTable.defaults, {
                 language: {
-                    lengthMenu: "_MENU_",
                     search: `_INPUT_`,
                     searchPlaceholder: "Tìm kiếm..",
                     info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
@@ -26,6 +24,8 @@ Dashmix.onLoad(() =>
                         last: '<i class="fa fa-angle-double-right"></i>',
                     },
                 },
+                pageLength: 10,
+                lengthChange: false
             });
 
             // Cấu hình Buttons mặc định
@@ -39,22 +39,16 @@ Dashmix.onLoad(() =>
 
             // Khởi tạo các loại Table khác nhau
             jQuery(".js-dataTable-full").DataTable({
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
             });
 
             jQuery(".js-dataTable-buttons").DataTable({
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 buttons: ["copy", "csv", "excel", "pdf", "print"],
                 dom: "<'row'<'col-sm-12'<'text-center bg-body-light py-2 mb-2'B>>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
             });
 
             jQuery(".js-dataTable-simple").DataTable({
-                pageLength: 5,
-                lengthMenu: !1,
                 searching: !1,
                 autoWidth: !1,
                 dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-6'i><'col-sm-6'p>>",
@@ -89,7 +83,7 @@ Dashmix.onLoad(() =>
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 responsive: !0,
-                dom: "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-4'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                dom: "<'row'<'col-sm-12 col-md-3'<'#status-filter-place'>><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-3'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './don_hang/getData',
                     dataSrc: ''
@@ -142,13 +136,18 @@ Dashmix.onLoad(() =>
                         data: 'trangthai',
                         className: 'text-center',
                         render: function (data) {
-                            let statusClass = data == 1 ? "bg-success" : "bg-danger";
-                            let statusText = data == 1 ? "Hoàn thành" : "Đã hủy";
-                            return `<span class="badge ${statusClass}">${statusText}</span>`;
+                            let statusMap = {
+                                0: { text: "Chưa xử lý", class: "bg-warning" },
+                                1: { text: "Đã xác nhận", class: "bg-info" },
+                                2: { text: "Đã giao thành công", class: "bg-success" },
+                                3: { text: "Đã hủy", class: "bg-danger" }
+                            };
+                            let status = statusMap[data] || { text: "N/A", class: "bg-secondary" };
+                            return `<span class="badge ${status.class}">${status.text}</span>`;
                         }
                     },
                     {
-                        data: 'makh',
+                        data: 'madh',
                         className: 'text-center',
                         render: function (data) {
                             return `
@@ -164,8 +163,23 @@ Dashmix.onLoad(() =>
                 ]
             });
 
-            jQuery("#date-filter-box").html(dateRangeHtml);
+            // Lọc trạng thái
+            jQuery("#status-filter-place").html(`
+                <select class="form-select" id="filter-status">
+                    <option value="">Tất cả trạng thái</option>
+                    <option value="Chưa xử lý">Chưa xử lý</option>
+                    <option value="Đã xác nhận">Đã xác nhận</option>
+                    <option value="Đã giao thành công">Đã giao thành công</option>
+                    <option value="Đã hủy">Đã hủy</option>
+                </select>
+            `);
+            $('#filter-status').on('change', function () {
+                let val = $(this).val();
+                userTable.column(6).search(val ? '^' + val + '$' : '', true, false).draw();
+            });
 
+            // Lọc khoảng thời gian
+            jQuery("#date-filter-box").html(dateRangeHtml);
             const baseFpConfig = {
                 enableTime: true,
                 time_24hr: true,
@@ -183,7 +197,6 @@ Dashmix.onLoad(() =>
                     userTable.draw();
                 }
             });
-
             const toPicker = flatpickr("#filter-to", {
                 ...baseFpConfig,
                 onClose: function (selectedDates, dateStr) {
@@ -230,6 +243,7 @@ Dashmix.onLoad(() =>
                 }
                 return false;
             });
+            // END lọc khoảng thời gian
         }
 
         static init() {
