@@ -35,6 +35,11 @@ if (isset($Plugin["slick"]) && $Plugin["slick"] == 1) {
     $dm->get_js('js/plugins/slick-carousel/slick.min.js');
 }
 
+// Plugin: Flatpickr
+if (isset($Plugin["flatpickr"]) && $Plugin["flatpickr"] == 1) {
+    $dm->get_js('js/plugins/flatpickr/flatpickr.min.js');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');

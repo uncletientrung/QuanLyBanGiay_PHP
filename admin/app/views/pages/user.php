@@ -15,25 +15,11 @@
                     <button type="button" class="btn btn-hero btn-primary" data-bs-toggle="modal" data-bs-target="#modal-user" id="btn-add-modal">
                         Thêm mới <i class="fa fa-plus ms-1"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-ecom-filters">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                            New
-                            <span class="badge bg-success rounded-pill">260</span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                            Out of Stock
-                            <span class="badge bg-danger rounded-pill">63</span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                            All
-                            <span class="badge bg-black-50 rounded-pill">36k</span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="block-content block-content-full">
-            <!-- All Products Table -->
+            <!-- All Users Table -->
             <div class="table-responsive">
                 <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive">
                     <thead>
@@ -55,7 +41,7 @@
                     <!-- END Data Table -->
 
                 </table>
-                <!-- END All Products Table -->
+                <!-- END All Users Table -->
             </div>
 
             <!-- Modal -->
@@ -126,6 +112,6 @@
             </div>
             <!-- END Modal -->
         </div>
-        <!-- END All Products -->
+        <!-- END All Users -->
     </div>
     <!-- END Page Content -->
