@@ -16,12 +16,7 @@ Dashmix.onLoad(() =>
             jQuery.extend(!0, jQuery.fn.dataTable.defaults, {
                 language: {
                     lengthMenu: "_MENU_",
-                    search: `
-                        <div class="input-group flex-nowrap">
-                            <span class="input-group-text bg-body-light"><i class="fa fa-search"></i></span>
-                            _INPUT_
-                        </div>
-                    `,
+                    search: `_INPUT_`,
                     searchPlaceholder: "Tìm kiếm..",
                     info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
                     paginate: {
@@ -55,13 +50,6 @@ Dashmix.onLoad(() =>
                 autoWidth: !1,
                 buttons: ["copy", "csv", "excel", "pdf", "print"],
                 dom: "<'row'<'col-sm-12'<'text-center bg-body-light py-2 mb-2'B>>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            });
-
-            jQuery(".js-dataTable-full-pagination").DataTable({
-                pagingType: "full_numbers",
-                pageLength: 5,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
-                autoWidth: !1,
             });
 
             jQuery(".js-dataTable-simple").DataTable({
