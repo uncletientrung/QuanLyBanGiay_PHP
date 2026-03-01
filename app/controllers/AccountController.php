@@ -14,6 +14,10 @@ class AccountController
             header('location:'. APP_PATH);
         }
     }
+    public function updateProfile(){
+        $user_id = $_SESSION['user-id'] ?? NULL;
+        $user= $this->UserModel->getById($user_id);
+    }
     public function showAccountPage()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;

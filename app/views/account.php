@@ -40,17 +40,17 @@
                 <div class="row g-3">
                   <div class="col-4 fw-bold">Họ và Tên</div>
                   <div class="col-8">
-                    <input type="text" class="form-control" value="<?= $user['hoten'] ?>" readonly>
+                    <input type="text" name='hoten' class="form-control" value="<?= $user['hoten'] ?>" readonly>
                   </div>
 
                   <div class="col-4 fw-bold">Email</div>
                   <div class="col-8">
-                    <input type="email" class="form-control" value="<?= $user['email'] ?>" readonly>
+                    <input type="email" name= 'email' class="form-control" value="<?= $user['email'] ?>" readonly>
                   </div>
 
                   <div class="col-4 fw-bold">Số điện thoại</div>
                   <div class="col-8">
-                    <input type="tel" class="form-control" value="<?= $user['sdt'] ?>" readonly>
+                    <input type="tel" name='sdt' class="form-control" value="<?= $user['sdt'] ?>" readonly>
                   </div>
 
                   <div class="col-4 fw-bold">Giới tính</div>
@@ -74,7 +74,7 @@
                     <?php if ($user['diachi'] == NULL): ?>
                       <p class="text-muted mb-4">Bạn chưa có địa chỉ nào được lưu.</p>
                     <?php else: ?>
-                      <input type="text" class="form-control" value="<?= $user['diachi'] ?>" readonly>
+                      <input type="text" name = 'diachi' class="form-control" value="<?= $user['diachi'] ?>" readonly>
                     <?php endif ?>
                   </div>
                 </div>

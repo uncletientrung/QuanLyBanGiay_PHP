@@ -53,3 +53,6 @@ btnEditPasswordMobile.addEventListener("click", function (e) {
         btnEditPasswordMobile.innerHTML = 'CHỈNH SỬA <i class="fas fa-save ms-1"></i>';
     }
 })
+
+// Chỉnh sửa profile
+
