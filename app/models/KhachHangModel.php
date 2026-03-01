@@ -45,7 +45,7 @@ class KhachHangModel
                 WHERE makh = ? ";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$user_data['hoten'], $user_data['email'], $user_data['sdt'],
-                        $user_data['sdt'], $user_data['diachi'], $user_id]);
+                        $user_data['gioitinh'], $user_data['diachi'], $user_id]);
         return $stmt->rowCount();
     }
 

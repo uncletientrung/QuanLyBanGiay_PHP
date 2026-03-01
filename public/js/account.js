@@ -4,9 +4,10 @@ btnLogout.addEventListener("click", function () {
     window.location.href = ROOT_URL + "account/logout";
 })
 
-// Xóa readonly trong profile
+// Chỉnh sửa profile
 const btnEditProfile = document.getElementById("account-btn-edit-profile");
 let isEditing = false;
+const formProfile = document.getElementById("profile-form");
 btnEditProfile.addEventListener("click", function (e) {
     e.preventDefault();
     isEditing = !isEditing;
@@ -17,10 +18,12 @@ btnEditProfile.addEventListener("click", function (e) {
         });
         btnEditProfile.innerHTML = 'LƯU <i class="fas fa-save ms-1"></i>';
     } else {
+        formProfile.submit();
         ListInput.forEach(input => {
             input.setAttribute("readonly", "true");
         });
         btnEditProfile.innerHTML = 'CHỈNH SỬA <i class="fas fa-save ms-1"></i>';
+
     }
 })
 // Xóa readonly trong password-desktop
@@ -54,5 +57,5 @@ btnEditPasswordMobile.addEventListener("click", function (e) {
     }
 })
 
-// Chỉnh sửa profile
+
 

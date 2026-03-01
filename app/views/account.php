@@ -57,13 +57,13 @@
                   <div class="col-8">
                     <div class="d-flex gap-4">
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="male"
-                          value="Nam" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> readonly>
+                        <input class="form-check-input" type="radio" name="gioitinh" id="male"
+                          value="1" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> readonly>
                         <label class="form-check-label" for="male">Nam</label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="female"
-                          value="Nữ" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> readonly>
+                        <input class="form-check-input" type="radio" name="gioitinh" id="female"
+                          value="0" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> readonly>
                         <label class="form-check-label" for="female">Nữ</label>
                       </div>
                     </div>

@@ -7,16 +7,24 @@ class AccountController
     {
         $this->UserModel = new KhachHangModel($conn);
     }
-    public function logout(){
+    public function logout()
+    {
         $user_id = $_SESSION['user-id'] ?? NULL;
-        if($user_id != NULL){
+        if ($user_id != NULL) {
             unset($_SESSION['user-id']);
-            header('location:'. APP_PATH);
+            header('location:' . APP_PATH);
         }
     }
-    public function updateProfile(){
+    public function updateProfile()
+    {
         $user_id = $_SESSION['user-id'] ?? NULL;
-        $user= $this->UserModel->getById($user_id);
+        $user_data = [];
+        $user_data['hoten'] = $_POST['hoten'] ?? NULL;
+        $user_data['email'] = $_POST['email'] ?? NULL;
+        $user_data['sdt'] = $_POST['sdt'] ?? NULL;
+        $user_data['gioitinh'] = $_POST['gioitinh'] ?? NULL;
+        $user_data['diachi'] = $_POST['diachi'] ?? NULL;
+        return $user_data;
     }
     public function showAccountPage()
     {

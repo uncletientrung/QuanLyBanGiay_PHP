@@ -3,9 +3,12 @@ require_once APP_PATH_DIR . 'controllers/GioHangController.php';
 require_once APP_PATH_DIR . 'controllers/ChackoutController.php';
 require_once APP_PATH_DIR . 'controllers/HeaderController.php';
 require_once APP_PATH_DIR . 'controllers/AccountController.php';
+require_once VIEW_PATH_DIR . 'debug.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
+$uri = trim($uri, '/');
+$accountController = new AccountController($conn);
 
 function requireLogin()
 {
@@ -92,7 +95,7 @@ if ($uri == 'contact') {
     render('contact', $conn);
     exit;
 }
-if ($uri == 'product-detail') { 
+if ($uri == 'product-detail') {
     render('product-detail', $conn);
     exit;
 }
@@ -112,9 +115,12 @@ if ($uri == 'account/login') {
     exit;
 }
 if ($uri == 'account/logout') {
-    $accountController = new AccountController($conn);
     $accountController->logout();
     exit;
+}
+if ($uri == 'account/update') {
+    echo "<script>console.log('Da vao account/update');</script>";
+    exit();
 }
 // Account END
 
