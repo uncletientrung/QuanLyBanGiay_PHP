@@ -124,6 +124,11 @@ if ($uri == 'account/update') {
     $accountController->updateProfile();
     exit();
 }
+if ($uri == 'account/update/password') {
+    requireLogin();
+    $accountController->updatePassword();
+    exit();
+}
 // Account END
 
 // Chỗ debug

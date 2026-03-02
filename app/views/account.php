@@ -23,12 +23,19 @@
             ĐĂNG XUẤT
           </a>
         </div>
-        
-        <div class="alert alert-secondary text-center fw-bold text-primary" 
-              role="alert" 
-              id="success-message"
-              style="display: none;">
+
+        <div class="alert alert-success text-center fw-bold text-primary"
+          role="alert"
+          id="success-message"
+          style="display: none;">
           <i class="fas fa-check-circle me-2"></i>Chỉnh sửa thành công!
+        </div>
+
+        <div class="alert alert-secondary text-center fw-bold text-danger"
+          role="alert"
+          id="error-message"
+          style="display: none;">
+          <i class="fas fa-times-circle me-2"></i> Chỉnh sửa thất bại!
         </div>
 
         <div class="row g-4">
@@ -38,10 +45,10 @@
                 <h5 class="fw-bold mb-0" style="color: var(--bs-primary);">
                   <i class="fas fa-user me-2"></i> HỒ SƠ
                 </h5>
-                <button 
-                class="btn border-secondary fw-bold" id="account-btn-edit-profile" 
-                style="color: var(--bs-primary); text-decoration: none;"
-                type="button">
+                <button
+                  class="btn border-secondary fw-bold" id="account-btn-edit-profile"
+                  style="color: var(--bs-primary); text-decoration: none;"
+                  type="button">
                   CHỈNH SỬA <i class="fas fa-edit ms-1"></i>
                 </button>
               </div>
@@ -68,12 +75,12 @@
                     <div class="d-flex gap-4">
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="gioitinh" id="male"
-                          value="1" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> >
+                          value="1" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?>>
                         <label class="form-check-label" for="male">Nam</label>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="gioitinh" id="female"
-                          value="0" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> >
+                          value="0" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?>>
                         <label class="form-check-label" for="female">Nữ</label>
                       </div>
                     </div>
@@ -104,13 +111,66 @@
                 </a>
               </div>
 
-              <div class="row g-3">
-                <div class="col-4 fw-bold">Mật khẩu</div>
-                <div class="col-8">
-                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>"
-                    id="account-input-edit-password-mobile" readonly>
+              <form id="password-form-mobile">
+                <div class="row g-3">
+                  <!-- Mật khẩu cũ -->
+                  <div style="display: flex;">
+                    <div class="col-4 fw-bold">Mật khẩu</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="password"
+                          id="account-input-password-mobile"
+                          value="<?= $user['matkhau'] ?>"
+                          readonly>
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Mật khẩu mới -->
+                  <div style="display: none;" id="mobile-form-password-new">
+                    <div class="col-4 fw-bold">Mật khẩu mới</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="password-new"
+                          id="account-input-passwordNew-mobile">
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Xác nhận mật khẩu -->
+                  <div style="display: none;" id="mobile-form-password-confirm">
+                    <div class="col-4 fw-bold">Xác nhận</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          name="password-confirm"
+                          id="account-input-passwordConfirm-mobile">
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-              </div>
+              </form>
             </div>
           </div>
 
@@ -127,13 +187,61 @@
                   CHỈNH SỬA <i class="fas fa-edit ms-1"></i>
                 </a>
               </div>
-              <div class="row g-3">
-                <div class="col-5 fw-bold">Mật khẩu</div>
-                <div class="col-7">
-                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>"
-                    id="account-input-edit-password-desktop" readonly>
+
+              <form id="password-form-desktop">
+                <div class="row g-3 ">
+                  <div style="display: flex;">
+                    <div class="col-4 fw-bold">Mật khẩu</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          value="<?= $user['matkhau'] ?>"
+                          id="account-input-edit-password-desktop"
+                          name="password"
+                          readonly>
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: none;" id="form-password-new">
+                    <div class="col-4 fw-bold">Mật khẩu mới</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="account-input-edit-passwordNew-desktop"
+                          name="password-new">
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: none;" id="form-password-confirm">
+                    <div class="col-4 fw-bold">Xác nhận mật khẩu</div>
+                    <div class="col-8">
+                      <div class="input-group">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="account-input-edit-passwordConfirm-desktop"
+                          name="password-confirm">
+                        <span class="input-group-text bg-white border-start-0 toggle-password"
+                          style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

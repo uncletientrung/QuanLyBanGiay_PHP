@@ -48,6 +48,14 @@ class KhachHangModel
                         $user_data['gioitinh'], $user_data['diachi'], $user_id]);
         return $stmt->rowCount();
     }
+    public function updatePassword_Model($user_id, $password){
+        $sql = "UPDATE khachhang
+                SET matkhau = ?
+                WHERE makh = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$password, $user_id]);
+        return $stmt->rowCount();
+    }
 
     public function add($data)
     {
