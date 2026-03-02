@@ -24,7 +24,10 @@
           </a>
         </div>
         
-        <div class="d-none alert alert-secondary text-center fw-bold text-primary" role="alert" id="success-message">
+        <div class="alert alert-secondary text-center fw-bold text-primary" 
+              role="alert" 
+              id="success-message"
+              style="display: none;">
           <i class="fas fa-check-circle me-2"></i>Chỉnh sửa thành công!
         </div>
 
@@ -43,7 +46,7 @@
                 </button>
               </div>
 
-              <form id="profile-form" method="POST">
+              <form id="profile-form">
                 <div class="row g-3">
                   <div class="col-4 fw-bold">Họ và Tên</div>
                   <div class="col-8">

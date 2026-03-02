@@ -9,40 +9,39 @@ const btnEditProfile = document.getElementById("account-btn-edit-profile");
 let isEditing = false;
 const formProfile = document.getElementById("profile-form");
 const success_alert = document.getElementById("success-message");
-// btnEditProfile.addEventListener("click", function (e) {
-//     e.preventDefault();
-//     isEditing = !isEditing;
-//     const ListInput = document.querySelectorAll("#profile-form input");
-//     if (isEditing) {
-//         ListInput.forEach(input => {
-//             input.removeAttribute("readonly");
-//         });
-//         btnEditProfile.innerHTML = 'LƯU <i class="fas fa-save ms-1"></i>';
-//         success_alert.style.display = "none";
-//     } else {
-//         const formData = new FormData(formProfile); // Trả về name -> value
-//         fetch(ROOT_URL + "account/update", {
-//             method: "POST",
-//             body: formData
-//         })
-//             .then(res => res.json())
-//             .then(data => {
-//                 // if (data.success) {
-//                 //     ListInput.forEach(input => {
-//                 //         input.setAttribute("readonly", "true");
-//                 //     });
-//                 //     btnEditProfile.innerHTML = 'CHỈNH SỬA <i class="fas fa-save ms-1"></i>';
-//                 //     success_alert.style.display = "flex";
-//                 // } else {
-//                 //     alert(data.message);
-//                 // }
-//                 console.log(data);
-//             })
-//             .catch(error => {
-//                 alert(error);
-//             })
-//     }
-// })
+btnEditProfile.addEventListener("click", function (e) {
+    e.preventDefault();
+    isEditing = !isEditing;
+    const ListInput = document.querySelectorAll("#profile-form input");
+    if (isEditing) {
+        ListInput.forEach(input => {
+            input.removeAttribute("readonly");
+        });
+        btnEditProfile.innerHTML = 'LƯU <i class="fas fa-save ms-1"></i>';
+        success_alert.style.display = "none";
+    } else {
+        const formData = new FormData(formProfile); // Trả về name -> value
+        fetch(ROOT_URL + "account/update", {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    ListInput.forEach(input => {
+                        input.setAttribute("readonly", "true");
+                    });
+                    btnEditProfile.innerHTML = 'CHỈNH SỬA <i class="fas fa-save ms-1"></i>';
+                    success_alert.style.display = "flex";
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert(error);
+            })
+    }
+})
 // Xóa readonly trong password-desktop
 const btnEditPasswordDesktop = document.getElementById("account-btn-edit-password-desktop");
 let isEditingPasswordDesktop = false;
