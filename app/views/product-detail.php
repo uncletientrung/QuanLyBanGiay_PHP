@@ -58,14 +58,14 @@ echo '</pre>';
               <div class="col-2 d-none d-lg-block">
                 <div class="d-flex flex-column gap-2"> 
 
-                <?php foreach($listHinh as $hinh): ?>
+                <?php foreach($listHinh as $index => $hinh): ?>
 
                   <img src="<?= $hinh['path'] ?>" 
-                      class="img-fluid rounded thumb-img active" 
+                      class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>" 
                       onclick="changeImage(this)" 
                       style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
-                  
-                  <?php endforeach?>
+
+                <?php endforeach ?>
                   
                 </div>
               </div>

@@ -50,13 +50,13 @@ $co = $spController->isEmptyFilters($filters);
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
-<!-- 
+
 <?php
 echo '<pre>';
-print_r($filters);
+print_r($_SESSION['user-id']);
 echo '</pre>';
 
-?> -->
+?> 
   <div class="container py-5">
     <h1 class="mb-4">SHOP giày</h1>
     <div class="row g-4">
