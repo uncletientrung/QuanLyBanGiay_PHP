@@ -24,7 +24,16 @@ class AccountController
         $user_data['sdt'] = $_POST['sdt'] ?? NULL;
         $user_data['gioitinh'] = $_POST['gioitinh'] ?? NULL;
         $user_data['diachi'] = $_POST['diachi'] ?? NULL;
-        return $user_data;
+        $rowCount = $this->UserModel->updateProfile_Model($user_id, $user_data);
+        if ($rowCount >= 0) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Cập nhật thất bại'
+            ]);
+        }
+        // return $user_data;
     }
     public function showAccountPage()
     {

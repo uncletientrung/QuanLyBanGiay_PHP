@@ -23,6 +23,10 @@
             ĐĂNG XUẤT
           </a>
         </div>
+        
+        <div class="d-none alert alert-secondary text-center fw-bold text-primary" role="alert" id="success-message">
+          <i class="fas fa-check-circle me-2"></i>Chỉnh sửa thành công!
+        </div>
 
         <div class="row g-4">
           <div class="col-lg-8">
@@ -31,12 +35,15 @@
                 <h5 class="fw-bold mb-0" style="color: var(--bs-primary);">
                   <i class="fas fa-user me-2"></i> HỒ SƠ
                 </h5>
-                <button class="btn border-secondary fw-bold" id="account-btn-edit-profile" style="color: var(--bs-primary); text-decoration: none;">
+                <button 
+                class="btn border-secondary fw-bold" id="account-btn-edit-profile" 
+                style="color: var(--bs-primary); text-decoration: none;"
+                type="button">
                   CHỈNH SỬA <i class="fas fa-edit ms-1"></i>
                 </button>
               </div>
 
-              <form id="profile-form" method="POST" action="<?= ROOT_URL ?>account/update">
+              <form id="profile-form" method="POST">
                 <div class="row g-3">
                   <div class="col-4 fw-bold">Họ và Tên</div>
                   <div class="col-8">
@@ -45,7 +52,7 @@
 
                   <div class="col-4 fw-bold">Email</div>
                   <div class="col-8">
-                    <input type="email" name= 'email' class="form-control" value="<?= $user['email'] ?>" readonly>
+                    <input type="email" name='email' class="form-control" value="<?= $user['email'] ?>" readonly>
                   </div>
 
                   <div class="col-4 fw-bold">Số điện thoại</div>
@@ -58,12 +65,12 @@
                     <div class="d-flex gap-4">
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="gioitinh" id="male"
-                          value="1" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> readonly>
+                          value="1" <?= $user['gioitinh'] == 1 ? 'checked' : '' ?> >
                         <label class="form-check-label" for="male">Nam</label>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="gioitinh" id="female"
-                          value="0" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> readonly>
+                          value="0" <?= $user['gioitinh'] == 0 ? 'checked' : '' ?> >
                         <label class="form-check-label" for="female">Nữ</label>
                       </div>
                     </div>
@@ -74,7 +81,7 @@
                     <?php if ($user['diachi'] == NULL): ?>
                       <p class="text-muted mb-4">Bạn chưa có địa chỉ nào được lưu.</p>
                     <?php else: ?>
-                      <input type="text" name = 'diachi' class="form-control" value="<?= $user['diachi'] ?>" readonly>
+                      <input type="text" name='diachi' class="form-control" value="<?= $user['diachi'] ?>" readonly>
                     <?php endif ?>
                   </div>
                 </div>
@@ -87,9 +94,9 @@
                 <h5 class="fw-bold mb-0" style="color: var(--bs-primary);">
                   <i class="fas fa-lock me-2"></i> MẬT KHẨU
                 </h5>
-                <a class="btn fw-bold border-secondary" 
-                    style="color: var(--bs-primary); text-decoration: none;"
-                    id="account-btn-edit-password-mobile">
+                <a class="btn fw-bold border-secondary"
+                  style="color: var(--bs-primary); text-decoration: none;"
+                  id="account-btn-edit-password-mobile">
                   CHỈNH SỬA <i class="fas fa-edit ms-1"></i>
                 </a>
               </div>
@@ -97,8 +104,8 @@
               <div class="row g-3">
                 <div class="col-4 fw-bold">Mật khẩu</div>
                 <div class="col-8">
-                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>" 
-                         id="account-input-edit-password-mobile" readonly>
+                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>"
+                    id="account-input-edit-password-mobile" readonly>
                 </div>
               </div>
             </div>
@@ -111,17 +118,17 @@
                 <h5 class="fw-bold mb-0" style="color: var(--bs-primary);">
                   <i class="fas fa-lock me-2"></i> MẬT KHẨU
                 </h5>
-                <a class="btn fw-bold border-secondary" 
-                    style="color: var(--bs-primary); text-decoration: none;"
-                    id="account-btn-edit-password-desktop">
+                <a class="btn fw-bold border-secondary"
+                  style="color: var(--bs-primary); text-decoration: none;"
+                  id="account-btn-edit-password-desktop">
                   CHỈNH SỬA <i class="fas fa-edit ms-1"></i>
                 </a>
               </div>
               <div class="row g-3">
                 <div class="col-5 fw-bold">Mật khẩu</div>
                 <div class="col-7">
-                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>" 
-                  id="account-input-edit-password-desktop" readonly>
+                  <input type="password" class="form-control" value="<?= $user['matkhau'] ?>"
+                    id="account-input-edit-password-desktop" readonly>
                 </div>
               </div>
             </div>
