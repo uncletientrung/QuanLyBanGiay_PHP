@@ -1,13 +1,14 @@
 <?php
     class SizeModel{
-        private $conn;
-        public function __construct($db)
+        private $db;
+        public function __construct()
         {
-            $this->conn = $db;
+            global $conn;
+            $this->db = $conn;
         }
         public function getAll(){
-            $sql = "SELECT * FROM size where trangthai = 1";
-            $stmt = $this->conn->prepare($sql);
+            $sql = "SELECT * FROM size";
+            $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -20,7 +21,7 @@
                 JOIN size s ON ss.masize = s.masize
                 WHERE ss.masp = ?
             ";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute([$maSP]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -32,7 +33,7 @@
                 FROM sanphamsize
                 WHERE masp = ? AND masize = ?
             ";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute([$maSP, $maSize]);
             return $stmt->fetchColumn();
         }

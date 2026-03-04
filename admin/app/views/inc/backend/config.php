@@ -67,25 +67,32 @@ $dm->main_nav                   = array(
     array(
         'name'  => 'Thuộc tính',
         'icon'  => 'fa fa-tags',
-        'url'   => APP_ADMIN_PATH . 'attributes'
-        // 'sub'   => array(
-        //     array(
-        //         'name'  => 'Dashboard',
-        //         'url'   => 'be_pages_jobs_dashboard.php'
-        //     ),
-        //     array(
-        //         'name'  => 'Listing',
-        //         'url'   => 'be_pages_jobs_listing.php'
-        //     ),
-        //     array(
-        //         'name'  => 'Apply',
-        //         'url'   => 'be_pages_jobs_apply.php'
-        //     ),
-        //     array(
-        //         'name'  => 'Post',
-        //         'url'   => 'be_pages_jobs_post.php'
-        //     )
-        // )
+        'sub'   => array(
+            array(
+                'name'  => 'Hãng',
+                'url'   => APP_ADMIN_PATH . 'brands'
+            ),
+            
+            array(
+                'name'  => 'Loại',
+                'url'   => APP_ADMIN_PATH . 'categories'
+            ),
+            
+            array(
+                'name'  => 'Màu',
+                'url'   => APP_ADMIN_PATH . 'colors'
+            ),
+
+            array(
+                'name'  => 'Size',
+                'url'   => APP_ADMIN_PATH . 'sizes'
+            ),
+
+            array(
+                'name'  => 'Nhà cung cấp',
+                'url'   => APP_ADMIN_PATH . 'suppliers'
+            ),
+        )
     ),
     array(
         'name'  => 'Sản phẩm',

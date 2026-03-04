@@ -266,6 +266,7 @@ class Template
    */
   private function build_nav_array($nav_array, $nav_horizontal)
   {
+    $this->main_nav_active = $_SERVER['REQUEST_URI'];
     foreach ($nav_array as $node) {
       // Get all vital link info
       $link_name = '<span class="nav-main-link-name">' . (isset($node['name']) ? $node['name'] : '') . '</span>' . "\n";
@@ -276,8 +277,8 @@ class Template
       $link_type = isset($node['type']) ? isset($node['type']) : '';
       $sub_active = false;
       $link_active = $link_url == $this->main_nav_active ? true : false;
-
-      // If link type is a header
+      
+      // If link type is a header 
       if ($link_type == 'heading') {
         $this->nav_html .= "<li class=\"nav-main-heading\">" . (isset($node['name']) ? $node['name'] : '') . "</li>\n";
       } else {

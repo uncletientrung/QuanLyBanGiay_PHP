@@ -20,11 +20,25 @@ $router->post('/user/add', 'User@add');
 $router->post('/user/update', 'User@update');
 $router->post('/user/delete', 'User@delete');
 
-// Other
-$router->get('/attributes', 'Attributes@default');
+// Thuoc tinh
+$router->get('/brands', 'Brands@default');
+$router->get('/brands/getData', 'Brands@getData');
 
+$router->get('/categories', 'Categories@default');
+$router->get('/categories/getData', 'Categories@getData');
+
+$router->get('/colors', 'Colors@default');
+$router->get('/colors/getData', 'Colors@getData');
+
+$router->get('/sizes', 'Sizes@default');
+$router->get('/sizes/getData', 'Sizes@getData');
+
+$router->get('/suppliers', 'Suppliers@default');
+
+// San pham
 $router->get('/products', 'Products@default');
 
+// Kho hang
 $router->get('/nhap_hang', 'Nhap_hang@default');
 
 // Don hang

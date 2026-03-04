@@ -1,13 +1,14 @@
 <?php
     class LoaiModel{
-        private $conn;
-        public function __construct($db)
+        private $db;
+        public function __construct()
         {
-            $this->conn = $db;
+            global $conn;
+            $this->db = $conn;
         }
         public function getAll(){
             $sql = "SELECT * FROM loai where trangthai = 1";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -15,7 +16,7 @@
        public function getNameById($maLoai)
         {
             $sql = "SELECT tenloai FROM loai WHERE trangthai = 1 AND maloai = ?";
-            $stmt = $this->conn->prepare($sql);
+            $stmt = $this->db->prepare($sql);
             $stmt->execute([$maLoai]);
             return $stmt->fetchColumn(); 
         }
@@ -31,7 +32,7 @@
             l.trangthai=1 AND sp.trangthai=1
         GROUP BY l.maloai,l.tenloai
         ";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
