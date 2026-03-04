@@ -93,6 +93,7 @@
   <script src="<?= ROOT_URL ?>public/js/main.js"></script>
   <script src="<?= ROOT_URL ?>public/js/cart.js"></script>
   <script src="<?= ROOT_URL ?>public/js/chackout.js"></script>
+  <script src="<?= ROOT_URL ?>public/js/account.js"></script>
 
   </body>
 

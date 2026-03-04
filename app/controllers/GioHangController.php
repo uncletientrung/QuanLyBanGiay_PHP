@@ -37,6 +37,7 @@ class GioHangController
             $soluong++;
         }
         $this->model->updateQuantity_Model($user_id, $masp, $soluong);
+        $carts = $this->model->getCartsByUserId_Model($user_id);
         $sp = $this->SanPhamModel->getSpById($masp);
         $gia = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
 
@@ -74,7 +75,7 @@ class GioHangController
             'success'     => true,
             'masp'        => $masp,
             'tonggiohang' => number_format($tong) . '₫',
-            'empty'       => true
+            'empty'       => count($carts) == 0
         ]);
     }
     public function countCartItem()

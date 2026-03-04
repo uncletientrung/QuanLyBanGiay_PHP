@@ -8,7 +8,6 @@
 </div>
 <!-- Single Page Header End -->
 
-
 <!-- Danh sách giỏ hàng Start -->
 <div class="container-fluid py-3">
   <div class="container py-3">
@@ -130,7 +129,6 @@
             <h5 class="mb-0 ps-4 me-4">Tổng cộng</h5>
             <p class="mb-0 pe-4" id="cart-total-final"><?= number_format($total) ?>₫</p>
           </div>
-          <!-- Chưa viết CHUYỂN TRANG SANG THANH TOÁN -->
           <a
             class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
             href="<?= APP_PATH . "chackout" ?>">

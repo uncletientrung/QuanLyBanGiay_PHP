@@ -10,6 +10,7 @@ $listSP = $spController->getAll();
 $listBestSellingALL = $spController->getBestSellingByName("all");
 $UserController = new AuthController($conn);
 $GioHangController = new GioHangController($conn);
+$accountController = new AccountController($conn);
 
 
 
@@ -21,4 +22,4 @@ $GioHangController = new GioHangController($conn);
 //     print_r($sp);
 //     echo "</pre>";
 // }
-print_r($GioHangController->countCartItem());
+// print_r($test11->getData());
