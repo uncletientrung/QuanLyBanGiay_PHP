@@ -2,6 +2,7 @@
 // Core JS
 $dm->get_js('js/lib/jquery.min.js');
 $dm->get_js('js/dashmix.app.min.js');
+$dm->get_js('/js/lib/sidebar.mini.js');
 
 // Plugin: DataTables
 if (isset($Plugin["datatables"]) && $Plugin["datatables"] == 1) {

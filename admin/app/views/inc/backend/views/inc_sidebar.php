@@ -27,7 +27,7 @@
   <div class="bg-header-dark">
     <div class="content-header bg-white-5">
       <!-- Logo -->
-      <a class="fw-semibold text-white tracking-wide" href="index.php">
+      <a class="fw-semibold text-white tracking-wide" href="dashboard">
         <span class="smini-visible">
           G<span class="opacity-75">s</span>
         </span>

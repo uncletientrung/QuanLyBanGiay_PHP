@@ -24,7 +24,7 @@
       </button>
 
       <!-- NÚT 2: Chỉ hiện trên Desktop (màn hình >= 992px) -->
-      <button type="button" class="btn btn-alt-secondary d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+      <button type="button" class="btn btn-alt-secondary d-none d-lg-inline-block" id="sidebar-mini-toggle" data-toggle="layout" data-action="sidebar_mini_toggle">
         <i class="fa fa-fw fa-ellipsis-v"></i>
       </button>
       <!-- END Toggle Sidebar -->
