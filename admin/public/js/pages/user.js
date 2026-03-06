@@ -121,6 +121,7 @@ Dashmix.onLoad(() =>
                 },
                 columns: [
                     {
+                        // Lấy cột makh
                         data: 'makh',
                         className: 'text-center',
                         type: 'num',
@@ -137,8 +138,23 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
+                        // Không chỉ định cột cụ thể => data null
                         data: null,
+                        /** render( data, type, row, meta )
+                         * Cặp 1 (data, type)
+                         * Với data, Kiểu DL: Any. Phụ thuộc vào những gì ghi trong columns.data
+                         * Với type, Kiểu DL: String
+                         * -> type = {filter, display, type, sort}
+                         * 
+                         * Cặp 2 (row, meta)
+                         * Với row, Kiểu DL: Any. 1 Object chứa nhiều cột 
+                         * Với meta, Kiểu DL: object. Đối tượng chứa dl vị trí (dòng mấy, cột mấy)
+                        */
                         render: function (data, type, row) {
+                            /** dataType (default: Intelligent Guess (xml, json, script, or html))
+                             * Nếu không được chỉ định kiểu cụ thể, nó sẽ tự chuyển đổi
+                             * JSON -> JS Object
+                             */
                             return `
                                 <div class="fw-semibold text-primary">${row.hoten || 'N/A'}</div>
                                 <div class="text-muted small">${row.email || ''}</div>
