@@ -16,4 +16,26 @@ class DonHangModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function addOrder_Model($user_id, $order_data, $dia_chi)
+    {
+        $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan)
+                VALUES (?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$user_id, $order_data['tongtien'], $dia_chi, $order_data['hinhthucthanhtoan']]);
+        return $this->db->lastInsertId(); // cái này trả về mã vừa thêm vào
+    }
+    public function beginTransaction()
+    {
+        return $this->db->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->db->commit();
+    }
+
+    public function rollBack()
+    {
+        return $this->db->rollBack();
+    }
 }

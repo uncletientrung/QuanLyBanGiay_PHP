@@ -13,29 +13,29 @@
 <div class="container py-3">
   <div class="container py-3">
     <h1 class="mb-4">Thông tin hóa đơn</h1>
-    <form action="#">
+    <form action="<?= ROOT_URL ?>chackout/add-order" method="POST" id="checkout-form">
       <div class="row g-5">
         <!-- Thông tin người dùng -->
         <div class="col-md-12 col-lg-7 col-xl-6">
           <div class="form-item">
             <label class="form-label my-3">Họ và Tên<sup>*</sup></label>
             <input type="text" class="form-control"
-              value="<?= $user['hoten'] ?>">
+              name="hoten" value="<?= $user['hoten'] ?>" readonly>
           </div>
           <div class="form-item">
             <label class="form-label my-3">Địa chỉ nhận hàng <sup>*</sup></label>
             <input type="text" class="form-control" placeholder="Địa chỉ mặc định của người dùng"
-              value="<?= $user['diachi'] ?>">
+              name="diachi" value="<?= $user['diachi'] ?>" readonly>
           </div>
           <div class="form-item">
             <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
             <input type="tel" class="form-control"
-              value="<?= $user['sdt'] ?>">
+              name="sdt" value="<?= $user['sdt'] ?>" readonly>
           </div>
           <div class="form-item">
             <label class="form-label my-3">Email<sup>*</sup></label>
             <input type="email" class="form-control"
-              value="<?= $user['email'] ?>">
+              name="email" value="<?= $user['email'] ?>" readonly>
           </div>
           <hr>
           <div class="form-check my-3">
@@ -44,8 +44,8 @@
               Giao hàng đến 1 địa chỉ khác?</label>
           </div>
           <div class="form-item" id="chackout-address-textarea" style="display: none;">
-            <textarea name="text" class="form-control" spellcheck="false" cols="30" rows="11" 
-            placeholder="Nhập địa chỉ nhận hàng khác"></textarea>
+            <textarea name="diachi_khac" class="form-control" spellcheck="false" cols="30" rows="11"
+              placeholder="Nhập địa chỉ nhận hàng khác"></textarea>
           </div>
         </div>
         <!-- Giỏ hàng -->
@@ -64,45 +64,60 @@
               <!-- Sản phẩm trong giỏ -->
               <tbody>
                 <?php if (!empty($carts)): ?>
-                  <?php foreach ($carts as $item): ?>
+                  <?php
+                  $tongtien = 0;
+                  foreach ($carts as $item):
+                    $thanhtien = $item['soluong'] * $item['giaban'];
+                    $tongtien += $thanhtien;
+                  ?>
                     <tr>
                       <th scope="row">
                         <div class="d-flex align-items-center mt-2">
                           <img src="<?= $item['path'] ?>" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
                         </div>
                       </th>
-                      <td class="py-5"><?=  $item['tensp'] ?></td>
+                      <td class="py-5"><?= $item['tensp'] ?></td>
                       <td class="py-5"><?= number_format($item['giaban']) ?></td>
                       <td class="py-5"><?= number_format($item['soluong']) ?></td>
                       <td class="py-5"><?= number_format($item['soluong'] * $item['giaban']) ?></td>
                     </tr>
-                  <?php endforeach ?>
-                <?php endif ?>
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>
+          <!-- Tổng đơn hàng -->
+          <div class="text-end fw-bold fs-5 mt-3">
+            Tổng tiền: <?= number_format($tongtien) ?> đ
+          </div>
+          <!-- PT thanh toán -->
           <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
             <div class="col-12">
               <div class="form-check text-start my-1">
-                <input type="checkbox" class="form-check-input bg-primary border-0" id="Transfer-1" name="Transfer" value="Transfer">
+                <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1" 
+                      name="phuongthucthanhtoan" value="1">
                 <label class="form-check-label" for="Transfer-1">Chuyển Khoản</label>
               </div>
               <p class="text-start text-dark">
                 Vui lòng chuyển khoản vào QR hiện lên sau khi nhấn "Đặt Hàng". Sau khi chuyển
-                khoản hệ thống sẽ tự ghi nhận và lên đơn hàng. 
+                khoản hệ thống sẽ tự ghi nhận và lên đơn hàng.
               </p>
             </div>
           </div>
           <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
             <div class="col-12">
               <div class="form-check text-start my-1">
-                <input type="checkbox" class="form-check-input bg-primary border-0" id="Delivery-1" name="Delivery" value="Delivery">
+                <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" 
+                      name="phuongthucthanhtoan" value="2" checked>
                 <label class="form-check-label" for="Delivery-1">Thanh Toán Khi Nhận Hàng</label>
               </div>
             </div>
           </div>
+
           <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-            <button type="button" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt Hàng</button>
+            <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">
+              Đặt Hàng
+            </button>
           </div>
         </div>
       </div>
