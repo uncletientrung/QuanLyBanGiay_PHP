@@ -3,9 +3,8 @@ class AdminModel
 {
     private $db;
 
-    public function __construct()
+    public function __construct($conn)
     {
-        global $conn;
         $this->db = $conn;
     }
 
