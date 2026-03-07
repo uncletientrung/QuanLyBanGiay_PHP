@@ -1,16 +1,26 @@
 <?php
-require_once "../QuanLyBanGiay_PHP/app/models/SanPhamModel.php";
-require_once "../QuanLyBanGiay_PHP/app/models/HangModel.php";
+require_once APP_PATH_DIR . 'models/SanPhamModel.php';
+require_once APP_PATH_DIR . 'models/HangModel.php';
+require_once APP_PATH_DIR . 'models/MauSacModel.php';
+require_once APP_PATH_DIR . 'models/LoaiModel.php';
+require_once APP_PATH_DIR . 'models/HinhAnhModel.php';
 
 class SanPhamController
 {
     private $model;
     private $hangModel;
+    private $mauModel;
+    private $loaiModel;
+    private $hinhAnhModel;
+
 
     public function __construct($db)
     {
         $this->model = new SanPhamModel($db);
         $this->hangModel = new HangModel($db);
+        $this->loaiModel = new LoaiModel($db);
+        $this->mauModel = new MauSacModel($db);
+        $this->hinhAnhModel= new HinhAnhModel($db);
     }
 
     /**
@@ -52,7 +62,7 @@ class SanPhamController
             && empty($filters['gioitinh'])
             && empty($filters['mau'])
             && empty($filters['price_range'])
-            && $filters['sort'] === 'default';
+            && ($filters['sort'] ?? 'default') === 'default';
     }
 
 
@@ -93,5 +103,38 @@ class SanPhamController
     public function countFiltered($filters)
     {
         return $this->model->countFiltered($filters);
+    }
+
+    public function showProducts()
+    {
+
+        $listHang = $this->hangModel->getAll();
+        $listMauSac = $this->mauModel->getAll();
+        $listLoai = $this->loaiModel->getLoaivaSoluongTuongUng();
+
+        $filters = [
+            'q' => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
+            'hang' => !empty($_GET['hang']) ? array_map('intval', (array)$_GET['hang']) : [],
+            'loai' => !empty($_GET['loai']) ? array_map('intval', (array)$_GET['loai']) : [],
+            'gioitinh' => !empty($_GET['gioitinh']) ? array_map('trim', (array)$_GET['gioitinh']) : [],
+            'mau' => !empty($_GET['mau']) ? array_map('intval', (array)$_GET['mau']) : [],
+            'price_range' => $_GET['price_range'] ?? null,
+            'sort' => $_GET['sort'] ?? 'default',
+        ];
+
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 9;
+
+        $listSP = $this->getProducts($filters, $page, $limit);
+        $totalProducts = $this->countProducts($filters);
+        $totalPages = ceil($totalProducts / $limit);
+
+        foreach ($listSP as &$sp) {
+            $sp['image'] = $this->hinhAnhModel->getImageMainById($sp['masp']);
+            $sp['tenhang'] = $this->hangModel->getNameById($sp['hang']);
+        }
+        unset($sp);
+
+        require VIEW_PATH_DIR . 'products.php';
     }
 }
