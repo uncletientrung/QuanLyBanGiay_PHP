@@ -39,16 +39,24 @@ class KhachHangModel
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function updateProfile_Model($user_id, $user_data){
+    public function updateProfile_Model($user_id, $user_data)
+    {
         $sql = "UPDATE khachhang
                 SET hoten = ?, email = ?, sdt = ?, gioitinh = ?, diachi = ?
                 WHERE makh = ? ";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$user_data['hoten'], $user_data['email'], $user_data['sdt'],
-                        $user_data['gioitinh'], $user_data['diachi'], $user_id]);
+        $stmt->execute([
+            $user_data['hoten'],
+            $user_data['email'],
+            $user_data['sdt'],
+            $user_data['gioitinh'],
+            $user_data['diachi'],
+            $user_id
+        ]);
         return $stmt->rowCount();
     }
-    public function updatePassword_Model($user_id, $password){
+    public function updatePassword_Model($user_id, $password)
+    {
         $sql = "UPDATE khachhang
                 SET matkhau = ?
                 WHERE makh = ?";

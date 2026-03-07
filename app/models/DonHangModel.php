@@ -11,7 +11,10 @@ class DonHangModel
 
     public function getAll()
     {
-        $sql = "SELECT * FROM donhang ORDER BY madh ASC";
+        $sql = "SELECT dh.*, kh.hoten 
+                FROM donhang dh 
+                JOIN khachhang kh ON dh.makh = kh.makh 
+                ORDER BY dh.madh ASC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

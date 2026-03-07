@@ -106,9 +106,13 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data: 'makh',
+                        data: 'hoten',
                         className: 'text-center',
-                        render: data => `KH-${data}`
+                        render: function (data) {
+                            return `
+                                <div class="fw-semibold">${data}</div>
+                            `;
+                        }
                     },
                     {
                         data: 'tongtien',

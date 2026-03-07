@@ -27,7 +27,7 @@
                         <tr>
                             <!-- sm: Ẩn trên điện thoại / md: ẩn trên ipad -->
                             <th class="text-center" style="width: 80px;">MÃ ĐH</th>
-                            <th class="text-center">MÃ KH</th>
+                            <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
                             <th class="text-center d-none d-sm-table-cell">THỜI GIAN</th>
                             <th class="text-center d-none d-lg-table-cell">ĐỊA CHỈ</th>
