@@ -100,7 +100,12 @@ if ($uri == 'contact') {
     exit;
 }
 if ($uri == 'product-detail') {
-    render('product-detail', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $controller = new SanPhamController($conn);
+    $controller->showDetail();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 // Account START

@@ -1,5 +1,5 @@
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
+<div class="container-fluid page-header py-4">
   <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
@@ -9,7 +9,7 @@
 <!-- Single Page Header End -->
 
 <!-- Fruits Shop Start-->
-<div class="container-fluid fruite py-5">
+<div class="container-fluid fruite py-2">
 
 <!-- <?php
 echo '<pre>';
@@ -17,13 +17,13 @@ print_r($_SESSION['user-id']);
 echo '</pre>';
 
 ?>  -->
-  <div class="container py-5">
-    <h1 class="mb-4">SHOP giày</h1>
-    <div class="row g-4" id="start-products">
+  <div class="container py-3">
+    <!-- <h1 class="mb-4">SHOP giày</h1> -->
+    <div class="row g-4" >
       <div class="col-lg-12">
-        <form method="GET" action="#product-list" id="filterForm">
+        <form method="GET" action="#start-products" id="filterForm">
           <div class="row g-4"  id="product-list">
-            <div class="col-xl-3">
+            <div class="col-xl-3" id="start-products">
               <div class="input-group w-100 mx-auto d-flex">
                 <input 
                   type="search" 
@@ -329,5 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="price_range"]').forEach(radio => {
         radio.addEventListener('change', () => form.submit());
     });
+    
+    
 });
 </script>
