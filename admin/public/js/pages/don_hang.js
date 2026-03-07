@@ -168,7 +168,7 @@ Dashmix.onLoad(() =>
                         render: function (data) {
                             return `
                                 <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)">
-                                    <i class="fa fa-fw fa-pen-to-square text-info"></i>
+                                    <i class="fa fa-fw fa-eye text-info"></i>
                                 </a>
                                 <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)">
                                     <i class="fa fa-fw fa-times text-danger"></i>
@@ -193,23 +193,29 @@ Dashmix.onLoad(() =>
                 let val = $(this).val();
                 userTable.column(7).search(val ? `^${val}$` : '', true, false).draw();
 
-                const $bulkSelect = $('#bulk-status-select');
-                $bulkSelect.empty().append('<option value="">Chọn thao tác</option>');
+                const $bulkMenu = $('#bulk-status-menu');
+                const $bulkBtn = $('#bulk-status-dropdown');
+                const $hiddenInput = $('#bulk-status-select');
+
+                // Reset dropdown bulk
+                $bulkMenu.empty();
+                $bulkBtn.text('Chọn thao tác');
+                $hiddenInput.val('');
 
                 // Ẩn/Hiện checkbox (cột 0)
                 if (val === "Chưa xử lý") {
                     userTable.column(0).visible(true);
                     // "Chưa xử lý" : Xác nhận, Hủy
-                    $bulkSelect.append(`
-                        <option value="1">Xác nhận đơn hàng</option>
-                        <option value="3">Huỷ đơn</option>
+                    $bulkMenu.append(`
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="1">Xác nhận đơn hàng</a>
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="3">Huỷ đơn</a>
                     `);
                 } else if (val === "Đã xác nhận") {
                     userTable.column(0).visible(true);
                     // "Đã xác nhận" : Giao thành công, Hủy
-                    $bulkSelect.append(`
-                        <option value="2">Giao hàng thành công</option>
-                        <option value="3">Huỷ đơn</option>
+                    $bulkMenu.append(`
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="2">Giao hàng thành công</a>
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="3">Huỷ đơn</a>
                     `);
                 } else {
                     userTable.column(0).visible(false);
@@ -384,6 +390,16 @@ Dashmix.onLoad(() =>
                         });
                     }
                 });
+            });
+
+            // Xử lý khi chọn item trong Dropdown Bulk Action
+            $(document).on('click', '#bulk-status-menu .dropdown-item', function (e) {
+                e.preventDefault();
+                let selText = $(this).text();
+                let selValue = $(this).data('value');
+
+                $('#bulk-status-dropdown').text(selText); // Đổi text trên nút
+                $('#bulk-status-select').val(selValue);   // Gán giá trị vào input ẩn
             });
             // END Checkbox
 

@@ -20,12 +20,14 @@
                     Đã chọn (<span id="selected-count">0</span> đơn hàng)
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <select class="form-select form-select-sm" id="bulk-status-select" style="width: 200px;">
-                        <option value="">Chọn thao tác</option>
-                        <option value="1">Xác nhận đơn hàng</option>
-                        <option value="2">Giao hàng thành công</option>
-                        <option value="3">Huỷ đơn</option>
-                    </select>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" id="bulk-status-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 200px;">
+                            Chọn thao tác
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="bulk-status-dropdown" id="bulk-status-menu">
+                        </div>
+                        <input type="hidden" id="bulk-status-select" value="">
+                    </div>
                     <button type="button" class="btn btn-sm btn-primary" id="btn-apply-bulk">Áp dụng</button>
                 </div>
             </div>
@@ -49,7 +51,7 @@
                             <th class="text-center">MÃ ĐƠN</th>
                             <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
-                            <th class="text-center d-none d-sm-table-cell" style="width: 120px;">THỜI GIAN</th>
+                            <th class="text-center d-none d-sm-table-cell" style="width: 100px;">THỜI GIAN</th>
                             <th class="text-center d-none d-lg-table-cell">ĐỊA CHỈ</th>
                             <th class="text-center">THANH TOÁN</th>
                             <th class="text-center">TRẠNG THÁI</th>
