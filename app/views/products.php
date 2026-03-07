@@ -1,45 +1,5 @@
-<?php
-require_once '../QuanLyBanGiay_PHP/config/connectdb.php';
-require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/MauSacController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/LoaiController.php";
-
-$spController = new SanPhamController($conn);
-$hangController = new HangController($conn);
-$hinhAnhController = new HinhAnhController($conn);
-$mauSacController = new MauSacController($conn);
-$loaiController = new LoaiController($conn);
-
-$listHang = $hangController->getAll();
-$listMauSac = $mauSacController->getAll();
-$listLoai = $loaiController->getLoaivaSoluongTuongUng(); 
-
-// Xử lý filters từ GET
-$filters = [
-    'q'         => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
-    'hang'      => !empty($_GET['hang']) ? array_map('intval', (array)$_GET['hang']) : [],
-    'loai'      => !empty($_GET['loai']) ? array_map('intval', (array)$_GET['loai']) : [],
-    'gioitinh'  => !empty($_GET['gioitinh']) ? array_map('trim', (array)$_GET['gioitinh']) : [],
-    'mau'       => !empty($_GET['mau']) ? array_map('intval', (array)$_GET['mau']) : [],   
-    'price_range' => $_GET['price_range'] ?? null, // tầm giá
-    'sort'      => $_GET['sort'] ?? 'default',     // sắp xếp
-];
-
-// Phân trang
-$page = max(1, (int)($_GET['page'] ?? 1));
-$limit = 9;
-
-// Lấy dữ liệu sản phẩm
-$listSP = $spController->getProducts($filters, $page, $limit);
-$totalProducts = $spController->countProducts($filters);
-$totalPages = ceil($totalProducts / $limit);
-$co = $spController->isEmptyFilters($filters);
-?>
-
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5">
+<div class="container-fluid page-header py-4">
   <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
@@ -49,21 +9,21 @@ $co = $spController->isEmptyFilters($filters);
 <!-- Single Page Header End -->
 
 <!-- Fruits Shop Start-->
-<div class="container-fluid fruite py-5">
+<div class="container-fluid fruite py-2">
 
-<?php
+<!-- <?php
 echo '<pre>';
 print_r($_SESSION['user-id']);
 echo '</pre>';
 
-?> 
-  <div class="container py-5">
-    <h1 class="mb-4">SHOP giày</h1>
-    <div class="row g-4">
+?>  -->
+  <div class="container py-3">
+    <!-- <h1 class="mb-4">SHOP giày</h1> -->
+    <div class="row g-4" >
       <div class="col-lg-12">
-        <form method="GET" action="products" id="filterForm">
-          <div class="row g-4">
-            <div class="col-xl-3">
+        <form method="GET" action="#start-products" id="filterForm">
+          <div class="row g-4"  id="product-list">
+            <div class="col-xl-3" id="start-products">
               <div class="input-group w-100 mx-auto d-flex">
                 <input 
                   type="search" 
@@ -232,7 +192,7 @@ echo '</pre>';
                 <!-- Nút xóa bộ lọc -->
                 <div class="col-lg-12">
                   <div class="d-grid">
-                    <a href="products" class="btn btn-outline-secondary">
+                    <a href="<?= ROOT_URL ?>products#start-products" class="btn btn-outline-secondary">
                       <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
                     </a>
                   </div>
@@ -253,23 +213,20 @@ echo '</pre>';
 
             <!-- Danh sách sản phẩm -->
             <div class="col-lg-9">
-              <div class="row g-4">
+              <div class="row g-4"> 
                 <?php if (!empty($listSP)): ?>
+                  
                   <?php foreach ($listSP as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-6 col-xl-4">
                       <div class="rounded position-relative fruite-item">
                         <div class="fruite-img">
                           <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img 
-                              src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" 
-                              class="img-fluid w-100 rounded-top" 
-                              alt=""
-                            >
+                            <img src="<?= $sp['image'] ?>" class="img-fluid w-100 rounded-top">
                           </a>
                         </div>
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
-                          <?= htmlspecialchars($hangController->getNameById($sp['hang'])) ?>
+                          <?= htmlspecialchars($sp['tenhang']) ?>
                         </div>
                        
                         <div class="p-4 border border-secondary border-top-0 rounded-bottom">
@@ -280,9 +237,9 @@ echo '</pre>';
                               <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                             </p>
                             
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                            <!-- <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
                               <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
-                            </a>
+                            </a> -->
                             <p class="text-black fs-6 mb-0">
                               Đã bán: <?= $sp['soluongdaban'] ?>
                             </p>
@@ -372,5 +329,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('input[name="price_range"]').forEach(radio => {
         radio.addEventListener('change', () => form.submit());
     });
+    
+    
 });
 </script>

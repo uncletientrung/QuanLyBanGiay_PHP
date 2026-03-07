@@ -19,7 +19,7 @@ class GioHangModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$soluong, $makh, $masp]);
     }
-    public function deleteItem_Model($makh, $masp){
+    public function deleteItem_Model($makh, $masp){ // Chưa nhét size vào tất cả
         $sql = "DELETE FROM giohang WHERE makh = ? AND masp = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$makh, $masp]);

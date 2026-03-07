@@ -1,32 +1,4 @@
-<?php
-require_once '../QuanLyBanGiay_PHP/config/connectdb.php';
-require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/MauSacController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/LoaiController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/SizeController.php";
-$spController = new SanPhamController($conn);
-$hangController = new HangController($conn);
-$hinhAnhController = new HinhAnhController($conn);
-$mauSacController = new MauSacController($conn);
-$loaiController = new LoaiController($conn);
-$sizeController = new SizeController($conn);
-$listHang = $hangController->getAll();
-$listMauSac = $mauSacController->getAll();
-$listLoai = $loaiController->getAll();
-$listSP = $spController->getAll();
-$masp = isset($_GET['masp']) ? $_GET['masp'] : null;
-$currentSP = $spController->getSpById($masp);
-$listHinh=$hinhAnhController->getAllById($masp);
-$loai = $loaiController->getNameById($currentSP['loai']);
-$hang = $hangController->getNamebyid2($currentSP['hang']);
-$mau = $mauSacController->getNameById($currentSP['mau']);
-$gioitinh = ($currentSP['gioitinh']==1) ? 'Nam' : 'Nữ';
-$giaBan = $currentSP['gianhap'] + $currentSP['gianhap'] * $currentSP['tyleloinhuan'] / 100;
-$listSize = $sizeController->getSizeBySanPham($currentSP['masp']);
 
-?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop Detail</h1>
@@ -38,9 +10,9 @@ $listSize = $sizeController->getSizeBySanPham($currentSP['masp']);
 <!-- Single Page Header End -->
 
 <!-- Single Product Start -->
-<div class="container-fluid py-5 mt-5">
-  <div class="container py-5">
-    <div class="row g-4 mb-5">
+<div class="container-fluid py-4">
+  <div class="container py-4">
+    <div class="row g-4 mb-4">
       <div class="col-12">
         <div class="row g-4">
           <!-- <?php
@@ -70,12 +42,12 @@ echo '</pre>';
                 </div>
               </div>
 
-            <!-- Ảnh lớn - luôn có border-radius -->
+            <!-- Ảnh lớn  -->
             <div class="col-10">
               <div class="rounded product-image-container" 
                   style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
                 <img id="mainImage"
-                    src="<?= $hinhAnhController->getMainImageById($currentSP['masp']) ?>" 
+                    src="<?=  $currentSP['image'] ?>" 
                     class="img-fluid product-main-image"
                     style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;">  <!-- thêm border-radius ở đây -->
               </div>
@@ -201,22 +173,22 @@ echo '</pre>';
 
               <div class="meta-brand">
                 <span class="label">Thương hiệu</span>
-                <span class="value">Nike</span>
+                <span class="value"><?= $hang ?></span>
               </div>
 
 
               <div class="meta-attrs">
                 <div class="attr">
                   <span class="label">Loại</span>
-                  <span class="value">Giày thể thao</span>
+                  <span class="value"><?= $loai ?></span>
                 </div>
                 <div class="attr">
                   <span class="label">Màu sắc</span>
-                  <span class="value">Đen</span>
+                  <span class="value"><?= $mau ?></span>
                 </div>
                 <div class="attr">
                   <span class="label">Giới tính</span>
-                  <span class="value">Nam</span>
+                  <span class="value"><?= $gioitinh ?></span>
                 </div>
 
               </div>
@@ -328,13 +300,13 @@ echo '</pre>';
           <div class="vesitable-img">
             <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
                             <img 
-                              src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" 
+                              src="<?= $sp['image'] ?>" 
                               class="img-fluid w-100 rounded-top" 
                               alt=""
                             >
                           </a>
           </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?= $hangController->getNameById($sp['hang']) ?></div>
+          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?= $sp['tenhang'] ?></div>
           <div class="p-4 pb-0 rounded-bottom">
             <h4><?= $sp['tensp'] ?></h4>
              

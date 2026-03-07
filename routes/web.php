@@ -3,7 +3,7 @@ require_once APP_PATH_DIR . 'controllers/GioHangController.php';
 require_once APP_PATH_DIR . 'controllers/ChackoutController.php';
 require_once APP_PATH_DIR . 'controllers/HeaderController.php';
 require_once APP_PATH_DIR . 'controllers/AccountController.php';
-
+require_once APP_PATH_DIR . 'controllers/SanPhamController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
@@ -41,7 +41,12 @@ if ($uri == '' || $uri == '/' || $uri == 'home') {
     exit;
 }
 if ($uri == 'products') {
-    render('products', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $controller = new SanPhamController($conn);
+    $controller->showProducts();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 
@@ -95,7 +100,12 @@ if ($uri == 'contact') {
     exit;
 }
 if ($uri == 'product-detail') {
-    render('product-detail', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $controller = new SanPhamController($conn);
+    $controller->showDetail();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 // Account START
