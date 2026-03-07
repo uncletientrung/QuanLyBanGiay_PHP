@@ -44,6 +44,7 @@ $router->get('/nhap_hang', 'Nhap_hang@default');
 // Don hang
 $router->get('/don_hang', 'Don_hang@default');
 $router->get('/don_hang/getData', 'Don_hang@getData');
+$router->post('/don_hang/updateBulkStatus', 'Don_hang@updateBulkStatus');
 
 $router->get('/ton_kho', 'Ton_kho@default');
 

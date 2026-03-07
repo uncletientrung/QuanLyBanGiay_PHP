@@ -13,6 +13,24 @@
             <h3 class="block-title">Đơn hàng</h3>
         </div>
         <div class="block-content block-content-full">
+            <!-- Bulk Action -->
+            <div id="bulk-action-bar" class="d-none bg-body-light p-2 mb-3 rounded border d-flex align-items-center justify-content-between">
+                <div class="fw-semibold">
+                    <i class="fa fa-check-square me-1 text-primary"></i>
+                    Đã chọn (<span id="selected-count">0</span> đơn hàng)
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <select class="form-select form-select-sm" id="bulk-status-select" style="width: 200px;">
+                        <option value="">-- Thay đổi trạng thái --</option>
+                        <option value="1">Đã xác nhận</option>
+                        <option value="2">Đã giao thành công</option>
+                        <option value="3">Đã hủy</option>
+                    </select>
+                    <button type="button" class="btn btn-sm btn-primary" id="btn-apply-bulk">Áp dụng</button>
+                </div>
+            </div>
+            <!-- END Bulk Action -->
+
             <!-- All Orders Table -->
             <div class="table-responsive">
                 <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive js-table-checkable">
