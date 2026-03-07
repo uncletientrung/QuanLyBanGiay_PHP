@@ -21,10 +21,10 @@
                 </div>
                 <div class="d-flex align-items-center gap-2">
                     <select class="form-select form-select-sm" id="bulk-status-select" style="width: 200px;">
-                        <option value="">-- Thay đổi trạng thái --</option>
-                        <option value="1">Đã xác nhận</option>
-                        <option value="2">Đã giao thành công</option>
-                        <option value="3">Đã hủy</option>
+                        <option value="">Chọn thao tác</option>
+                        <option value="1">Xác nhận đơn hàng</option>
+                        <option value="2">Giao hàng thành công</option>
+                        <option value="3">Huỷ đơn</option>
                     </select>
                     <button type="button" class="btn btn-sm btn-primary" id="btn-apply-bulk">Áp dụng</button>
                 </div>
@@ -46,7 +46,7 @@
 
 
                             <!-- sm: Ẩn trên điện thoại / md: ẩn trên ipad -->
-                            <th class="text-center">MÃ ĐH</th>
+                            <th class="text-center">MÃ ĐƠN</th>
                             <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
                             <th class="text-center d-none d-sm-table-cell">THỜI GIAN</th>

@@ -40,4 +40,12 @@ class DonHangModel
     {
         return $this->db->rollBack();
     }
+
+    public function updateStatusMulti($ids, $status)
+    {
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "UPDATE donhang SET trangthai = ? WHERE madh IN ($placeholders)";
+        $stmt = $this->db->prepare($sql);
+        return $stmt->execute(array_merge([$status], $ids));
+    }
 }

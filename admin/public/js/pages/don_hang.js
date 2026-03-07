@@ -25,33 +25,8 @@ Dashmix.onLoad(() =>
                     },
                 },
                 pageLength: 10,
-                lengthChange: false
-            });
-
-            // Cấu hình Buttons mặc định
-            jQuery.extend(!0, jQuery.fn.DataTable.Buttons.defaults, {
-                dom: {
-                    button: {
-                        className: "btn btn-sm btn-primary",
-                    },
-                },
-            });
-
-            // Khởi tạo các loại Table khác nhau
-            jQuery(".js-dataTable-full").DataTable({
-                autoWidth: !1,
-            });
-
-            jQuery(".js-dataTable-buttons").DataTable({
-                autoWidth: !1,
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
-                dom: "<'row'<'col-sm-12'<'text-center bg-body-light py-2 mb-2'B>>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            });
-
-            jQuery(".js-dataTable-simple").DataTable({
-                searching: !1,
-                autoWidth: !1,
-                dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-6'i><'col-sm-6'p>>",
+                lengthChange: false,
+                autoWidth: false
             });
 
             const dateRangeHtml = `
@@ -79,7 +54,7 @@ Dashmix.onLoad(() =>
 
             const userTable = jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
-                pageLength: 5,
+                pageLength: 10,
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 responsive: !0,
@@ -218,12 +193,24 @@ Dashmix.onLoad(() =>
                 let val = $(this).val();
                 userTable.column(7).search(val ? `^${val}$` : '', true, false).draw();
 
-                // Ẩn/Hiện checkbox (cột 0)
-                // Hiện: Chưa xử lý, Đã xác nhận
-                const allowedStatuses = ["Chưa xử lý", "Đã xác nhận"];
+                const $bulkSelect = $('#bulk-status-select');
+                $bulkSelect.empty().append('<option value="">Chọn thao tác</option>');
 
-                if (allowedStatuses.includes(val)) {
+                // Ẩn/Hiện checkbox (cột 0)
+                if (val === "Chưa xử lý") {
                     userTable.column(0).visible(true);
+                    // "Chưa xử lý" : Xác nhận, Hủy
+                    $bulkSelect.append(`
+                        <option value="1">Xác nhận đơn hàng</option>
+                        <option value="3">Huỷ đơn</option>
+                    `);
+                } else if (val === "Đã xác nhận") {
+                    userTable.column(0).visible(true);
+                    // "Đã xác nhận" : Giao thành công, Hủy
+                    $bulkSelect.append(`
+                        <option value="2">Giao hàng thành công</option>
+                        <option value="3">Huỷ đơn</option>
+                    `);
                 } else {
                     userTable.column(0).visible(false);
                 }
@@ -315,7 +302,7 @@ Dashmix.onLoad(() =>
             }
 
 
-            $('#check-all').on('click', function () { // Delegation
+            $('#user-table').on('click', '#check-all', function () { // Delegation
                 /** .prop()
                  * Lấy giá trị thuộc tính của phần tử đầu tiên, Gán cho tất cả thực thể trong tập hợp
                  * 
@@ -325,7 +312,8 @@ Dashmix.onLoad(() =>
                  * .prop( propertyName, function ): Thiết lập giá trị thông qua một hàm xử lý.
                  */
                 let isChecked = $(this).prop('checked');
-                $('#user-table tbody .js-check-row').prop('checked', isChecked);
+                let rows = userTable.rows({ page: 'current' }).nodes();
+                $(rows).find('.js-check-row').prop('checked', isChecked);
                 updateBulkActionUI();
             });
 

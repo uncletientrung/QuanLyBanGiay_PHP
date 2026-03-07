@@ -79,35 +79,8 @@ Dashmix.onLoad(() =>
                     },
                 },
                 pageLength: 10,
-                lengthChange: false
-            });
-
-            // Cấu hình Buttons mặc định
-            jQuery.extend(!0, jQuery.fn.DataTable.Buttons.defaults, {
-                dom: {
-                    button: {
-                        className: "btn btn-sm btn-primary",
-                    },
-                },
-            });
-
-            // Khởi tạo các loại Table khác nhau
-            jQuery(".js-dataTable-full").DataTable({
-                autoWidth: !1,
-            });
-
-            jQuery(".js-dataTable-buttons").DataTable({
-                autoWidth: !1,
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
-                dom: "<'row'<'col-sm-12'<'text-center bg-body-light py-2 mb-2'B>>><'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-            });
-
-            jQuery(".js-dataTable-simple").DataTable({
-                pageLength: 5,
-                lengthMenu: !1,
-                searching: !1,
-                autoWidth: !1,
-                dom: "<'row'<'col-sm-12'tr>><'row'<'col-sm-6'i><'col-sm-6'p>>",
+                lengthChange: false,
+                autoWidth: false
             });
 
             const userTable = jQuery(".js-dataTable-responsive").DataTable({
