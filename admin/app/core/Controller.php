@@ -1,11 +1,10 @@
 <?php
 class Controller
-{    
+{
     public function model($model)
     {
         if (file_exists(MODEL_PATH_DIR . $model . '.php')) {
             require_once  MODEL_PATH_DIR . $model . '.php';
-            require_once __DIR__ . '/../../../config/connectdb.php';
             global $conn;
             if (class_exists($model)) {
                 return new $model($conn);

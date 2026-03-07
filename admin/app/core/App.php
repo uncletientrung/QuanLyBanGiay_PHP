@@ -5,7 +5,8 @@ class App
     {
         if (!isset($_SESSION['admin_logged']) && isset($_COOKIE['admin_token'])) {
             require_once MODEL_PATH_DIR . 'AdminModel.php';
-            $adminModel = new AdminModel();
+            global $conn;
+            $adminModel = new AdminModel($conn);
             $adminModel->validateToken($_COOKIE['admin_token']);
         }
 

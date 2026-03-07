@@ -122,7 +122,27 @@ Dashmix.onLoad(() =>
                     },
                     {
                         data: 'thoigiantao',
-                        className: 'd-none d-sm-table-cell'
+                        className: 'text-center',
+                        render: function (data, type) {
+                            if (!data) return '';
+
+                            let parts = data.split(' ');
+                            let dateParts = parts[0].split('-'); // Ngày
+                            let timePart = parts[1] || ''; // Giờ
+
+                            // Format date
+                            let formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+                            // Nếu lọc thì dùng dữ liệu gốc
+                            if (type === 'sort' || type === 'filter') {
+                                return data;
+                            }
+
+                            return `
+                                <div class="fw-bold text-primary">${formattedDate}</div>
+                                <div class="text-muted fs-sm">${timePart}</div>
+                            `;
+                        }
                     },
                     {
                         data: 'diachigiaohang',
@@ -139,7 +159,7 @@ Dashmix.onLoad(() =>
                     {
                         data: 'trangthai',
                         className: 'text-center',
-                        render: function (data) {
+                        render: function (data, type) {
                             let statusMap = {
                                 0: { text: "Chưa xử lý", class: "bg-warning" },
                                 1: { text: "Đã xác nhận", class: "bg-info" },
@@ -147,6 +167,7 @@ Dashmix.onLoad(() =>
                                 3: { text: "Đã hủy", class: "bg-danger" }
                             };
                             let status = statusMap[data] || { text: "N/A", class: "bg-secondary" };
+                            if (type === 'filter') return status.text;
                             return `<span class="badge ${status.class}">${status.text}</span>`;
                         }
                     },
@@ -179,7 +200,7 @@ Dashmix.onLoad(() =>
             `);
             $('#filter-status').on('change', function () {
                 let val = $(this).val();
-                userTable.column(6).search(val ? '^' + val + '$' : '', true, false).draw();
+                userTable.column(6).search(val ? `^${val}$` : '', true, false).draw();
             });
 
             // Lọc khoảng thời gian
