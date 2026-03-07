@@ -11,22 +11,24 @@
     <div class="block block-rounded">
         <div class="block-header block-header-default">
             <h3 class="block-title">Đơn hàng</h3>
-            <div class="block-options">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-hero btn-primary" data-bs-toggle="modal" data-bs-target="#modal-user" id="btn-add-modal">
-                        Thêm mới <i class="fa fa-plus ms-1"></i>
-                    </button>
-                </div>
-            </div>
         </div>
         <div class="block-content block-content-full">
             <!-- All Orders Table -->
             <div class="table-responsive">
-                <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive">
+                <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive js-table-checkable">
                     <thead>
                         <tr>
+                            <!-- Checkbox -->
+                            <th class="text-center" style="width: 30px;">
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" type="checkbox" value="" id="check-all" name="check-all">
+                                    <label class="form-check-label" for="check-all"></label>
+                                </div>
+                            </th>
+
+
                             <!-- sm: Ẩn trên điện thoại / md: ẩn trên ipad -->
-                            <th class="text-center" style="width: 80px;">MÃ ĐH</th>
+                            <th class="text-center">MÃ ĐH</th>
                             <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
                             <th class="text-center d-none d-sm-table-cell">THỜI GIAN</th>

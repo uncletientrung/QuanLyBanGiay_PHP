@@ -83,12 +83,27 @@ Dashmix.onLoad(() =>
                 lengthMenu: [[5, 10, 20], [5, 10, 20]],
                 autoWidth: !1,
                 responsive: !0,
+                order: [[1]],
                 dom: "<'row'<'col-sm-12 col-md-3'<'#status-filter-place'>><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-3'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './don_hang/getData',
                     dataSrc: ''
                 },
                 columns: [
+                    {
+                        data: null,
+                        className: 'text-center',
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return `
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input js-check-row" type="checkbox" value="${row.madh}" id="row_${row.madh}" name="row_${row.madh}">
+                                    <label class="form-check-label" for="row_${row.madh}"></label>
+                                </div>
+                            `;
+                        }
+                    },
+
                     {
                         data: 'madh',
                         className: 'text-center',
@@ -174,6 +189,7 @@ Dashmix.onLoad(() =>
                     {
                         data: 'madh',
                         className: 'text-center',
+                        orderable: false,
                         render: function (data) {
                             return `
                                 <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)">
@@ -188,6 +204,8 @@ Dashmix.onLoad(() =>
                 ]
             });
 
+            // Default ẩn checkbox
+            userTable.column(0).visible(false);
             // Lọc trạng thái
             jQuery("#status-filter-place").html(`
                 <select class="form-select" id="filter-status">
@@ -200,7 +218,17 @@ Dashmix.onLoad(() =>
             `);
             $('#filter-status').on('change', function () {
                 let val = $(this).val();
-                userTable.column(6).search(val ? `^${val}$` : '', true, false).draw();
+                userTable.column(7).search(val ? `^${val}$` : '', true, false).draw();
+
+                // Ẩn/Hiện checkbox (cột 0)
+                // Hiện: Chưa xử lý, Đã xác nhận
+                const allowedStatuses = ["Chưa xử lý", "Đã xác nhận"];
+
+                if (allowedStatuses.includes(val)) {
+                    userTable.column(0).visible(true);
+                } else {
+                    userTable.column(0).visible(false);
+                }
             });
 
             // Lọc khoảng thời gian
@@ -234,13 +262,13 @@ Dashmix.onLoad(() =>
             });
 
             $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                if (settings.nTable.id !== 'userTableID' && !$(settings.nTable).hasClass('js-dataTable-responsive')) {
+                if (settings.nTable.id !== 'user-table' && !$(settings.nTable).hasClass('js-dataTable-responsive')) {
                     return true;
                 }
 
                 let minStr = jQuery("#filter-from").val();
                 let maxStr = jQuery("#filter-to").val();
-                let tableDateTime = data[3];
+                let tableDateTime = data[4];
 
                 if (!minStr && !maxStr) return true;
                 if (!tableDateTime) return false;
@@ -269,6 +297,51 @@ Dashmix.onLoad(() =>
                 return false;
             });
             // END lọc khoảng thời gian
+
+            // Checkbox
+            $('#user-table').on('click', '#check-all', function () { // Delegation
+                /** .prop()
+                 * Lấy giá trị thuộc tính của phần tử đầu tiên, Gán cho tất cả thực thể trong tập hợp
+                 * 
+                 * .prop( propertyName ): Lấy giá trị của thuộc tính.
+                 * .prop( propertyName, value ): Thiết lập một giá trị cho thuộc tính.
+                 * .prop( properties ): Thiết lập nhiều thuộc tính cùng lúc bằng một đối tượng (object).
+                 * .prop( propertyName, function ): Thiết lập giá trị thông qua một hàm xử lý.
+                 */
+                let isChecked = $(this).prop('checked');
+                $('#user-table tbody .js-check-row').prop('checked', isChecked);
+            });
+
+            /** Delegation
+             * Áp dụng nổi bọt: <ul><a></a></ul> -> click mỗi a nhưng sau đó ul cũng bị click
+             * .on( events [, selector ] [, data ], handler )
+             * events, Kiểu DL: String. 1 hoặc nhiều sự kiện cách nhau 1 khoảng trắng
+             * selector, Kiểu DL: String. Phần tử con nằm trong từng dòng của bảng
+             * data, Kiểu DL: Anything. Truyền DL vào handler thông qua event.data
+             * handler, Kiểu DL: Function. 
+             */
+            $('#user-table tbody').on('change', '.js-check-row', function () { // Delegation 
+                let total = $('#user-table tbody .js-check-row').length;
+                let checked = $('#user-table tbody .js-check-row:checked').length;
+
+                if (total > 0 && total === checked) {
+                    $('#check-all').prop('checked', true);
+                } else {
+                    $('#check-all').prop('checked', false);
+                }
+            });
+
+            /** Reset check-all
+             * draw kích hoạt khi vẽ lại bảng trên trang, cùng thời điểm với drawCallback
+             * function(e, settings)
+             * - e, Kiểu DL: object jQuery
+             * - settings, Kiểu DL: DataTables.Settings
+             */
+            userTable.on('draw', function () {
+                $('#check-all').prop('checked', false);
+            });
+            // END Checkbox
+
         }
 
         static init() {
