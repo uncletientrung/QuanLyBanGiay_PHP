@@ -68,7 +68,7 @@
           <div class="navbar-nav mx-auto">
             <a href="<?= ROOT_URL ?>" class="nav-item nav-link active">Trang chủ</a>
             <a href="<?= ROOT_URL ?>about-us" class="nav-item nav-link">Giới thiệu</a>
-            <a href="<?= ROOT_URL ?>products" class="nav-item nav-link">Ggit iày</a>
+            <a href="<?= ROOT_URL ?>products" class="nav-item nav-link">Giày</a>
             
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
