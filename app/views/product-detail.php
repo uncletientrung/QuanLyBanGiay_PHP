@@ -287,46 +287,43 @@ echo '</pre>';
     </div>
 
     <h1 class="fw-bold mb-0">Related products</h1>
+
     <div class="vesitable">
-     
       <div class="owl-carousel vegetable-carousel justify-content-center">
 
-         <?php if(!empty($listSP)) : ?>
-        <?php foreach($listSP as $sp):?>
-          <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
+        <?php if(!empty($listSP)) : ?>
+          <?php foreach($listSP as $sp): ?>
+            <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
 
-   
-        <div class="border border-primary rounded position-relative vesitable-item">
-          <div class="vesitable-img">
-            <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img 
-                              src="<?= $sp['image'] ?>" 
-                              class="img-fluid w-100 rounded-top" 
-                              alt=""
-                            >
-                          </a>
-          </div>
-          <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;"><?= $sp['tenhang'] ?></div>
-          <div class="p-4 pb-0 rounded-bottom">
-            <h4><?= $sp['tensp'] ?></h4>
-             
-            <div class="d-flex justify-content-between flex-lg-wrap">
-              <p class="text-dark fs-5 fw-bold"><?= number_format($giaBanSP, 0, ',', '.') ?> ₫</p>
-                 <p class="text-black fs-6 mb-0">
-                  Đã bán: <?= $sp['soluongdaban'] ?>
+            <div class="product-item position-relative"> 
+
+              <div class="product-img">
+                <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                  <img src="<?= $sp['image'] ?>" class="img-fluid w-100">
+                </a>
+              </div>
+
+              <div class="brand-tag">
+                <?= htmlspecialchars($sp['tenhang']) ?>
+              </div>
+
+              <div class="product-content p-2">
+                <p class="product-price">
+                  <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                 </p>
-              
-            </div>
-              <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
-          </div>
-        </div>
-                <?php endforeach; ?>
-      <?php else: ?>
-          <div class="col-12 text-center">
-          <p class="text-muted fs-5">Không có sản phẩm nào</p>
-        </div>
-      <?php endif; ?>
+                <p class="product-name">
+                  <?= htmlspecialchars($sp['tensp']) ?>
+                </p>
+              </div>
 
+            </div>
+
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div class="col-12 text-center">
+            <p class="text-muted fs-5">Không có sản phẩm nào</p>
+          </div>
+        <?php endif; ?>
 
       </div>
     </div>

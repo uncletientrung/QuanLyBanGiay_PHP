@@ -1,3 +1,4 @@
+
 <?php
 require_once "../QuanLyBanGiay_PHP/config/connectdb.php";
 require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
@@ -25,6 +26,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
         <h4 class="mb-3 text-secondary">Giày chính hãng – Chất lượng cao</h4>
         <h1 class="mb-5 display-3 text-primary">Giày Cao Cấp Cho Cuộc Sống Hiện Đại</h1>
         <div class="position-relative mx-auto">
+
           <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text"
             placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
           <button type="submit"
@@ -171,26 +173,26 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                   <?php foreach ($listBestSellingALL as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                      <div class="product-item position-relative">
+
+                        <div class="product-img">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          </a>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+
+                        <div class="brand-tag">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="p-4 border border-secondary border-top-0">
-                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-                          <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
-                            <p class="text-dark fs-5 fw-bold mb-0">
-                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
-                            </p>
-                            <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongdaban'] ?>
-                            </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
-                          </div>
+                        <div class="product-content p-2">
+
+                          <p class="product-price">
+                            <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                          </p>
+                          <p class="product-name">
+                            <?= $sp['tensp'] ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -213,26 +215,26 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                   <?php foreach ($listBestSellingAdidas as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                      <div class="product-item position-relative">
+
+                        <div class="product-img">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          </a>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+
+                        <div class="brand-tag">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="p-4 border border-secondary border-top-0">
-                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-                          <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
-                            <p class="text-dark fs-5 fw-bold mb-0">
-                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
-                            </p>
-                            <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongdaban'] ?>
-                            </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
-                          </div>
+                        <div class="product-content p-2">
+
+                          <p class="product-price">
+                            <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                          </p>
+                          <p class="product-name">
+                            <?= $sp['tensp'] ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -254,26 +256,26 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                   <?php foreach ($listBestSellingNike as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                      <div class="product-item position-relative">
+
+                        <div class="product-img">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          </a>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+
+                        <div class="brand-tag">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="p-4 border border-secondary border-top-0">
-                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-                          <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
-                            <p class="text-dark fs-5 fw-bold mb-0">
-                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
-                            </p>
-                            <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongdaban'] ?>
-                            </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
-                          </div>
+                        <div class="product-content p-2">
+
+                          <p class="product-price">
+                            <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                          </p>
+                          <p class="product-name">
+                            <?= $sp['tensp'] ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -295,26 +297,26 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                   <?php foreach ($listBestSellingPuma as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                      <div class="product-item position-relative">
+
+                        <div class="product-img">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          </a>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+
+                        <div class="brand-tag">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="p-4 border border-secondary border-top-0">
-                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-                          <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
-                            <p class="text-dark fs-5 fw-bold mb-0">
-                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
-                            </p>
-                            <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongdaban'] ?>
-                            </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
-                          </div>
+                        <div class="product-content p-2">
+
+                          <p class="product-price">
+                            <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                          </p>
+                          <p class="product-name">
+                            <?= $sp['tensp'] ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -337,26 +339,26 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                   <?php foreach ($listBestSellingVans as $sp): ?>
                     <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                      <div class="rounded position-relative fruite-item">
-                        <div class="fruite-img">
-                          <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
+                      <div class="product-item position-relative">
+
+                        <div class="product-img">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          </a>
                         </div>
-                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+
+                        <div class="brand-tag">
                           <?= $hangController->getNameById($sp['hang']) ?>
                         </div>
-                        <div class="p-4 border border-secondary border-top-0">
-                          <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-                          <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
 
-                            <p class="text-dark fs-5 fw-bold mb-0">
-                              <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
-                            </p>
-                            <p class="text-black fs-6 mb-0">
-                              Đã bán: <?= $sp['soluongdaban'] ?>
-                            </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
-                          </div>
+                        <div class="product-content p-2">
+
+                          <p class="product-price">
+                            <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
+                          </p>
+                          <p class="product-name">
+                            <?= $sp['tensp'] ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -447,26 +449,29 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
       <?php if (!empty($listSP)): ?>
         <?php foreach ($listSP as $sp): ?>
           <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
-          <div class="border border-primary rounded position-relative vesitable-item">
-            <div class="vesitable-img">
-              <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100 rounded-top" alt="">
-            </div>
-            <div class="text-white bg-primary px-3 py-1 rounded position-absolute" style="top: 10px; right: 10px;">
-              <?= $hangController->getNameById($sp['hang']) ?></div>
-            <div class="p-4 rounded-bottom">
-              <h4 class="text-start"><?= $sp['tensp'] ?></h4>
-              <div class="d-flex justify-content-between align-items-center flex-lg-wrap">
-                <p class="text-dark fs-5 fw-bold mb-0">
+          <div class="product-item position-relative"> 
+
+              <div class="product-img">
+                <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
+                  <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                </a>
+              </div>
+
+              <div class="brand-tag">
+                <?= htmlspecialchars($hangController->getNameById($sp['hang'])) ?>
+              </div>
+
+              <div class="product-content p-2">
+                <p class="product-price">
                   <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                 </p>
-                <p class="text-black fs-6 mb-0">
-                  Đã bán: <?= $sp['soluongdaban'] ?>
+                <p class="product-name">
+                  <?= htmlspecialchars($sp['tensp']) ?>
                 </p>
-                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                    class="fa fa-shopping-bag me-2 text-primary"></i>THÊM VÀO GIỎ</a>
               </div>
+
             </div>
-          </div>
+
         <?php endforeach; ?>
       <?php else: ?>
         <div class="col-12 text-center">

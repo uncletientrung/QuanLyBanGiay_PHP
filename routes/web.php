@@ -40,6 +40,7 @@ if ($uri == '' || $uri == '/' || $uri == 'home') {
     render('home', $conn);
     exit;
 }
+//sản phẩm Start
 if ($uri == 'products') {
     $headerData = prepareHeader($conn);
     extract($headerData);
@@ -49,6 +50,8 @@ if ($uri == 'products') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+
+// sản phẩm END
 
 // Giỏ hàng START
 if ($uri == 'cart') {
