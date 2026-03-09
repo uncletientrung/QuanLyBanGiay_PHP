@@ -35,14 +35,16 @@
 
             <!-- All Orders Table -->
             <div class="table-responsive">
-                <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive js-table-checkable">
+                <table id="user-table" class="table table-borderless table-striped table-vcenter js-dataTable-responsive">
                     <thead>
                         <tr>
                             <!-- Checkbox -->
                             <th class="text-center" style="width: 30px;">
                                 <div class="form-check d-inline-block">
-                                    <input class="form-check-input" type="checkbox" value="" id="check-all" name="check-all">
-                                    <label class="form-check-label" for="check-all"></label>
+                                    <input class="form-check-input" type="checkbox" value="" id="check-all" name="check-all"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="check-all"
+                                        style="cursor: pointer;"></label>
                                 </div>
                             </th>
 

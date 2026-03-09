@@ -72,8 +72,11 @@ Dashmix.onLoad(() =>
                         render: function (data, type, row) {
                             return `
                                 <div class="form-check d-inline-block">
-                                    <input class="form-check-input js-check-row" type="checkbox" value="${row.madh}" id="row_${row.madh}" name="row_${row.madh}">
-                                    <label class="form-check-label" for="row_${row.madh}"></label>
+                                    <input class="form-check-input js-check-row" type="checkbox" 
+                                        style="cursor: pointer;" 
+                                        value="${row.madh}" id="row_${row.madh}" name="row_${row.madh}">
+                                    <label class="form-check-label" for="row_${row.madh}" 
+                                        style="cursor: pointer;"></label>
                                 </div>
                             `;
                         }
