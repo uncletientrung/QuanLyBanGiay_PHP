@@ -87,6 +87,7 @@ Dashmix.onLoad(() =>
                 pagingType: "full_numbers",
                 autoWidth: !1,
                 responsive: !0,
+                order: [[0]],
                 dom: "<'row'<'col-sm-12 col-md-6'<'#status-filter-place'>><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './user/getData',

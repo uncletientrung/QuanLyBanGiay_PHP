@@ -34,6 +34,22 @@ class Don_hang extends Controller
         exit;
     }
 
+    public function updateStatus()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id     = $_POST['id']     ?? null;
+            $status = $_POST['status'] ?? null;
+
+            if ($id && $status !== null) {
+                $result = $this->donhangModel->updateStatus($id, $status);
+                echo json_encode(['success' => $result]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ']);
+            }
+        }
+        exit;
+    }
+
     public function updateBulkStatus()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -57,12 +73,38 @@ class Don_hang extends Controller
 
     public function detail($id = null)
     {
+        $order = $this->donhangModel->getDetail($id);
+        $items = $this->donhangModel->getItems($id);
+
+        if (!$order) {
+            header('Location: /don_hang');
+            exit;
+        }
+
         $this->renderView("main_layout", [
             "page" => "don_hang_detail",
-            "title" => "Chi tiết đơn hàng #" . $id,
+            "title" => "Chi tiết đơn hàng" . $id,
             "id" => $id,
-            "Plugin"  => [],
-            "Script"  => ""
+            "order" => $order,
+            "items" => $items,
+            "Plugin"  => ["sweetalert2" => 1],
+            "Script"  => "ct_don_hang"
         ]);
+    }
+
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'] ?? null;
+            if ($id) {
+                $result = $this->donhangModel->deleteFullOrder($id);
+                echo json_encode(['success' => $result]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'ID không hợp lệ']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+        }
+        exit;
     }
 }

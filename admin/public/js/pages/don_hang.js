@@ -461,6 +461,69 @@ Dashmix.onLoad(() =>
             });
             // END Checkbox
 
+            // Xoá
+            $(document).on("click", ".btn-delete-user", function (e) {
+                e.preventDefault();
+                var trid = $(this).data("id");
+
+                let swalBlock = Swal.mixin({
+                    buttonsStyling: !1,
+                    target: "#page-container",
+                    customClass: {
+                        confirmButton: "btn btn-danger m-1",
+                        cancelButton: "btn btn-secondary m-1",
+                        input: "form-control",
+                    },
+                });
+
+                swalBlock.fire({
+                    title: "Bạn có chắc chắn?",
+                    text: "Đơn hàng DH-" + trid + " và toàn bộ chi tiết bên trong sẽ bị xoá vĩnh viễn!",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    confirmButtonText: "Vâng, xóa ngay!",
+                    cancelButtonText: "Huỷ",
+                    html: !1,
+                    preConfirm: (e) =>
+                        new Promise((resolve) => {
+                            setTimeout(() => {
+                                resolve();
+                            }, 50);
+                        }),
+                }).then((t) => {
+                    if (t.value == true) {
+                        $.ajax({
+                            type: "post",
+                            url: "./don_hang/delete",
+                            data: {
+                                id: trid,
+                            },
+                            dataType: "json",
+                            success: function (response) {
+                                if (response.success) {
+                                    swalBlock.fire("Đã xoá!", "Đơn hàng và các chi tiết liên quan đã được xóa sạch.", "success");
+
+                                    userTable.ajax.reload(function () {
+                                        let info = userTable.page.info();
+                                        // Trang hiện tại không còn dòng nào -> quay lại trang trước
+                                        if (info.recordsDisplay > 0 && info.start >= info.recordsDisplay) {
+                                            userTable.page('previous').draw('page');
+                                        }
+                                    }, false);
+                                } else {
+                                    swalBlock.fire("Lỗi!", "Không thể xoá đơn hàng này khỏi cơ sở dữ liệu.", "error");
+                                }
+                            },
+                            error: function () {
+                                swalBlock.fire("Lỗi!", "Lỗi kết nối máy chủ. Vui lòng kiểm tra Route/Controller.", "error");
+                            }
+                        });
+                    } else {
+                        swalBlock.fire("Đã huỷ", "Dữ liệu vẫn an toàn", "error");
+                    }
+                });
+            });
+            // END Xoá
         }
 
         static init() {

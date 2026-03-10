@@ -10,7 +10,7 @@ class KhachHangModel
 
     public function getAll()
     {
-        $sql = "SELECT * FROM khachhang ORDER BY makh ASC";
+        $sql = "SELECT * FROM khachhang";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
