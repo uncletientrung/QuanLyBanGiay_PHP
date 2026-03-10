@@ -38,6 +38,13 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);   
     }
 
+     public function getBestSellingProduct(){
+        $sql = "SELECT * FROM sanpham WHERE trangthai = 1 ORDER BY soluongdaban DESC LIMIT 12";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);   
+    }
+
     public function countAll() 
     {
         $sql = "SELECT COUNT(*) as total FROM sanpham WHERE trangthai = 1";

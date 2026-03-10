@@ -30,7 +30,95 @@
 }
 
 /*** Spinner End ***/
+/*** NAVY THEME ***/
 
+:root {
+  --navy: #0b3d91;
+  --navy-dark: #082c6a;
+}
+.navbar-brand h1 {
+  color: var(--navy) !important;
+}
+
+.navbar-brand h1:hover {
+  color: var(--navy-dark) !important;
+}
+
+.topbar {
+  background: var(--navy) !important;
+}
+.navbar-nav .nav-link {
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--navy) !important;
+}
+.navbar-nav .nav-link.active {
+  color: var(--navy) !important;
+  font-weight: 600;
+}
+.dropdown-item:hover {
+  background: var(--navy) !important;
+  color: white !important;
+}
+.fa-shopping-bag,
+.fa-user {
+  color: var(--navy);
+}
+
+.fa-shopping-bag:hover,
+.fa-user:hover {
+  color: var(--navy-dark);
+}
+.position-absolute.bg-secondary {
+  background: var(--navy) !important;
+  color: white !important;
+}
+.fa-bars {
+  color: var(--navy) !important;
+}
+
+.footer h1 {
+  color: rgb(255, 255, 255) !important;
+}
+
+.footer .btn-primary {
+  background: var(--navy-dark) !important;
+  border: none !important;
+}
+
+.footer .btn-primary:hover {
+  background: #061f4f !important;
+}
+.footer .btn.border-secondary {
+  border-color: white !important;
+  color: white !important;
+}
+
+.footer .btn.border-secondary:hover {
+  background: white !important;
+  color: var(--navy) !important;
+}
+.back-to-top {
+  background: var(--navy) !important;
+  border-color: var(--navy) !important;
+}
+
+.back-to-top:hover {
+  background: var(--navy-dark) !important;
+}
+
+.footer .btn-outline-secondary {
+  border-color: white !important;
+  color: white !important;
+}
+
+.footer .btn-outline-secondary:hover {
+  background: white !important;
+  color: var(--navy) !important;
+}
 /*** Button Start ***/
 .btn {
   font-weight: 600;
@@ -185,7 +273,7 @@
 .hero-header {
   background:
     linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)),
-    url(../img/hero-img.jpg);
+    url(../img/background-gemini2.png);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -201,7 +289,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 25px;
-  background: linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7));
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
 }
 
 .carousel-control-next,
@@ -246,6 +337,55 @@
   .page-header {
     margin-top: 97px !important;
   }
+}
+.hero-subtitle {
+  color: #2e2e5b;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.hero-title {
+  color: #2e2e5b;
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.btn-search {
+  background: #2e2e5b;
+  border: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-search:hover {
+  background: #1e3a8a;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: calc(50% - 10px);
+  transform: translateY(-50%);
+
+  background: transparent;
+  border: none;
+
+  color: white;
+  font-size: 70px; /* chỉnh kích thước icon */
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.carousel-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
 }
 
 /*** Hero Header end ***/

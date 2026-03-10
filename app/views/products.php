@@ -30,7 +30,7 @@ echo '</pre>';
                 <input 
                   type="search" 
                   name="q" 
-                  value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" 
+                  value="<?= htmlspecialchars($filters['q'] ?? '') ?>" 
                   class="form-control p-3" 
                   placeholder="Tìm kiếm..." 
                   aria-describedby="search-icon-1"

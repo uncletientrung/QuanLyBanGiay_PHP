@@ -37,7 +37,9 @@
     <div class="spinner-grow text-primary" role="status"></div>
   </div>
   <!-- Loading End -->
-
+  <?php
+  $currentPage = $_GET['url'] ?? 'home';
+  ?>
   <!-- NAV start -->
   <div class="container-fluid fixed-top">
     <div class="container topbar bg-primary d-none d-lg-block">
@@ -66,10 +68,28 @@
         </button>
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="<?= ROOT_URL ?>" class="nav-item nav-link active">Trang chủ</a>
-            <a href="<?= ROOT_URL ?>about-us" class="nav-item nav-link">Giới thiệu</a>
-            <a href="<?= ROOT_URL ?>products" class="nav-item nav-link">Giày</a>
-            
+            <a href="<?= ROOT_URL ?>" 
+            class="nav-item nav-link <?= $currentPage == 'home' ? 'active' : '' ?>">
+            Trang chủ
+            </a>
+            <a href="<?= ROOT_URL ?>about-us" 
+            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
+            Giới thiệu
+            </a>
+          
+            <div class="nav-item dropdown">
+                <a class="nav-item nav-link dropdown-toggle 
+                <?= str_contains($currentPage,'products') ? 'active' : '' ?>" 
+                data-bs-toggle="dropdown">
+                  Giày
+                </a>
+              <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                  <a href="<?= ROOT_URL ?>products" class="dropdown-item">Tất cả</a>
+                  <?php foreach($listHang as $hang): ?>
+                  <a href="<?= ROOT_URL ?>products?hang[]=<?= $hang['mahang'] ?>" class="dropdown-item"> <?= htmlspecialchars($hang['tenhang']) ?></a>
+                  <?php endforeach; ?>
+              </div>
+          </div>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -79,11 +99,14 @@
                 <a href="<?= ROOT_URL ?>404" class="dropdown-item">404 Page</a>
               </div>
             </div>
-            <a href="<?= ROOT_URL ?>contact" class="nav-item nav-link">Liên hệ</a>
+            <a href="<?= ROOT_URL ?>contact" 
+            class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
+            Liên hệ
+            </a>
           </div>
           <div class="d-flex m-3 me-0">
-            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-              data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+            <!-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+              data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
             <!-- Button cart -->
             <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>

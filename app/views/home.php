@@ -1,39 +1,40 @@
-
-<?php
-require_once "../QuanLyBanGiay_PHP/config/connectdb.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/SanPhamController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HangController.php";
-require_once "../QuanLyBanGiay_PHP/app/controllers/HinhAnhController.php";
-
-$spController = new SanPhamController($conn);
-$hangController = new HangController($conn);
-$hinhAnhController = new HinhAnhController($conn);
-
-$listSP = $spController->getAll();
-
-$listBestSellingALL = $spController->getBestSellingByName("all");
-$listBestSellingPuma = $spController->getBestSellingByName("puma");
-$listBestSellingAdidas = $spController->getBestSellingByName("adidas");
-$listBestSellingVans = $spController->getBestSellingByName("vans");
-$listBestSellingNike = $spController->getBestSellingByName("nike");
-?>
-
 <!-- Banner đầu trang -->
 <div class="container-fluid py-3 mb-4 hero-header">
   <div class="container py-3">
     <div class="row g-5 align-items-center">
-      <div class="col-md-12 col-lg-7">
-        <h4 class="mb-3 text-secondary">Giày chính hãng – Chất lượng cao</h4>
-        <h1 class="mb-5 display-3 text-primary">Giày Cao Cấp Cho Cuộc Sống Hiện Đại</h1>
-        <div class="position-relative mx-auto">
+    <div class="col-md-12 col-lg-7">
 
-          <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text"
-            placeholder="Nhập từ khóa để tìm kiếm sản phẩm">
-          <button type="submit"
-            class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-            style="top: 0; right: 25%;">Tìm sản phẩm</button>
-        </div>
-      </div>
+    <h4 class="hero-subtitle mb-3">
+        Giày chính hãng – Chất lượng cao
+    </h4>
+
+    <h1 class="hero-title mb-5">
+        New Collection
+    </h1>
+
+    <div class="position-relative mx-auto">
+
+        <form action="<?= ROOT_URL ?>products" method="GET">
+
+            <input 
+            class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill"
+            type="text"
+            name="q"
+            placeholder="Nhập từ khóa để tìm kiếm sản phẩm"
+            value="<?= htmlspecialchars($filters['q'] ?? '') ?>"
+            >
+
+            <button
+            type="submit"
+            class="btn-search py-3 px-4 position-absolute rounded-pill h-100"
+            style="top:0; right:25%;">
+            Tìm sản phẩm
+            </button>
+
+        </form>
+
+    </div>
+</div>
 
       <div class="col-md-12 col-lg-5">
         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -55,13 +56,12 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               <a href="#" class="btn px-4 py-2 text-white rounded">Puma</a>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+          <button class="carousel-btn prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+              ‹
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+
+          <button class="carousel-btn next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+              ›
           </button>
         </div>
       </div>
@@ -131,9 +131,9 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
     <div class="tab-class text-center">
       <div class="row g-4">
         <div class="col-lg-4 text-start">
-          <h1>Sản phẩm bán chạy</h1>
+          <h1>Sản phẩm nổi bật</h1>
         </div>
-        <div class="col-lg-8 text-end">
+        <!-- <div class="col-lg-8 text-end">
           <ul class="nav nav-pills d-inline-flex text-center mb-3">
             <li class="nav-item">
               <a class="d-flex   m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
@@ -161,7 +161,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               </a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
 
       <div class="tab-content">
@@ -177,12 +177,12 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
 
                         <div class="product-img">
                           <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                            <img src="<?= $sp['image'] ?>" class="img-fluid w-100">
                           </a>
                         </div>
 
                         <div class="brand-tag">
-                          <?= $hangController->getNameById($sp['hang']) ?>
+                          <?= htmlspecialchars($sp['tenhang']) ?>
                         </div>
 
                         <div class="product-content p-2">
@@ -191,7 +191,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
                             <?= number_format($giaBanSP, 0, ',', '.') ?> ₫
                           </p>
                           <p class="product-name">
-                            <?= $sp['tensp'] ?>
+                            <?= htmlspecialchars($sp['tensp']) ?>
                           </p>
                         </div>
                       </div>
@@ -207,7 +207,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
             </div>
           </div>
         </div>
-        <div id="tab-2" class="tab-pane fade show p-0">
+        <!-- <div id="tab-2" class="tab-pane fade show p-0">
           <div class="row g-4">
             <div class="col-lg-12">
               <div class="row g-4">
@@ -336,14 +336,14 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               <div class="row g-4">
 
                 <?php if (!empty($listBestSellingVans)): ?>
-                  <?php foreach ($listBestSellingVans as $sp): ?>
-                    <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
+                  <?php foreach ($listBestSellingVans as $spp): ?>
+                    <?php $giaBanSP = $spp['gianhap'] + $spp['gianhap'] * $spp['tyleloinhuan'] / 100; ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                       <div class="product-item position-relative">
 
                         <div class="product-img">
-                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                          <a href="<?= ROOT_URL ?>product-detail?masp=<?= $spp['masp'] ?>">
+                            <img src="<?= $hinhAnhController->getMainImageById($spp['masp']) ?>" class="img-fluid w-100">
                           </a>
                         </div>
 
@@ -371,7 +371,7 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -453,12 +453,12 @@ $listBestSellingNike = $spController->getBestSellingByName("nike");
 
               <div class="product-img">
                 <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                  <img src="<?= $hinhAnhController->getMainImageById($sp['masp']) ?>" class="img-fluid w-100">
+                  <img src="<?= $sp['image'] ?>" class="img-fluid w-100">
                 </a>
               </div>
 
               <div class="brand-tag">
-                <?= htmlspecialchars($hangController->getNameById($sp['hang'])) ?>
+                <?= htmlspecialchars($sp['tenhang']) ?>
               </div>
 
               <div class="product-content p-2">

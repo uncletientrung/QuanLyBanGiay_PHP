@@ -171,4 +171,22 @@ class SanPhamController
 
 
     }
+
+    public function showHome(){
+        $listSP = $this->model->getAll();
+        $listBestSellingALL = $this->model->getBestSellingProduct();
+        foreach ($listBestSellingALL as &$sp) {
+            $sp['image'] = $this->hinhAnhModel->getImageMainById($sp['masp']);
+            $sp['tenhang'] = $this->hangModel->getNameById($sp['hang']);
+        }
+        unset($spp);
+        foreach ($listSP as &$sp) {
+            $sp['image'] = $this->hinhAnhModel->getImageMainById($sp['masp']);
+            $sp['tenhang'] = $this->hangModel->getNameById($sp['hang']);
+        }
+        unset($sp);
+        require VIEW_PATH_DIR . 'home.php';
+    }
+
+
 }

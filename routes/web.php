@@ -37,7 +37,12 @@ function prepareHeader($conn) // Chuẩn bị các dữ liệu cho Header
     return $headerController->getHeaderData();
 }
 if ($uri == '' || $uri == '/' || $uri == 'home') {
-    render('home', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $controller = new SanPhamController($conn);
+    $controller->showHome();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 //sản phẩm Start
