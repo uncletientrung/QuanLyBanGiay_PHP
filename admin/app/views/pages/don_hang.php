@@ -4,6 +4,7 @@
 <?php $dm->get_css('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
+<?php $dm->get_css('js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'); ?>
 
 <!-- Page Content -->
 <div class="content">

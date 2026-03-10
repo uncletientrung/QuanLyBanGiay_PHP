@@ -170,10 +170,10 @@ Dashmix.onLoad(() =>
                         orderable: false,
                         render: function (data) {
                             return `
-                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)">
+                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)" title="Xem chi tiết">
                                     <i class="fa fa-fw fa-eye text-info"></i>
                                 </a>
-                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)">
+                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)" title="Xoá">
                                     <i class="fa fa-fw fa-times text-danger"></i>
                                 </a>
                             `;
@@ -228,6 +228,7 @@ Dashmix.onLoad(() =>
 
             // Lọc khoảng thời gian
             jQuery("#date-filter-box").html(dateRangeHtml);
+
             const baseFpConfig = {
                 enableTime: true,
                 time_24hr: true,
@@ -235,24 +236,78 @@ Dashmix.onLoad(() =>
                 allowInput: true
             };
 
-            const fromPicker = flatpickr("#filter-from", {
+            // Highlight giữa 2 khoảng thời gian
+            function applyRangeHighlight(calendarContainer, fromDate, toDate) {
+                calendarContainer.querySelectorAll(".flatpickr-day").forEach(function (d) {
+                    d.classList.remove("inRange", "startRange", "endRange");
+                    const dDate = d.dateObj;
+                    if (!dDate || !fromDate) return;
+                    const cmp = toDate || fromDate;
+                    // Nằm giữa Từ và Đến thì thêm class inRange
+                    // class inRange, startRange, endRange có sẵn của Flatpickr
+                    if (dDate > fromDate && dDate < cmp) d.classList.add("inRange");
+                    if (dDate.toDateString() === fromDate.toDateString()) d.classList.add("startRange");
+                    if (dDate.toDateString() === cmp.toDateString()) d.classList.add("endRange");
+                });
+            }
+
+            var fromPicker = flatpickr("#filter-from", {
                 ...baseFpConfig,
-                onClose: function (selectedDates, dateStr) {
-                    let toValue = jQuery("#filter-to").val();
-                    if (dateStr && !toValue) {
-                        toPicker.setDate(selectedDates[0]);
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const from = fp.selectedDates[0];
+                    const to = toPicker ? toPicker.selectedDates[0] : null;
+                    if (!from) return;
+                    const end = to || from;
+                    const d = dayElem.dateObj;
+                    if (d > from && d < end) dayElem.classList.add("inRange");
+                    if (d.toDateString() === from.toDateString()) dayElem.classList.add("startRange");
+                    if (d.toDateString() === end.toDateString()) dayElem.classList.add("endRange");
+                },
+                onChange: function (selectedDates) {
+                    const fromDate = selectedDates[0];
+                    const toDate = toPicker.selectedDates[0];
+                    if (fromDate && toPicker) {
+                        toPicker.set('minDate', fromDate);
+                        if (!toDate || fromDate > toDate) {
+                            toPicker.setDate(fromDate, false);
+                        }
+                        toPicker.redraw();
                     }
                     userTable.draw();
                 }
             });
-            const toPicker = flatpickr("#filter-to", {
+
+            var toPicker = flatpickr("#filter-to", {
                 ...baseFpConfig,
-                onClose: function (selectedDates, dateStr) {
-                    let fromValue = jQuery("#filter-from").val();
-                    if (dateStr && !fromValue) {
-                        fromPicker.setDate(selectedDates[0]);
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const from = fromPicker.selectedDates[0];
+                    const to = fp.selectedDates[0];
+                    if (!from) return;
+                    const end = to || from;
+                    const d = dayElem.dateObj;
+                    if (d > from && d < end) dayElem.classList.add("inRange");
+                    if (d.toDateString() === from.toDateString()) dayElem.classList.add("startRange");
+                    if (d.toDateString() === end.toDateString()) dayElem.classList.add("endRange");
+                },
+                onChange: function (selectedDates) {
+                    const toDate = selectedDates[0];
+                    const fromDate = fromPicker.selectedDates[0];
+                    if (toDate && (!fromDate || toDate < fromDate)) {
+                        fromPicker.setDate(toDate, false);
+                        fromPicker.redraw();
                     }
+                    fromPicker.redraw();
                     userTable.draw();
+                },
+                onReady: function (selectedDates, dateStr, fp) {
+                    fp.calendarContainer.addEventListener("mouseover", function (e) {
+                        const dayElem = e.target.closest(".flatpickr-day");
+                        if (!dayElem || !fromPicker.selectedDates[0]) return;
+                        applyRangeHighlight(fp.calendarContainer, fromPicker.selectedDates[0], dayElem.dateObj);
+                    });
+                    fp.calendarContainer.addEventListener("mouseleave", function () {
+                        applyRangeHighlight(fp.calendarContainer, fromPicker.selectedDates[0], fp.selectedDates[0]);
+                    });
                 }
             });
 

@@ -165,10 +165,10 @@ Dashmix.onLoad(() =>
                         className: 'text-center',
                         render: function (data) {
                             return `
-                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)">
+                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)" title="Sửa">
                                     <i class="fa fa-fw fa-pen-to-square text-info"></i>
                                 </a>
-                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)">
+                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)" title="Xoá">
                                     <i class="fa fa-fw fa-times text-danger"></i>
                                 </a>
                             `;
