@@ -8,8 +8,12 @@ class Don_hang extends Controller
         $this->donhangModel = $this->model("DonHangModel");
     }
 
-    public function default()
+    public function default($id = null)
     {
+        if ($id !== null) {
+            return $this->detail($id);
+        }
+
         $this->renderView("main_layout", [
             "page" => "don_hang",
             "title" => "Quản lý đơn hàng",
@@ -49,5 +53,16 @@ class Don_hang extends Controller
             }
         }
         exit;
+    }
+
+    public function detail($id = null)
+    {
+        $this->renderView("main_layout", [
+            "page" => "don_hang_detail",
+            "title" => "Chi tiết đơn hàng #" . $id,
+            "id" => $id,
+            "Plugin"  => [],
+            "Script"  => ""
+        ]);
     }
 }

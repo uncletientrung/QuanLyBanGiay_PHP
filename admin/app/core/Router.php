@@ -31,6 +31,18 @@ class Router
             return;
         }
 
+        // Ưu tiên url nhiều cấp
+        if (count($urlParts) >= 2) {
+            $checkUrl2 = '/' . $urlParts[0] . '/' . $urlParts[1];
+            if (isset($this->routers[$method][$checkUrl2])) {
+                $callback = $this->routers[$method][$checkUrl2];
+                unset($urlParts[0], $urlParts[1]);
+                $this->execute($callback, array_values($urlParts));
+                return;
+            }
+        }
+
+
         // Params
         $checkUrl = ($urlParts[0] == '') ? '/' : '/' . $urlParts[0];
         if (isset($this->routers[$method][$checkUrl])) {

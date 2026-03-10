@@ -170,7 +170,7 @@ Dashmix.onLoad(() =>
                         orderable: false,
                         render: function (data) {
                             return `
-                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" data-id="${data}" href="javascript:void(0)" title="Xem chi tiết">
+                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" href="./don_hang/${data}" title="Xem chi tiết">
                                     <i class="fa fa-fw fa-eye text-info"></i>
                                 </a>
                                 <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)" title="Xoá">
