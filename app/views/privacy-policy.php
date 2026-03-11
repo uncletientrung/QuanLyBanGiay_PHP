@@ -1,4 +1,4 @@
-  <style>
+<style>
   .policy-content {
     max-width: 1320px;
     margin: 50px 100px;
@@ -10,13 +10,14 @@
   .policy-content h3 {
     margin-top: 35px;
     font-size: 22px;
-    color: #2c7a2c;
+    color: #0a2a66; /* navy */
   }
 
   .policy-content h4 {
     margin-top: 20px;
     font-size: 17px;
     font-weight: bold;
+    color: #0a2a66;
   }
 
   .policy-content ul,
@@ -30,18 +31,19 @@
   }
 
   .policy-note {
-    background: #f4fdf0;
+    background: #eef2ff; /* nền xanh navy nhạt */
     padding: 15px 20px;
-    border-left: 4px solid #a5e46e;
+    border-left: 4px solid #0a2a66; /* navy */
     margin: 20px 0;
     border-radius: 4px;
   }
 
   .policy-contact {
-    background: #f9f9f9;
+    background: #f5f7fb; /* nền navy rất nhạt */
     padding: 20px;
     border-radius: 6px;
     margin-top: 30px;
+    border-left: 4px solid #0a2a66;
   }
 </style>
 

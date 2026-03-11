@@ -187,4 +187,25 @@ if ($uri == 'privacy-policy') {
     exit;
 }
 
+if ($uri == 'cs-vanchuyen') {
+    render('csvanchuyen', $conn);
+    exit;
+}
+if ($uri == 'cs-kiemhang') {
+    render('cskiemhang', $conn);
+    exit;
+}
+if ($uri == 'cs-thanhtoan') {
+    render('csthanhtoan', $conn);
+    exit;
+}
+if ($uri == 'cs-baohanh') {
+    render('csbaohanh', $conn);
+    exit;
+}
+if ($uri == 'dk-dichvu') {
+    render('dkdichvu', $conn);
+    exit;
+}
+
 render('404', $conn);

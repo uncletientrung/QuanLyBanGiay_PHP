@@ -42,20 +42,20 @@
         <div class="col-lg-3 col-md-6">
           <div class="d-flex flex-column text-start footer-item">
             <h4 class="text-light mb-3">Chính sách</h4>
-            <a class="btn-link" href="<?= ROOT_URL ?>about-us">Chính sách bảo mật thông tin</a>
-            <a class="btn-link" href="<?= ROOT_URL ?>contact-us">Chính sách thanh toán</a>
-            <a class="btn-link" href="<?= ROOT_URL ?>privacy-policy">Chính sách vận chuyển</a>
-            <a class="btn-link" href="<?= ROOT_URL ?>terms-condition">Chính sách kiểm hàng</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>privacy-policy">Chính sách bảo mật thông tin</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>cs-thanhtoan">Chính sách thanh toán</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>cs-vanchuyen">Chính sách vận chuyển</a>
+            <!-- <a class="btn-link" href="<?= ROOT_URL ?>terms-condition">Chính sách kiểm hàng</a> -->
+              <a class="btn-link" href="<?= ROOT_URL ?>cs-kiemhang">Chính sách kiểm hàng</a>
             <a class="btn-link" href="<?= ROOT_URL ?>return-policy">Chính sách đổi trả</a>
-            <a class="btn-link" href="">Chính sách bảo hành</a>
+            <a class="btn-link" href="<?= ROOT_URL ?>cs-baohanh">Chính sách bảo hành</a>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="d-flex flex-column text-start footer-item">
             <h4 class="text-light mb-3">Hướng dẫn</h4>
-            <a class="btn-link" href="">Hướng dẫn order</a>
-            <a class="btn-link" href="">Hướng dẫn mua hàng</a>
-            <a class="btn-link" href="">Điều khoản dịch vụ</a>
+           
+            <a class="btn-link" href="<?= ROOT_URL ?>dk-dichvu">Điều khoản dịch vụ</a>
             <a class="btn-link" href="<?= ROOT_URL ?>contact-us">Liên hệ</a>
             <a class="btn-link" href="<?= ROOT_URL ?>about-us">Giới thiệu</a>
             <a class="btn-link" href="<?= ROOT_URL ?>products">Tất cả sản phẩm</a>
