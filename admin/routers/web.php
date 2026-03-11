@@ -19,6 +19,7 @@ $router->post('/user/getDetail', 'User@getDetail');
 $router->post('/user/add', 'User@add');
 $router->post('/user/update', 'User@update');
 $router->post('/user/delete', 'User@delete');
+$router->post('/user/checkExists', 'User@checkExists');
 
 // Thuoc tinh
 $router->get('/brands', 'Brands@default');

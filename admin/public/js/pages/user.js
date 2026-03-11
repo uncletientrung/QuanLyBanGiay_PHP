@@ -192,6 +192,34 @@ Dashmix.onLoad(() =>
                 userTable.column(5).search(val ? '^' + val + '$' : '', true, false).draw();
             });
 
+            // Check trùng email / sđt
+            function checkCustomerExists(email, sdt, id = null) {
+                let result = true;
+                $.ajax({
+                    type: "post",
+                    url: "./user/checkExists",
+                    data: {
+                        email: email,
+                        sdt: sdt,
+                        id: id // update
+                    },
+                    async: false,
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.length !== 0) {
+                            Dashmix.helpers('jq-notify', {
+                                type: 'danger',
+                                icon: 'fa fa-times me-1',
+                                message: `Người dùng đã tồn tại trong hệ thống!`,
+                                z_index: 9999
+                            });
+                            result = false;
+                        }
+                    }
+                });
+                return result;
+            }
+
             // Model Thêm
             $("#btn-add-modal").on("click", function () {
                 $("#form-user")[0].reset();
@@ -203,35 +231,41 @@ Dashmix.onLoad(() =>
             });
 
             // Thêm / Sửa
-            $("#form-user").on("submit", function (e) {
+            $("#btn-save-customer").on("click", function (e) {
                 e.preventDefault();
 
-                if ($(this).valid()) {
+                if ($("#form-user").valid()) {
                     let id = $("#user_id").val();
-                    let url = id ? './user/update' : './user/add'; // Có id -> sửa : thêm
+                    let email = $("#email").val();
+                    let sdt = $("#sdt").val();
 
-                    let formData = {
-                        id: id,
-                        hoten: $("#hoten").val(),
-                        email: $("#email").val(),
-                        sdt: $("#sdt").val(),
-                        diachi: $("#diachi").val(),
-                        matkhau: $("#matkhau").val(),
-                        gioitinh: $("input[name='gioitinh']:checked").val(),
-                        trangthai: $("#trangthai").is(":checked") ? 1 : 0
-                    };
+                    if (checkCustomerExists(email, sdt, id)) {
+                        let url = id ? './user/update' : './user/add'; // Có id -> sửa : thêm
 
-                    $.post(url, formData, function (res) {
-                        if (res.success) {
-                            Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: 'Cập nhật thành công!' });
-                            $("#modal-user").modal("hide");
-                            userTable.ajax.reload();
-                        } else {
-                            Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: 'Có lỗi xảy ra!' });
-                        }
-                    }, 'json');
+                        let formData = {
+                            id: id,
+                            hoten: $("#hoten").val(),
+                            email: email,
+                            sdt: sdt,
+                            diachi: $("#diachi").val(),
+                            matkhau: $("#matkhau").val(),
+                            gioitinh: $("input[name='gioitinh']:checked").val(),
+                            trangthai: $("#trangthai").is(":checked") ? 1 : 0
+                        };
+
+                        $.post(url, formData, function (res) {
+                            if (res.success) {
+                                Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check me-1', message: 'Cập nhật thành công!' });
+                                $("#modal-user").modal("hide");
+                                jQuery(".js-dataTable-responsive").DataTable().ajax.reload();
+                            } else {
+                                Dashmix.helpers('jq-notify', { type: 'danger', icon: 'fa fa-times me-1', message: 'Có lỗi xảy ra!' });
+                            }
+                        }, 'json');
+                    }
                 }
             });
+
 
             // Modal Sửa
             $(document).on("click", ".btn-edit-user", function () {

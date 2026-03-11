@@ -76,4 +76,17 @@ class User extends Controller
         echo json_encode(['success' => $result]);
         exit;
     }
+
+    public function checkExists()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST['email'];
+            $sdt = $_POST['sdt'];
+            $id = isset($_POST['id']) ? $_POST['id'] : null;
+
+            $result = $this->khachHangModel->checkExists($email, $sdt, $id);
+            echo json_encode($result);
+            exit;
+        }
+    }
 }

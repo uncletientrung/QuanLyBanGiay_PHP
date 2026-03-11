@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="block-content block-content-full text-end bg-body-light">
                                     <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-dismiss="modal">Đóng</button>
-                                    <button type="submit" class="btn btn-sm btn-primary" id="btn-save">Lưu</button>
+                                    <button type="button" class="btn btn-sm btn-primary" id="btn-save-customer">Lưu</button>
                                 </div>
                             </div>
                         </form>

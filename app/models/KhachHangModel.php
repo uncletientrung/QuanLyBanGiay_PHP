@@ -89,4 +89,22 @@ class KhachHangModel
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+    public function checkExists($email, $sdt, $excludeId = null)
+    {
+        $sql = "SELECT * FROM khachhang WHERE (email = :email OR sdt = :sdt)";
+        if ($excludeId) {
+            $sql .= " AND makh != :id";
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':sdt', $sdt);
+        if ($excludeId) {
+            $stmt->bindParam(':id', $excludeId);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
