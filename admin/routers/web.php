@@ -48,6 +48,9 @@ $router->post('/don_hang/updateStatus', 'Don_hang@updateStatus');
 $router->post('/don_hang/updateBulkStatus', 'Don_hang@updateBulkStatus');
 $router->post('/don_hang/delete', 'Don_hang@delete');
 
+// Ton kho
 $router->get('/ton_kho', 'Ton_kho@default');
 
+// Thong ke
 $router->get('/reports', 'Reports@default');
+$router->get('/reports/getSummaryData', 'Reports@getSummaryData');

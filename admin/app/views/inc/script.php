@@ -41,6 +41,11 @@ if (isset($Plugin["flatpickr"]) && $Plugin["flatpickr"] == 1) {
     $dm->get_js('js/plugins/flatpickr/flatpickr.min.js');
 }
 
+// Plugin: Chart.js
+if (isset($Plugin["chartjs"]) && $Plugin["chartjs"] == 1) {
+    $dm->get_js('js/plugins/chart.js/chart.min.js');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');
