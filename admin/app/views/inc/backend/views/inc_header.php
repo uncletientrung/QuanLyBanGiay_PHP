@@ -43,11 +43,11 @@
         </button>
         <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="page-header-user-dropdown">
           <div class="bg-primary-dark rounded-top fw-semibold text-white text-center p-3">
-            User Options
+            Tuỳ chọn
           </div>
           <div class="p-2">
             <a class="dropdown-item" href="<?php echo APP_ADMIN_PATH; ?>profile">
-              <i class="far fa-fw fa-user me-1"></i> Profile
+              <i class="far fa-fw fa-user me-1"></i> Tài khoản
             </a>
             <div role="separator" class="dropdown-divider"></div>
             <a class="dropdown-item" href="<?php echo APP_ADMIN_PATH; ?>auth/logout">

@@ -10,7 +10,7 @@
             <div class="block block-rounded block-bordered">
                 <!-- Header -->
                 <div class="block-header block-header-default border-bottom">
-                    <h3 class="block-title">Thông tin đơn hàng <b class="text-primary">#<?= $order['madh'] ?></b></h3>
+                    <h3 class="block-title">Thông tin đơn hàng <b class="text-primary">DH-<?= $order['madh'] ?></b></h3>
                     <div class="block-options">
                         <span class="text-muted fs-sm">
                             <i class="fa fa-clock me-1"></i> <?= date('d/m/Y H:i:s', strtotime($order['thoigiantao'])) ?>
@@ -102,7 +102,7 @@
                                 <button type="button" class="btn btn-primary btn-update-status"
                                     data-id="<?= $order['madh'] ?>"
                                     data-status="1"
-                                    data-confirm="Xác nhận đơn hàng #<?= $order['madh'] ?>?">
+                                    data-confirm="Xác nhận đơn hàng DH-<?= $order['madh'] ?>?">
                                     <i class="fa fa-check me-1"></i> Confirm
                                 </button>
                             <?php endif; ?>
@@ -130,7 +130,7 @@
                                     <button type="button" class="btn btn-primary btn-update-status"
                                         data-id="<?= $order['madh'] ?>"
                                         data-status="2"
-                                        data-confirm="Xác nhận đã giao thành công đơn hàng #<?= $order['madh'] ?>?">
+                                        data-confirm="Xác nhận đã giao thành công đơn hàng DH-<?= $order['madh'] ?>?">
                                         <i class="fa fa-truck me-1"></i> Xác nhận
                                     </button>
                                 <?php endif; ?>
@@ -157,7 +157,7 @@
         <div class="col-md-4">
             <div class="block block-rounded block-bordered">
                 <div class="block-header block-header-default border-bottom">
-                    <h3 class="block-title fs-sm fw-bold">Thông tin khách hàng</h3>
+                    <h3 class="block-title fs-sm fw-bold text-center">Thông tin khách hàng</h3>
                 </div>
                 <div class="block-content py-3">
                     <div class="d-flex align-items-center mb-3">
@@ -193,7 +193,7 @@
                 <button type="button" class="btn btn-danger w-100 mt-3 btn-update-status"
                     data-id="<?= $order['madh'] ?>"
                     data-status="3"
-                    data-confirm="Bạn có chắc muốn huỷ đơn hàng #<?= $order['madh'] ?>?">
+                    data-confirm="Bạn có chắc muốn huỷ đơn hàng DH-<?= $order['madh'] ?>?">
                     <i class="fa fa-times me-1"></i> Huỷ đơn hàng
                 </button>
             <?php endif; ?>
