@@ -3,6 +3,11 @@
 
 <!-- Page Content -->
 <div class="content">
+    <div class="mb-3">
+        <a class="btn btn-alt-primary" href="../don_hang">
+            <i class="fa fa-chevron-left me-1"></i> Danh sách đơn hàng
+        </a>
+    </div>
     <div class="row">
 
         <!-- Left -->

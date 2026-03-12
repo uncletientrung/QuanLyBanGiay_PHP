@@ -1,7 +1,6 @@
 <?php
 // __DIR__ -> D:\xampp\htdocs\QuanLyBanGiay_PHP\admin
 // dirname(__DIR__): lùi 1 cấp -> D:\xampp\htdocs\QuanLyBanGiay_PHP
-require_once dirname(__DIR__) . "/config/constants.php";
 require_once dirname(__DIR__) . "/config/connectdb.php";
 
 // Load Core
