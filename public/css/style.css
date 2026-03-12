@@ -46,6 +46,8 @@
 
 .topbar {
   background: var(--navy) !important;
+  border-radius: 0 !important;
+  max-height: fit-content;
 }
 .navbar-nav .nav-link {
   color: #333 !important;

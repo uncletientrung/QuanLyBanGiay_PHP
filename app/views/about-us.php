@@ -2,14 +2,14 @@
     
 
     .note {
-      background: #f4fdf0;
+      background: #eef2ff;
       padding: 15px;
-      border-left: 4px solid #a5e46e;
+      border-left: 4px solid #0a2a66;
       margin: 20px 0;
     }
 
     .contact-box {
-      background: #f9f9f9;
+      background: #eef2ff;
       padding: 20px;
       border-radius: 6px;
       margin-top: 30px;
