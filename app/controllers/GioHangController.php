@@ -9,11 +9,13 @@ class GioHangController
     private $model;
     private $SanPhamModel;
     private $HinhAnhModel;
+    private $SizeModel;
     public function __construct($db)
     {
         $this->model = new GioHangModel($db);
         $this->SanPhamModel = new SanPhamModel($db);
         $this->HinhAnhModel =  new HinhAnhModel($db);
+        $this->SizeModel = new SizeModel($db);
     }
     public function getCartsByUserId($user_id)
     {
@@ -90,9 +92,12 @@ class GioHangController
         $total = 0;
         foreach ($carts as &$item) { // Tham chiếu
             $sp = $this->SanPhamModel->getSpById($item['masp']);
+            $size = $this->SizeModel->getNameById($item['masize'])['tensize'];
+            echo "<script>console.log(" . json_encode($size) . ");</script>";
             $giaBan = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
             $item['tensp']  = $sp['tensp'];
             $item['gia']  = $giaBan;
+            $item['tensize'] = $size;
             $item['path'] = $this->HinhAnhModel->getImageMainById($item['masp']);
             $total += $giaBan * $item['soluong'];
         }

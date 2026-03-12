@@ -48,4 +48,11 @@ class SizeModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$soLuongSauTru, $maSP, $maSize]);
     }
+    public function getNameById($maSize)
+    {
+        $sql = "SELECT * FROM size where masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$maSize]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

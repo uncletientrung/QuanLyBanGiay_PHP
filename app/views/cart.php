@@ -20,6 +20,7 @@
               <tr>
                 <th scope="col">Sản Phẩm</th>
                 <th scope="col">Tên Sản Phẩm</th>
+                <th scope="col">Size</th>
                 <th scope="col">Đơn Giá</th>
                 <th scope="col">Số Lượng</th>
                 <th scope="col">Số Tiền</th>
@@ -38,6 +39,9 @@
                     </th>
                     <td>
                       <p class="mb-0 mt-4"><?= $item['tensp'] ?></p>
+                    </td>
+                    <td>
+                      <p class="mb-0 mt-4"><?= $item['tensize'] ?></p>
                     </td>
                     <td>
                       <p class="mb-0 mt-4">
