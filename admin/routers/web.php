@@ -38,6 +38,7 @@ $router->get('/suppliers', 'Suppliers@default');
 
 // San pham
 $router->get('/products', 'Products@default');
+$router->get('/products/getData', 'Products@getData');
 
 // Kho hang
 $router->get('/nhap_hang', 'Nhap_hang@default');
