@@ -34,6 +34,37 @@ class pageProfileAdmin {
                     minlength: 'Số điện thoại không hợp lệ',
                     maxlength: 'Số điện thoại không hợp lệ'
                 }
+            },
+            submitHandler: function (form) {
+                let $form = jQuery(form);
+                let $btn = $form.find('button[type="submit"]');
+
+                $btn.prop('disabled', true); // Chống click nhiều
+
+                $.ajax({
+                    type: "POST",
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+                    dataType: "json",
+                    success: function (res) {
+                        Dashmix.helpers("jq-notify", {
+                            type: res.status === 'success' ? 'success' : 'danger',
+                            icon: res.status === 'success' ? "fa fa-check me-1" : "fa fa-times me-1",
+                            message: res.message
+                        });
+
+                        if (res.status === "success") {
+                            $(".fs-4.fw-bold.mb-1").text($form.find("input[name='hoten']").val());
+                        }
+                    },
+                    error: function () {
+                        Dashmix.helpers("jq-notify", { type: 'danger', icon: "fa fa-times me-1", message: 'Lỗi hệ thống!' });
+                    },
+                    complete: function () {
+                        $btn.prop('disabled', false);
+                    }
+                });
+                return false;
             }
         });
 
@@ -63,6 +94,35 @@ class pageProfileAdmin {
                     required: 'Vui lòng xác nhận lại mật khẩu mới',
                     equalTo: 'Mật khẩu xác nhận không khớp'
                 }
+            },
+            submitHandler: function (form) {
+                let $form = jQuery(form);
+                let $btn = $form.find('button[type="submit"]');
+                $btn.prop('disabled', true);
+
+                $.ajax({
+                    type: "POST",
+                    url: $form.attr('action'),
+                    data: $form.serialize(),
+                    dataType: "json",
+                    success: function (res) {
+                        Dashmix.helpers("jq-notify", {
+                            type: res.status === 'success' ? 'success' : 'danger',
+                            icon: res.status === 'success' ? "fa fa-check me-1" : "fa fa-times me-1",
+                            message: res.message
+                        });
+                        if (res.status === "success") {
+                            $form[0].reset();
+                        }
+                    },
+                    error: function () {
+                        Dashmix.helpers("jq-notify", { type: 'danger', icon: "fa fa-times me-1", message: 'Lỗi hệ thống!' });
+                    },
+                    complete: function () {
+                        $btn.prop('disabled', false);
+                    }
+                });
+                return false;
             }
         });
     }
