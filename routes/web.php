@@ -111,13 +111,25 @@ if ($uri == 'chackout/add-order') {
     
     if($addOrderStatus){
         $_SESSION['add-order'] =true;
-        echo "<script> console.log('true')</script>";
     }else{
         $_SESSION['add-order'] =false;
     }
     exit;
 }
 // Cổng thanh toán END
+
+// Kiểm tra trạng thái đơn hàng START
+if ($uri == 'track-order') {
+    requireLogin();
+    render('track-order', $conn);
+    exit;
+}
+if ($uri == 'track-order-detail') {
+    requireLogin();
+    render('track-order-detail', $conn);
+    exit;
+}
+// Kiểm tra trạng thái đơn hàng END
 
 if ($uri == 'contact') {
     render('contact', $conn);
