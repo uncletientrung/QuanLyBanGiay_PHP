@@ -93,7 +93,6 @@ class GioHangController
         foreach ($carts as &$item) { // Tham chiếu
             $sp = $this->SanPhamModel->getSpById($item['masp']);
             $size = $this->SizeModel->getNameById($item['masize'])['tensize'];
-            echo "<script>console.log(" . json_encode($size) . ");</script>";
             $giaBan = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
             $item['tensp']  = $sp['tensp'];
             $item['gia']  = $giaBan;

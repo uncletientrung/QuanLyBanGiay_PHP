@@ -1,3 +1,23 @@
+<style>
+  .toast-notify {
+    position: fixed;
+    top: 20px;
+    right: -350px;
+    background: #28a745;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 6px;
+    font-size: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: right 0.5s ease;
+    z-index: 9999;
+  }
+
+  .toast-notify.show {
+    right: 20px;
+  }
+</style>
+
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Checkout</h1>
@@ -56,6 +76,7 @@
                 <tr>
                   <th scope="col">Sản Phẩm</th>
                   <th scope="col">Tên Sản Phẩm</th>
+                  <th scope="col">Size</th>
                   <th scope="col">Đơn Giá</th>
                   <th scope="col">Số Lượng</th>
                   <th scope="col">Số Tiền</th>
@@ -63,10 +84,10 @@
               </thead>
               <!-- Sản phẩm trong giỏ -->
               <tbody>
-                <?php if (!empty($carts)): ?>
+                <?php if (!empty($this->carts)): ?>
                   <?php
                   $tongtien = 0;
-                  foreach ($carts as $item):
+                  foreach ($this->carts as $item):
                     $thanhtien = $item['soluong'] * $item['giaban'];
                     $tongtien += $thanhtien;
                   ?>
@@ -77,6 +98,7 @@
                         </div>
                       </th>
                       <td class="py-5"><?= $item['tensp'] ?></td>
+                      <td class="py-5"><?= $item['tensize'] ?></td>
                       <td class="py-5"><?= number_format($item['giaban']) ?></td>
                       <td class="py-5"><?= number_format($item['soluong']) ?></td>
                       <td class="py-5"><?= number_format($item['soluong'] * $item['giaban']) ?></td>
@@ -94,8 +116,8 @@
           <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
             <div class="col-12">
               <div class="form-check text-start my-1">
-                <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1" 
-                      name="phuongthucthanhtoan" value="1">
+                <input type="radio" class="form-check-input bg-primary border-0" id="Transfer-1"
+                  name="phuongthucthanhtoan" value="1">
                 <label class="form-check-label" for="Transfer-1">Chuyển Khoản</label>
               </div>
               <p class="text-start text-dark">
@@ -107,8 +129,8 @@
           <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
             <div class="col-12">
               <div class="form-check text-start my-1">
-                <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1" 
-                      name="phuongthucthanhtoan" value="2" checked>
+                <input type="radio" class="form-check-input bg-primary border-0" id="Delivery-1"
+                  name="phuongthucthanhtoan" value="2" checked>
                 <label class="form-check-label" for="Delivery-1">Thanh Toán Khi Nhận Hàng</label>
               </div>
             </div>
@@ -125,5 +147,12 @@
   </div>
 </div>
 <!-- Checkout Page End -->
+<!-- Show Toast -->
+<?php if (isset($_SESSION['success']) && $_SESSION['success']): ?>
+  <script>
+    showToast("Hệ thống đã lên đơn hàng");
+  </script>
+  <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
 
 </html>

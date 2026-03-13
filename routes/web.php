@@ -8,7 +8,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
 $accountController = new AccountController($conn);
-
+$chackoutController = new ChackoutController($conn);
 function requireLogin()
 {
     if (empty($_SESSION['user-id'])) {
@@ -96,9 +96,25 @@ if ($uri == 'chackout') {
     $headerData = prepareHeader($conn);
     extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
-    $chackoutController = new ChackoutController($conn);
     $chackoutController->showChackout();
     require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if ($uri == 'chackout/add-order') {
+    if (!checkCart($conn)) {
+        header('location:' . ROOT_URL . 'cart');
+        exit;
+    }
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $addOrderStatus= $chackoutController->addOrder();
+    
+    if($addOrderStatus){
+        $_SESSION['add-order'] =true;
+        echo "<script> console.log('true')</script>";
+    }else{
+        $_SESSION['add-order'] =false;
+    }
     exit;
 }
 // Cổng thanh toán END
@@ -138,7 +154,6 @@ if ($uri == 'account/logout') {
 }
 if ($uri == 'account/update') {
     requireLogin();
-    // print_r($accountController->updateProfile());
     $accountController->updateProfile();
     exit();
 }

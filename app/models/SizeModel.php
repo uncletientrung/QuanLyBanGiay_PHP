@@ -38,7 +38,7 @@ class SizeModel
         $stmt->execute([$maSP, $maSize]);
         return $stmt->fetchColumn();
     }
-    public function updateSoLuongSize_Model($maSP, $maSize, $soLuongTru)
+    public function updateSoLuongSanPhamSize_Model($maSP, $maSize, $soLuongTru)
     {
         $soLuongHienTai = $this->getSoLuongSize($maSP, $maSize);
         $soLuongSauTru = $soLuongHienTai - $soLuongTru;

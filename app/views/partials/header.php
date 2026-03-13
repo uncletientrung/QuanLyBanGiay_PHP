@@ -30,6 +30,8 @@
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
 </head>
 
+<div id="toast" class="toast-notify">
+</div>
 <body>
   <!-- Load trang -->
   <div id="spinner"
