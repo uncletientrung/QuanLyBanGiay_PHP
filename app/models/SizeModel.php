@@ -38,6 +38,7 @@ class SizeModel
         $stmt->execute([$maSP, $maSize]);
         return $stmt->fetchColumn();
     }
+
     public function updateSoLuongSanPhamSize_Model($maSP, $maSize, $soLuongTru)
     {
         $soLuongHienTai = $this->getSoLuongSize($maSP, $maSize);
@@ -48,6 +49,14 @@ class SizeModel
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$soLuongSauTru, $maSP, $maSize]);
     }
+
+    public function hoanSoLuongSanPhamSize_Model($maSP, $maSize, $soLuongHoan)
+    {
+        $sql = "UPDATE sanphamsize SET soluong = soluong + ? WHERE masp = ? AND masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$soLuongHoan, $maSP, $maSize]);
+    }
+
     public function getNameById($maSize)
     {
         $sql = "SELECT * FROM size where masize = ?";

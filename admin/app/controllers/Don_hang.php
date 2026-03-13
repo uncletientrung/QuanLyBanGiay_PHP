@@ -41,7 +41,11 @@ class Don_hang extends Controller
             $status = $_POST['status'] ?? null;
 
             if ($id && $status !== null) {
-                $result = $this->donhangModel->updateStatus($id, $status);
+                if ($status == -1) {
+                    $result = $this->donhangModel->huyDonHang_Model($id);
+                } else {
+                    $result = $this->donhangModel->updateStatus($id, $status);
+                }
                 echo json_encode(['success' => $result]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ']);
@@ -57,18 +61,23 @@ class Don_hang extends Controller
             $status = $_POST['status'] ?? ''; // Trạng thái mới
 
             if (!empty($ids) && $status !== '') {
-                $result = $this->donhangModel->updateStatusMulti($ids, $status);
+                $successCount = 0;
+                foreach ($ids as $id) {
+                    if ($status == -1) {
+                        if ($this->donhangModel->huyDonHang_Model($id)) $successCount++;
+                    } else {
+                        if ($this->donhangModel->updateStatus($id, $status)) $successCount++;
+                    }
+                }
 
-                if ($result) {
-                    echo json_encode(['status' => 'success', 'message' => 'Cập nhật thành công']);
+                if ($successCount > 0) {
+                    echo json_encode(['status' => 'success', 'message' => "Cập nhật thành công $successCount đơn hàng"]);
                 } else {
                     echo json_encode(['status' => 'error', 'message' => 'Cập nhật thất bại']);
                 }
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Dữ liệu không hợp lệ']);
             }
+            exit;
         }
-        exit;
     }
 
     public function detail($id = null)

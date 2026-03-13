@@ -17,8 +17,9 @@ class DonHangModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getAllByMaKH($makh){
-        $sql = "SELECT * FROM donhang FROM makh = ? ";
+    public function getAllByMaKH($makh)
+    {
+        $sql = "SELECT * FROM donhang WHERE makh = ? ";
         $stmt =  $this->db->prepare($sql);
         $stmt->execute([$makh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -98,6 +99,33 @@ class DonHangModel
 
             $this->db->commit();
             return $result;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
+
+    public function huyDonHang_Model($madh)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $sql = "UPDATE donhang SET trangthai = -1 WHERE madh = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$madh]);
+
+            // Hoàn kho
+            $items = $this->getItems($madh);
+            foreach ($items as $item) {
+                $sqlStock = "UPDATE sanphamsize 
+                         SET soluong = soluong + ? 
+                         WHERE masp = ? AND masize = ?";
+                $stmtStock = $this->db->prepare($sqlStock);
+                $stmtStock->execute([$item['soluong'], $item['masp'], $item['masize']]);
+            }
+
+            $this->db->commit();
+            return true;
         } catch (Exception $e) {
             $this->db->rollBack();
             return false;
