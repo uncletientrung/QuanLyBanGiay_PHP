@@ -47,54 +47,57 @@
 
         <!-- Danh sách đơn hàng dạng card -->
         <div class="row g-4" id="orders-list">
+          <?php if (!empty($orders)) : ?>
+            <?php foreach ($orders as $order): ?>
 
-          <!-- Ví dụ 1 card đơn hàng (bạn sẽ loop tương tự bằng PHP) -->
-          <div class="col-12">
-            <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden hover-shadow"
-              style="transition: all 0.3s; cursor: pointer;"
-              onclick="location.href='chi-tiet-don-hang?madh=12345';"> <!-- link chi tiết -->
+              <div class="col-12">
+                <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden hover-shadow"
+                  style="transition: all 0.3s; cursor: pointer;"
+                  onclick="location.href='chi-tiet-don-hang?madh=12345';"> <!-- link chi tiết -->
 
-              <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <div>
-                    <small class="text-muted">Mã đơn: #123456789</small><br>
-                    <small class="text-muted">Ngày đặt: 12/03/2026 - 09:45</small>
+                  <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <div>
+                        <small class="text-muted">Mã đơn: DH-<?= $order['soluongSP'] ?></small><br>
+                        <small class="text-muted">Ngày đặt: <?= date_format($order['thoigiantao'], 'd-m-Y H:i') ?></small>
+                      </div>
+                      <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold">
+                        <?= $order['trangthaiDH'] ?>
+
+                      </span>
+                    </div>
+
+                    <!-- Sản phẩm trong đơn (hiển thị 1-2 sp đại diện + số lượng còn lại) -->
+                    <div class="d-flex align-items-center mb-3">
+                      <img src="path/to/product1.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
+                      <div class="flex-grow-1">
+                        <p class="mb-1 fw-bold product-name">Áo Nike Dri-FIT phiên bản giới hạn</p>
+                        <small class="text-muted">Size: L × 1</small>
+                      </div>
+                      <div class="text-end">
+                        <p class="mb-0 fw-bold text-danger">980.000₫</p>
+                      </div>
+                    </div>
+
+                    <!-- Nếu nhiều sản phẩm -->
+                    <small class="text-primary d-block mb-3">+ 2 sản phẩm khác</small>
+
+                    <hr class="my-3">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <small class="text-muted">Tổng tiền:</small><br>
+                        <strong class="fs-5 text-dark">2.450.000₫</strong>
+                      </div>
+                      <button class="btn btn-outline-secondary rounded-pill px-4">
+                        Xem chi tiết
+                      </button>
+                    </div>
                   </div>
-                  <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold">
-                    Chờ xác nhận
-                  </span>
-                </div>
-
-                <!-- Sản phẩm trong đơn (hiển thị 1-2 sp đại diện + số lượng còn lại) -->
-                <div class="d-flex align-items-center mb-3">
-                  <img src="path/to/product1.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                  <div class="flex-grow-1">
-                    <p class="mb-1 fw-bold product-name">Áo Nike Dri-FIT phiên bản giới hạn</p>
-                    <small class="text-muted">Size: L × 1</small>
-                  </div>
-                  <div class="text-end">
-                    <p class="mb-0 fw-bold text-danger">980.000₫</p>
-                  </div>
-                </div>
-
-                <!-- Nếu nhiều sản phẩm -->
-                <small class="text-primary d-block mb-3">+ 2 sản phẩm khác</small>
-
-                <hr class="my-3">
-
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <small class="text-muted">Tổng tiền:</small><br>
-                    <strong class="fs-5 text-dark">2.450.000₫</strong>
-                  </div>
-                  <button class="btn btn-outline-secondary rounded-pill px-4">
-                    Xem chi tiết
-                  </button>
                 </div>
               </div>
-            </div>
-          </div>
-
+            <?php endforeach; ?>
+          <?php endif ?>
           <!-- Card mẫu 2: Đã giao -->
           <div class="col-12">
             <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden">

@@ -24,6 +24,14 @@ class DonHangModel
         $stmt->execute([$makh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getCountOrderByMaDH($madh)
+    {
+        $sql = "SELECT COUNT(*) as total FROM donhang WHERE madh =?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$madh]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'];
+    }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
         $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan, trangthai)
