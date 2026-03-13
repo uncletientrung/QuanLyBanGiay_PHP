@@ -15,7 +15,7 @@
 
 <!-- <?php
 echo '<pre>';
-print_r($_SESSION['user-id']);
+print_r($sp['image']);
 echo '</pre>';
 
 ?>  -->
@@ -217,7 +217,7 @@ echo '</pre>';
 
                         <div class="product-img">
                           <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img src="<?= $sp['image'] ?>" class="img-fluid w-100">
+                            <img src="<?= !empty($sp['image']) ? $sp['image'] : NO_IMAGE ?>" class="img-fluid w-100">
                           </a>
                         </div>
 
