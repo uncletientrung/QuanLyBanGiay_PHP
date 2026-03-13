@@ -14,7 +14,7 @@
 - Liên hệ  
   - ⏳ Tìm hiểu và làm PhpEmail  
 - Kiểm tra đơn hàng  
-  - ⏳ Mới làm View  
+  - ⏳ Chưa làm view 
 - Đặt đơn hàng (Checkout)  
 - Đăng nhập  
   - ⏳ Chưa kiểm tra password hash  
@@ -22,7 +22,8 @@
 
 **Đã hoàn thành:**
 - ✅ Giới thiệu  
-- ✅ Account Page  
+- ✅ Account Page
+- ✅ Thêm đơn hàng
 
 ---
 
