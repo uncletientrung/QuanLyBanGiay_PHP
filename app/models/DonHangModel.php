@@ -20,7 +20,7 @@ class DonHangModel
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
         $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan, trangthai)
-                VALUES (?, ?, ?, ?, 1)";
+                VALUES (?, ?, ?, ?, 0)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$user_id, $order_data['tongtien'], $dia_chi, $order_data['hinhthucthanhtoan']]);
         return $this->db->lastInsertId(); // cái này trả về mã vừa thêm vào
