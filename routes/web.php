@@ -4,6 +4,7 @@ require_once APP_PATH_DIR . 'controllers/ChackoutController.php';
 require_once APP_PATH_DIR . 'controllers/HeaderController.php';
 require_once APP_PATH_DIR . 'controllers/AccountController.php';
 require_once APP_PATH_DIR . 'controllers/SanPhamController.php';
+require_once APP_PATH_DIR . 'controllers/TrackOrderController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
@@ -107,12 +108,12 @@ if ($uri == 'chackout/add-order') {
     }
     $headerData = prepareHeader($conn);
     extract($headerData);
-    $addOrderStatus= $chackoutController->addOrder();
-    
-    if($addOrderStatus){
-        $_SESSION['add-order'] =true;
-    }else{
-        $_SESSION['add-order'] =false;
+    $addOrderStatus = $chackoutController->addOrder();
+
+    if ($addOrderStatus) {
+        $_SESSION['add-order'] = true;
+    } else {
+        $_SESSION['add-order'] = false;
     }
     exit;
 }
@@ -121,7 +122,13 @@ if ($uri == 'chackout/add-order') {
 // Kiểm tra trạng thái đơn hàng START
 if ($uri == 'track-order') {
     requireLogin();
-    render('track-order', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $trackOrderController = new TrackOrderController($conn);
+    $trackOrderController->showTrackOrder();
+    require VIEW_PATH_DIR . 'partials/footer.php';
+
     exit;
 }
 if ($uri == 'track-order-detail') {

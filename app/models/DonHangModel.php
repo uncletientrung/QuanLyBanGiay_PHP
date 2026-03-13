@@ -17,11 +17,20 @@ class DonHangModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getAllByMaKH($makh){
-        $sql = "SELECT * FROM donhang FROM makh = ? ";
+    public function getAllByMaKH($makh)
+    {
+        $sql = "SELECT * FROM donhang WHERE makh = ? ";
         $stmt =  $this->db->prepare($sql);
         $stmt->execute([$makh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getCountOrderByMaDH($madh)
+    {
+        $sql = "SELECT COUNT(*) as total FROM donhang WHERE madh =?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$madh]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'];
     }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
