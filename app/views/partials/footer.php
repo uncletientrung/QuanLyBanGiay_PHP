@@ -5,7 +5,7 @@
       <div class="row g-5">
         <div class="col-lg-3 col-md-6">
           <div class="footer-item">
-            <h4 class="text-light mb-3">Galaxyshoes - Giày chính hãng?</h4>
+            <h4 class="text-light mb-3">Galaxyshoes - Giày chính hãng</h4>
             <p class="mb-4">Có tâm ắc sẽ có tầm, với những sản phẩm chất lượng cao cùng với đó là giá cả hợp lý, chúng tôi hứa hẹn sẽ mang lại dịch vụ tốt nhất cho bạn!</p>
             <a href="<?= ROOT_URL ?>about-us" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Xem thêm</a>
           </div>

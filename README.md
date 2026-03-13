@@ -10,9 +10,8 @@
 
 **Phụ trách:**
 
-- Header
-- Home
-  - ⏳ Chưa làm: Tìm kiếm, Thêm vào giỏ
+- Thêm vào giỏ
+  - ⏳ Chưa làm: Thêm vào giỏ
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
 - Kiểm tra đơn hàng
@@ -34,11 +33,12 @@
 
 **Phụ trách:**
 
+- Trang chủ
+- Header
 - Footer
 - Danh sách sản phẩm
 - Tìm kiếm sản phẩm
 - Product Detail
-- Thêm vào giỏ
 
 **Đã hoàn thành:**
 

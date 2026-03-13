@@ -104,10 +104,29 @@
   color: var(--navy) !important;
 }
 
-.footer h1 {
-  color: rgb(255, 255, 255) !important;
+/* Footer nền xanh */
+.footer {
+  background: #2e2e5b !important;
 }
 
+/* tiêu đề footer */
+.footer h1,
+.footer h4 {
+  color: #ffffff !important;
+}
+
+/* text footer */
+.footer p,
+.footer .btn-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* hover link footer */
+.footer .btn-link:hover {
+  color: #ffffff;
+}
+
+/* nút trong footer */
 .footer .btn-primary {
   background: var(--navy-dark) !important;
   border: none !important;
@@ -116,6 +135,8 @@
 .footer .btn-primary:hover {
   background: #061f4f !important;
 }
+
+/* nút viền trắng */
 .footer .btn.border-secondary {
   border-color: white !important;
   color: white !important;
@@ -123,17 +144,10 @@
 
 .footer .btn.border-secondary:hover {
   background: white !important;
-  color: var(--navy) !important;
-}
-.back-to-top {
-  background: var(--navy) !important;
-  border-color: var(--navy) !important;
+  color: #2e2e5b !important;
 }
 
-.back-to-top:hover {
-  background: var(--navy-dark) !important;
-}
-
+/* outline button */
 .footer .btn-outline-secondary {
   border-color: white !important;
   color: white !important;
@@ -141,8 +155,19 @@
 
 .footer .btn-outline-secondary:hover {
   background: white !important;
-  color: var(--navy) !important;
+  color: #2e2e5b !important;
 }
+
+/* Back to top */
+.back-to-top {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.back-to-top i {
+  color: #000000 !important;
+}
+
 /*** Button Start ***/
 .btn {
   font-weight: 600;
