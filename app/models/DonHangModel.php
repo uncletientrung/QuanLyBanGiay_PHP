@@ -32,6 +32,13 @@ class DonHangModel
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row['total'];
     }
+    public function getDHByMaDH($madh)
+    {
+        $sql = "SELECT * FROM donhang WHERE madh =?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$madh]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
         $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan, trangthai)

@@ -128,12 +128,16 @@ if ($uri == 'track-order') {
     $trackOrderController = new TrackOrderController($conn);
     $trackOrderController->showTrackOrder();
     require VIEW_PATH_DIR . 'partials/footer.php';
-
     exit;
 }
 if ($uri == 'track-order-detail') {
     requireLogin();
-    render('track-order-detail', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $trackOrderController = new TrackOrderController($conn);
+    $trackOrderController->showTrackOrderDetail();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 // Kiểm tra trạng thái đơn hàng END

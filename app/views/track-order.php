@@ -1,9 +1,9 @@
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../img/hero-img-nike.jpg);">
-  <h1 class="text-center text-white display-6">Đơn Hàng Của Tôi</h1>
+<div class="container-fluid page-header py-4">
+  <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>" class="text-white">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Kiểm tra đơn hàng</li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item active text-white">Theo dõi đơn hàng</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
@@ -51,101 +51,43 @@
             <?php foreach ($orders as $order): ?>
 
               <div class="col-12">
-                <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden hover-shadow"
-                  style="transition: all 0.3s; cursor: pointer;"
-                  onclick="location.href='chi-tiet-don-hang?madh=12345';"> <!-- link chi tiết -->
-
+                <div class="card order-card shadow-sm border-2 border-dark rounded-3 overflow-hidden hover-shadow"
+                  style="transition: all 0.3s; cursor: pointer;">
+                  
                   <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div>
-                        <small class="text-muted">Mã đơn: DH-<?= $order['soluongSP'] ?></small><br>
-                        <small class="text-muted">Ngày đặt: <?= date_format($order['thoigiantao'], 'd-m-Y H:i') ?></small>
+                        <small class="fw-bold text-dark">Mã đơn: DH-<?= $order['soluongSP'] ?></small><br>
+                        <small class="fw-bold text-dark">Ngày đặt: <?= $order['thoigiantao'] ?></small>
                       </div>
-                      <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold">
+                      <span class="badge <?php
+                                          echo $order['trangthai'] == 0 ? 'bg-warning text-dark' : ($order['trangthai'] == 1 ? 'bg-success text-white' : ($order['trangthai'] == 2 ? 'bg-primary text-white' : ($order['trangthai'] == -1 ? 'bg-danger text-white' : 'bg-secondary text-white')));
+                                          ?>
+                        px-3 py-2 fs-6 fw-bold">
                         <?= $order['trangthaiDH'] ?>
-
                       </span>
                     </div>
 
-                    <!-- Sản phẩm trong đơn (hiển thị 1-2 sp đại diện + số lượng còn lại) -->
-                    <div class="d-flex align-items-center mb-3">
-                      <img src="path/to/product1.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                      <div class="flex-grow-1">
-                        <p class="mb-1 fw-bold product-name">Áo Nike Dri-FIT phiên bản giới hạn</p>
-                        <small class="text-muted">Size: L × 1</small>
-                      </div>
-                      <div class="text-end">
-                        <p class="mb-0 fw-bold text-danger">980.000₫</p>
-                      </div>
-                    </div>
-
                     <!-- Nếu nhiều sản phẩm -->
-                    <small class="text-primary d-block mb-3">+ 2 sản phẩm khác</small>
-
+                    <small class="fw-bold text-dark  d-block mb-3"> Tổng <?= $order['soluongSP'] ?> sản phẩm</small>
                     <hr class="my-3">
-
                     <div class="d-flex justify-content-between align-items-center">
                       <div>
                         <small class="text-muted">Tổng tiền:</small><br>
-                        <strong class="fs-5 text-dark">2.450.000₫</strong>
+                        <strong class="fs-5 text-dark"><?= number_format($order['tongtien']) ?></strong>
                       </div>
-                      <button class="btn btn-outline-secondary rounded-pill px-4">
+                      <a class="btn btn-outline-secondary rounded-pill px-4"
+                        href="track-order-detail?madh=<?= $order['madh'] ?>">
                         Xem chi tiết
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             <?php endforeach; ?>
           <?php endif ?>
-          <!-- Card mẫu 2: Đã giao -->
-          <div class="col-12">
-            <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden">
-              <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <div>
-                    <small class="text-muted">Mã đơn: #987654321</small><br>
-                    <small class="text-muted">Ngày đặt: 05/03/2026 - 14:20</small>
-                  </div>
-                  <span class="badge bg-success text-white px-3 py-2 fs-6 fw-bold">
-                    Đã giao
-                  </span>
-                </div>
-
-                <div class="d-flex align-items-center mb-3">
-                  <img src="path/to/product2.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                  <div class="flex-grow-1">
-                    <p class="mb-1 fw-bold">Giày Air Jordan 1 High</p>
-                    <small class="text-muted">Size: 42 × 1</small>
-                  </div>
-                  <div class="text-end">
-                    <p class="mb-0 fw-bold text-danger">3.200.000₫</p>
-                  </div>
-                </div>
-
-                <hr class="my-3">
-
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <small class="text-muted">Tổng tiền:</small><br>
-                    <strong class="fs-5 text-dark">3.200.000₫</strong>
-                  </div>
-                  <button class="btn btn-outline-secondary rounded-pill px-4">
-                    Mua lại
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Thêm nhiều card khác tương tự -->
-
         </div>
       </div>
-
-      <!-- Các tab khác (pending, processing, shipping, delivered, cancelled) -->
-      <!-- Bạn copy phần trên và thay đổi id, class badge tương ứng -->
-
     </div>
   </div>
 </div>
@@ -153,16 +95,6 @@
 
 <!-- CSS bổ sung (thêm vào file CSS của bạn) -->
 <style>
-  .order-card {
-    border: 1px solid #dce3f0;
-    background: #fff;
-  }
-
-  .order-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-  }
-
   .badge {
     font-size: 0.9rem !important;
   }
@@ -175,13 +107,11 @@
     background-color: var(--navy) !important;
   }
 
-  /* hoặc màu xanh bạn thích */
   .bg-danger {
     background-color: #dc3545 !important;
   }
 
   .hover-shadow:hover {
     box-shadow: 0 0 45px rgba(11, 61, 145, 0.2) !important;
-    /* navy nhẹ */
   }
 </style>

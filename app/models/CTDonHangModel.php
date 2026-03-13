@@ -20,4 +20,11 @@ class CTDonHangModel
         ]);
         return $stmt->rowCount();
     }
+    public function getAllOrderDetailByMaDH($madh)
+    {
+        $sql = "SELECT * FROM ctdonhang WHERE madh = ?";
+        $stmt =  $this->conn->prepare($sql);
+        $stmt->execute([$madh]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
