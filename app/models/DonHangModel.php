@@ -17,6 +17,12 @@ class DonHangModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllByMaKH($makh){
+        $sql = "SELECT * FROM donhang FROM makh = ? ";
+        $stmt =  $this->db->prepare($sql);
+        $stmt->execute([$makh]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
         $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan, trangthai)

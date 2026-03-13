@@ -10,8 +10,7 @@
 
 **Phụ trách:**
 
-- Thêm vào giỏ
-  - ⏳ Chưa làm: Thêm vào giỏ
+
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
 - Kiểm tra đơn hàng
@@ -33,6 +32,7 @@
 
 **Phụ trách:**
 
+- Thêm vào giỏ
 - Trang chủ
 - Header
 - Footer
