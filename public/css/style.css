@@ -31,9 +31,32 @@
 
 /*** Spinner End ***/
 /*** NAVY THEME ***/
+
+/* breadcrumb màu trắng */
+.page-header .breadcrumb-item a {
+  color: #d9d9d9;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* hover trang chủ */
+.page-header .breadcrumb-item a:hover {
+  color: #ffffff;
+}
+
+/* chữ active */
+.page-header .breadcrumb-item.active {
+  color: #ffffff;
+}
+
+/* dấu / giữa breadcrumb */
+.page-header .breadcrumb-item + .breadcrumb-item::before {
+  color: #ffffff;
+}
 .text-primary {
   color: #2e2e5b !important; /* navy */
 }
+
 :root {
   --navy: #2e2e5b;
   --navy-dark: #2e2e5b;
