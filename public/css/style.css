@@ -652,29 +652,48 @@
   display: inline-block;
 }
 
+/* Pagination */
 .pagination a {
-  color: var(--bs-dark);
+  color: #0b2a5b; /* chữ navy */
   padding: 10px 16px;
   text-decoration: none;
-  transition: 0.5s;
-  border: 1px solid var(--bs-secondary);
+  transition: 0.3s;
+  border: 1px solid #0b2a5b; /* viền navy */
   margin: 0 4px;
+  background: white;
 }
 
 .pagination a.active {
-  background-color: var(--bs-primary);
-  color: var(--bs-light);
-  border: 1px solid var(--bs-secondary);
+  background-color: #0b2a5b;
+  color: white;
+  border: 1px solid #0b2a5b;
 }
 
 .pagination a:hover:not(.active) {
-  background-color: var(--bs-primary);
+  background-color: #0b2a5b;
+  color: white;
 }
 
 .nav.nav-tabs .nav-link.active {
-  border-bottom: 2px solid var(--bs-secondary) !important;
+  border-bottom: 2px solid #0b2a5b !important;
 }
 
+.border-navy {
+  border-color: #0b2a5b !important;
+}
+.btn-filter-reset {
+  color: #0b2a5b;
+  border: 1px solid #0b2a5b;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn-filter-reset:hover {
+  background: #0b2a5b;
+  color: white;
+}
 /*** Single Page End ***/
 
 /*** Footer Start ***/
