@@ -106,6 +106,10 @@
             class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
             Liên hệ
             </a>
+            <a href="<?= ROOT_URL ?>track-order" 
+            class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
+            Theo dõi đơn hàng
+            </a>
           </div>
           <div class="d-flex m-3 me-0">
             <!-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
