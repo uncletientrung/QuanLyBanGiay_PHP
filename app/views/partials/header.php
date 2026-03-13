@@ -53,9 +53,9 @@
               class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
         <div class="top-link pe-2">
-          <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-          <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-          <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+          <a href="<?= ROOT_URL ?>privacy-policy" class="text-white"><small class="text-white mx-2">Chính sách bảo mật</small>/</a>
+          <a href="<?= ROOT_URL ?>dk-dichvu" class="text-white"><small class="text-white mx-2">Điều khoản dịch vụ</small>/</a>
+          <a href="<?= ROOT_URL ?>cs-baohanh" class="text-white"><small class="text-white ms-2">Chính sách bảo hành</small></a>
         </div>
       </div>
     </div>
@@ -74,10 +74,7 @@
             class="nav-item nav-link <?= $currentPage == 'home' ? 'active' : '' ?>">
             Trang chủ
             </a>
-            <a href="<?= ROOT_URL ?>about-us" 
-            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
-            Giới thiệu
-            </a>
+       
           
             <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle 
@@ -92,6 +89,10 @@
                   <?php endforeach; ?>
               </div>
           </div>
+               <a href="<?= ROOT_URL ?>about-us" 
+            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
+            Giới thiệu
+            </a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">

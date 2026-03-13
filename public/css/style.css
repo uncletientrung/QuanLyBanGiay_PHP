@@ -31,22 +31,21 @@
 
 /*** Spinner End ***/
 /*** NAVY THEME ***/
-
-:root {
-  --navy: #0b3d91;
-  --navy-dark: #082c6a;
+.text-primary {
+  color: #2e2e5b !important; /* navy */
 }
+:root {
+  --navy: #2e2e5b;
+  --navy-dark: #2e2e5b;
+}
+
 .navbar-brand h1 {
   color: var(--navy) !important;
 }
 
-.navbar-brand h1:hover {
-  color: var(--navy-dark) !important;
-}
-
 .topbar {
   background: var(--navy) !important;
-  border-radius: 0 !important;
+
   max-height: fit-content;
 }
 .navbar-nav .nav-link {
@@ -638,7 +637,7 @@
 }
 
 .footer .footer-item .btn-link:hover {
-  color: var(--bs-secondary) !important;
+  color: #ffffff !important;
 }
 
 .footer .footer-item p.mb-4 {
