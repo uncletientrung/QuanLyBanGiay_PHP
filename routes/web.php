@@ -61,7 +61,7 @@ if ($uri == 'products') {
 
 // Giỏ hàng START
 if ($uri == 'cart') {
-    requireLogin();
+  
     $headerData = prepareHeader($conn);
     extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -78,7 +78,7 @@ if ($uri == 'add-cart') {
 }
 
 if ($uri == 'cart/update') {
-    requireLogin();
+    
     $headerData = prepareHeader($conn);
     extract($headerData);
     $controller = new GioHangController($conn);
@@ -86,7 +86,7 @@ if ($uri == 'cart/update') {
     exit;
 }
 if ($uri == 'cart/delete') {
-    requireLogin();
+
     $headerData = prepareHeader($conn);
     extract($headerData);
     $controller = new GioHangController($conn);

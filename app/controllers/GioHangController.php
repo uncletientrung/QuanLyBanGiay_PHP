@@ -86,23 +86,38 @@ class GioHangController
         return $this->model->countCartItem_Model($user_id);
     }
     public function showCarts()
-    {
-        $user_id = $_SESSION['user-id'] ?? NULL;
-        $carts = $this->model->getCartsByUserId_Model($user_id); // list sản phẩm trong giỏ
-        $total = 0;
-        foreach ($carts as &$item) { // Tham chiếu
-            $sp = $this->SanPhamModel->getSpById($item['masp']);
-            $size = $this->SizeModel->getNameById($item['masize'])['tensize'];
-            $giaBan = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
-            $item['tensp']  = $sp['tensp'];
-            $item['gia']  = $giaBan;
-            $item['tensize'] = $size;
-            $item['path'] = $this->HinhAnhModel->getImageMainById($item['masp']);
-            $total += $giaBan * $item['soluong'];
-        }
-        // return $carts;
-        require VIEW_PATH_DIR . 'cart.php';
+{
+    $user_id = $_SESSION['user-id'] ?? null;
+
+    if ($user_id) {
+        // Nếu đã đăng nhập → lấy từ DB
+        $carts = $this->model->getCartsByUserId_Model($user_id);
+    } else {
+        // Nếu chưa đăng nhập → lấy từ session
+        $carts = $_SESSION['cart'] ?? [];
     }
+
+    $total = 0;
+
+    foreach ($carts as &$item) {
+
+        $sp = $this->SanPhamModel->getSpById($item['masp']);
+        $size = $this->SizeModel->getNameById($item['masize'])['tensize'];
+
+        $giaBan = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
+
+        $item['tensp'] = $sp['tensp'];
+        $item['gia'] = $giaBan;
+        $item['tensize'] = $size;
+        $item['path'] = $this->HinhAnhModel->getImageMainById($item['masp']);
+
+        $total += $giaBan * $item['soluong'];
+    }
+
+    require VIEW_PATH_DIR . 'cart.php';
+}
+
+   
 
    public function addToCart()
 {
