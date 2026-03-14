@@ -76,7 +76,11 @@ if ($uri == 'add-cart') {
     $controller->addToCart();
     exit;
 }
-
+if ($uri == 'clear-cart') {
+    unset($_SESSION['cart']);
+    echo "Session cart cleared";
+    exit;
+}
 if ($uri == 'cart/update') {
     
     $headerData = prepareHeader($conn);

@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sizeButtons.forEach((b) => b.classList.remove("active"));
       this.classList.add("active");
 
-      selectedSize = this.dataset.size;
+      selectedSize = this.dataset.sizeId;
       selectedStock = parseInt(this.dataset.stock) || 0;
 
       if (qtyInput) qtyInput.value = 1;
@@ -175,9 +175,9 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: JSON.stringify(data),
       })
-        .then((res) => res.json())
+        .then((res) => res.text())
         .then((res) => {
-          console.log("Server response:", res);
+          console.log("RAW RESPONSE:", res);
         });
     });
   }

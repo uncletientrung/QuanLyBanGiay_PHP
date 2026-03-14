@@ -210,21 +210,22 @@ echo '</pre>';
             </h5>
 
             <div class="mb-4">
-            <p class="fw-bold mb-2">Size</p>
-            <div class="d-flex gap-2 flex-wrap">
-              <?php foreach ($listSize as $size): ?>
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary btn-sm size-btn
-                    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
-                  data-size="<?= $size['tensize'] ?>"
-                  data-stock="<?= $size['soluong'] ?>"
-                  <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
-                >
-                  <?= $size['tensize'] ?>
-                </button>
-              <?php endforeach ?>
-            </div>
+           <p class="fw-bold mb-2">Size</p>
+<div class="d-flex gap-2 flex-wrap">
+<?php foreach ($listSize as $size): ?>
+  <button
+    type="button"
+    class="btn btn-outline-secondary btn-sm size-btn
+      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
+    data-size-id="<?= $size['masize'] ?>"
+    data-size="<?= $size['tensize'] ?>"
+    data-stock="<?= $size['soluong'] ?>"
+    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
+  >
+    <?= $size['tensize'] ?>
+  </button>
+<?php endforeach ?>
+</div>
           </div>
 
 

@@ -2,7 +2,7 @@
 require_once APP_PATH_DIR . 'models/GioHangModel.php';
 require_once APP_PATH_DIR . 'models/SanPhamModel.php';
 require_once APP_PATH_DIR . 'models/HinhAnhModel.php';
-
+require_once APP_PATH_DIR . 'models/SizeModel.php';
 
 class GioHangController
 {
@@ -109,7 +109,7 @@ class GioHangController
         $item['tensp'] = $sp['tensp'];
         $item['gia'] = $giaBan;
         $item['tensize'] = $size;
-        $item['path'] = $this->HinhAnhModel->getImageMainById($item['masp']);
+        $item['path'] = $this->HinhAnhModel->getImageMainById($sp['masp']);
 
         $total += $giaBan * $item['soluong'];
     }
@@ -127,14 +127,28 @@ class GioHangController
     $size = $data['size'] ?? null;
     $qty = $data['qty'] ?? 1;
 
-    if(!$masp || !$size){
+    if (!$masp || !$size) {
         echo json_encode([
-            "error" => "Invalid data",
-            "data" => $data
+            "error" => "Invalid data"
         ]);
         return;
     }
 
+    $user_id = $_SESSION['user-id'] ?? null;
+
+    // đã login
+    if ($user_id) {
+
+        $this->model->insertOrUpdateCart($user_id, $masp, $size, $qty);
+
+        echo json_encode([
+            "message" => "Đã thêm vào DB"
+        ]);
+        
+        return;
+    }
+
+    // chưa login
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -146,8 +160,26 @@ class GioHangController
     ];
 
     echo json_encode([
-        "message" => "Đã thêm vào session cart",
-        "cart" => $_SESSION['cart']
+        "message" => "Đã thêm vào session"
     ]);
+}
+public function mergeCartAfterLogin($user_id)
+{
+    if (!isset($_SESSION['cart'])) {
+        return;
+    }
+
+    foreach ($_SESSION['cart'] as $item) {
+
+        $this->model->insertOrUpdateCart(
+            $user_id,
+            $item['masp'],
+            $item['masize'],
+            $item['soluong']
+        );
+    }
+
+    // clear session cart
+    unset($_SESSION['cart']);
 }
 }
