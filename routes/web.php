@@ -70,6 +70,13 @@ if ($uri == 'cart') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+
+if ($uri == 'add-cart') {
+    $controller = new GioHangController($conn);
+    $controller->addToCart();
+    exit;
+}
+
 if ($uri == 'cart/update') {
     requireLogin();
     $headerData = prepareHeader($conn);

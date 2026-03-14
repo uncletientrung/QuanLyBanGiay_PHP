@@ -103,4 +103,36 @@ class GioHangController
         // return $carts;
         require VIEW_PATH_DIR . 'cart.php';
     }
+
+   public function addToCart()
+{
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $masp = $data['masp'] ?? null;
+    $size = $data['size'] ?? null;
+    $qty = $data['qty'] ?? 1;
+
+    if(!$masp || !$size){
+        echo json_encode([
+            "error" => "Invalid data",
+            "data" => $data
+        ]);
+        return;
+    }
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $_SESSION['cart'][] = [
+        'masp' => $masp,
+        'masize' => $size,
+        'soluong' => $qty
+    ];
+
+    echo json_encode([
+        "message" => "Đã thêm vào session cart",
+        "cart" => $_SESSION['cart']
+    ]);
+}
 }

@@ -10,6 +10,9 @@
 
 <!-- Danh sách giỏ hàng Start -->
 <div class="container-fluid py-3">
+  <?php
+print_r($_SESSION['cart']);
+?>
   <div class="container py-3">
     <div class="row g-5">
       <div class="col-lg-8">

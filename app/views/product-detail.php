@@ -239,8 +239,12 @@ echo '</pre>';
                 </button>
               </div>
 
-              <a href="#" class="btn border border-secondary rounded-pill px-5 py-2 text-primary">
-                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+              <a
+              class="btn border border-secondary rounded-pill px-5 py-2 text-primary add-to-cart-btn"
+              data-masp="<?= $currentSP['masp'] ?>"
+              data-tensp="<?= htmlspecialchars($currentSP['tensp']) ?>"
+              >
+              <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
               </a>
             </div>
 
@@ -364,9 +368,9 @@ echo '</pre>';
           </a>
         </div>
       </div>
-
     </div>
   </div>
+  
 </div>
 <style>
   .thumb-img:hover {
@@ -559,231 +563,7 @@ echo '</pre>';
   }
 }
 </style>
-
 <script>
-  function changeImage(elem) {
-    const mainImg = document.getElementById('mainImage');
-    const thumbs = document.querySelectorAll('.thumb-img');
-    
-    thumbs.forEach(img => img.classList.remove('active'));
-    elem.classList.add('active');
-    
-    mainImg.style.opacity = '0';
-    
-    setTimeout(() => {
-      mainImg.src = elem.src;
-      mainImg.style.opacity = '1';
-    }, 150);
-  }
-
-  document.querySelectorAll('.thumb-img').forEach(img => {
-    img.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.08)';
-    });
-    img.addEventListener('mouseleave', function() {
-      if (!this.classList.contains('active')) {
-        this.style.transform = 'scale(1)';
-      }
-    });
-  });
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    // Biến trạng thái
-    let selectedSize  = null;
-    let selectedStock = 0;
-
-    // Lấy giá gốc (giá 1 sản phẩm)
-    const giaBanElement = document.querySelector('.gia-ban');
-    const pricePerUnit  = parseFloat(giaBanElement?.dataset?.gia) || 0;
-
-    // Các phần tử DOM
-    const sizeButtons   = document.querySelectorAll('.size-btn');
-    const qtyInput      = document.getElementById('qty');
-    const btnMinus      = document.querySelector('.btn-minus');
-    const btnPlus       = document.querySelector('.btn-plus');
-    const addToCartBtn  = document.querySelector('a[href="#"][class*="border-secondary"]');
-    const buyNowBtn     = document.querySelector('.btn.btn-danger.w-100'); // nút Mua ngay
-
-    // Hàm cập nhật giá
-    function updateDisplayedPrice() {
-        if (!giaBanElement || !qtyInput) return;
-        const qty = parseInt(qtyInput.value) || 1;
-        const total = pricePerUnit * qty;
-        // ding dạng tiền
-        const formattedTotal = total.toLocaleString('vi-VN') + ' ₫';
-        giaBanElement.innerHTML = formattedTotal;
-        // chữ x
-         giaBanElement.innerHTML = formattedTotal + ` <small>(x${qty})</small>`;
-    }
-
-    // chọn size
-    sizeButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            if (this.classList.contains('disabled')) return;
-
-            sizeButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            selectedSize  = this.dataset.size;
-            selectedStock = parseInt(this.dataset.stock) || 0;
-
-            if (qtyInput) qtyInput.value = 1;
-            updateDisplayedPrice();
-        });
-    });
-
-    // số lưognj
-    function changeQty(delta) {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size trước!');
-            return;
-        }
-        if (!qtyInput) return;
-
-        let val = parseInt(qtyInput.value) || 1;
-        val += delta;
-
-        if (val < 1) val = 1;
-        if (val > selectedStock) {
-            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
-            val = selectedStock;
-        }
-
-        qtyInput.value = val;
-        updateDisplayedPrice();
-    }
-
-    if (btnPlus)  btnPlus.addEventListener('click',  () => changeQty(1));
-    if (btnMinus) btnMinus.addEventListener('click', () => changeQty(-1));
-
-    // trường hợp nhập input
-    if (qtyInput) {
-        qtyInput.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9]/g, ''); // chỉ cho phép số
-        });
-
-        qtyInput.addEventListener('change', validateQty);
-        qtyInput.addEventListener('blur',   validateQty);
-    }
-
-    function validateQty() {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size trước!');
-            if (qtyInput) qtyInput.value = 1;
-            updateDisplayedPrice();
-            return;
-        }
-
-        let val = parseInt(qtyInput.value) || 1;
-        if (val < 1) val = 1;
-        if (val > selectedStock) {
-            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
-            val = selectedStock;
-        }
-        qtyInput.value = val;
-        updateDisplayedPrice();
-    }
-
-    // validate trước khi mua
-    function canProceed() {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size!');
-            return false;
-        }
-        if (!qtyInput) return false;
-
-        const qty = parseInt(qtyInput.value) || 1;
-        if (qty < 1 || qty > selectedStock) {
-            alert(`Số lượng không hợp lệ! Chỉ còn ${selectedStock} cái size ${selectedSize}.`);
-            qtyInput.value = Math.min(qty, selectedStock) || 1;
-            updateDisplayedPrice();
-            return false;
-        }
-        return true;
-    }
-
-    // nut them gio hang
-    // ================== ADD TO CART (Modal đẹp thay alert) ==================
-if (addToCartBtn) {
-    addToCartBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (!canProceed()) return;
-
-        const qty = parseInt(qtyInput.value);
-        const totalPrice = pricePerUnit * qty;
-        const productName = "<?= addslashes($currentSP['tensp']) ?>"; // Tên SP từ PHP
-
-        const data = {
-            masp: "<?= $currentSP['masp'] ?? '' ?>",
-            tensp: productName,
-            size: selectedSize,
-            qty: qty,
-            totalPrice: totalPrice
-        };
-
-        // Hiển thị thông báo trong modal
-        showCartSuccess(productName, selectedSize, qty, totalPrice);
-
-        // GỬI AJAX THẬT LÊN SERVER (tùy chọn - sau này implement)
-        console.log('Add to cart data:', data);
-        // sendToCartAPI(data); // Uncomment khi có API
-
-        // Reset form (tùy chọn)
-        // qtyInput.value = 1;
-        // updateDisplayedPrice();
-    });
-}
-
-// ================== HÀM HIỂN THỊ MODAL THÀNH CÔNG ==================
-function showCartSuccess(productName, size, qty, totalPrice) {
-    const modal = new bootstrap.Modal(document.getElementById('cartModal'));
-    const messageEl = document.getElementById('cartMessage');
-    
-    const formattedTotal = totalPrice.toLocaleString('vi-VN') + ' ₫';
-    
-    messageEl.innerHTML = `
-        <div class="mb-3">
-            <strong>${productName}</strong>
-        </div>
-        <div class="mb-2">
-            Size: <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1">${size}</span>
-              × ${qty} đôi
-        </div>
-        <div class="fs-4 fw-bold text-success mb-4">
-            ${formattedTotal}
-        </div>
-        <small class="text-muted">Sản phẩm đã được thêm vào giỏ hàng của bạn</small>
-    `;
-
-    modal.show();
-
-    // Tự động đóng sau 6 giây
-    setTimeout(() => modal.hide(), 6000);
-
-    // Nút tiếp tục mua
-    document.getElementById('continueShopping').onclick = () => modal.hide();
-}
-
-    // mua ngay
-    if (buyNowBtn) {
-        buyNowBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (!canProceed()) return;
-
-            const data = {
-                masp: "<?= $currentSP['masp'] ?? '' ?>",
-                size: selectedSize,
-                qty: parseInt(qtyInput.value)
-            };
-            console.log('Buy now:', data);
-            alert('Đi đến thanh toán: Size ' + selectedSize + ' × ' + data.qty);
-        });
-    }
-
-    // Khởi tạo giá ban đầu
-    updateDisplayedPrice();
-
-});
-
+const BASE_URL = "<?= ROOT_URL ?>";
 </script>
+<script src="<?= APP_PATH ?>public/js/product-detail.js"></script>
