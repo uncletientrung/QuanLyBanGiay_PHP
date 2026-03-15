@@ -358,7 +358,93 @@
 #searchModal .modal-content {
   background: rgba(255, 255, 255, 0.8);
 }
+/* ===== CART MODAL NAVY ===== */
 
+.cart-header {
+  background: #2e2e5b;
+  color: white;
+}
+
+.cart-header i {
+  color: #2e2e5b;
+}
+
+.cart-header .rounded-circle {
+  background: white;
+}
+
+/* BODY */
+
+#cartModal .modal-body {
+  background: #ffffff;
+  padding: 28px;
+}
+
+/* PRODUCT NAME */
+
+#cartMessage strong {
+  font-size: 20px;
+  color: #2e2e5b;
+}
+
+/* SIZE BADGE */
+
+#cartMessage .badge {
+  background: #2e2e5b;
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+/* PRICE */
+
+#cartMessage .fs-4 {
+  color: #2e2e5b !important;
+}
+
+/* NOTE */
+
+#cartMessage small {
+  font-size: 14px;
+}
+
+/* BUTTONS */
+
+#cartModal .btn {
+  border-radius: 30px;
+  padding: 10px 26px;
+  font-weight: 500;
+}
+
+/* CONTINUE */
+
+#continueShopping {
+  border: 1px solid #2e2e5b;
+  color: #2e2e5b;
+}
+
+#continueShopping:hover {
+  background: #2e2e5b;
+  color: white;
+}
+
+/* VIEW CART */
+
+#viewCart {
+  background: #2e2e5b;
+  border: none;
+}
+
+#viewCart:hover {
+  background: #1f1f45;
+}
+
+/* MODAL SHADOW */
+
+#cartModal .modal-content {
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
 /*** Navbar End ***/
 
 /*** Hero Header ***/

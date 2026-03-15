@@ -27,6 +27,7 @@ document.querySelectorAll(".thumb-img").forEach((img) => {
 document.addEventListener("DOMContentLoaded", function () {
   // Biến trạng thái
   let selectedSize = null;
+  let tensize = null;
   let selectedStock = 0;
 
   // Lấy giá gốc (giá 1 sản phẩm)
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.add("active");
 
       selectedSize = this.dataset.sizeId;
+      tensize = this.dataset.size;
       selectedStock = parseInt(this.dataset.stock) || 0;
 
       if (qtyInput) qtyInput.value = 1;
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (val < 1) val = 1;
     if (val > selectedStock) {
-      alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
+      alert(`Chỉ còn ${selectedStock} sản phẩm size ${tensize}!`);
       val = selectedStock;
     }
 
@@ -117,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let val = parseInt(qtyInput.value) || 1;
     if (val < 1) val = 1;
     if (val > selectedStock) {
-      alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
+      alert(`Chỉ còn ${selectedStock} sản phẩm size ${tensize}!`);
       val = selectedStock;
     }
     qtyInput.value = val;
@@ -135,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const qty = parseInt(qtyInput.value) || 1;
     if (qty < 1 || qty > selectedStock) {
       alert(
-        `Số lượng không hợp lệ! Chỉ còn ${selectedStock} cái size ${selectedSize}.`,
+        `Số lượng không hợp lệ! Chỉ còn ${selectedStock} cái size ${tensize}.`,
       );
       qtyInput.value = Math.min(qty, selectedStock) || 1;
       updateDisplayedPrice();
@@ -163,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       // Hiển thị thông báo trong modal
-      showCartSuccess(productName, selectedSize, qty, totalPrice);
+      showCartSuccess(productName, tensize, qty, totalPrice);
 
       // GỬI AJAX THẬT LÊN SERVER (tùy chọn - sau này implement)
       console.log("Add to cart data:", data);
@@ -235,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
         qty: parseInt(qtyInput.value),
       };
       console.log("Buy now:", data);
-      alert("Đi đến thanh toán: Size " + selectedSize + " × " + data.qty);
+      alert("Đi đến thanh toán: Size " + tensize + " × " + data.qty);
     });
   }
 

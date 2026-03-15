@@ -349,10 +349,10 @@ echo '</pre>';
     <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
       
       <!-- Header nhẹ nhàng -->
-      <div class="modal-header bg-gradient-soft-green text-dark border-0 pb-0 pt-4 px-4">
+      <div class="modal-header cart-header border-0 px-4 py-3">
         <div class="d-flex align-items-center gap-3">
           <div class="bg-white rounded-circle p-2 shadow-sm">
-            <i class="fa fa-check text-success fs-4"></i>
+            <i class="fa fa-check fs-4"></i>
           </div>
           <h5 class="modal-title fw-semibold mb-0 fs-4" id="cartModalLabel">Đã thêm vào giỏ hàng</h5>
         </div>
