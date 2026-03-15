@@ -21,53 +21,89 @@ class GioHangController
   {
     return $this->model->getCartsByUserId_Model($user_id);
   }
-  public function updateQuantity()
-  {
+public function updateQuantity()
+{
     $user_id = $_SESSION['user-id'] ?? null;
+    if (!$user_id) {
+        echo json_encode(['success' => false, 'error' => 'Vui lòng đăng nhập']);
+        exit;
+    }
+
     $masp   = $_POST['masp'] ?? null;
     $masize = $_POST['masize'] ?? null;
     $action = $_POST['action'] ?? null;
-    $stock = $this->SanPhamModel->getStock($masp, $masize);
-    $carts = $this->model->getCartsByUserId_Model($user_id);
-    foreach ($carts as $item) {
-      if ($item['masp'] == $masp && $item['masize'] == $masize) {
-          $soluong = (int)$item['soluong'];
-          break;
-      }
-    }
-    if ($action === 'minus' && $soluong > 1) {
-        $soluong--;
-    } elseif ($action === 'plus') {
 
-        if ($soluong >= $stock) {
-            echo json_encode([
-                'success' => false,
-                'error' => 'Sản phẩm đã đạt số lượng tồn kho'
-            ]);
+    if (!$masp || !$masize || !$action) {
+        echo json_encode(['success' => false, 'error' => 'Thiếu thông tin']);
+        exit;
+    }
+
+    // Lấy stock
+    $stock = $this->SanPhamModel->getStock($masp, $masize);
+
+    
+    $soluong = $this->model->getQuantity($user_id, $masp, $masize);
+
+    if ($soluong === 0) {
+        echo json_encode(['success' => false, 'error' => 'Sản phẩm không tồn tại trong giỏ']);
+        exit;
+    }
+
+    $new_soluong = $soluong;
+
+    if ($action === 'minus') {
+        if ($soluong > 1) {
+            $new_soluong--;
+        } else {
+            echo json_encode(['success' => false, 'error' => 'Số lượng tối thiểu là 1']);
             exit;
         }
-
-        $soluong++;
+    } elseif ($action === 'plus') {
+        if ($soluong >= $stock) {
+            echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!"]);
+            exit;
+        }
+        $new_soluong++;
+    } elseif ($action === 'set') {
+        $quantity = (int)($_POST['quantity'] ?? 1);
+        if ($quantity < 1) $quantity = 1;
+        if ($quantity > $stock) {
+            echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!"]);
+            exit;
+        }
+        $new_soluong = $quantity;
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Hành động không hợp lệ']);
+        exit;
     }
-    $this->model->updateQuantity_Model($user_id, $masp, $soluong);
-    $carts = $this->model->getCartsByUserId_Model($user_id);
+
+    // Update số lượng mới
+    $updated = $this->model->updateQuantity_Model($user_id, $masp, $masize, $new_soluong);
+    if (!$updated) {
+        echo json_encode(['success' => false, 'error' => 'Cập nhật thất bại']);
+        exit;
+    }
+
+    // Tính lại thành tiền và tổng giỏ
     $sp = $this->SanPhamModel->getSpById($masp);
     $gia = $sp['gianhap'] + ($sp['gianhap'] * $sp['tyleloinhuan'] / 100);
+    $thanhtien = $gia * $new_soluong;
 
-    // Tính lại tổng giỏ hàng
+    $carts = $this->model->getCartsByUserId_Model($user_id);
     $tong = 0;
     foreach ($carts as $c) {
-      $spCart = $this->SanPhamModel->getSpById($c['masp']);
-      $giaCart = $spCart['gianhap'] + ($spCart['gianhap'] * $spCart['tyleloinhuan'] / 100);
-      $tong += $giaCart * $c['soluong'];
+        $spCart = $this->SanPhamModel->getSpById($c['masp']);
+        $giaCart = $spCart['gianhap'] + ($spCart['gianhap'] * $spCart['tyleloinhuan'] / 100);
+        $tong += $giaCart * $c['soluong'];
     }
+
     echo json_encode([
-      'success'      => true,
-      'soluong_moi'  => $soluong,
-      'thanhtien'    => number_format($gia * $soluong) . '₫',
-      'tonggiohang'  => number_format($tong) . '₫'
+        'success'      => true,
+        'soluong_moi'  => $new_soluong,
+        'thanhtien'    => number_format($thanhtien) . '₫',
+        'tonggiohang'  => number_format($tong) . '₫'
     ]);
-  }
+}
   public function deleteCartItem()
 {
     $user_id = $_SESSION['user-id'] ?? NULL;

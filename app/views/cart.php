@@ -60,9 +60,10 @@
 
                         <input type="text"
                           id="quantity-<?= $item['masp'] ?>-<?= $item['masize'] ?>"
-                          class="form-control form-control-sm text-center border-0"
+                          class="form-control form-control-sm text-center border-0 qty-input"
                           value="<?= $item['soluong'] ?>"
-                          readonly>
+                          data-masp="<?= $item['masp'] ?>"
+                          data-masize="<?= $item['masize'] ?>">
 
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-plus rounded-circle bg-light border"

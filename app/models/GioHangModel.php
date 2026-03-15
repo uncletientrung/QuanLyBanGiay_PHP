@@ -13,17 +13,21 @@ class GioHangModel
         $stmt->execute([$user_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function updateQuantity_Model($makh, $masp, $soluong)
+   
+    public function updateQuantity_Model($makh, $masp, $masize, $soluong)
     {
-        $sql = "UPDATE giohang SET soluong = ? WHERE makh = ? AND masp = ?";
+        $sql = "UPDATE giohang SET soluong = ? WHERE makh = ? AND masp = ? AND masize = ?";
         $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([$soluong, $makh, $masp]);
+        return $stmt->execute([$soluong, $makh, $masp, $masize]);
     }
-   public function deleteItem_Model($makh,$masp){
-    $sql = "DELETE FROM giohang WHERE makh = ? AND masp = ?";
-    $stmt = $this->conn->prepare($sql);
-    return $stmt->execute([$makh,$masp]);
-}
+
+    
+    public function deleteItem_Model($makh, $masp, $masize)
+    {
+        $sql = "DELETE FROM giohang WHERE makh = ? AND masp = ? AND masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$makh, $masp, $masize]);
+    }
     public function countCartItem_Model($user_id){
         $sql = "SELECT COUNT(*) as total FROM giohang WHERE makh =?";
         $stmt = $this->conn->prepare($sql);
@@ -57,5 +61,15 @@ class GioHangModel
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$user_id, $masp, $masize, $qty]);
         }
+    }
+   
+    public function getQuantity($makh, $masp, $masize)
+    {
+        $sql = "SELECT soluong FROM giohang WHERE makh = ? AND masp = ? AND masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$makh, $masp, $masize]);
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)($row['soluong'] ?? 0);
     }
 }
