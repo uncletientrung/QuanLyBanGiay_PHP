@@ -1,13 +1,15 @@
 <?php
 require_once __DIR__ . '/../../config/connectdb.php';
 require_once __DIR__ . '/../models/AuthModel.php';
-
+require_once __DIR__ . '/GioHangController.php'; 
 class AuthController
 {
     private $model;
+    private $gioHangController;
     public function __construct($db)
     {
         $this->model = new AuthModel($db);
+        $this->gioHangController = new GioHangController($db);
     }
     public function checkLoginUser()
     {
@@ -27,6 +29,7 @@ class AuthController
                 if ($khachhang != FALSE) { // Nếu tìm thấy khách dựa trên mail
                     if ($khachhang['matkhau'] == $password) {
                         $_SESSION['user-id'] = $khachhang['makh'];
+                         $this->gioHangController->mergeCartAfterLogin($khachhang['makh']);
                         header('location:' . ROOT_URL);
                     } else {
                         $errors['password'] = "Vui lòng nhập đúng mật khẩu";
