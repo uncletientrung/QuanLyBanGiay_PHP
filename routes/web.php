@@ -147,7 +147,7 @@ if ($uri == 'track-order/cancel-order') {
     requireLogin();
     $headerData = prepareHeader($conn);
     extract($headerData);
-    $cancleOrderStatus= $chackoutController->cancelOrder();
+    $cancleOrderStatus = $chackoutController->cancelOrder();
     if ($cancleOrderStatus) {
         $_SESSION['cancle-order'] = true;
     } else {
@@ -179,6 +179,12 @@ if ($uri == 'product-detail') {
     $controller = new SanPhamController($conn);
     $controller->showDetail();
     require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if ($uri == 'product-detail/add-product') {
+    requireLogin();
+    $gioHangController = new GioHangController($conn);
+    $gioHangController->addCartItemClickBuy();
     exit;
 }
 // Account START

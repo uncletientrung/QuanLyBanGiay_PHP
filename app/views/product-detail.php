@@ -1,4 +1,3 @@
-
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop Detail</h1>
@@ -16,11 +15,11 @@
       <div class="col-12">
         <div class="row g-4">
           <!-- <?php
-echo '<pre>';
-print_r($listSize);
-echo '</pre>';
+                echo '<pre>';
+                print_r($listSize);
+                echo '</pre>';
 
-?> -->
+                ?> -->
 
           <!-- Cột trái: Hình ảnh + Tabs (thu nhỏ lại thành col-lg-7) -->
           <div class="col-lg-7">
@@ -28,30 +27,30 @@ echo '</pre>';
             <!-- Div mẹ chứa thumbnail + ảnh lớn -->
             <div class="row g-3 mb-4">
               <div class="col-2 d-none d-lg-block">
-                <div class="d-flex flex-column gap-2"> 
+                <div class="d-flex flex-column gap-2">
 
-                <?php foreach($listHinh as $index => $hinh): ?>
+                  <?php foreach ($listHinh as $index => $hinh): ?>
 
-                  <img src="<?= $hinh['path'] ?>" 
-                      class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>" 
-                      onclick="changeImage(this)" 
+                    <img src="<?= $hinh['path'] ?>"
+                      class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>"
+                      onclick="changeImage(this)"
                       style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
 
-                <?php endforeach ?>
-                  
+                  <?php endforeach ?>
+
                 </div>
               </div>
 
-            <!-- Ảnh lớn  -->
-            <div class="col-10">
-              <div class="rounded product-image-container" 
+              <!-- Ảnh lớn  -->
+              <div class="col-10">
+                <div class="rounded product-image-container"
                   style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
-                <img id="mainImage"
-                    src="<?=  $currentSP['image'] ?>" 
+                  <img id="mainImage"
+                    src="<?= $currentSP['image'] ?>"
                     class="img-fluid product-main-image"
-                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;">  <!-- thêm border-radius ở đây -->
+                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;"> <!-- thêm border-radius ở đây -->
+                </div>
               </div>
-            </div>
             </div>
 
             <!-- Tabs mô tả - giữ sát biên trái -->
@@ -167,7 +166,7 @@ echo '</pre>';
           <div class="col-lg-5">
             <!-- Tên sản phẩm nổi bật hơn -->
             <h4 class="fw-bold mb-2 product-name" style="font-size: 2.5rem; line-height: 1.1;"><?= $currentSP['tensp'] ?></h4>
-            
+
             <div class="product-meta">
 
 
@@ -208,51 +207,54 @@ echo '</pre>';
             </p>
 
             <div class="mb-4">
-           <p class="fw-bold mb-2">Size</p>
-          <div class="d-flex gap-2 flex-wrap">
-            <?php if(!empty($listSize)): ?>
-                <?php foreach ($listSize as $size): ?>
+              <p class="fw-bold mb-2">Size</p>
+              <div class="d-flex gap-2 flex-wrap">
+                <?php if (!empty($listSize)): ?>
+                  <?php foreach ($listSize as $size): ?>
                     <button
-                        type="button"
-                        class="btn btn-outline-secondary btn-sm size-btn
+                      type="button"
+                      class="btn btn-outline-secondary btn-sm size-btn
                         <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
-                        data-size-id="<?= $size['masize'] ?>"
-                        data-size="<?= $size['tensize'] ?>"
-                        data-stock="<?= $size['soluong'] ?>"
-                        <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
-                    >
-                        <?= $size['tensize'] ?>
+                      data-size-id="<?= $size['masize'] ?>"
+                      data-size="<?= $size['tensize'] ?>"
+                      data-stock="<?= $size['soluong'] ?>"
+                      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>>
+                      <?= $size['tensize'] ?>
                     </button>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p class="text-danger">Sản phẩm này hiện chưa có size nào.</p>
-                
-            <?php endif; ?>
-        </div>
-          </div>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <p class="text-danger">Sản phẩm này hiện chưa có size nào.</p>
+
+                <?php endif; ?>
+              </div>
+            </div>
 
 
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="input-group quantity" style="width: 130px;">
-                <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
                   <i class="fa fa-minus"></i>
                 </button>
-                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1" >
-                <button class="btn btn-sm btn-plus rounded-circle bg-light border" >
+                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1">
+                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
 
               <a
-              class="btn border border-secondary rounded-pill px-5 py-2 text-primary add-to-cart-btn"
-              data-masp="<?= $currentSP['masp'] ?>"
-              data-tensp="<?= htmlspecialchars($currentSP['tensp']) ?>"
-              >
-              <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                class="btn border border-secondary rounded-pill px-5 py-2 text-primary add-to-cart-btn"
+                data-masp="<?= $currentSP['masp'] ?>"
+                data-tensp="<?= htmlspecialchars($currentSP['tensp']) ?>">
+                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
               </a>
             </div>
 
-            <a href="#" class="btn btn-danger w-100 mb-4 py-3 fw-bold" style="font-size: 1.2rem;">Mua ngay</a>
+            <a
+              class="btn btn-danger w-100 mb-4 py-3 fw-bold buy-now-btn"
+              data-masp="<?= $currentSP['masp'] ?>"
+              style="font-size: 1.2rem;">
+              Mua ngay
+            </a>
 
             <!-- Khung icons info - làm dài bằng nút Mua ngay -->
             <div class="rounded py-3 bg-white border mb-4 w-100">
@@ -299,11 +301,11 @@ echo '</pre>';
     <div class="vesitable">
       <div class="owl-carousel vegetable-carousel justify-content-center">
 
-        <?php if(!empty($listSP)) : ?>
-          <?php foreach($listSP as $sp): ?>
+        <?php if (!empty($listSP)) : ?>
+          <?php foreach ($listSP as $sp): ?>
             <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
 
-            <div class="product-item position-relative"> 
+            <div class="product-item position-relative">
 
               <div class="product-img">
                 <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
@@ -345,7 +347,7 @@ echo '</pre>';
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
-      
+
       <!-- Header nhẹ nhàng -->
       <div class="modal-header cart-header border-0 px-4 py-3">
         <div class="d-flex align-items-center gap-3">
@@ -374,7 +376,7 @@ echo '</pre>';
       </div>
     </div>
   </div>
-  
+
 </div>
 <style>
   .thumb-img:hover {
@@ -393,9 +395,9 @@ echo '</pre>';
   }
 
   .product-main-image:hover {
-  transform: scale(1.12);
-  cursor: zoom-in;
-}
+    transform: scale(1.12);
+    cursor: zoom-in;
+  }
 
 
   @media (max-width: 768px) {
@@ -404,188 +406,201 @@ echo '</pre>';
     }
   }
 
-.vesitable-item {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+  .vesitable-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
-.vesitable-item .p-4 {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+  .vesitable-item .p-4 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
 
-.vesitable-item h4 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-height: 3.6rem;
-  max-height: 3.6rem;
-  margin-bottom: 1rem;
-}
+  .vesitable-item h4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.6rem;
+    max-height: 3.6rem;
+    margin-bottom: 1rem;
+  }
 
-.vesitable-item .d-flex {
-  margin-top: auto;
-}
-.product-meta {
-  margin-top: 16px;
-  font-family: system-ui, -apple-system, sans-serif;
-}
+  .vesitable-item .d-flex {
+    margin-top: auto;
+  }
 
-/* Thương hiệu */
-.meta-brand {
-  margin-bottom: 16px;
-}
+  .product-meta {
+    margin-top: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
 
-.meta-brand .label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #6b7280; 
-  display: block;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+  /* Thương hiệu */
+  .meta-brand {
+    margin-bottom: 16px;
+  }
 
-.meta-brand .value {
-  font-size: 22px;              /* to hơn rõ rệt */
-  font-weight: 700;
-  color: #2e2e5b;              
-  letter-spacing: -0.3px;
-  line-height: 1.1;
-}
+  .meta-brand .label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-.product-name{
-  color: #2e2e5b !important;
-}
-.meta-attrs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 12px 20px;              
-}
+  .meta-brand .value {
+    font-size: 22px;
+    /* to hơn rõ rệt */
+    font-weight: 700;
+    color: #2e2e5b;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
 
-.attr {
-  display: flex;
-  flex-direction: column;
-}
+  .product-name {
+    color: #2e2e5b !important;
+  }
 
-.attr .label {
-  font-size: 12px;
-  font-weight: 500;
-  color: #9ca3af;               
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
+  .meta-attrs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px 20px;
+  }
 
-.attr .value {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;          
-}
+  .attr {
+    display: flex;
+    flex-direction: column;
+  }
 
-.size-btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
-.size-btn.active {
-  background-color: #0d6efd;
-  color: #fff;
-  border-color: #0d6efd;
-}
+  .attr .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .attr .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .size-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .size-btn.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+  }
 
 
-/* Modal tone dịu - pastel nhẹ nhàng */
-#cartModal .modal-content {
-  border-radius: 24px;
-  background: #ffffff;
-}
+  /* Modal tone dịu - pastel nhẹ nhàng */
+  #cartModal .modal-content {
+    border-radius: 24px;
+    background: #ffffff;
+  }
 
-#cartModal .modal-header {
-  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
-  border-bottom: none !important;
-}
+  #cartModal .modal-header {
+    background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+    border-bottom: none !important;
+  }
 
-.bg-gradient-soft-green {
-  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
-}
+  .bg-gradient-soft-green {
+    background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+  }
 
-.btn-soft-green {
-  background: #4caf50;
-  border: none;
-  transition: all 0.25s ease;
-}
+  .btn-soft-green {
+    background: #4caf50;
+    border: none;
+    transition: all 0.25s ease;
+  }
 
-.btn-soft-green:hover {
-  background: #43a047;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
-}
+  .btn-soft-green:hover {
+    background: #43a047;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+  }
 
-#cartModal .modal-body {
-  background: #fafafa;
-}
-.nav-tabs .nav-link{
-  color: #2c3e50;
-}
+  #cartModal .modal-body {
+    background: #fafafa;
+  }
 
-.nav-tabs .nav-link:hover{
-  color: #2c3e50;
-}
-#cartModal #cartMessage {
-  line-height: 1.6;
-  color: #2c3e50;
-}
+  .nav-tabs .nav-link {
+    color: #2c3e50;
+  }
 
-#cartModal .btn-outline-secondary {
-  border-color: #adb5bd;
-  color: #495057;
-  transition: all 0.25s ease;
-}
+  .nav-tabs .nav-link:hover {
+    color: #2c3e50;
+  }
 
-#cartModal .btn-outline-secondary:hover {
-  background: #e9ecef;
-  color: #212529;
-}
+  #cartModal #cartMessage {
+    line-height: 1.6;
+    color: #2c3e50;
+  }
 
-/* Hiệu ứng mượt khi mở modal */
-#cartModal .modal-dialog {
-  transform: scale(0.95);
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+  #cartModal .btn-outline-secondary {
+    border-color: #adb5bd;
+    color: #495057;
+    transition: all 0.25s ease;
+  }
 
-#cartModal.show .modal-dialog {
-  transform: scale(1);
-  opacity: 1;
-}
-.gia-ban{
-  font-size: 2rem;        /* to như h5 */
-  font-weight: 800;       /* fw-bolder */
-  color: #dc3545;    
-  text-shadow: 0 0 0.4px #dc3545;     /* đỏ bootstrap text-danger */
-  letter-spacing: -0.5px;
-  margin-top: 15px;
-  margin-bottom: 1rem;
-  white-space: nowrap;    /* không rớt dòng */
-  line-height: 1.2;
-}
-/* Mobile thân thiện */
-@media (max-width: 576px) {
+  #cartModal .btn-outline-secondary:hover {
+    background: #e9ecef;
+    color: #212529;
+  }
+
+  /* Hiệu ứng mượt khi mở modal */
   #cartModal .modal-dialog {
-    margin: 1rem;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  #cartModal .btn {
-    width: 100%;
-    padding: 0.75rem 1.25rem;
+
+  #cartModal.show .modal-dialog {
+    transform: scale(1);
+    opacity: 1;
   }
-}
+
+  .gia-ban {
+    font-size: 2rem;
+    /* to như h5 */
+    font-weight: 800;
+    /* fw-bolder */
+    color: #dc3545;
+    text-shadow: 0 0 0.4px #dc3545;
+    /* đỏ bootstrap text-danger */
+    letter-spacing: -0.5px;
+    margin-top: 15px;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    /* không rớt dòng */
+    line-height: 1.2;
+  }
+
+  /* Mobile thân thiện */
+  @media (max-width: 576px) {
+    #cartModal .modal-dialog {
+      margin: 1rem;
+    }
+
+    #cartModal .btn {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+    }
+  }
 </style>
 <script>
-const BASE_URL = "<?= ROOT_URL ?>";
+  const BASE_URL = "<?= ROOT_URL ?>";
 </script>
 <script src="<?= APP_PATH ?>public/js/product-detail.js"></script>

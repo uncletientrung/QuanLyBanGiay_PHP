@@ -231,13 +231,21 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       if (!canProceed()) return;
 
-      const data = {
-        masp: masp,
-        size: selectedSize,
-        qty: parseInt(qtyInput.value),
-      };
-      console.log("Buy now:", data);
-      alert("Đi đến thanh toán: Size " + tensize + " × " + data.qty);
+      const formData = new FormData();
+      formData.append("masp", masp);
+      formData.append("masize", selectedSize);
+      formData.append("soluong", qtyInput.value);
+      fetch(ROOT_URL + "product-detail/add-product", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            window.location.href = ROOT_URL + "chackout";
+          }
+        })
+        .catch((err) => console.error(err));
     });
   }
 

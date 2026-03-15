@@ -83,7 +83,7 @@ class ChackoutController
                     $this->DonHangModel->rollBack();
                     return false;
                 }
-                $this->CartModel->deleteItem_Model($user_id, $item['masp']); // xóa giỏ hàng
+                $this->CartModel->deleteItem_Model($user_id, $item['masp'], $item['masize']); // xóa giỏ hàng
             }
             $this->DonHangModel->commit();
             return true;
