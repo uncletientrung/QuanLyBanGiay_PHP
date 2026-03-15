@@ -13,8 +13,6 @@
 
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
-- Kiểm tra đơn hàng
-  - ⏳ Chưa làm view
 - Đặt đơn hàng (Checkout)
 - Đăng nhập
   - ⏳ Chưa kiểm tra password hash
@@ -25,6 +23,7 @@
 - ✅ Giới thiệu
 - ✅ Account Page
 - ✅ Thêm đơn hàng
+- ✅ Kiểm tra đơn hàng
 
 ---
 

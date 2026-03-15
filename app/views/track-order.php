@@ -52,8 +52,9 @@
 
               <div class="col-12">
                 <div class="card order-card shadow-sm border-2 border-dark rounded-3 overflow-hidden hover-shadow"
-                  style="transition: all 0.3s; cursor: pointer;">
-                  
+                  style="transition: all 0.3s; cursor: pointer;"
+                  data-status="<?= $order['trangthai'] ?>">
+
                   <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div>
