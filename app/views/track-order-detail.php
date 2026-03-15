@@ -58,6 +58,15 @@
       px-4 py-2 fs-6 fw-bold d-inline-block">
           <?= $order_status ?>
         </span>
+        <?php if ($order['trangthai'] == 0): ?>
+          <div class="mt-3">
+            <a href="track-order/cancel-order?madh=<?= $order['madh'] ?>"
+              class="btn btn-outline-danger rounded-pill px-4"
+              onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">
+              Hủy đơn
+            </a>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
 
