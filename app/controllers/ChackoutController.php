@@ -32,14 +32,12 @@ class ChackoutController
     {
         $user_id = $_SESSION['user-id'] ?? null;
         if (!$user_id){
-            echo "<script> console.log('false0')</script>";
             return false;
         } 
             
         $user = $this->KhachHangModel->getById($user_id); // Lấy user
         $this->carts = $this->CartModel->getCartsByUserId_Model($user_id); // lấy lại giỏ hàng
         if (empty($this->carts)){
-            echo "<script> console.log('falsee')</script>";
             return false;
         } 
         try {
@@ -60,7 +58,6 @@ class ChackoutController
             $madh = $this->DonHangModel->addOrder_Model($user_id, $order_data, $diachi);
             if (!$madh) {
                 $this->DonHangModel->rollBack();
-                 echo "<script> console.log('false1')</script>";
                 return false;
             }
             // Xử lý thêm vào chi tiết đơn hàng
@@ -75,7 +72,6 @@ class ChackoutController
                 $addDetail = $this->CTDonHangModel->addOrderDetail_Model($madh, $order_detail_data);
                 if (!$addDetail) {
                     $this->DonHangModel->rollBack();
-                    echo "<script> console.log('false2')</script>";
                     return false;
 
                 }
@@ -86,7 +82,6 @@ class ChackoutController
                 );
                 if (!$update) {
                     $this->DonHangModel->rollBack();
-                    echo "<script> console.log('false3')</script>";
                     return false;
                 }
                 $this->CartModel->deleteItem_Model($user_id, $item['masp']); // xóa giỏ hàng
@@ -95,7 +90,6 @@ class ChackoutController
             return true;
         } catch (Exception $e) {
             $this->DonHangModel->rollBack();
-            echo "<script> console.log('false4')</script>";
             return false;
         }
     }
@@ -104,7 +98,6 @@ class ChackoutController
         $user_id = $_SESSION['user-id'] ?? NULL;
         $user = $this->KhachHangModel->getById($user_id);
         $this->carts = $this->CartModel->getCartsByUserId_Model($user_id);
-        echo "<script>console.log(" . json_encode($this->carts) . ");</script>";
         $total = 0;
         foreach ($this->carts as &$item) {
             $sp = $this->SanPhamModel->getSpById($item['masp']);

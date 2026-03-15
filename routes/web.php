@@ -10,6 +10,7 @@ $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
 $accountController = new AccountController($conn);
 $chackoutController = new ChackoutController($conn);
+$trackOrderController = new TrackOrderController($conn);
 function requireLogin()
 {
     if (empty($_SESSION['user-id'])) {
@@ -126,6 +127,7 @@ if ($uri == 'chackout/add-order') {
     } else {
         $_SESSION['add-order'] = false;
     }
+    $trackOrderController->showTrackOrder();
     exit;
 }
 // Cổng thanh toán END

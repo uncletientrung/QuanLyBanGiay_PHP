@@ -45,13 +45,15 @@ class TrackOrderController
     public function showTrackOrder()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;
-        $orders = $this->DonHangModel->getAllByMaKH($user_id);
-        echo '<script> console.log(' . json_encode($orders) . ')</script>';
+        $order_truocDaoNguoc = $this->DonHangModel->getAllByMaKH($user_id);
+        $orders = array_reverse($order_truocDaoNguoc);
         foreach ($orders as &$order) {
-            $order['soluongSP'] = $this->DonHangModel->getCountOrderByMaDH($order['madh']);
+            $order['soluongSP'] = $this->CTDonHangModel->getCountOrderDetailByMaDH($order['madh']);
             $order['trangthaiDH'] = $this->getStatusText($order['trangthai']);
             $order['thoigiantao'] = date('d-m-Y H:i', strtotime($order['thoigiantao']));
         }
+        echo '<script> console.log(' . json_encode($orders) . ')</script>';
+        unset($order);
         require VIEW_PATH_DIR . 'track-order.php';
     }
     public function showTrackOrderDetail()
@@ -69,8 +71,9 @@ class TrackOrderController
             $detail['tensize'] = $this->SizeModel->getNameById($detail['masize'])['tensize'];
             $detail['main-image'] = $this->HinhAnhModel->getImageMainById($detail['sanpham']['masp']);
             $detail['tenmau'] = $this->MauSacModel->getNameByIdNoStatus($detail['sanpham']['mau']);
-            $tongtien += $detail['giaban'] * $detail['soluong'];
+            $tongtien += $detail['dongia'] * $detail['soluong'];
         }
+        unset($detail);
         echo "<script>console.log(" . json_encode($order) . ")</script>";
         echo "<script>console.log(" . json_encode($user) . ")</script>";
         echo "<script>console.log(" . json_encode($order_details) . ")</script>";
