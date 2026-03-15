@@ -211,21 +211,26 @@ echo '</pre>';
 
             <div class="mb-4">
            <p class="fw-bold mb-2">Size</p>
-<div class="d-flex gap-2 flex-wrap">
-<?php foreach ($listSize as $size): ?>
-  <button
-    type="button"
-    class="btn btn-outline-secondary btn-sm size-btn
-      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
-    data-size-id="<?= $size['masize'] ?>"
-    data-size="<?= $size['tensize'] ?>"
-    data-stock="<?= $size['soluong'] ?>"
-    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
-  >
-    <?= $size['tensize'] ?>
-  </button>
-<?php endforeach ?>
-</div>
+          <div class="d-flex gap-2 flex-wrap">
+            <?php if(!empty($listSize)): ?>
+                <?php foreach ($listSize as $size): ?>
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm size-btn
+                        <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
+                        data-size-id="<?= $size['masize'] ?>"
+                        data-size="<?= $size['tensize'] ?>"
+                        data-stock="<?= $size['soluong'] ?>"
+                        <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
+                    >
+                        <?= $size['tensize'] ?>
+                    </button>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-danger">Sản phẩm này hiện chưa có size nào.</p>
+                
+            <?php endif; ?>
+        </div>
           </div>
 
 
