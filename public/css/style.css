@@ -915,7 +915,15 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.btn-primary {
+  background-color: #6e8dab !important;
+  border-color: #707e8d !important;
+}
 
+.btn-primary:hover {
+  background-color: #4b80b2 !important;
+  border-color: #384e62 !important;
+}
 /* GIÁ */
 .product-price {
   color: #cb0606; /* đỏ */

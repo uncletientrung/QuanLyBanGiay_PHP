@@ -166,7 +166,7 @@ echo '</pre>';
           <!-- Cột phải: Thông tin sản phẩm -->
           <div class="col-lg-5">
             <!-- Tên sản phẩm nổi bật hơn -->
-            <h4 class="fw-bold mb-2" style="font-size: 2.5rem; line-height: 1.1;"><?= $currentSP['tensp'] ?></h4>
+            <h4 class="fw-bold mb-2 product-name" style="font-size: 2.5rem; line-height: 1.1;"><?= $currentSP['tensp'] ?></h4>
             
             <div class="product-meta">
 
@@ -202,12 +202,10 @@ echo '</pre>';
 
 
 
-            <!-- Giá nổi bật hơn -->
-            <h5 class="fw-bolder mb-4 text-danger" style="font-size: 2rem; letter-spacing: -0.5px; margin-top: 15px;">
-              <p class="gia-ban" data-gia="<?= $giaBan ?>">
-                <?= number_format($giaBan, 0, ',', '.') ?> ₫
-              </p>
-            </h5>
+            <!-- Giá -->
+            <p class="gia-ban" data-gia="<?= $giaBan ?>">
+              <?= number_format($giaBan, 0, ',', '.') ?> ₫
+            </p>
 
             <div class="mb-4">
            <p class="fw-bold mb-2">Size</p>
@@ -455,12 +453,14 @@ echo '</pre>';
 .meta-brand .value {
   font-size: 22px;              /* to hơn rõ rệt */
   font-weight: 700;
-  color: #e142a2;              
+  color: #2e2e5b;              
   letter-spacing: -0.3px;
   line-height: 1.1;
 }
 
-
+.product-name{
+  color: #2e2e5b !important;
+}
 .meta-attrs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -529,7 +529,13 @@ echo '</pre>';
 #cartModal .modal-body {
   background: #fafafa;
 }
+.nav-tabs .nav-link{
+  color: #2c3e50;
+}
 
+.nav-tabs .nav-link:hover{
+  color: #2c3e50;
+}
 #cartModal #cartMessage {
   line-height: 1.6;
   color: #2c3e50;
@@ -557,7 +563,17 @@ echo '</pre>';
   transform: scale(1);
   opacity: 1;
 }
-
+.gia-ban{
+  font-size: 2rem;        /* to như h5 */
+  font-weight: 800;       /* fw-bolder */
+  color: #dc3545;    
+  text-shadow: 0 0 0.4px #dc3545;     /* đỏ bootstrap text-danger */
+  letter-spacing: -0.5px;
+  margin-top: 15px;
+  margin-bottom: 1rem;
+  white-space: nowrap;    /* không rớt dòng */
+  line-height: 1.2;
+}
 /* Mobile thân thiện */
 @media (max-width: 576px) {
   #cartModal .modal-dialog {
