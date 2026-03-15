@@ -31,7 +31,50 @@
 
 /*** Spinner End ***/
 /*** NAVY THEME ***/
+/* Avatar initials - Navy modern & premium */
+/* Avatar initials - Navy chủ đạo #2e2e5b, không hover */
+.avatar-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #2e2e5b; /* Màu chủ đạo cố định */
+  color: #ffffff;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 2px solid #3b82f6; /* viền xanh dương nhẹ nhàng, nổi bật trên nền navy */
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06); /* bóng nhẹ cố định, tạo cảm giác nổi */
+  transition: none; /* tắt hết transition */
+}
 
+/* Optional: nếu muốn viền nhạt hơn hoặc đổi kiểu */
+.avatar-initials {
+  /* Nếu muốn viền mờ hơn: */
+  /* border: 2px solid rgba(59, 130, 246, 0.5); */
+
+  /* Hoặc viền trắng cho contrast cao: */
+  /* border: 2px solid #ffffff; */
+}
+
+/* Responsive nhỏ hơn trên mobile (tùy chọn) */
+@media (max-width: 576px) {
+  .avatar-initials {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+}
 /* breadcrumb màu trắng */
 .page-header .breadcrumb-item a {
   color: #d9d9d9;

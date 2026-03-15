@@ -28,9 +28,11 @@ class AuthController
                 $khachhang = $this->model->getUserByEmail($email);
                 if ($khachhang != FALSE) { // Nếu tìm thấy khách dựa trên mail
                     if ($khachhang['matkhau'] == $password) {
+                        $_SESSION['user'] = $khachhang;
                         $_SESSION['user-id'] = $khachhang['makh'];
                          $this->gioHangController->mergeCartAfterLogin($khachhang['makh']);
                         header('location:' . ROOT_URL);
+                        exit();
                     } else {
                         $errors['password'] = "Vui lòng nhập đúng mật khẩu";
                     }
@@ -48,6 +50,7 @@ class AuthController
             header('location:' . ROOT_URL . 'account/login');
             die();
         }
+        
     }
 }
 $auth = new AuthController($conn);

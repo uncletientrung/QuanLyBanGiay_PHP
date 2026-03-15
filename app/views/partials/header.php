@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/auth_helper.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,10 +128,26 @@
                 </span>
               <?php endif; ?>
             </a>
-            <!-- Button user -->
-            <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto">
-              <i class="fas fa-user fa-2x"></i>
-            </a>
+
+<!-- Button user / Avatar -->
+<a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+  <?php 
+  $initial = null;
+
+  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
+      $hoten = trim($user['hoten']);
+      $initial = mb_strtoupper(mb_substr($hoten, 0, 1), 'UTF-8');
+  }
+  ?>
+
+  <?php if ($initial !== null): ?>
+    <div class="avatar-initials">
+      <?= htmlspecialchars($initial) ?>
+    </div>
+  <?php else: ?>
+    <i class="fas fa-user fa-2x text-primary"></i>
+  <?php endif; ?>
+</a>
           </div>
         </div>
       </nav>

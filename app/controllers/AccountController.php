@@ -9,11 +9,38 @@ class AccountController
     }
     public function logout()
     {
-        $user_id = $_SESSION['user-id'] ?? NULL;
-        if ($user_id != NULL) {
-            unset($_SESSION['user-id']);
-            header('location:' . APP_PATH);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
+
+        // Xóa sạch các key user
+        if (isset($_SESSION['user'])) {
+            unset($_SESSION['user']);
+        }
+        if (isset($_SESSION['user-id'])) {
+            unset($_SESSION['user-id']);
+        }
+
+        // Hủy cookie session (nếu dùng)
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+
+        // Destroy session hoàn toàn
+        session_destroy();
+
+        // Chống cache
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Pragma: no-cache");
+        header("Expires: Thu, 01 Jan 1970 00:00:00 GMT");
+
+        // Redirect + timestamp chống cache
+        header('Location: ' . APP_PATH . '?t=' . time());
+        exit();
     }
     public function updateProfile()
     {
