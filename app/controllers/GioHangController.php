@@ -25,18 +25,29 @@ class GioHangController
   {
     $user_id = $_SESSION['user-id'] ?? null;
     $masp   = $_POST['masp'] ?? null;
+    $masize = $_POST['masize'] ?? null;
     $action = $_POST['action'] ?? null;
+    $stock = $this->SanPhamModel->getStock($masp, $masize);
     $carts = $this->model->getCartsByUserId_Model($user_id);
     foreach ($carts as $item) {
-      if ($item['masp'] == $masp) {
-        $soluong = (int)$item['soluong'];
-        break;
+      if ($item['masp'] == $masp && $item['masize'] == $masize) {
+          $soluong = (int)$item['soluong'];
+          break;
       }
     }
     if ($action === 'minus' && $soluong > 1) {
-      $soluong--;
+        $soluong--;
     } elseif ($action === 'plus') {
-      $soluong++;
+
+        if ($soluong >= $stock) {
+            echo json_encode([
+                'success' => false,
+                'error' => 'Sản phẩm đã đạt số lượng tồn kho'
+            ]);
+            exit;
+        }
+
+        $soluong++;
     }
     $this->model->updateQuantity_Model($user_id, $masp, $soluong);
     $carts = $this->model->getCartsByUserId_Model($user_id);
@@ -58,28 +69,40 @@ class GioHangController
     ]);
   }
   public function deleteCartItem()
-  {
+{
     $user_id = $_SESSION['user-id'] ?? NULL;
     $masp = $_POST['masp'] ?? NULL;
-    if (!$user_id || !$masp) {
-      echo json_encode(['success' => false]);
-      exit;
+    $masize = $_POST['masize'] ?? NULL;
+
+    if (!$user_id || !$masp || !$masize) {
+        echo json_encode(['success' => false]);
+        exit;
     }
-    $this->model->deleteItem_Model($user_id, $masp);
+
+    // Xóa sản phẩm
+    $this->model->deleteItem_Model($user_id, $masp, $masize);
+
+    // Lấy lại giỏ hàng
     $carts = $this->model->getCartsByUserId_Model($user_id);
+
+    // Tính tổng tiền
     $tong = 0;
     foreach ($carts as $c) {
-      $sp = $this->SanPhamModel->getSpById($c['masp']);
-      $gia = $sp['gianhap'] * (1 + $sp['tyleloinhuan'] / 100);
-      $tong += $gia * $c['soluong'];
+        $sp = $this->SanPhamModel->getSpById($c['masp']);
+        $gia = $sp['gianhap'] * (1 + $sp['tyleloinhuan'] / 100);
+        $tong += $gia * $c['soluong'];
     }
+
+    // Đếm lại số item
+    $cartCount = $this->model->countCartItem_Model($user_id);
+
     echo json_encode([
-      'success'     => true,
-      'masp'        => $masp,
-      'tonggiohang' => number_format($tong) . '₫',
-      'empty'       => count($carts) == 0
+        'success'     => true,
+        'tonggiohang' => number_format($tong) . '₫',
+        'empty'       => count($carts) == 0,
+        'cartCount'   => $cartCount
     ]);
-  }
+}
   public function countCartItem()
   {
     $user_id = $_SESSION['user-id'] ?? NULL;
@@ -114,50 +137,56 @@ class GioHangController
 
 
 
-  public function addToCart()
-  {
+ public function addToCart()
+{
     $data = json_decode(file_get_contents("php://input"), true);
 
     $masp = $data['masp'] ?? null;
     $size = $data['size'] ?? null;
-    $qty = $data['qty'] ?? 1;
+    $qty  = $data['qty'] ?? 1;
 
     if (!$masp || !$size) {
-      echo json_encode([
-        "error" => "Invalid data"
-      ]);
-      return;
+        echo json_encode([
+            "success" => false,
+            "error" => "Invalid data"
+        ]);
+        return;
     }
 
     $user_id = $_SESSION['user-id'] ?? null;
 
-    // đã login
+    // ===== Đã login =====
     if ($user_id) {
 
-      $this->model->insertOrUpdateCart($user_id, $masp, $size, $qty);
+        $this->model->insertOrUpdateCart($user_id, $masp, $size, $qty);
 
-      echo json_encode([
-        "message" => "Đã thêm vào DB"
-      ]);
+        // đếm lại giỏ hàng
+        $cartCount = $this->model->countCartItem_Model($user_id);
 
-      return;
+        echo json_encode([
+            "success" => true,
+            "cartCount" => $cartCount
+        ]);
+
+        return;
     }
 
-    // chưa login
+    // ===== Chưa login =====
     if (!isset($_SESSION['cart'])) {
-      $_SESSION['cart'] = [];
+        $_SESSION['cart'] = [];
     }
 
     $_SESSION['cart'][] = [
-      'masp' => $masp,
-      'masize' => $size,
-      'soluong' => $qty
+        'masp' => $masp,
+        'masize' => $size,
+        'soluong' => $qty
     ];
 
     echo json_encode([
-      "message" => "Đã thêm vào session"
+        "success" => true,
+        "cartCount" => count($_SESSION['cart'])
     ]);
-  }
+}
   public function mergeCartAfterLogin($user_id)
   {
     if (!isset($_SESSION['cart'])) {

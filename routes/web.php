@@ -62,7 +62,7 @@ if ($uri == 'products') {
 
 // Giỏ hàng START
 if ($uri == 'cart') {
-    
+    requireLogin();
     $headerData = prepareHeader($conn);
     extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';

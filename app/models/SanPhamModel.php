@@ -242,6 +242,15 @@ class SanPhamModel
     $stmt->execute();
     return (int)$stmt->fetchColumn();
 }
+    public function getStock($masp, $masize)
+    {
+        $sql = "SELECT soluong FROM sanphamsize WHERE masp = ? AND masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$masp, $masize]);
 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['soluong'] ?? 0;
+    }
 }
 ?>

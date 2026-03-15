@@ -175,9 +175,20 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: JSON.stringify(data),
       })
-        .then((res) => res.text())
-        .then((res) => {
-          console.log("RAW RESPONSE:", res);
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.success) return;
+
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            if (data.cartCount == 0) {
+              cartCount.remove();
+            } else {
+              cartCount.innerText = data.cartCount;
+              cartCount.style.display = "flex";
+            }
+          }
         });
     });
   }
