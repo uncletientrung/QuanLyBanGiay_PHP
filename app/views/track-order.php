@@ -44,6 +44,27 @@
             <i class="fa fa-arrow-left me-2"></i> Quay lại cửa hàng
           </a>
         </div>
+        <!--  Thông báo lên đơn thành công-->
+        <?php if (isset($_SESSION['add-order']) && $_SESSION['add-order'] == true): ?>
+          <div class="container mt-4">
+            <div class="alert alert-success d-flex align-items-center ">
+              <i class="fa fa-check-circle"></i>
+              <span class="fw-bold">Thêm đơn hàng thành công</span>
+            </div>
+          </div>
+          <?php unset($_SESSION['add-order']); ?>
+        <?php endif; ?>
+
+        <!--  Thông báo hủy đơn thành công-->
+        <?php if (isset($_SESSION['cancle-order']) && $_SESSION['cancle-order'] == true): ?>
+          <div class="container mt-4">
+            <div class="alert alert-danger d-flex align-items-center ">
+              <i class="fa fa-check-circle"></i>
+              <span class="fw-bold">Hủy đơn hàng thành công</span>
+            </div>
+          </div>
+          <?php unset($_SESSION['cancle-order']); ?>
+        <?php endif; ?>
 
         <!-- Danh sách đơn hàng dạng card -->
         <div class="row g-4" id="orders-list">
@@ -58,7 +79,7 @@
                   <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div>
-                        <small class="fw-bold text-dark">Mã đơn: DH-<?= $order['soluongSP'] ?></small><br>
+                        <small class="fw-bold text-dark">Mã đơn: DH-<?= $order['madh'] ?></small><br>
                         <small class="fw-bold text-dark">Ngày đặt: <?= $order['thoigiantao'] ?></small>
                       </div>
                       <span class="badge <?php
@@ -70,17 +91,30 @@
                     </div>
 
                     <!-- Nếu nhiều sản phẩm -->
-                    <small class="fw-bold text-dark  d-block mb-3"> Tổng <?= $order['soluongSP'] ?> sản phẩm</small>
+                    <small class="fw-bold text-dark  d-block mb-3"> Tổng <?= $order['soluongSP'] ?> sản phẩm ( <?= $order['soloaiSP'] ?> loại)</small>
                     <hr class="my-3">
                     <div class="d-flex justify-content-between align-items-center">
                       <div>
                         <small class="text-muted">Tổng tiền:</small><br>
                         <strong class="fs-5 text-dark"><?= number_format($order['tongtien']) ?></strong>
                       </div>
-                      <a class="btn btn-outline-secondary rounded-pill px-4"
-                        href="track-order-detail?madh=<?= $order['madh'] ?>">
-                        Xem chi tiết
-                      </a>
+
+                      <div class="d-flex gap-2">
+
+                        <?php if ($order['trangthai'] == 0): ?>
+                          <a class="btn btn-outline-danger rounded-pill px-4"
+                            href="track-order/cancel-order?madh=<?= $order['madh'] ?>"
+                            onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">
+                            Hủy đơn
+                          </a>
+                        <?php endif; ?>
+
+                        <a class="btn btn-outline-secondary rounded-pill px-4"
+                          href="track-order-detail?madh=<?= $order['madh'] ?>">
+                          Xem chi tiết
+                        </a>
+
+                      </div>
                     </div>
                   </div>
                 </div>

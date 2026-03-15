@@ -62,7 +62,7 @@ if ($uri == 'products') {
 
 // Giỏ hàng START
 if ($uri == 'cart') {
-  
+
     $headerData = prepareHeader($conn);
     extract($headerData);
     require VIEW_PATH_DIR . 'partials/header.php';
@@ -83,7 +83,7 @@ if ($uri == 'clear-cart') {
     exit;
 }
 if ($uri == 'cart/update') {
-    
+
     $headerData = prepareHeader($conn);
     extract($headerData);
     $controller = new GioHangController($conn);
@@ -127,7 +127,7 @@ if ($uri == 'chackout/add-order') {
     } else {
         $_SESSION['add-order'] = false;
     }
-    $trackOrderController->showTrackOrder();
+    header('location:' . ROOT_URL . 'track-order');
     exit;
 }
 // Cổng thanh toán END
@@ -141,6 +141,19 @@ if ($uri == 'track-order') {
     $trackOrderController = new TrackOrderController($conn);
     $trackOrderController->showTrackOrder();
     require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if ($uri == 'track-order/cancel-order') {
+    requireLogin();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $cancleOrderStatus= $chackoutController->cancelOrder();
+    if ($cancleOrderStatus) {
+        $_SESSION['cancle-order'] = true;
+    } else {
+        $_SESSION['cancle-order'] = false;
+    }
+    header('location:' . ROOT_URL . 'track-order');
     exit;
 }
 if ($uri == 'track-order-detail') {

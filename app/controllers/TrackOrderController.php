@@ -48,12 +48,14 @@ class TrackOrderController
         $order_truocDaoNguoc = $this->DonHangModel->getAllByMaKH($user_id);
         $orders = array_reverse($order_truocDaoNguoc);
         foreach ($orders as &$order) {
+            $order['soloaiSP'] = $this->CTDonHangModel->getCountLoaiSPByMaDH($order['madh']);
             $order['soluongSP'] = $this->CTDonHangModel->getCountOrderDetailByMaDH($order['madh']);
             $order['trangthaiDH'] = $this->getStatusText($order['trangthai']);
             $order['thoigiantao'] = date('d-m-Y H:i', strtotime($order['thoigiantao']));
         }
         echo '<script> console.log(' . json_encode($orders) . ')</script>';
         unset($order);
+        echo '<script> console.log(' . json_encode($orders) . ')</script>';
         require VIEW_PATH_DIR . 'track-order.php';
     }
     public function showTrackOrderDetail()

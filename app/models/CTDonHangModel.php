@@ -20,7 +20,16 @@ class CTDonHangModel
         ]);
         return $stmt->rowCount();
     }
+
     public function getCountOrderDetailByMaDH($madh)
+    {
+        $sql = "SELECT SUM(soluong) as total FROM ctdonhang WHERE madh =?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$madh]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['total'];
+    }
+    public function getCountLoaiSPByMaDH($madh)
     {
         $sql = "SELECT COUNT(*) as total FROM ctdonhang WHERE madh =?";
         $stmt = $this->conn->prepare($sql);
@@ -34,5 +43,19 @@ class CTDonHangModel
         $stmt =  $this->conn->prepare($sql);
         $stmt->execute([$madh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function beginTransaction()
+    {
+        return $this->conn->beginTransaction();
+    }
+
+    public function commit()
+    {
+        return $this->conn->commit();
+    }
+
+    public function rollBack()
+    {
+        return $this->conn->rollBack();
     }
 }

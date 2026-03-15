@@ -93,6 +93,16 @@ class ChackoutController
             return false;
         }
     }
+    public function cancelOrder(){
+        $user_id = $_SESSION['user-id'] ?? NULL;
+        $madh = $_GET['madh'];
+        try {
+            $this->DonHangModel->deleteFullOrder($madh);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
     public function showChackout()
     {
         $user_id = $_SESSION['user-id'] ?? NULL;
