@@ -31,15 +31,15 @@ class ChackoutController
     public function addOrder()
     {
         $user_id = $_SESSION['user-id'] ?? null;
-        if (!$user_id){
+        if (!$user_id) {
             return false;
-        } 
-            
+        }
+
         $user = $this->KhachHangModel->getById($user_id); // Lấy user
         $this->carts = $this->CartModel->getCartsByUserId_Model($user_id); // lấy lại giỏ hàng
-        if (empty($this->carts)){
+        if (empty($this->carts)) {
             return false;
-        } 
+        }
         try {
             $this->DonHangModel->beginTransaction();
             // Xử lý thêm vào đơn hàng
@@ -73,7 +73,6 @@ class ChackoutController
                 if (!$addDetail) {
                     $this->DonHangModel->rollBack();
                     return false;
-
                 }
                 $update = $this->SizeModel->updateSoLuongSanPhamSize_Model( // sửa số lượng
                     $item['masp'],
@@ -93,11 +92,12 @@ class ChackoutController
             return false;
         }
     }
-    public function cancelOrder(){
+    public function cancelOrder()
+    {
         $user_id = $_SESSION['user-id'] ?? NULL;
         $madh = $_GET['madh'];
         try {
-            $this->DonHangModel->deleteFullOrder($madh);
+            $this->DonHangModel->huyDonHang_Model($madh);
             return true;
         } catch (Exception $e) {
             return false;
@@ -119,6 +119,7 @@ class ChackoutController
             $item['path'] = $this->HinhAnhModel->getImageMainById($item['masp']);
             $total += $item['soluong'] * $giaBan;
         }
+        unset($item);
         require VIEW_PATH_DIR . 'chackout.php';
     }
 }
