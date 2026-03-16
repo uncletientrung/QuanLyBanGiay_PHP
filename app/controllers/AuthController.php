@@ -143,4 +143,84 @@ class AuthController
             exit;
         }
     }
+
+    public function DangKyUser()
+    {
+        if (!isset($_POST['register'])) {
+            echo json_encode(['success' => false, 'message' => 'Yêu cầu không hợp lệ']);
+            exit;
+        }
+
+        $errors = [];
+        $hoten   = trim($_POST['fullName']   ?? '');
+        $email      = trim($_POST['email']      ?? '');
+        $password   = trim($_POST['password']   ?? '');
+        $confirm    = trim($_POST['confirmPassword'] ?? '');
+        $sdt      = trim($_POST['phone']      ?? '');
+        $diachi    = trim($_POST['address']    ?? '');
+        $gender     = $_POST['gender'] ?? 'Nam';
+
+        if (empty($hoten)) {
+            $errors['hoten'] = 'Vui lòng nhập họ và tên';
+        } elseif (!preg_match('/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+$/u', $hoten)) {
+            $errors['hoten'] = 'Tên không được chứa ký tự đặc biệt';
+        }
+
+        if (empty($email)) {
+            $errors['email'] = 'Vui lòng nhập email';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Email không hợp lệ';
+        } elseif ($this->KhachHangModel->checkEmailExists($email)) {
+            $errors['email'] = 'Email này đã được sử dụng';
+        }
+
+        if (empty($password)) {
+            $errors['password'] = 'Vui lòng nhập mật khẩu';
+        } elseif (strlen($password) < 3) {
+            $errors['password'] = 'Mật khẩu phải có ít nhất 3 ký tự';
+        }
+
+        if ($password !== $confirm) {
+            $errors['confirmPassword'] = 'Mật khẩu nhập lại không khớp';
+        }
+
+        if (empty($sdt)) {
+            $errors['sdt'] = 'Vui lòng nhập số điện thoại';
+        } elseif (!preg_match('/^0[0-9]{9}$/', $sdt)) {
+            $errors['sdt'] = 'Số điện thoại phải bắt đầu bằng 0 và có 10 số';
+        }
+
+        if (empty($diachi)) {
+            $errors['diachi'] = 'Vui lòng nhập địa chỉ';
+        } elseif (!preg_match('/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s0-9,\/.-]+$/u', $diachi)) {
+            $errors['diachi'] = 'Địa chỉ không được chứa ký tự đặc biệt';
+        }
+
+        if (!empty($errors)) {
+            echo json_encode(['success' => false, 'errors' => $errors]);
+            exit;
+        }
+        // Tạo tài khoản
+        $data = [
+            'hoten'     => $hoten,
+            'email'     => $email,
+            'matkhau'   => $password,           
+            'sdt'       => $sdt,
+            'diachi'    => $diachi,
+            'gioitinh'  => $gender
+        ];
+        $result = $this->KhachHangModel->createUser($data); // mã user
+        if ($result) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Tạo tài khoản thành công'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Không thể tạo tài khoản. Vui lòng thử lại.'
+            ]);
+        }
+        exit;
+    }
 }

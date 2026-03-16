@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () { // Đăng nhập
       .then((result) => {
         if (result.success) {
           // Đăng nhập thành công
-          formMessage.textContent = "Đăng nhập thành công! Đang chuyển hướng...";
+          formMessage.textContent = "ĐĂNG NHẬP THÀNH CÔNG. CHUYỀN TRANG...";
           formMessage.classList.add("text-success");
           setTimeout(() => {
             window.location.href = ROOT_URL;
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () { // Kiểm tra đơn 
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {
-          messageDiv.textContent = "Đã tìm thấy mã đơn DH-" + result.data.madh;
+          messageDiv.textContent = "ĐÃ TÌM THẤY MÃ ĐƠN DH-" + result.data.madh;
           messageDiv.classList.add("text-success");
 
           let html = `
@@ -263,4 +263,156 @@ document.addEventListener('DOMContentLoaded', function () { // Kiểm tra đơn 
 
   // Chạy validate lần đầu
   validateCheckOrder();
+});
+
+document.addEventListener('DOMContentLoaded', function () { // Đăng ký tài khoản
+  const regForm = document.getElementById('registerForm');
+  if (!regForm) return;
+
+  const fullNameInput      = document.getElementById('regFullName');
+  const emailInput         = document.getElementById('regEmail');
+  const passwordInput      = document.getElementById('regPassword');
+  const confirmPassInput   = document.getElementById('regConfirmPassword');
+  const phoneInput         = document.getElementById('regPhone');
+  const addressInput       = document.getElementById('regAddress');
+  const registerBtn        = document.getElementById('registerBtn');
+  const regMessage         = document.getElementById('registerMessage');
+
+  // Toggle mắt cho cả 2 ô mật khẩu
+  document.querySelectorAll('.toggle-password-reg').forEach(toggle => {
+    toggle.addEventListener('click', function () {
+      const input = this.previousElementSibling;
+      const type = input.type === 'password' ? 'text' : 'password';
+      input.type = type;
+      this.querySelector('i').classList.toggle('fa-eye');
+      this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+  });
+
+  function validateRegister() {
+    const fullName = fullNameInput.value.trim();
+    const email    = emailInput.value.trim();
+    const pass     = passwordInput.value;
+    const confirm  = confirmPassInput.value;
+    const phone    = phoneInput.value.trim();
+    const address  = addressInput.value.trim();
+
+    // Regex: chỉ cho phép chữ cái, số, khoảng trắng
+    const nameRegex   = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s0-9]+$/u;
+    const addressRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s0-9,\/.-]+$/u;
+
+    const isNameValid    = nameRegex.test(fullName) && fullName.length >= 2;
+    const isEmailValid   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const isPassValid    = pass.length >= 3;
+    const isConfirmValid = confirm === pass && confirm.length >= 3;
+    const isPhoneValid   = /^0[0-9]{9}$/.test(phone);
+    const isAddressValid = addressRegex.test(address) && address.length >= 5;
+
+    // Visual feedback
+    fullNameInput.classList.toggle('is-valid', isNameValid);
+    fullNameInput.classList.toggle('is-invalid', !isNameValid && fullName !== '');
+    emailInput.classList.toggle('is-valid', isEmailValid);
+    emailInput.classList.toggle('is-invalid', !isEmailValid && email !== '');
+    passwordInput.classList.toggle('is-valid', isPassValid);
+    passwordInput.classList.toggle('is-invalid', !isPassValid && pass !== '');
+    confirmPassInput.classList.toggle('is-valid', isConfirmValid);
+    confirmPassInput.classList.toggle('is-invalid', !isConfirmValid && confirm !== '');
+    phoneInput.classList.toggle('is-valid', isPhoneValid);
+    phoneInput.classList.toggle('is-invalid', !isPhoneValid && phone !== '');
+    addressInput.classList.toggle('is-valid', isAddressValid);
+    addressInput.classList.toggle('is-invalid', !isAddressValid && address !== '');
+
+    // Enable/disable button
+    registerBtn.disabled = !(
+      isNameValid && isEmailValid && isPassValid && isConfirmValid &&
+      isPhoneValid && isAddressValid
+    );
+
+    // Xóa lỗi khi đang focus
+    [fullNameInput, emailInput, passwordInput, confirmPassInput, phoneInput, addressInput].forEach(el => {
+      if (el === document.activeElement) {
+        const errEl = document.getElementById(el.id.replace('reg', '').toLowerCase() + 'Error') || 
+                      document.getElementById(el.id.toLowerCase() + 'Error');
+        if (errEl) errEl.textContent = '';
+      }
+    });
+  }
+
+  // Gắn sự kiện input cho tất cả trường
+  [fullNameInput, emailInput, passwordInput, confirmPassInput, phoneInput, addressInput]
+    .forEach(input => input.addEventListener('input', validateRegister));
+
+  // Submit form
+  regForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    regMessage.textContent = '';
+    regMessage.className = 'mt-4 text-center';
+
+    const formData = new FormData(regForm);
+    formData.append('register', '1');
+
+    registerBtn.disabled = true;
+    registerBtn.textContent = 'ĐANG TẠO TÀI KHOẢN...';
+
+    fetch(ROOT_URL + 'register', {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          regMessage.textContent = 'ĐĂNG KÝ THÀNH CÔNG';
+          regMessage.classList.add('text-success');
+          setTimeout(() => {
+            window.location.href = ROOT_URL + 'account/login';
+          }, 500);
+        } else {
+          regMessage.textContent = result.message || 'Có lỗi xảy ra, vui lòng thử lại.';
+          regMessage.classList.add('text-danger');
+
+          if (result.errors) {
+            if (result.errors.hoten) {
+              document.getElementById('fullNameError').textContent = result.errors.fullName;
+              fullNameInput.classList.add('is-invalid');
+            }
+            if (result.errors.email) {
+              document.getElementById('emailError').textContent = result.errors.email;
+              emailInput.classList.add('is-invalid');
+            }
+            if (result.errors.password) {
+              document.getElementById('passwordError').textContent = result.errors.password;
+              passwordInput.classList.add('is-invalid');
+            }
+            if (result.errors.confirmPassword) {
+              document.getElementById('confirmPasswordError').textContent = result.errors.confirmPassword;
+              confirmPassInput.classList.add('is-invalid');
+            }
+            if (result.errors.sdt) {
+              document.getElementById('phoneError').textContent = result.errors.phone;
+              phoneInput.classList.add('is-invalid');
+            }
+            if (result.errors.diachi) {
+              document.getElementById('addressError').textContent = result.errors.address;
+              addressInput.classList.add('is-invalid');
+            }
+            if (result.errors.general) {
+              regMessage.textContent = result.errors.general;
+            }
+          }
+        }
+      })
+      .catch(err => {
+        regMessage.textContent = 'Không thể kết nối đến server. Vui lòng kiểm tra mạng.';
+        regMessage.classList.add('text-danger');
+        console.error(err);
+      })
+      .finally(() => {
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'TẠO TÀI KHOẢN';
+      });
+  });
+
+  // Chạy validate ban đầu
+  validateRegister();
 });

@@ -140,19 +140,25 @@ unset($_SESSION['login-data']);
 
                 <!-- Tab tạo tài khoản START -->
                 <div class="tab-pane fade" id="register">
-                  <form>
+                  <form id="registerForm" novalidate>
                     <div class="mb-3">
                       <label class="form-label fw-bold">HỌ VÀ TÊN*</label>
-                      <input type="text" class="form-control is-invalid" placeholder="Nhập họ tên của bạn">
-                      <div class="invalid-feedback">
-                        Vui lòng nhập họ và tên
+                      <input type="text"
+                        class="form-control"
+                        name="fullName"
+                        id="regFullName"
+                        placeholder="Nhập họ và tên"
+                        required>
+                      <div class="invalid-feedback" id="fullNameError">
+                        Tên không được chứa ký tự đặc biệt
                       </div>
                     </div>
+
                     <div class="mb-3">
                       <label class="form-label fw-bold">GIỚI TÍNH</label>
                       <div class="d-flex gap-4">
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gender" id="male" value="Nam">
+                          <input class="form-check-input" type="radio" name="gender" id="male" value="Nam" checked>
                           <label class="form-check-label" for="male">Nam</label>
                         </div>
                         <div class="form-check">
@@ -161,50 +167,93 @@ unset($_SESSION['login-data']);
                         </div>
                       </div>
                     </div>
+
                     <div class="mb-3">
                       <label class="form-label fw-bold">EMAIL*</label>
-                      <input type="email" class="form-control is-invalid" placeholder="Nhập email của bạn">
-                      <div class="invalid-feedback">
+                      <input type="email"
+                        class="form-control"
+                        name="email"
+                        id="regEmail"
+                        placeholder="Nhập email của bạn"
+                        required>
+                      <div class="invalid-feedback" id="emailError">
                         Email không hợp lệ hoặc đã được sử dụng
                       </div>
                     </div>
+
                     <div class="mb-3">
                       <label class="form-label fw-bold">MẬT KHẨU*</label>
                       <div class="input-group has-validation">
-                        <input
-                          type="password"
-                          class="form-control is-invalid"
-                          placeholder="Nhập mật khẩu"
-                          id="registerPassword">
-                        <span class="input-group-text bg-white border-start-0" style="cursor: pointer;">
-                          <i class="fas fa-eye eye-icon" id="registerEye"></i>
+                        <input type="password"
+                          class="form-control"
+                          name="password"
+                          id="regPassword"
+                          placeholder="Nhập mật khẩu (tối thiểu 3 ký tự)"
+                          required
+                          minlength="3">
+                        <span class="input-group-text bg-white border-start-0 toggle-password-reg" style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
                         </span>
-                        <div class="invalid-feedback">
-                          Mật khẩu phải có ít nhất 6 ký tự
+                        <div class="invalid-feedback" id="passwordError">
+                          Mật khẩu phải có ít nhất 3 ký tự
                         </div>
                       </div>
                     </div>
+
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">NHẬP LẠI MẬT KHẨU*</label>
+                      <div class="input-group has-validation">
+                        <input type="password"
+                          class="form-control"
+                          name="confirmPassword"
+                          id="regConfirmPassword"
+                          placeholder="Nhập lại mật khẩu"
+                          required>
+                        <span class="input-group-text bg-white border-start-0 toggle-password-reg" style="cursor: pointer;">
+                          <i class="fas fa-eye eye-icon"></i>
+                        </span>
+                        <div class="invalid-feedback" id="confirmPasswordError">
+                          Mật khẩu nhập lại không khớp
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="mb-3">
                       <label class="form-label fw-bold">SỐ ĐIỆN THOẠI*</label>
-                      <input type="tel" class="form-control is-invalid" placeholder="Nhập số điện thoại">
-                      <div class="invalid-feedback">
-                        Số điện thoại không hợp lệ (10-11 số)
+                      <input type="tel"
+                        class="form-control"
+                        name="phone"
+                        id="regPhone"
+                        placeholder="Nhập số điện thoại"
+                        required
+                        pattern="^0[0-9]{9}$">
+                      <div class="invalid-feedback" id="phoneError">
+                        Số điện thoại phải bắt đầu bằng 0 và có 10 số
                       </div>
                     </div>
-                    <div class="mb-4">
-                      <div class="form-check">
-                        <input class="form-check-input is-invalid" type="checkbox" id="emailPuma" checked>
-                        <label class="form-check-label" for="emailPuma">
-                          Tôi đã đọc và chấp nhận chính sách của website
-                        </label>
-                        <div class="invalid-feedback d-block">
-                          Vui lòng đồng ý với điều khoản sử dụng
-                        </div>
+
+                    <div class="mb-3">
+                      <label class="form-label fw-bold">ĐỊA CHỈ*</label>
+                      <input type="text"
+                        class="form-control"
+                        name="address"
+                        id="regAddress"
+                        placeholder="Nhập địa chỉ giao hàng"
+                        required>
+                      <div class="invalid-feedback" id="addressError">
+                        Địa chỉ không được chứa ký tự đặc biệt
                       </div>
                     </div>
-                    <button type="submit" class="btn border-secondary w-100 py-3 fw-bold">
+
+                    <button type="submit"
+                      id="registerBtn"
+                      class="btn border-secondary w-100 py-3 fw-bold"
+                      disabled>
                       TẠO TÀI KHOẢN
                     </button>
+
+                    <!-- Thông báo chung -->
+                    <div id="registerMessage" class="mt-4 text-center" style="min-height: 2rem;"></div>
                   </form>
                 </div>
                 <!-- Tab tạo tài khoản END -->

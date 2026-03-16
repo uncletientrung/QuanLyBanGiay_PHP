@@ -20,6 +20,14 @@ function requireLogin()
         exit;
     }
 }
+function backToAccount()
+{
+    if (!empty($_SESSION['user-id'])) {
+        header('Location: ' . ROOT_URL . 'account');
+        exit;
+    }
+    
+}
 function checkCart($conn)
 {
     requireLogin();
@@ -51,6 +59,7 @@ if ($uri == '' || $uri == '/' || $uri == 'home') {
 }
 // Đăng nhập
 if ($uri == 'login') {
+    backToAccount();
     $headerData = prepareHeader($conn);
     extract($headerData);
     $authController->checkLoginUser();
@@ -58,9 +67,19 @@ if ($uri == 'login') {
 }
 // Kiểm tra đơn hàng
 if ($uri == 'check-order') {
+    backToAccount();
     $headerData = prepareHeader($conn);
     extract($headerData);
     $authController->checkDonHang();
+    exit;
+}
+// Kiểm tra đơn hàng
+if ($uri == 'register') {
+    backToAccount();
+
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->DangKyUser();
     exit;
 }
 
@@ -216,6 +235,7 @@ if ($uri == 'account') {
     exit;
 }
 if ($uri == 'account/login') {
+    backToAccount();
     render('auth', $conn);
     exit;
 }
