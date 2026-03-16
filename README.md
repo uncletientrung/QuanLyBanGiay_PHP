@@ -11,11 +11,7 @@
 **Phụ trách:**
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
-
-- Đăng nhập
-  - ⏳ Chưa kiểm tra password hash
-  - ⏳ Chưa làm tạo tài khoản
-
+  
 **Đã hoàn thành:**
 
 - ✅ Giới thiệu
@@ -23,7 +19,7 @@
 - ✅ Thêm đơn hàng
 - ✅ Kiểm tra đơn hàng
 - ✅ Đặt đơn hàng (Checkout)
-
+- ✅ Xong phần Authentication (Không làm hash password)
 ---
 
 ### 🔹 Nguyễn Minh Thuan
