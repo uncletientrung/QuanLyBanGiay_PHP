@@ -66,6 +66,7 @@
   <script src="<?= ROOT_URL ?>public/js/chackout.js"></script>
   <script src="<?= ROOT_URL ?>public/js/account.js"></script>
   <script src="<?= ROOT_URL ?>public/js/track-order.js"></script>
+  <script src="<?= ROOT_URL ?>public/js/auth.js"></script>
 
   </body>
 

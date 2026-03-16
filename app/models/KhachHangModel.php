@@ -33,7 +33,7 @@ class KhachHangModel
     }
     public function getUserByEmail($email)
     {
-        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email";
+        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);

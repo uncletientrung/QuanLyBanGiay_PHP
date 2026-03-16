@@ -5,12 +5,14 @@ require_once APP_PATH_DIR . 'controllers/HeaderController.php';
 require_once APP_PATH_DIR . 'controllers/AccountController.php';
 require_once APP_PATH_DIR . 'controllers/SanPhamController.php';
 require_once APP_PATH_DIR . 'controllers/TrackOrderController.php';
+require_once APP_PATH_DIR . 'controllers/AuthController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
 $accountController = new AccountController($conn);
 $chackoutController = new ChackoutController($conn);
 $trackOrderController = new TrackOrderController($conn);
+$authController = new AuthController($conn);
 function requireLogin()
 {
     if (empty($_SESSION['user-id'])) {
@@ -47,6 +49,21 @@ if ($uri == '' || $uri == '/' || $uri == 'home') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+// Đăng nhập
+if ($uri == 'login') {
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->checkLoginUser();
+    exit;
+}
+// Kiểm tra đơn hàng
+if ($uri == 'check-order') {
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->checkDonHang();
+    exit;
+}
+
 //sản phẩm Start
 if ($uri == 'products') {
     $headerData = prepareHeader($conn);
