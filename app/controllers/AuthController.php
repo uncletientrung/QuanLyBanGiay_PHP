@@ -207,7 +207,7 @@ class AuthController
             'matkhau'   => $password,           
             'sdt'       => $sdt,
             'diachi'    => $diachi,
-            'gioitinh'  => $gender
+            'gioitinh'  => $gender == 'Nam' ? 1 : 0
         ];
         $result = $this->KhachHangModel->createUser($data); // mã user
         if ($result) {

@@ -39,7 +39,7 @@ class AccountController
         header("Expires: Thu, 01 Jan 1970 00:00:00 GMT");
 
         // Redirect + timestamp chống cache
-        header('Location: ' . APP_PATH . '?t=' . time());
+        header('Location: ' . APP_PATH);
         exit();
     }
     public function updateProfile()
