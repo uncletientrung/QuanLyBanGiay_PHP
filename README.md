@@ -9,8 +9,6 @@
 ### 🔹 Nguyễn Tiến Trung
 
 **Phụ trách:**
-
-- Chưa kiểm tra số lượng sản phẩm khi tăng số lượng trong cart
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
 
