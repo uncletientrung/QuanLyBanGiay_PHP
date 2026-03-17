@@ -4,19 +4,13 @@
     --primary-dark: #081f44;  /* hover đậm hơn */
     --navy: #0b2a5b;          /* alias cho badge */
   }
-  /* Tabs - loại bỏ hoàn toàn ảnh hưởng từ --bs-primary */
   .nav-tabs .nav-link {
-    color: #495057 !important;           /* chữ bình thường: xám đậm */
+    color: #495057 !important;           
     background: none !important;
     border: none !important;
     border-radius: 0 !important;
     padding: 0.75rem 1.25rem !important;
   }
-
-  /* .nav-tabs .nav-link:hover {
-    color: #0b2a5b !important;           /* hover → xanh navy */
-    border-bottom: 3px solid #0b2a5b !important;
-  } */
 
   /* Tab đang active */
   .nav-tabs .nav-link.active,
@@ -107,19 +101,6 @@
     background-color: #dc3545 !important;
     color: white !important;
   }
-
-
-
-  /* Nút "Quay lại cửa hàng" khi không có đơn */
-  /* .btn-primary {
-    background-color: var(--primary) !important;
-    border-color: var(--primary) !important;
-  } */
-
-  /* .btn-primary:hover {
-    background-color: var(--primary-dark) !important;
-    border-color: var(--primary-dark) !important;
-  } */
 
   /* Alert success / danger đồng bộ */
   .alert-success {
