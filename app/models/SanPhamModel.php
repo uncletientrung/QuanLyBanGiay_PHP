@@ -27,8 +27,6 @@ class SanPhamModel
                     s.tyleloinhuan,
                     h.tenhang,
                     m.tenmau,
-                    s.motasp,
-                    s.soluongdaban,
                     s.trangthai
                 FROM
                     sanpham s

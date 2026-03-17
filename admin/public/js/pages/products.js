@@ -35,11 +35,12 @@ Dashmix.onLoad(() =>
 
             
             // Init full extra DataTable
-            jQuery('.js-dataTable-full-pagination').DataTable({
+            jQuery('.js-dataTable-responsive').DataTable({
                 pagingType: "full_numbers",
                 pageLength: 7,
                 dom: '<ftip>',
                 autoWidth: false,
+                responsive: true,
                 ajax: {
                     url: './products/getData',
                     dataSrc: ''
@@ -64,9 +65,9 @@ Dashmix.onLoad(() =>
                         data:'tensp',
                         render: function(data) {
                             return `
-                            <a class="fw-semibold">
-                                    <strong>${data}</strong>
-                                </a>
+                            <span class="fw-semibold">
+                                <strong>${data}</strong>
+                            </span>
                             `;
                         }
                     },
@@ -103,17 +104,13 @@ Dashmix.onLoad(() =>
                         data:'tenmau',
                     },
                     {
-                        data:'soluongdaban',
-                        className:'text-center'
-                    },
-                    {
                         data:'trangthai',
                         className:'text-center',
                         render: function(data) {
                             let status;
                             let bgcolor;
                             if (data == 0) {
-                                status = "Ngừng bán";                                bgcolor = "bg-danger"
+                                status = "Ngừng bán";
                                 bgcolor = "bg-danger";
                             }
                             else {
@@ -121,10 +118,28 @@ Dashmix.onLoad(() =>
                                 bgcolor = "bg-success";
                             }
                             return `
-                                <a class="badge ${bgcolor}" style="width: 100%">${status}</a>
+                                <span class="badge ${bgcolor}" style="width: 100%">${status}</span>
                                 `;
                         }
                     },
+                    {
+                        data: 'masp',
+                        className:'text-center',
+                        render: function(data)
+                        { 
+                            return `
+                                    <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem mô tả sản phẩm">
+                                        <i class="fa fa-fw fa-bars text-primary-darker"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Sửa">
+                                        <i class="fa fa-fw fa-pen-to-square text-info"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
+                                        <i class="fa fa-fw fa-times text-danger"></i>
+                                    </button>
+                            `
+                        }
+                    }
                 ]
             });
         }

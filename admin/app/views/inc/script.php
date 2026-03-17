@@ -46,6 +46,11 @@ if (isset($Plugin["chartjs"]) && $Plugin["chartjs"] == 1) {
     $dm->get_js('js/plugins/chart.js/chart.min.js');
 }
 
+//Plugin: Select2
+if (isset($Plugin['select2']) && $Plugin['select2'] == 1) {
+    $dm->get_js('js\plugins\select2\js\select2.full.min.js');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');

@@ -7,8 +7,12 @@ class Products extends Controller
         $this->productsModel = $this->model("SanPhamModel");
     }
 
-    public function default()
+    public function default($id = null)
     {
+        if ($id !== null) {
+            return $this->detail($id);
+        }
+
         $this->renderView("main_layout", [
             "page" => "products",
             "title" => "Quản lý sản phẩm",
@@ -23,5 +27,16 @@ class Products extends Controller
     {
         echo json_encode($this->productsModel->getAllForAdmin());
         exit();
+    }
+
+    public function detail($id = null)
+    {
+        $this->renderView("main_layout", [
+            "page" => "product_detail",
+            "title" => "Chi tiết sản phẩm " . $id,
+            "id" => $id,
+            "Plugin"  => ["select2" => 1],
+            "Script"  => "product_detail"
+        ]);
     }
 }
