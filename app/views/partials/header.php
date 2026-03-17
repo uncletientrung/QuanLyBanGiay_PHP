@@ -50,9 +50,9 @@ require_once __DIR__ . '/auth_helper.php';
     <div class="container topbar bg-primary d-none d-lg-block">
       <div class="d-flex justify-content-between">
         <div class="top-info ps-2">
-          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
+          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a 
               class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
-          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
+          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a 
               class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
         <div class="top-link pe-2">

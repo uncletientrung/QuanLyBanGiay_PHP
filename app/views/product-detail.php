@@ -10,37 +10,40 @@
 
 <!-- Single Product Start -->
 <div class="container-fluid py-4">
-
   <div class="container py-4">
     <div class="row g-4 mb-4">
       <div class="col-12">
         <div class="row g-4">
-          <!-- <?php
-                echo '<pre>';
-                print_r($listSize);
-                echo '</pre>';
-
-                ?> -->
-
-          <!-- Cột trái: Hình ảnh + Tabs (thu nhỏ lại thành col-lg-7) -->
+          <!-- Cột trái: Hình ảnh + Tabs  -->
           <div class="col-lg-7">
 
             <!-- Div mẹ chứa thumbnail + ảnh lớn -->
             <div class="row g-3 mb-4">
-              <div class="col-2 d-none d-lg-block">
-                <div class="d-flex flex-column gap-2">
+           <div class="col-2 d-none d-lg-block">
+            <div class="d-flex flex-column gap-2">
 
-                  <?php foreach ($listHinh as $index => $hinh): ?>
+              <?php if (!empty($listHinh)): ?>
 
-                    <img src="<?= $hinh['path'] ?>"
-                      class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>"
-                      onclick="changeImage(this)"
-                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php foreach ($listHinh as $index => $hinh): ?>
+                  <img src="<?= $hinh['path'] ?>"
+                    class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>"
+                    onclick="changeImage(this)"
+                    style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php endforeach; ?>
 
-                  <?php endforeach ?>
+              <?php else: ?>
 
-                </div>
-              </div>
+                <?php for ($i = 0; $i < 6; $i++): ?>
+                  <img src="<?= ROOT_URL . NO_IMAGE ?>"
+                    class="img-fluid rounded thumb-img <?= $i == 0 ? 'active' : '' ?>"
+                    onclick="changeImage(this)"
+                    style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php endfor; ?>
+
+              <?php endif; ?>
+
+            </div>
+          </div>
 
               <!-- Ảnh lớn  -->
               <div class="col-10">
@@ -54,7 +57,7 @@
               </div>
             </div>
 
-            <!-- Tabs mô tả - giữ sát biên trái -->
+            <!-- Tabs mô tả -->
             <div class="ps-lg-0 ps-3">
               <nav>
                 <div class="nav nav-tabs mb-3">
