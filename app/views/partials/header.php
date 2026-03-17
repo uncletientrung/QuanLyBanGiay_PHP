@@ -131,13 +131,71 @@ require_once __DIR__ . '/auth_helper.php';
             </a>
 
 <!-- Button user / Avatar -->
-<a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+<!-- <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
   <?php 
   $initial = null;
 
   if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
       $hoten = trim($user['hoten']);
       $initial = mb_strtoupper(mb_substr($hoten, 0, 1), 'UTF-8');
+  }
+  ?>
+
+  <?php if ($initial !== null): ?>
+    <div class="avatar-initials">
+      <?= htmlspecialchars($initial) ?>
+    </div>
+  <?php else: ?>
+    <i class="fas fa-user fa-2x text-primary"></i>
+  <?php endif; ?>
+</a> -->
+
+<!-- Button user / Avatar -->
+<a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+  <?php 
+  $initial = null;
+
+  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
+      $hoten = trim($user['hoten']);
+      
+      // Hàm loại bỏ dấu tiếng Việt
+      function remove_accents($str) {
+          $utf8 = [
+              'a'=>'á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ',
+              'A'=>'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ằ|Ẳ|Ẵ|Ặ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+              'd'=>'đ',
+              'D'=>'Đ',
+              'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+              'E'=>'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+              'i'=>'í|ì|ỉ|ĩ|ị',
+              'I'=>'Í|Ì|Ỉ|Ĩ|Ị',
+              'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+              'O'=>'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+              'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+              'U'=>'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+              'y'=>'ý|ỳ|ỷ|ỹ|ỵ',
+              'Y'=>'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+          ];
+          
+          foreach ($utf8 as $ascii => $unicode) {
+              $str = preg_replace("/($unicode)/i", $ascii, $str);
+          }
+          return $str;
+      }
+
+      // Loại bỏ dấu trước
+      $hoten_no_accent = remove_accents($hoten);
+      
+      // Tách các từ (dùng preg_split để xử lý khoảng trắng thừa tốt hơn explode)
+      $words = preg_split('/\s+/', $hoten_no_accent);
+      
+      // Lấy từ cuối cùng
+      $lastWord = end($words);
+      
+      if ($lastWord !== '') {
+          // Lấy ký tự đầu, in hoa (không còn dấu nên dùng strtoupper bình thường cũng được)
+          $initial = strtoupper(substr($lastWord, 0, 1));
+      }
   }
   ?>
 
