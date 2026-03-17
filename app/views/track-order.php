@@ -1,5 +1,139 @@
+<style>
+  :root {
+    --primary: #0b2a5b;       /* xanh navy chính */
+    --primary-dark: #081f44;  /* hover đậm hơn */
+    --navy: #0b2a5b;          /* alias cho badge */
+  }
+  /* Tabs - loại bỏ hoàn toàn ảnh hưởng từ --bs-primary */
+  .nav-tabs .nav-link {
+    color: #495057 !important;           /* chữ bình thường: xám đậm */
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  /* .nav-tabs .nav-link:hover {
+    color: #0b2a5b !important;           /* hover → xanh navy */
+    border-bottom: 3px solid #0b2a5b !important;
+  } */
+
+  /* Tab đang active */
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-link.active:hover,
+  .nav-tabs .nav-link.active:focus {
+    color: #0b2a5b !important;           /* chữ xanh navy */
+    background: none !important;
+    border: none !important;
+    border-bottom: 4px solid #0b2a5b !important;  /* gạch chân đậm hơn */
+    font-weight: 700 !important;
+  }
+
+  /* Tab Đã hủy - giữ đỏ */
+  #cancelled-tab {
+    color: #dc3545 !important;
+  }
+
+  #cancelled-tab.active,
+  #cancelled-tab.active:hover,
+  #cancelled-tab.active:focus {
+    color: #dc3545 !important;
+    border-bottom: 2px solid #dc3545 !important;
+  }
+
+  /* Đường viền dưới toàn bộ tabs (nếu muốn giữ) */
+  .nav-tabs {
+    --bs-nav-tabs-border-width: 1px !important;
+    --bs-nav-tabs-border-color: #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  /* Override nếu có class text-success hoặc link-success chen vào */
+  .nav-tabs .nav-link.text-success,
+  .nav-tabs .nav-link.text-primary {
+    color: #0b2a5b !important;
+  }
+
+  .nav-tabs .nav-link.active.text-success,
+  .nav-tabs .nav-link.active.text-primary {
+    color: #0b2a5b !important;
+  }
+
+  /* Badge trạng thái */
+  .badge.bg-navy {
+    background-color: var(--navy) !important;
+    color: white !important;
+  }
+
+  .badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important; /* text tối hơn cho dễ đọc */
+  }
+
+  .badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+
+  .badge.bg-secondary {
+    background-color: #6c757d !important;
+    color: white !important;
+  }
+
+  /* Nút "Xem chi tiết" */
+  .btn-outline-secondary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    font-weight: 500;
+    transition: all 0.25s;
+  }
+
+  .btn-outline-secondary:hover,
+  .btn-outline-secondary:focus,
+  .btn-outline-secondary:active {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(11, 42, 91, 0.25);
+  }
+
+  /* Nút "Hủy đơn" giữ đỏ */
+  .btn-outline-danger {
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+
+
+
+  /* Nút "Quay lại cửa hàng" khi không có đơn */
+  /* .btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+  } */
+
+  /* .btn-primary:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+  } */
+
+  /* Alert success / danger đồng bộ */
+  .alert-success {
+    background-color: rgba(11, 42, 91, 0.08) !important;
+    border-color: rgba(11, 42, 91, 0.25) !important;
+    color: var(--primary) !important;
+  }
+
+  .alert-danger {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+  }
+</style>
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-4">
+<div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
@@ -82,11 +216,18 @@
                         <small class="fw-bold text-dark">Mã đơn: DH-<?= $order['madh'] ?></small><br>
                         <small class="fw-bold text-dark">Ngày đặt: <?= $order['thoigiantao'] ?></small>
                       </div>
-                      <span class="badge <?php
-                                          echo $order['trangthai'] == 0 ? 'bg-warning text-dark' : ($order['trangthai'] == 1 ? 'bg-success text-white' : ($order['trangthai'] == 2 ? 'bg-primary text-white' : ($order['trangthai'] == -1 ? 'bg-danger text-white' : 'bg-secondary text-white')));
-                                          ?>
-                        px-3 py-2 fs-6 fw-bold">
-                        <?= $order['trangthaiDH'] ?>
+                      <span class="badge px-3 py-2 fs-6 fw-bold <?php
+                          if ($order['trangthai'] == 0) {
+                              echo 'bg-warning text-dark';           
+                          } elseif ($order['trangthai'] == 1 || $order['trangthai'] == 2) {
+                              echo 'bg-navy text-white';             
+                          } elseif ($order['trangthai'] == -1) {
+                              echo 'bg-danger text-white';           
+                          } else {
+                              echo 'bg-secondary text-white';       
+                          }
+                      ?>">
+                          <?= $order['trangthaiDH'] ?>
                       </span>
                     </div>
 
