@@ -20,6 +20,7 @@
               <tr>
                 <th scope="col">Sản Phẩm</th>
                 <th scope="col">Tên Sản Phẩm</th>
+                <th scope="col">Size</th>
                 <th scope="col">Đơn Giá</th>
                 <th scope="col">Số Lượng</th>
                 <th scope="col">Số Tiền</th>
@@ -30,7 +31,7 @@
             <tbody id="cart-body">
               <?php if (!empty($carts)): ?>
                 <?php foreach ($carts as $item): ?>
-                  <tr id="cart-row-<?= $item['masp'] ?>">
+                  <tr id="cart-row-<?= $item['masp'] ?>-<?= $item['masize'] ?>">
                     <th scope="row">
                       <div class="d-flex align-items-center">
                         <img src=<?= $item['path'] ?> class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
@@ -38,6 +39,9 @@
                     </th>
                     <td>
                       <p class="mb-0 mt-4"><?= $item['tensp'] ?></p>
+                    </td>
+                    <td>
+                      <p class="mb-0 mt-4"><?= $item['tensize'] ?></p>
                     </td>
                     <td>
                       <p class="mb-0 mt-4">
@@ -49,20 +53,21 @@
                       <div class="input-group quantity mt-4" style="width: 100px;">
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                            data-masp="<?= $item['masp'] ?>">
+                            data-masp="<?= $item['masp'] ?>"  data-masize="<?= $item['masize'] ?>">
                             <i class="fa fa-minus"></i>
                           </button>
                         </div>
 
                         <input type="text"
-                          id="quantity-<?= $item['masp'] ?>"
-                          class="form-control form-control-sm text-center border-0"
+                          id="quantity-<?= $item['masp'] ?>-<?= $item['masize'] ?>"
+                          class="form-control form-control-sm text-center border-0 qty-input"
                           value="<?= $item['soluong'] ?>"
-                          readonly>
+                          data-masp="<?= $item['masp'] ?>"
+                          data-masize="<?= $item['masize'] ?>">
 
                         <div class="input-group-btn">
                           <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                            data-masp="<?= $item['masp'] ?>">
+                            data-masp="<?= $item['masp'] ?>"  data-masize="<?= $item['masize'] ?>">
                             <i class="fa fa-plus"></i>
                           </button>
                         </div>
@@ -70,7 +75,7 @@
                     </td>
 
                     <td>
-                      <p class="mb-0 mt-4" id="price-<?= $item['masp'] ?>">
+                      <p class="mb-0 mt-4" id="price-<?= $item['masp'] ?>-<?= $item['masize'] ?>">
                         <?= number_format($item['gia'] * $item['soluong']) ?>₫
                       </p>
                     </td>
@@ -78,8 +83,9 @@
                     <!-- Thao tác -->
                     <td>
                       <button class="btn btn-md rounded-circle bg-light border mt-4 btn-cart-delete"
-                              data-masp="<?= $item['masp'] ?>">
-                        <i class="fa fa-times text-danger"></i>
+                              data-masp="<?= $item['masp'] ?>"
+                              data-masize="<?= $item['masize'] ?>">
+                          <i class="fa fa-times text-danger"></i>
                       </button>
                     </td>
 

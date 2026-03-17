@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/auth_helper.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +33,8 @@
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
 </head>
 
+<div id="toast" class="toast-notify">
+</div>
 <body>
   <!-- Load trang -->
   <div id="spinner"
@@ -42,21 +47,21 @@
   ?>
   <!-- NAV start -->
   <div class="container-fluid fixed-top">
-    <!-- <div class="container topbar bg-primary d-none d-lg-block">
+    <div class="container topbar bg-primary d-none d-lg-block">
       <div class="d-flex justify-content-between">
         <div class="top-info ps-2">
-          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
+          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a 
               class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
-          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
+          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a 
               class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
         <div class="top-link pe-2">
-          <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-          <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-          <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+          <a href="<?= ROOT_URL ?>privacy-policy" class="text-white"><small class="text-white mx-2">Chính sách bảo mật</small>/</a>
+          <a href="<?= ROOT_URL ?>dk-dichvu" class="text-white"><small class="text-white mx-2">Điều khoản dịch vụ</small>/</a>
+          <a href="<?= ROOT_URL ?>cs-baohanh" class="text-white"><small class="text-white ms-2">Chính sách bảo hành</small></a>
         </div>
       </div>
-    </div> -->
+    </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
         <a href="<?= ROOT_URL ?>" class="navbar-brand">
@@ -72,10 +77,7 @@
             class="nav-item nav-link <?= $currentPage == 'home' ? 'active' : '' ?>">
             Trang chủ
             </a>
-            <a href="<?= ROOT_URL ?>about-us" 
-            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
-            Giới thiệu
-            </a>
+       
           
             <div class="nav-item dropdown">
                 <a class="nav-item nav-link dropdown-toggle 
@@ -90,6 +92,10 @@
                   <?php endforeach; ?>
               </div>
           </div>
+               <a href="<?= ROOT_URL ?>about-us" 
+            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
+            Giới thiệu
+            </a>
             <div class="nav-item dropdown">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">
@@ -103,6 +109,10 @@
             class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
             Liên hệ
             </a>
+            <a href="<?= ROOT_URL ?>track-order" 
+            class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
+            Theo dõi đơn hàng
+            </a>
           </div>
           <div class="d-flex m-3 me-0">
             <!-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
@@ -110,18 +120,93 @@
             <!-- Button cart -->
             <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
-              <?php if($isLogin): ?>
+              <?php if($isLogin && $cartCount > 0): ?>
                 <span
+                  id="cart-count"
                   class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                   style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
                   <?= $cartCount ?>
                 </span>
-              <?php endif; ?>
+                <?php endif; ?>
             </a>
-            <!-- Button user -->
-            <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto">
-              <i class="fas fa-user fa-2x"></i>
-            </a>
+
+<!-- Button user / Avatar -->
+<!-- <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+  <?php 
+  $initial = null;
+
+  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
+      $hoten = trim($user['hoten']);
+      $initial = mb_strtoupper(mb_substr($hoten, 0, 1), 'UTF-8');
+  }
+  ?>
+
+  <?php if ($initial !== null): ?>
+    <div class="avatar-initials">
+      <?= htmlspecialchars($initial) ?>
+    </div>
+  <?php else: ?>
+    <i class="fas fa-user fa-2x text-primary"></i>
+  <?php endif; ?>
+</a> -->
+
+<!-- Button user / Avatar -->
+<a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+  <?php 
+  $initial = null;
+
+  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
+      $hoten = trim($user['hoten']);
+      
+      // Hàm loại bỏ dấu tiếng Việt
+      function remove_accents($str) {
+          $utf8 = [
+              'a'=>'á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ',
+              'A'=>'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ằ|Ẳ|Ẵ|Ặ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+              'd'=>'đ',
+              'D'=>'Đ',
+              'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+              'E'=>'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+              'i'=>'í|ì|ỉ|ĩ|ị',
+              'I'=>'Í|Ì|Ỉ|Ĩ|Ị',
+              'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+              'O'=>'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+              'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+              'U'=>'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+              'y'=>'ý|ỳ|ỷ|ỹ|ỵ',
+              'Y'=>'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+          ];
+          
+          foreach ($utf8 as $ascii => $unicode) {
+              $str = preg_replace("/($unicode)/i", $ascii, $str);
+          }
+          return $str;
+      }
+
+      // Loại bỏ dấu trước
+      $hoten_no_accent = remove_accents($hoten);
+      
+      // Tách các từ (dùng preg_split để xử lý khoảng trắng thừa tốt hơn explode)
+      $words = preg_split('/\s+/', $hoten_no_accent);
+      
+      // Lấy từ cuối cùng
+      $lastWord = end($words);
+      
+      if ($lastWord !== '') {
+          // Lấy ký tự đầu, in hoa (không còn dấu nên dùng strtoupper bình thường cũng được)
+          $initial = strtoupper(substr($lastWord, 0, 1));
+      }
+  }
+  ?>
+
+  <?php if ($initial !== null): ?>
+    <div class="avatar-initials">
+      <?= htmlspecialchars($initial) ?>
+    </div>
+  <?php else: ?>
+    <i class="fas fa-user fa-2x text-primary"></i>
+  <?php endif; ?>
+</a>
           </div>
         </div>
       </nav>

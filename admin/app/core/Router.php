@@ -67,6 +67,8 @@ class Router
             $controller = new $controllerName;
 
             if (method_exists($controller, $actionName)) {
+                // Truyền tham số vào hàm
+                // $actionName = tên hàm trong file $controller với $params là tham số truyền vào
                 call_user_func_array([$controller, $actionName], $params);
             } else {
                 $this->execute("Myerror@default");

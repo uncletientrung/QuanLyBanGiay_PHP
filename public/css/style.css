@@ -31,22 +31,78 @@
 
 /*** Spinner End ***/
 /*** NAVY THEME ***/
+/* Avatar initials  */
+
+.avatar-initials {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #2e2e5b;
+  color: #ffffff;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 2px solid #d2e0f4;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: none;
+}
+
+/* Responsive nhỏ hơn trên mobile (tùy chọn) */
+@media (max-width: 576px) {
+  .avatar-initials {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+}
+/* breadcrumb màu trắng */
+.page-header .breadcrumb-item a {
+  color: #d9d9d9;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* hover trang chủ */
+.page-header .breadcrumb-item a:hover {
+  color: #ffffff;
+}
+
+/* chữ active */
+.page-header .breadcrumb-item.active {
+  color: #ffffff;
+}
+
+/* dấu / giữa breadcrumb */
+.page-header .breadcrumb-item + .breadcrumb-item::before {
+  color: #ffffff;
+}
+.text-primary {
+  color: #2e2e5b !important; /* navy */
+}
 
 :root {
-  --navy: #0b3d91;
-  --navy-dark: #082c6a;
+  --navy: #2e2e5b;
+  --navy-dark: #2e2e5b;
 }
+
 .navbar-brand h1 {
   color: var(--navy) !important;
 }
 
-.navbar-brand h1:hover {
-  color: var(--navy-dark) !important;
-}
-
 .topbar {
   background: var(--navy) !important;
-  border-radius: 0 !important;
+
   max-height: fit-content;
 }
 .navbar-nav .nav-link {
@@ -82,10 +138,29 @@
   color: var(--navy) !important;
 }
 
-.footer h1 {
-  color: rgb(255, 255, 255) !important;
+/* Footer nền xanh */
+.footer {
+  background: #2e2e5b !important;
 }
 
+/* tiêu đề footer */
+.footer h1,
+.footer h4 {
+  color: #ffffff !important;
+}
+
+/* text footer */
+.footer p,
+.footer .btn-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* hover link footer */
+.footer .btn-link:hover {
+  color: #ffffff;
+}
+
+/* nút trong footer */
 .footer .btn-primary {
   background: var(--navy-dark) !important;
   border: none !important;
@@ -94,6 +169,8 @@
 .footer .btn-primary:hover {
   background: #061f4f !important;
 }
+
+/* nút viền trắng */
 .footer .btn.border-secondary {
   border-color: white !important;
   color: white !important;
@@ -101,17 +178,10 @@
 
 .footer .btn.border-secondary:hover {
   background: white !important;
-  color: var(--navy) !important;
-}
-.back-to-top {
-  background: var(--navy) !important;
-  border-color: var(--navy) !important;
+  color: #2e2e5b !important;
 }
 
-.back-to-top:hover {
-  background: var(--navy-dark) !important;
-}
-
+/* outline button */
 .footer .btn-outline-secondary {
   border-color: white !important;
   color: white !important;
@@ -119,8 +189,19 @@
 
 .footer .btn-outline-secondary:hover {
   background: white !important;
-  color: var(--navy) !important;
+  color: #2e2e5b !important;
 }
+
+/* Back to top */
+.back-to-top {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+.back-to-top i {
+  color: #000000 !important;
+}
+
 /*** Button Start ***/
 .btn {
   font-weight: 600;
@@ -268,7 +349,93 @@
 #searchModal .modal-content {
   background: rgba(255, 255, 255, 0.8);
 }
+/* ===== CART MODAL NAVY ===== */
 
+.cart-header {
+  background: #2e2e5b;
+  color: white;
+}
+
+.cart-header i {
+  color: #2e2e5b;
+}
+
+.cart-header .rounded-circle {
+  background: white;
+}
+
+/* BODY */
+
+#cartModal .modal-body {
+  background: #ffffff;
+  padding: 28px;
+}
+
+/* PRODUCT NAME */
+
+#cartMessage strong {
+  font-size: 20px;
+  color: #2e2e5b;
+}
+
+/* SIZE BADGE */
+
+#cartMessage .badge {
+  background: #2e2e5b;
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+/* PRICE */
+
+#cartMessage .fs-4 {
+  color: #2e2e5b !important;
+}
+
+/* NOTE */
+
+#cartMessage small {
+  font-size: 14px;
+}
+
+/* BUTTONS */
+
+#cartModal .btn {
+  border-radius: 30px;
+  padding: 10px 26px;
+  font-weight: 500;
+}
+
+/* CONTINUE */
+
+#continueShopping {
+  border: 1px solid #2e2e5b;
+  color: #2e2e5b;
+}
+
+#continueShopping:hover {
+  background: #2e2e5b;
+  color: white;
+}
+
+/* VIEW CART */
+
+#viewCart {
+  background: #2e2e5b;
+  border: none;
+}
+
+#viewCart:hover {
+  background: #1f1f45;
+}
+
+/* MODAL SHADOW */
+
+#cartModal .modal-content {
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
 /*** Navbar End ***/
 
 /*** Hero Header ***/
@@ -605,29 +772,48 @@
   display: inline-block;
 }
 
+/* Pagination */
 .pagination a {
-  color: var(--bs-dark);
+  color: #0b2a5b; /* chữ navy */
   padding: 10px 16px;
   text-decoration: none;
-  transition: 0.5s;
-  border: 1px solid var(--bs-secondary);
+  transition: 0.3s;
+  border: 1px solid #0b2a5b; /* viền navy */
   margin: 0 4px;
+  background: white;
 }
 
 .pagination a.active {
-  background-color: var(--bs-primary);
-  color: var(--bs-light);
-  border: 1px solid var(--bs-secondary);
+  background-color: #0b2a5b;
+  color: white;
+  border: 1px solid #0b2a5b;
 }
 
 .pagination a:hover:not(.active) {
-  background-color: var(--bs-primary);
+  background-color: #0b2a5b;
+  color: white;
 }
 
 .nav.nav-tabs .nav-link.active {
-  border-bottom: 2px solid var(--bs-secondary) !important;
+  border-bottom: 2px solid #0b2a5b !important;
 }
 
+.border-navy {
+  border-color: #0b2a5b !important;
+}
+.btn-filter-reset {
+  color: #0b2a5b;
+  border: 1px solid #0b2a5b;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn-filter-reset:hover {
+  background: #0b2a5b;
+  color: white;
+}
 /*** Single Page End ***/
 
 /*** Footer Start ***/
@@ -638,7 +824,7 @@
 }
 
 .footer .footer-item .btn-link:hover {
-  color: var(--bs-secondary) !important;
+  color: #ffffff !important;
 }
 
 .footer .footer-item p.mb-4 {
@@ -720,7 +906,15 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.btn-primary {
+  background-color: #6e8dab !important;
+  border-color: #707e8d !important;
+}
 
+.btn-primary:hover {
+  background-color: #4b80b2 !important;
+  border-color: #384e62 !important;
+}
 /* GIÁ */
 .product-price {
   color: #cb0606; /* đỏ */

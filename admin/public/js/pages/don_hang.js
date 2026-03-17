@@ -157,7 +157,7 @@ Dashmix.onLoad(() =>
                                 0: { text: "Chưa xử lý", class: "bg-warning" },
                                 1: { text: "Đã xác nhận", class: "bg-info" },
                                 2: { text: "Đã giao thành công", class: "bg-success" },
-                                3: { text: "Đã hủy", class: "bg-danger" }
+                                "-1": { text: "Đã hủy", class: "bg-danger" }
                             };
                             let status = statusMap[data] || { text: "N/A", class: "bg-secondary" };
                             if (type === 'filter') return status.text;
@@ -211,14 +211,14 @@ Dashmix.onLoad(() =>
                     // "Chưa xử lý" : Xác nhận, Hủy
                     $bulkMenu.append(`
                         <a class="dropdown-item" href="javascript:void(0)" data-value="1">Xác nhận đơn hàng</a>
-                        <a class="dropdown-item" href="javascript:void(0)" data-value="3">Huỷ đơn</a>
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="-1">Huỷ đơn</a>
                     `);
                 } else if (val === "Đã xác nhận") {
                     userTable.column(0).visible(true);
                     // "Đã xác nhận" : Giao thành công, Hủy
                     $bulkMenu.append(`
                         <a class="dropdown-item" href="javascript:void(0)" data-value="2">Giao hàng thành công</a>
-                        <a class="dropdown-item" href="javascript:void(0)" data-value="3">Huỷ đơn</a>
+                        <a class="dropdown-item" href="javascript:void(0)" data-value="-1">Huỷ đơn</a>
                     `);
                 } else {
                     userTable.column(0).visible(false);

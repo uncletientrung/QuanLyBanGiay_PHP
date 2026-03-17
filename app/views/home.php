@@ -385,7 +385,7 @@
     <h1 class="mb-3">Đại sứ phong cách</h1>
     <div class="row g-4 justify-content-center">
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
-        <a href="#">
+       
           <div class="service-item bg-dark rounded border border-dark">
             <img src="public/img/model-img-2.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
@@ -395,10 +395,10 @@
               </div>
             </div>
           </div>
-        </a>
+     
       </div>
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
-        <a href="#">
+        
           <div class="service-item bg-secondary rounded border border-secondary">
             <img src="public/img/model-img-4.png" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
@@ -408,10 +408,10 @@
               </div>
             </div>
           </div>
-        </a>
+     
       </div>
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
-        <a href="#">
+      
           <div class="service-item bg-dark rounded border border-dark">
             <img src="public/img/model-img-3.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
@@ -421,10 +421,10 @@
               </div>
             </div>
           </div>
-        </a>
+      
       </div>
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
-        <a href="#">
+       
           <div class="service-item bg-secondary rounded border border-secondary">
             <img src="public/img/model-img-1.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
@@ -434,7 +434,7 @@
               </div>
             </div>
           </div>
-        </a>
+      
       </div>
     </div>
   </div>

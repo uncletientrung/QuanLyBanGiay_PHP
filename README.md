@@ -1,4 +1,5 @@
 # 👟 QuanLyBanGiay_PHP
+
 ## Vũ trụ giày
 
 ---
@@ -8,34 +9,35 @@
 ### 🔹 Nguyễn Tiến Trung
 
 **Phụ trách:**
-- Header  
-- Home  
-  - ⏳ Chưa làm: Tìm kiếm, Thêm vào giỏ  
-- Liên hệ  
-  - ⏳ Tìm hiểu và làm PhpEmail  
-- Kiểm tra đơn hàng  
-  - ⏳ Mới làm View  
-- Đặt đơn hàng (Checkout)  
-- Đăng nhập  
-  - ⏳ Chưa kiểm tra password hash  
-  - ⏳ Chưa làm tạo tài khoản  
-
+- Liên hệ
+  - ⏳ Tìm hiểu và làm PhpEmail
+  
 **Đã hoàn thành:**
-- ✅ Giới thiệu  
-- ✅ Account Page  
 
+- ✅ Giới thiệu
+- ✅ Account Page
+- ✅ Thêm đơn hàng
+- ✅ Kiểm tra đơn hàng
+- ✅ Đặt đơn hàng (Checkout)
+- ✅ Xong phần Authentication (Không làm hash password)
 ---
 
 ### 🔹 Nguyễn Minh Thuan
 
 **Phụ trách:**
-- Footer  
-- Danh sách sản phẩm  
-- Tìm kiếm sản phẩm  
-- Product Detail  
-- Thêm vào giỏ  
+
+- Thêm vào giỏ
+- Trang chủ
+- Header
+- Footer
+- Danh sách sản phẩm
+- Tìm kiếm sản phẩm
+- Product Detail
 
 **Đã hoàn thành:**
-- ⏳ Chưa có  
+
+- ✅ Giới thiệu
+- ✅ Danh sách sản phẩm
+- ✅ Product Detail
 
 ---

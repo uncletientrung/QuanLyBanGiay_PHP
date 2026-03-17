@@ -78,6 +78,10 @@
                                 $statusIcon = "";
 
                                 switch ($order['trangthai']) {
+                                    case -1:
+                                        $statusLabel = "Đơn hàng đã hủy";
+                                        $statusIcon = '<i class="fa fa-times text-danger me-2"></i>';
+                                        break;
                                     case 0:
                                         $statusLabel = "Đơn hàng chờ xử lý";
                                         $statusIcon = '<i class="fa fa-times text-danger me-2"></i>';
@@ -89,10 +93,6 @@
                                     case 2:
                                         $statusLabel = "Đơn hàng đã hoàn thành";
                                         $statusIcon = '<i class="fa fa-check-double text-success me-2"></i>';
-                                        break;
-                                    case 3:
-                                        $statusLabel = "Đơn hàng đã hủy";
-                                        $statusIcon = '<i class="fa fa-times text-danger me-2"></i>';
                                         break;
                                     default:
                                         $statusLabel = "Đơn hàng không xác định";
@@ -108,7 +108,7 @@
                                     data-id="<?= $order['madh'] ?>"
                                     data-status="1"
                                     data-confirm="Xác nhận đơn hàng DH-<?= $order['madh'] ?>?">
-                                    <i class="fa fa-check me-1"></i> Confirm
+                                    <i class="fa fa-check me-1"></i> Xác nhận đơn
                                 </button>
                             <?php endif; ?>
                         </div>
@@ -143,7 +143,7 @@
                             <div class="ms-4 ps-1 text-muted fs-sm">
                                 <?php if ($order['trangthai'] == 2): ?>
                                     <strong class="text-success">Giao hàng thành công</strong>
-                                <?php elseif ($order['trangthai'] == 3): ?>
+                                <?php elseif ($order['trangthai'] == -1): ?>
                                     <strong class="text-danger">Đơn hàng đã hủy</strong>
                                 <?php else: ?>
                                     <strong class="text-warning">Đang chờ giao hàng</strong>
@@ -194,10 +194,10 @@
                     </div>
                 </div>
             </div>
-            <?php if ($order['trangthai'] != 2 && $order['trangthai'] != 3): ?>
+            <?php if ($order['trangthai'] != 2 && $order['trangthai'] != -1): ?>
                 <button type="button" class="btn btn-danger w-100 mt-3 btn-update-status"
                     data-id="<?= $order['madh'] ?>"
-                    data-status="3"
+                    data-status="-1"
                     data-confirm="Bạn có chắc muốn huỷ đơn hàng DH-<?= $order['madh'] ?>?">
                     <i class="fa fa-times me-1"></i> Huỷ đơn hàng
                 </button>

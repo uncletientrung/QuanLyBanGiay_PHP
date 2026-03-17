@@ -17,10 +17,24 @@ class DonHangModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getAllByMaKH($makh)
+    {
+        $sql = "SELECT * FROM donhang WHERE makh = ? ";
+        $stmt =  $this->db->prepare($sql);
+        $stmt->execute([$makh]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getDHByMaDH($madh)
+    {
+        $sql = "SELECT * FROM donhang WHERE madh =?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$madh]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {
-        $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan)
-                VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO donhang (makh, tongtien, diachigiaohang, hinhthucthanhtoan, trangthai)
+                VALUES (?, ?, ?, ?, 0)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$user_id, $order_data['tongtien'], $dia_chi, $order_data['hinhthucthanhtoan']]);
         return $this->db->lastInsertId(); // cái này trả về mã vừa thêm vào
@@ -92,6 +106,33 @@ class DonHangModel
 
             $this->db->commit();
             return $result;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
+
+    public function huyDonHang_Model($madh)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            $sql = "UPDATE donhang SET trangthai = -1 WHERE madh = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$madh]);
+
+            // Hoàn kho
+            $items = $this->getItems($madh);
+            foreach ($items as $item) {
+                $sqlStock = "UPDATE sanphamsize 
+                         SET soluong = soluong + ? 
+                         WHERE masp = ? AND masize = ?";
+                $stmtStock = $this->db->prepare($sqlStock);
+                $stmtStock->execute([$item['soluong'], $item['masp'], $item['masize']]);
+            }
+
+            $this->db->commit();
+            return true;
         } catch (Exception $e) {
             $this->db->rollBack();
             return false;

@@ -1,8 +1,8 @@
 
 
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-4">
-  <h1 class="text-center text-white display-6">Shop</h1>
+<div class="container-fluid page-header py-5">
+  <h1 class="text-center text-white display-6">Giày</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
     <li class="breadcrumb-item active text-white">Shop</li>
@@ -15,7 +15,7 @@
 
 <!-- <?php
 echo '<pre>';
-print_r($_SESSION['user-id']);
+print_r($sp['image']);
 echo '</pre>';
 
 ?>  -->
@@ -69,7 +69,7 @@ echo '</pre>';
                 <!-- Khung Loại giày -->
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
-                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Loại giày</h4>
+                    <h4 class="mb-2 pb-2 border-bottom border-navy">Loại giày</h4>
                     <?php foreach($listLoai as $loai): ?>
                       <div class="mb-2">
                         <input
@@ -91,7 +91,7 @@ echo '</pre>';
                 <!-- Khung Thương hiệu -->
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm"> 
-                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Thương hiệu</h4>
+                    <h4 class="mb-2 pb-2 border-bottom border-navy">Thương hiệu</h4>
                     <?php foreach($listHang as $hang): ?>
                       <div class="mb-2">
                         <input
@@ -113,7 +113,7 @@ echo '</pre>';
                 <!-- Khung Tầm giá -->
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
-                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Tầm giá</h4>
+                    <h4 class="mb-2 pb-2 border-bottom border-navy">Tầm giá</h4>
                     <?php
                     $price_ranges = [
                       'all' => 'Tất cả',
@@ -143,7 +143,7 @@ echo '</pre>';
                 <!-- Màu sắc -->
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
-                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Màu sắc</h4>
+                    <h4 class="mb-2 pb-2 border-bottom border-navy">Màu sắc</h4>
                     <?php foreach($listMauSac as $mau): ?>
                       <div class="mb-2">
                         <input
@@ -165,7 +165,7 @@ echo '</pre>';
                 <!-- Giới tính -->
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
-                    <h4 class="mb-2 pb-2 border-bottom border-secondary">Giới tính</h4>
+                    <h4 class="mb-2 pb-2 border-bottom border-navy">Giới tính</h4>
                     <div class="mb-2">
                       <input
                         type="checkbox"
@@ -194,21 +194,13 @@ echo '</pre>';
                 <!-- Nút xóa bộ lọc -->
                 <div class="col-lg-12">
                   <div class="d-grid">
-                    <a href="<?= ROOT_URL ?>products#start-products" class="btn btn-outline-secondary">
+                    <a href="<?= ROOT_URL ?>products#start-products" class="btn btn-filter-reset">
                       <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
                     </a>
                   </div>
                 </div>
 
-                <!-- Banner -->
-                <div class="col-lg-12">
-                  <div class="position-relative">
-                    <img src="<?= IMAGE_PATH_DIR ?>banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
-                    <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                      <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
-                    </div>
-                  </div>
-                </div>
+          
 
               </div>
             </div>
@@ -225,7 +217,7 @@ echo '</pre>';
 
                         <div class="product-img">
                           <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
-                            <img src="<?= $sp['image'] ?>" class="img-fluid w-100">
+                            <img src="<?= !empty($sp['image']) ? $sp['image'] : NO_IMAGE ?>" class="img-fluid w-100">
                           </a>
                         </div>
 

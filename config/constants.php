@@ -19,4 +19,4 @@ define('VIEW_PATH_ADMIN_DIR', APP_ADMIN_PATH_DIR . 'views/');
 define('MODEL_PATH_DIR', APP_PATH_DIR . 'models/');
 
 define('IMAGE_PATH_DIR', 'public/img/');
-define('NO_IMAGE', 'public/images/no-image');
+define('NO_IMAGE', 'public/img/no-image3.png');

@@ -1,4 +1,3 @@
-
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Shop Detail</h1>
@@ -15,46 +14,50 @@
     <div class="row g-4 mb-4">
       <div class="col-12">
         <div class="row g-4">
-          <!-- <?php
-echo '<pre>';
-print_r($listSize);
-echo '</pre>';
-
-?> -->
-
-          <!-- Cột trái: Hình ảnh + Tabs (thu nhỏ lại thành col-lg-7) -->
+          <!-- Cột trái: Hình ảnh + Tabs  -->
           <div class="col-lg-7">
 
             <!-- Div mẹ chứa thumbnail + ảnh lớn -->
             <div class="row g-3 mb-4">
-              <div class="col-2 d-none d-lg-block">
-                <div class="d-flex flex-column gap-2"> 
+           <div class="col-2 d-none d-lg-block">
+            <div class="d-flex flex-column gap-2">
 
-                <?php foreach($listHinh as $index => $hinh): ?>
+              <?php if (!empty($listHinh)): ?>
 
-                  <img src="<?= $hinh['path'] ?>" 
-                      class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>" 
-                      onclick="changeImage(this)" 
-                      style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php foreach ($listHinh as $index => $hinh): ?>
+                  <img src="<?= $hinh['path'] ?>"
+                    class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>"
+                    onclick="changeImage(this)"
+                    style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php endforeach; ?>
 
-                <?php endforeach ?>
-                  
+              <?php else: ?>
+
+                <?php for ($i = 0; $i < 6; $i++): ?>
+                  <img src="<?= ROOT_URL . NO_IMAGE ?>"
+                    class="img-fluid rounded thumb-img <?= $i == 0 ? 'active' : '' ?>"
+                    onclick="changeImage(this)"
+                    style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
+                <?php endfor; ?>
+
+              <?php endif; ?>
+
+            </div>
+          </div>
+
+              <!-- Ảnh lớn  -->
+              <div class="col-10">
+                <div class="rounded product-image-container"
+                  style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
+                  <img id="mainImage"
+                    src="<?= $currentSP['image'] ?>"
+                    class="img-fluid product-main-image"
+                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;"> <!-- thêm border-radius ở đây -->
                 </div>
               </div>
-
-            <!-- Ảnh lớn  -->
-            <div class="col-10">
-              <div class="rounded product-image-container" 
-                  style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
-                <img id="mainImage"
-                    src="<?=  $currentSP['image'] ?>" 
-                    class="img-fluid product-main-image"
-                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;">  <!-- thêm border-radius ở đây -->
-              </div>
-            </div>
             </div>
 
-            <!-- Tabs mô tả - giữ sát biên trái -->
+            <!-- Tabs mô tả -->
             <div class="ps-lg-0 ps-3">
               <nav>
                 <div class="nav nav-tabs mb-3">
@@ -166,8 +169,8 @@ echo '</pre>';
           <!-- Cột phải: Thông tin sản phẩm -->
           <div class="col-lg-5">
             <!-- Tên sản phẩm nổi bật hơn -->
-            <h4 class="fw-bold mb-2" style="font-size: 2.5rem; line-height: 1.1;"><?= $currentSP['tensp'] ?></h4>
-            
+            <h4 class="fw-bold mb-2 product-name" style="font-size: 2.5rem; line-height: 1.1;"><?= $currentSP['tensp'] ?></h4>
+
             <div class="product-meta">
 
 
@@ -202,49 +205,69 @@ echo '</pre>';
 
 
 
-            <!-- Giá nổi bật hơn -->
-            <h5 class="fw-bolder mb-4 text-danger" style="font-size: 2rem; letter-spacing: -0.5px; margin-top: 15px;">
-              <p class="gia-ban" data-gia="<?= $giaBan ?>">
-                <?= number_format($giaBan, 0, ',', '.') ?> ₫
-              </p>
-            </h5>
+            <!-- Giá -->
+            <p class="gia-ban" data-gia="<?= $giaBan ?>">
+              <?= number_format($giaBan, 0, ',', '.') ?> ₫
+            </p>
 
             <div class="mb-4">
-            <p class="fw-bold mb-2">Size</p>
-            <div class="d-flex gap-2 flex-wrap">
-              <?php foreach ($listSize as $size): ?>
-                <button
-                  type="button"
-                  class="btn btn-outline-secondary btn-sm size-btn
-                    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
-                  data-size="<?= $size['tensize'] ?>"
-                  data-stock="<?= $size['soluong'] ?>"
-                  <?= $size['soluong'] == 0 ? 'disabled' : '' ?>
-                >
-                  <?= $size['tensize'] ?>
-                </button>
-              <?php endforeach ?>
+              <p class="fw-bold mb-2">Size</p>
+              <div class="d-flex gap-2 flex-wrap">
+                <?php if (!empty($listSize)): ?>
+                  <?php foreach ($listSize as $size): ?>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary btn-sm size-btn
+                        <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
+                      data-size-id="<?= $size['masize'] ?>"
+                      data-size="<?= $size['tensize'] ?>"
+                      data-stock="<?= $size['soluong'] ?>"
+                      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>>
+                      <?= $size['tensize'] ?>
+                    </button>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <p class="text-danger">Sản phẩm này hiện chưa có size nào.</p>
+
+                <?php endif; ?>
+              </div>
             </div>
-          </div>
 
 
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="input-group quantity" style="width: 130px;">
-                <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
+                <button class="btn btn-sm btn-minus rounded-circle bg-light border">
                   <i class="fa fa-minus"></i>
                 </button>
-                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1" >
-                <button class="btn btn-sm btn-plus rounded-circle bg-light border" >
+                <input id="qty" type="text" class="form-control form-control-sm text-center border-0" value="1">
+                <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
 
-              <a href="#" class="btn border border-secondary rounded-pill px-5 py-2 text-primary">
+              <a
+                class="btn border border-secondary rounded-pill px-5 py-2 text-primary add-to-cart-btn"
+                data-masp="<?= $currentSP['masp'] ?>"
+                data-tensp="<?= htmlspecialchars($currentSP['tensp']) ?>">
                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
               </a>
             </div>
+              <?php if (!isset($_SESSION['user-id'])): ?>
 
-            <a href="#" class="btn btn-danger w-100 mb-4 py-3 fw-bold" style="font-size: 1.2rem;">Mua ngay</a>
+                <a href="<?= ROOT_URL ?>account/login"
+                  class="btn btn-danger w-100 mb-4 py-3 fw-bold">
+                  Mua ngay
+                </a>
+
+                <?php else: ?>
+
+                <a
+                  class="btn btn-danger w-100 mb-4 py-3 fw-bold buy-now-btn"
+                  data-masp="<?= $currentSP['masp'] ?>">
+                  Mua ngay
+                </a>
+
+            <?php endif; ?>
 
             <!-- Khung icons info - làm dài bằng nút Mua ngay -->
             <div class="rounded py-3 bg-white border mb-4 w-100">
@@ -291,11 +314,11 @@ echo '</pre>';
     <div class="vesitable">
       <div class="owl-carousel vegetable-carousel justify-content-center">
 
-        <?php if(!empty($listSP)) : ?>
-          <?php foreach($listSP as $sp): ?>
+        <?php if (!empty($listSP)) : ?>
+          <?php foreach ($listSP as $sp): ?>
             <?php $giaBanSP = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100; ?>
 
-            <div class="product-item position-relative"> 
+            <div class="product-item position-relative">
 
               <div class="product-img">
                 <a href="<?= ROOT_URL ?>product-detail?masp=<?= $sp['masp'] ?>">
@@ -337,12 +360,12 @@ echo '</pre>';
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-md">
     <div class="modal-content border-0 shadow-sm rounded-4 overflow-hidden">
-      
+
       <!-- Header nhẹ nhàng -->
-      <div class="modal-header bg-gradient-soft-green text-dark border-0 pb-0 pt-4 px-4">
+      <div class="modal-header cart-header border-0 px-4 py-3">
         <div class="d-flex align-items-center gap-3">
           <div class="bg-white rounded-circle p-2 shadow-sm">
-            <i class="fa fa-check text-success fs-4"></i>
+            <i class="fa fa-check fs-4"></i>
           </div>
           <h5 class="modal-title fw-semibold mb-0 fs-4" id="cartModalLabel">Đã thêm vào giỏ hàng</h5>
         </div>
@@ -364,9 +387,9 @@ echo '</pre>';
           </a>
         </div>
       </div>
-
     </div>
   </div>
+
 </div>
 <style>
   .thumb-img:hover {
@@ -385,9 +408,9 @@ echo '</pre>';
   }
 
   .product-main-image:hover {
-  transform: scale(1.12);
-  cursor: zoom-in;
-}
+    transform: scale(1.12);
+    cursor: zoom-in;
+  }
 
 
   @media (max-width: 768px) {
@@ -396,394 +419,201 @@ echo '</pre>';
     }
   }
 
-.vesitable-item {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+  .vesitable-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
-.vesitable-item .p-4 {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+  .vesitable-item .p-4 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
 
-.vesitable-item h4 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  min-height: 3.6rem;
-  max-height: 3.6rem;
-  margin-bottom: 1rem;
-}
+  .vesitable-item h4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 3.6rem;
+    max-height: 3.6rem;
+    margin-bottom: 1rem;
+  }
 
-.vesitable-item .d-flex {
-  margin-top: auto;
-}
-.product-meta {
-  margin-top: 16px;
-  font-family: system-ui, -apple-system, sans-serif;
-}
+  .vesitable-item .d-flex {
+    margin-top: auto;
+  }
 
-/* Thương hiệu */
-.meta-brand {
-  margin-bottom: 16px;
-}
+  .product-meta {
+    margin-top: 16px;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
 
-.meta-brand .label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #6b7280; 
-  display: block;
-  margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+  /* Thương hiệu */
+  .meta-brand {
+    margin-bottom: 16px;
+  }
 
-.meta-brand .value {
-  font-size: 22px;              /* to hơn rõ rệt */
-  font-weight: 700;
-  color: #e142a2;              
-  letter-spacing: -0.3px;
-  line-height: 1.1;
-}
+  .meta-brand .label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-brand .value {
+    font-size: 22px;
+    /* to hơn rõ rệt */
+    font-weight: 700;
+    color: #2e2e5b;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+  }
+
+  .product-name {
+    color: #2e2e5b !important;
+  }
+
+  .meta-attrs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 12px 20px;
+  }
+
+  .attr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .attr .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #9ca3af;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .attr .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  .size-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  .size-btn.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
+  }
 
 
-.meta-attrs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 12px 20px;              
-}
+  /* Modal tone dịu - pastel nhẹ nhàng */
+  #cartModal .modal-content {
+    border-radius: 24px;
+    background: #ffffff;
+  }
 
-.attr {
-  display: flex;
-  flex-direction: column;
-}
+  #cartModal .modal-header {
+    background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+    border-bottom: none !important;
+  }
 
-.attr .label {
-  font-size: 12px;
-  font-weight: 500;
-  color: #9ca3af;               
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
+  .bg-gradient-soft-green {
+    background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
+  }
 
-.attr .value {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;          
-}
+  .btn-soft-green {
+    background: #4caf50;
+    border: none;
+    transition: all 0.25s ease;
+  }
 
-.size-btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
-.size-btn.active {
-  background-color: #0d6efd;
-  color: #fff;
-  border-color: #0d6efd;
-}
+  .btn-soft-green:hover {
+    background: #43a047;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
+  }
 
+  #cartModal .modal-body {
+    background: #fafafa;
+  }
 
-/* Modal tone dịu - pastel nhẹ nhàng */
-#cartModal .modal-content {
-  border-radius: 24px;
-  background: #ffffff;
-}
+  .nav-tabs .nav-link {
+    color: #2c3e50;
+  }
 
-#cartModal .modal-header {
-  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
-  border-bottom: none !important;
-}
+  .nav-tabs .nav-link:hover {
+    color: #2c3e50;
+  }
 
-.bg-gradient-soft-green {
-  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e9 100%);
-}
+  #cartModal #cartMessage {
+    line-height: 1.6;
+    color: #2c3e50;
+  }
 
-.btn-soft-green {
-  background: #4caf50;
-  border: none;
-  transition: all 0.25s ease;
-}
+  #cartModal .btn-outline-secondary {
+    border-color: #adb5bd;
+    color: #495057;
+    transition: all 0.25s ease;
+  }
 
-.btn-soft-green:hover {
-  background: #43a047;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.25);
-}
+  #cartModal .btn-outline-secondary:hover {
+    background: #e9ecef;
+    color: #212529;
+  }
 
-#cartModal .modal-body {
-  background: #fafafa;
-}
-
-#cartModal #cartMessage {
-  line-height: 1.6;
-  color: #2c3e50;
-}
-
-#cartModal .btn-outline-secondary {
-  border-color: #adb5bd;
-  color: #495057;
-  transition: all 0.25s ease;
-}
-
-#cartModal .btn-outline-secondary:hover {
-  background: #e9ecef;
-  color: #212529;
-}
-
-/* Hiệu ứng mượt khi mở modal */
-#cartModal .modal-dialog {
-  transform: scale(0.95);
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-#cartModal.show .modal-dialog {
-  transform: scale(1);
-  opacity: 1;
-}
-
-/* Mobile thân thiện */
-@media (max-width: 576px) {
+  /* Hiệu ứng mượt khi mở modal */
   #cartModal .modal-dialog {
-    margin: 1rem;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  #cartModal .btn {
-    width: 100%;
-    padding: 0.75rem 1.25rem;
+
+  #cartModal.show .modal-dialog {
+    transform: scale(1);
+    opacity: 1;
   }
-}
+
+  .gia-ban {
+    font-size: 2rem;
+    /* to như h5 */
+    font-weight: 800;
+    /* fw-bolder */
+    color: #dc3545;
+    text-shadow: 0 0 0.4px #dc3545;
+    /* đỏ bootstrap text-danger */
+    letter-spacing: -0.5px;
+    margin-top: 15px;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    /* không rớt dòng */
+    line-height: 1.2;
+  }
+
+  /* Mobile thân thiện */
+  @media (max-width: 576px) {
+    #cartModal .modal-dialog {
+      margin: 1rem;
+    }
+
+    #cartModal .btn {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+    }
+  }
 </style>
-
 <script>
-  function changeImage(elem) {
-    const mainImg = document.getElementById('mainImage');
-    const thumbs = document.querySelectorAll('.thumb-img');
-    
-    thumbs.forEach(img => img.classList.remove('active'));
-    elem.classList.add('active');
-    
-    mainImg.style.opacity = '0';
-    
-    setTimeout(() => {
-      mainImg.src = elem.src;
-      mainImg.style.opacity = '1';
-    }, 150);
-  }
-
-  document.querySelectorAll('.thumb-img').forEach(img => {
-    img.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.08)';
-    });
-    img.addEventListener('mouseleave', function() {
-      if (!this.classList.contains('active')) {
-        this.style.transform = 'scale(1)';
-      }
-    });
-  });
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    // Biến trạng thái
-    let selectedSize  = null;
-    let selectedStock = 0;
-
-    // Lấy giá gốc (giá 1 sản phẩm)
-    const giaBanElement = document.querySelector('.gia-ban');
-    const pricePerUnit  = parseFloat(giaBanElement?.dataset?.gia) || 0;
-
-    // Các phần tử DOM
-    const sizeButtons   = document.querySelectorAll('.size-btn');
-    const qtyInput      = document.getElementById('qty');
-    const btnMinus      = document.querySelector('.btn-minus');
-    const btnPlus       = document.querySelector('.btn-plus');
-    const addToCartBtn  = document.querySelector('a[href="#"][class*="border-secondary"]');
-    const buyNowBtn     = document.querySelector('.btn.btn-danger.w-100'); // nút Mua ngay
-
-    // Hàm cập nhật giá
-    function updateDisplayedPrice() {
-        if (!giaBanElement || !qtyInput) return;
-        const qty = parseInt(qtyInput.value) || 1;
-        const total = pricePerUnit * qty;
-        // ding dạng tiền
-        const formattedTotal = total.toLocaleString('vi-VN') + ' ₫';
-        giaBanElement.innerHTML = formattedTotal;
-        // chữ x
-         giaBanElement.innerHTML = formattedTotal + ` <small>(x${qty})</small>`;
-    }
-
-    // chọn size
-    sizeButtons.forEach(btn => {
-        btn.addEventListener('click', function () {
-            if (this.classList.contains('disabled')) return;
-
-            sizeButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-            selectedSize  = this.dataset.size;
-            selectedStock = parseInt(this.dataset.stock) || 0;
-
-            if (qtyInput) qtyInput.value = 1;
-            updateDisplayedPrice();
-        });
-    });
-
-    // số lưognj
-    function changeQty(delta) {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size trước!');
-            return;
-        }
-        if (!qtyInput) return;
-
-        let val = parseInt(qtyInput.value) || 1;
-        val += delta;
-
-        if (val < 1) val = 1;
-        if (val > selectedStock) {
-            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
-            val = selectedStock;
-        }
-
-        qtyInput.value = val;
-        updateDisplayedPrice();
-    }
-
-    if (btnPlus)  btnPlus.addEventListener('click',  () => changeQty(1));
-    if (btnMinus) btnMinus.addEventListener('click', () => changeQty(-1));
-
-    // trường hợp nhập input
-    if (qtyInput) {
-        qtyInput.addEventListener('input', function () {
-            this.value = this.value.replace(/[^0-9]/g, ''); // chỉ cho phép số
-        });
-
-        qtyInput.addEventListener('change', validateQty);
-        qtyInput.addEventListener('blur',   validateQty);
-    }
-
-    function validateQty() {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size trước!');
-            if (qtyInput) qtyInput.value = 1;
-            updateDisplayedPrice();
-            return;
-        }
-
-        let val = parseInt(qtyInput.value) || 1;
-        if (val < 1) val = 1;
-        if (val > selectedStock) {
-            alert(`Chỉ còn ${selectedStock} sản phẩm size ${selectedSize}!`);
-            val = selectedStock;
-        }
-        qtyInput.value = val;
-        updateDisplayedPrice();
-    }
-
-    // validate trước khi mua
-    function canProceed() {
-        if (!selectedSize) {
-            alert('Vui lòng chọn size!');
-            return false;
-        }
-        if (!qtyInput) return false;
-
-        const qty = parseInt(qtyInput.value) || 1;
-        if (qty < 1 || qty > selectedStock) {
-            alert(`Số lượng không hợp lệ! Chỉ còn ${selectedStock} cái size ${selectedSize}.`);
-            qtyInput.value = Math.min(qty, selectedStock) || 1;
-            updateDisplayedPrice();
-            return false;
-        }
-        return true;
-    }
-
-    // nut them gio hang
-    // ================== ADD TO CART (Modal đẹp thay alert) ==================
-if (addToCartBtn) {
-    addToCartBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        if (!canProceed()) return;
-
-        const qty = parseInt(qtyInput.value);
-        const totalPrice = pricePerUnit * qty;
-        const productName = "<?= addslashes($currentSP['tensp']) ?>"; // Tên SP từ PHP
-
-        const data = {
-            masp: "<?= $currentSP['masp'] ?? '' ?>",
-            tensp: productName,
-            size: selectedSize,
-            qty: qty,
-            totalPrice: totalPrice
-        };
-
-        // Hiển thị thông báo trong modal
-        showCartSuccess(productName, selectedSize, qty, totalPrice);
-
-        // GỬI AJAX THẬT LÊN SERVER (tùy chọn - sau này implement)
-        console.log('Add to cart data:', data);
-        // sendToCartAPI(data); // Uncomment khi có API
-
-        // Reset form (tùy chọn)
-        // qtyInput.value = 1;
-        // updateDisplayedPrice();
-    });
-}
-
-// ================== HÀM HIỂN THỊ MODAL THÀNH CÔNG ==================
-function showCartSuccess(productName, size, qty, totalPrice) {
-    const modal = new bootstrap.Modal(document.getElementById('cartModal'));
-    const messageEl = document.getElementById('cartMessage');
-    
-    const formattedTotal = totalPrice.toLocaleString('vi-VN') + ' ₫';
-    
-    messageEl.innerHTML = `
-        <div class="mb-3">
-            <strong>${productName}</strong>
-        </div>
-        <div class="mb-2">
-            Size: <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-1">${size}</span>
-              × ${qty} đôi
-        </div>
-        <div class="fs-4 fw-bold text-success mb-4">
-            ${formattedTotal}
-        </div>
-        <small class="text-muted">Sản phẩm đã được thêm vào giỏ hàng của bạn</small>
-    `;
-
-    modal.show();
-
-    // Tự động đóng sau 6 giây
-    setTimeout(() => modal.hide(), 6000);
-
-    // Nút tiếp tục mua
-    document.getElementById('continueShopping').onclick = () => modal.hide();
-}
-
-    // mua ngay
-    if (buyNowBtn) {
-        buyNowBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            if (!canProceed()) return;
-
-            const data = {
-                masp: "<?= $currentSP['masp'] ?? '' ?>",
-                size: selectedSize,
-                qty: parseInt(qtyInput.value)
-            };
-            console.log('Buy now:', data);
-            alert('Đi đến thanh toán: Size ' + selectedSize + ' × ' + data.qty);
-        });
-    }
-
-    // Khởi tạo giá ban đầu
-    updateDisplayedPrice();
-
-});
-
+  const BASE_URL = "<?= ROOT_URL ?>";
 </script>
+<script src="<?= APP_PATH ?>public/js/product-detail.js"></script>

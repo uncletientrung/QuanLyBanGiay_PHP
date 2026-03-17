@@ -33,7 +33,7 @@ class KhachHangModel
     }
     public function getUserByEmail($email)
     {
-        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email";
+        $sql = "SELECT * FROM khachhang WHERE trangthai = 1 AND email = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -64,12 +64,15 @@ class KhachHangModel
         return $stmt->rowCount();
     }
 
-    public function add($data)
+    public function createUser($data)
     {
-        $sql = "INSERT INTO khachhang (hoten, sdt, diachi, gioitinh, trangthai, email, matkhau)
-                       VALUES (:hoten, :sdt, :diachi, :gioitinh, :trangthai, :email, :matkhau)";
+        $sql = "INSERT INTO khachhang (hoten, sdt, diachi, gioitinh, email, matkhau, trangthai)
+                VALUES (:hoten, :sdt, :diachi, :gioitinh, :email, :matkhau, 1)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        if ($stmt->execute($data)) {
+            return $this->db->lastInsertId();
+        }
+        return false;
     }
 
     public function update($id, $data)
@@ -106,5 +109,19 @@ class KhachHangModel
 
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function checkEmailExists($email)
+    {
+        $sql = "SELECT * FROM khachhang WHERE email = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$email]);
+        return $stmt->rowCount() > 0;
+    }
+    public function checkSDTExists($sdt)
+    {
+        $sql = "SELECT * FROM khachhang WHERE sdt = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$sdt]);
+        return $stmt->rowCount() > 0;
     }
 }
