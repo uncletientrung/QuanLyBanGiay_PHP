@@ -71,9 +71,10 @@ class SanPhamModel
     $where = [];
     $params = [];
 
-    // tìm theo tên
+    // tìm theo tên hoặc mô tả
     if (!empty($filters['q'])) {
-        $where[] = "tensp LIKE ?";
+        $where[] = "(tensp LIKE ? OR motasp LIKE ?)";
+        $params[] = '%' . $filters['q'] . '%';
         $params[] = '%' . $filters['q'] . '%';
     }
 
