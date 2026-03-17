@@ -10,6 +10,7 @@
 
 <!-- Single Product Start -->
 <div class="container-fluid py-4">
+
   <div class="container py-4">
     <div class="row g-4 mb-4">
       <div class="col-12">
@@ -248,13 +249,22 @@
                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
               </a>
             </div>
+              <?php if (!isset($_SESSION['user-id'])): ?>
 
-            <a
-              class="btn btn-danger w-100 mb-4 py-3 fw-bold buy-now-btn"
-              data-masp="<?= $currentSP['masp'] ?>"
-              style="font-size: 1.2rem;">
-              Mua ngay
-            </a>
+                <a href="<?= ROOT_URL ?>account/login"
+                  class="btn btn-danger w-100 mb-4 py-3 fw-bold">
+                  Mua ngay
+                </a>
+
+                <?php else: ?>
+
+                <a
+                  class="btn btn-danger w-100 mb-4 py-3 fw-bold buy-now-btn"
+                  data-masp="<?= $currentSP['masp'] ?>">
+                  Mua ngay
+                </a>
+
+            <?php endif; ?>
 
             <!-- Khung icons info - làm dài bằng nút Mua ngay -->
             <div class="rounded py-3 bg-white border mb-4 w-100">

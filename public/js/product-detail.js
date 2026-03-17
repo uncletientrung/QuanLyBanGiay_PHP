@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const masp = addToCartBtn.dataset.masp;
   const productName = addToCartBtn.dataset.tensp;
-  const buyNowBtn = document.querySelector(".btn.btn-danger.w-100"); // nút Mua ngay
+  const buyNowBtn = document.querySelector(".buy-now-btn");
 
   // Hàm cập nhật giá
   function updateDisplayedPrice() {
