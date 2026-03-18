@@ -24,20 +24,17 @@
 
 ### 🔹 Nguyễn Minh Thuan
 
-**Phụ trách:**
-
-- Thêm vào giỏ
-- Trang chủ
-- Header
-- Footer
-- Danh sách sản phẩm
-- Tìm kiếm sản phẩm
-- Product Detail
-
 **Đã hoàn thành:**
 
 - ✅ Giới thiệu
 - ✅ Danh sách sản phẩm
 - ✅ Product Detail
+- ✅ Thêm vào giỏ
+- ✅ Trang chủ
+- ✅ Header
+- ✅ Footer
+- ✅ Tìm kiếm sản phẩm
+  
+
 
 ---
