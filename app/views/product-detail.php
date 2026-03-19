@@ -309,7 +309,7 @@
       </div>
     </div>
 
-    <h1 class="fw-bold mb-0">Related products</h1>
+    <h1 class="fw-bold mb-0">Gợi ý sản phẩm</h1>
 
     <div class="vesitable">
       <div class="owl-carousel vegetable-carousel justify-content-center">
