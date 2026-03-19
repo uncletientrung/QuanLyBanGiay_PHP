@@ -5,17 +5,28 @@ require_once APP_PATH_DIR . 'controllers/HeaderController.php';
 require_once APP_PATH_DIR . 'controllers/AccountController.php';
 require_once APP_PATH_DIR . 'controllers/SanPhamController.php';
 require_once APP_PATH_DIR . 'controllers/TrackOrderController.php';
+require_once APP_PATH_DIR . 'controllers/AuthController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
 $accountController = new AccountController($conn);
 $chackoutController = new ChackoutController($conn);
+$trackOrderController = new TrackOrderController($conn);
+$authController = new AuthController($conn);
 function requireLogin()
 {
     if (empty($_SESSION['user-id'])) {
         header('location:' . ROOT_URL . 'account/login');
         exit;
     }
+}
+function backToAccount()
+{
+    if (!empty($_SESSION['user-id'])) {
+        header('Location: ' . ROOT_URL . 'account');
+        exit;
+    }
+    
 }
 function checkCart($conn)
 {
@@ -46,6 +57,32 @@ if ($uri == '' || $uri == '/' || $uri == 'home') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+// Đăng nhập
+if ($uri == 'login') {
+    backToAccount();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->checkLoginUser();
+    exit;
+}
+// Kiểm tra đơn hàng
+if ($uri == 'check-order') {
+    backToAccount();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->checkDonHang();
+    exit;
+}
+// Kiểm tra đơn hàng
+if ($uri == 'register') {
+    backToAccount();
+
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $authController->DangKyUser();
+    exit;
+}
+
 //sản phẩm Start
 if ($uri == 'products') {
     $headerData = prepareHeader($conn);
@@ -54,6 +91,12 @@ if ($uri == 'products') {
     $controller = new SanPhamController($conn);
     $controller->showProducts();
     require VIEW_PATH_DIR . 'partials/footer.php';
+    exit;
+}
+if ($uri == 'api/products') {
+    header('Content-Type: application/json');
+    $controller = new SanPhamController($conn);
+    $controller->ajaxProducts();
     exit;
 }
 
@@ -70,8 +113,19 @@ if ($uri == 'cart') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+
+if ($uri == 'add-cart') {
+    $controller = new GioHangController($conn);
+    $controller->addToCart();
+    exit;
+}
+if ($uri == 'clear-cart') {
+    unset($_SESSION['cart']);
+    echo "Session cart cleared";
+    exit;
+}
 if ($uri == 'cart/update') {
-    requireLogin();
+
     $headerData = prepareHeader($conn);
     extract($headerData);
     $controller = new GioHangController($conn);
@@ -79,7 +133,7 @@ if ($uri == 'cart/update') {
     exit;
 }
 if ($uri == 'cart/delete') {
-    requireLogin();
+
     $headerData = prepareHeader($conn);
     extract($headerData);
     $controller = new GioHangController($conn);
@@ -115,6 +169,7 @@ if ($uri == 'chackout/add-order') {
     } else {
         $_SESSION['add-order'] = false;
     }
+    header('location:' . ROOT_URL . 'track-order');
     exit;
 }
 // Cổng thanh toán END
@@ -128,12 +183,29 @@ if ($uri == 'track-order') {
     $trackOrderController = new TrackOrderController($conn);
     $trackOrderController->showTrackOrder();
     require VIEW_PATH_DIR . 'partials/footer.php';
-
+    exit;
+}
+if ($uri == 'track-order/cancel-order') {
+    requireLogin();
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    $cancleOrderStatus = $chackoutController->cancelOrder();
+    if ($cancleOrderStatus) {
+        $_SESSION['cancle-order'] = true;
+    } else {
+        $_SESSION['cancle-order'] = false;
+    }
+    header('location:' . ROOT_URL . 'track-order');
     exit;
 }
 if ($uri == 'track-order-detail') {
     requireLogin();
-    render('track-order-detail', $conn);
+    $headerData = prepareHeader($conn);
+    extract($headerData);
+    require VIEW_PATH_DIR . 'partials/header.php';
+    $trackOrderController = new TrackOrderController($conn);
+    $trackOrderController->showTrackOrderDetail();
+    require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
 // Kiểm tra trạng thái đơn hàng END
@@ -151,6 +223,12 @@ if ($uri == 'product-detail') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if ($uri == 'product-detail/add-product') {
+    requireLogin();
+    $gioHangController = new GioHangController($conn);
+    $gioHangController->addCartItemClickBuy();
+    exit;
+}
 // Account START
 if ($uri == 'account') {
     requireLogin();
@@ -163,6 +241,7 @@ if ($uri == 'account') {
     exit;
 }
 if ($uri == 'account/login') {
+    backToAccount();
     render('auth', $conn);
     exit;
 }

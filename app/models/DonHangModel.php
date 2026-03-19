@@ -24,13 +24,12 @@ class DonHangModel
         $stmt->execute([$makh]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getCountOrderByMaDH($madh)
+    public function getDHByMaDH($madh)
     {
-        $sql = "SELECT COUNT(*) as total FROM donhang WHERE madh =?";
+        $sql = "SELECT * FROM donhang WHERE madh =?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$madh]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row['total'];
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addOrder_Model($user_id, $order_data, $dia_chi)
     {

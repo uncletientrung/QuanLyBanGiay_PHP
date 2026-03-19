@@ -1,3 +1,79 @@
+<style>
+  :root {
+    --primary: #0b2a5b;
+    --primary-dark: #081f44;
+    --primary-light: #1a4a8b;
+  }
+  /* 2. Tiêu đề lớn "Tài khoản của tôi - Bảng điều khiển" */
+  h3.fw-bold {
+    color: var(--primary) !important;
+  }
+
+  /* 3. Các tiêu đề phần nhỏ (HỒ SƠ, MẬT KHẨU) */
+  h5.fw-bold.mb-0 {
+    color: var(--primary) !important;
+  }
+
+  /* 4. Nút ĐĂNG XUẤT + CHỈNH SỬA (cả desktop & mobile) */
+  #account-btn-logout,
+  #account-btn-edit-profile,
+  #account-btn-edit-password-mobile,
+  #account-btn-edit-password-desktop,
+  .btn.border-secondary.fw-bold {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    background-color: white !important;
+    transition: all 0.25s;
+  }
+
+  #account-btn-logout:hover,
+  #account-btn-edit-profile:hover,
+  #account-btn-edit-password-mobile:hover,
+  #account-btn-edit-password-desktop:hover,
+  .btn.border-secondary.fw-bold:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+  }
+
+  /* 5. Alert success / error - đồng bộ màu */
+  .alert-success {
+    background-color: rgba(11, 42, 91, 0.1) !important;
+    border-color: rgba(11, 42, 91, 0.3) !important;
+    color: var(--primary) !important;
+  }
+
+  .alert-secondary.text-danger {
+    color: #dc3545 !important; /* giữ đỏ cho error */
+  }
+
+  /* 6. Radio button (Nam/Nữ) - làm nổi bật khi checked */
+  .form-check-input:checked {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+  }
+
+  /* 7. Input khi focus */
+  .form-control:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(11, 42, 91, 0.25) !important;
+  }
+
+  /* 8. Icon toggle mắt (password) - màu accent */
+  .toggle-password {
+    color: var(--primary) !important;
+  }
+
+  /* 9. (Tùy chọn) Hover dòng thông tin */
+  .row.g-3 > div:hover {
+    background-color: rgba(11, 42, 91, 0.03);
+  }
+
+  /* 10. Border các card */
+  .border.rounded.shadow-sm {
+    border-color: rgba(11, 42, 91, 0.15) !important;
+  }
+</style>
 <!-- Trang ẩn Start -->
 <!-- <div class="container-fluid py-4">
   <h1 class="text-center text-white display-6"></h1>

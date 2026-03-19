@@ -1,9 +1,124 @@
+<style>
+  :root {
+    --primary: #0b2a5b;       /* xanh navy chính */
+    --primary-dark: #081f44;  /* hover đậm hơn */
+    --navy: #0b2a5b;          /* alias cho badge */
+  }
+  .nav-tabs .nav-link {
+    color: #495057 !important;           
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  /* Tab đang active */
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-link.active:hover,
+  .nav-tabs .nav-link.active:focus {
+    color: #0b2a5b !important;           /* chữ xanh navy */
+    background: none !important;
+    border: none !important;
+    border-bottom: 4px solid #0b2a5b !important;  /* gạch chân đậm hơn */
+    font-weight: 700 !important;
+  }
+
+  /* Tab Đã hủy - giữ đỏ */
+  #cancelled-tab {
+    color: #dc3545 !important;
+  }
+
+  #cancelled-tab.active,
+  #cancelled-tab.active:hover,
+  #cancelled-tab.active:focus {
+    color: #dc3545 !important;
+    border-bottom: 2px solid #dc3545 !important;
+  }
+
+  /* Đường viền dưới toàn bộ tabs (nếu muốn giữ) */
+  .nav-tabs {
+    --bs-nav-tabs-border-width: 1px !important;
+    --bs-nav-tabs-border-color: #dee2e6 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+  }
+
+  /* Override nếu có class text-success hoặc link-success chen vào */
+  .nav-tabs .nav-link.text-success,
+  .nav-tabs .nav-link.text-primary {
+    color: #0b2a5b !important;
+  }
+
+  .nav-tabs .nav-link.active.text-success,
+  .nav-tabs .nav-link.active.text-primary {
+    color: #0b2a5b !important;
+  }
+
+  /* Badge trạng thái */
+  .badge.bg-navy {
+    background-color: var(--navy) !important;
+    color: white !important;
+  }
+
+  .badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important; /* text tối hơn cho dễ đọc */
+  }
+
+  .badge.bg-danger {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+
+  .badge.bg-secondary {
+    background-color: #6c757d !important;
+    color: white !important;
+  }
+
+  /* Nút "Xem chi tiết" */
+  .btn-outline-secondary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    font-weight: 500;
+    transition: all 0.25s;
+  }
+
+  .btn-outline-secondary:hover,
+  .btn-outline-secondary:focus,
+  .btn-outline-secondary:active {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(11, 42, 91, 0.25);
+  }
+
+  /* Nút "Hủy đơn" giữ đỏ */
+  .btn-outline-danger {
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545 !important;
+    color: white !important;
+  }
+
+  /* Alert success / danger đồng bộ */
+  .alert-success {
+    background-color: rgba(11, 42, 91, 0.08) !important;
+    border-color: rgba(11, 42, 91, 0.25) !important;
+    color: var(--primary) !important;
+  }
+
+  .alert-danger {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+  }
+</style>
 <!-- Single Page Header start -->
-<div class="container-fluid page-header py-5" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(../img/hero-img-nike.jpg);">
-  <h1 class="text-center text-white display-6">Đơn Hàng Của Tôi</h1>
+<div class="container-fluid page-header py-5">
+  <h1 class="text-center text-white display-6">Shop</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>" class="text-white">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Kiểm tra đơn hàng</li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item active text-white">Theo dõi đơn hàng</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
@@ -44,6 +159,27 @@
             <i class="fa fa-arrow-left me-2"></i> Quay lại cửa hàng
           </a>
         </div>
+        <!--  Thông báo lên đơn thành công-->
+        <?php if (isset($_SESSION['add-order']) && $_SESSION['add-order'] == true): ?>
+          <div class="container mt-4">
+            <div class="alert alert-success d-flex align-items-center ">
+              <i class="fa fa-check-circle"></i>
+              <span class="fw-bold">Thêm đơn hàng thành công</span>
+            </div>
+          </div>
+          <?php unset($_SESSION['add-order']); ?>
+        <?php endif; ?>
+
+        <!--  Thông báo hủy đơn thành công-->
+        <?php if (isset($_SESSION['cancle-order']) && $_SESSION['cancle-order'] == true): ?>
+          <div class="container mt-4">
+            <div class="alert alert-danger d-flex align-items-center ">
+              <i class="fa fa-check-circle"></i>
+              <span class="fw-bold">Hủy đơn hàng thành công</span>
+            </div>
+          </div>
+          <?php unset($_SESSION['cancle-order']); ?>
+        <?php endif; ?>
 
         <!-- Danh sách đơn hàng dạng card -->
         <div class="row g-4" id="orders-list">
@@ -51,101 +187,64 @@
             <?php foreach ($orders as $order): ?>
 
               <div class="col-12">
-                <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden hover-shadow"
+                <div class="card order-card shadow-sm border-2 border-dark rounded-3 overflow-hidden hover-shadow"
                   style="transition: all 0.3s; cursor: pointer;"
-                  onclick="location.href='chi-tiet-don-hang?madh=12345';"> <!-- link chi tiết -->
+                  data-status="<?= $order['trangthai'] ?>">
 
                   <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                       <div>
-                        <small class="text-muted">Mã đơn: DH-<?= $order['soluongSP'] ?></small><br>
-                        <small class="text-muted">Ngày đặt: <?= date_format($order['thoigiantao'], 'd-m-Y H:i') ?></small>
+                        <small class="fw-bold text-dark">Mã đơn: DH-<?= $order['madh'] ?></small><br>
+                        <small class="fw-bold text-dark">Ngày đặt: <?= $order['thoigiantao'] ?></small>
                       </div>
-                      <span class="badge bg-warning text-dark px-3 py-2 fs-6 fw-bold">
-                        <?= $order['trangthaiDH'] ?>
-
+                      <span class="badge px-3 py-2 fs-6 fw-bold <?php
+                          if ($order['trangthai'] == 0) {
+                              echo 'bg-warning text-dark';           
+                          } elseif ($order['trangthai'] == 1 || $order['trangthai'] == 2) {
+                              echo 'bg-navy text-white';             
+                          } elseif ($order['trangthai'] == -1) {
+                              echo 'bg-danger text-white';           
+                          } else {
+                              echo 'bg-secondary text-white';       
+                          }
+                      ?>">
+                          <?= $order['trangthaiDH'] ?>
                       </span>
                     </div>
 
-                    <!-- Sản phẩm trong đơn (hiển thị 1-2 sp đại diện + số lượng còn lại) -->
-                    <div class="d-flex align-items-center mb-3">
-                      <img src="path/to/product1.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                      <div class="flex-grow-1">
-                        <p class="mb-1 fw-bold product-name">Áo Nike Dri-FIT phiên bản giới hạn</p>
-                        <small class="text-muted">Size: L × 1</small>
-                      </div>
-                      <div class="text-end">
-                        <p class="mb-0 fw-bold text-danger">980.000₫</p>
-                      </div>
-                    </div>
-
                     <!-- Nếu nhiều sản phẩm -->
-                    <small class="text-primary d-block mb-3">+ 2 sản phẩm khác</small>
-
+                    <small class="fw-bold text-dark  d-block mb-3"> Tổng <?= $order['soluongSP'] ?> sản phẩm ( <?= $order['soloaiSP'] ?> loại)</small>
                     <hr class="my-3">
-
                     <div class="d-flex justify-content-between align-items-center">
                       <div>
                         <small class="text-muted">Tổng tiền:</small><br>
-                        <strong class="fs-5 text-dark">2.450.000₫</strong>
+                        <strong class="fs-5 text-dark"><?= number_format($order['tongtien']) ?></strong>
                       </div>
-                      <button class="btn btn-outline-secondary rounded-pill px-4">
-                        Xem chi tiết
-                      </button>
+
+                      <div class="d-flex gap-2">
+
+                        <?php if ($order['trangthai'] == 0): ?>
+                          <a class="btn btn-outline-danger rounded-pill px-4"
+                            href="track-order/cancel-order?madh=<?= $order['madh'] ?>"
+                            onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">
+                            Hủy đơn
+                          </a>
+                        <?php endif; ?>
+
+                        <a class="btn btn-outline-secondary rounded-pill px-4"
+                          href="track-order-detail?madh=<?= $order['madh'] ?>">
+                          Xem chi tiết
+                        </a>
+
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             <?php endforeach; ?>
           <?php endif ?>
-          <!-- Card mẫu 2: Đã giao -->
-          <div class="col-12">
-            <div class="card order-card shadow-sm border-0 rounded-3 overflow-hidden">
-              <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <div>
-                    <small class="text-muted">Mã đơn: #987654321</small><br>
-                    <small class="text-muted">Ngày đặt: 05/03/2026 - 14:20</small>
-                  </div>
-                  <span class="badge bg-success text-white px-3 py-2 fs-6 fw-bold">
-                    Đã giao
-                  </span>
-                </div>
-
-                <div class="d-flex align-items-center mb-3">
-                  <img src="path/to/product2.jpg" alt="" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                  <div class="flex-grow-1">
-                    <p class="mb-1 fw-bold">Giày Air Jordan 1 High</p>
-                    <small class="text-muted">Size: 42 × 1</small>
-                  </div>
-                  <div class="text-end">
-                    <p class="mb-0 fw-bold text-danger">3.200.000₫</p>
-                  </div>
-                </div>
-
-                <hr class="my-3">
-
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <small class="text-muted">Tổng tiền:</small><br>
-                    <strong class="fs-5 text-dark">3.200.000₫</strong>
-                  </div>
-                  <button class="btn btn-outline-secondary rounded-pill px-4">
-                    Mua lại
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Thêm nhiều card khác tương tự -->
-
         </div>
       </div>
-
-      <!-- Các tab khác (pending, processing, shipping, delivered, cancelled) -->
-      <!-- Bạn copy phần trên và thay đổi id, class badge tương ứng -->
-
     </div>
   </div>
 </div>
@@ -153,16 +252,6 @@
 
 <!-- CSS bổ sung (thêm vào file CSS của bạn) -->
 <style>
-  .order-card {
-    border: 1px solid #dce3f0;
-    background: #fff;
-  }
-
-  .order-card:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-  }
-
   .badge {
     font-size: 0.9rem !important;
   }
@@ -175,13 +264,11 @@
     background-color: var(--navy) !important;
   }
 
-  /* hoặc màu xanh bạn thích */
   .bg-danger {
     background-color: #dc3545 !important;
   }
 
   .hover-shadow:hover {
     box-shadow: 0 0 45px rgba(11, 61, 145, 0.2) !important;
-    /* navy nhẹ */
   }
 </style>

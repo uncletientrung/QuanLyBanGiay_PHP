@@ -9,41 +9,32 @@
 ### 🔹 Nguyễn Tiến Trung
 
 **Phụ trách:**
-
-
 - Liên hệ
   - ⏳ Tìm hiểu và làm PhpEmail
-- Kiểm tra đơn hàng
-  - ⏳ Chưa làm view
-- Đặt đơn hàng (Checkout)
-- Đăng nhập
-  - ⏳ Chưa kiểm tra password hash
-  - ⏳ Chưa làm tạo tài khoản
-
+  
 **Đã hoàn thành:**
 
 - ✅ Giới thiệu
 - ✅ Account Page
 - ✅ Thêm đơn hàng
-
+- ✅ Kiểm tra đơn hàng
+- ✅ Đặt đơn hàng (Checkout)
+- ✅ Xong phần Authentication (Không làm hash password)
 ---
 
 ### 🔹 Nguyễn Minh Thuan
-
-**Phụ trách:**
-
-- Thêm vào giỏ
-- Trang chủ
-- Header
-- Footer
-- Danh sách sản phẩm
-- Tìm kiếm sản phẩm
-- Product Detail
 
 **Đã hoàn thành:**
 
 - ✅ Giới thiệu
 - ✅ Danh sách sản phẩm
 - ✅ Product Detail
+- ✅ Thêm vào giỏ
+- ✅ Trang chủ
+- ✅ Header
+- ✅ Footer
+- ✅ Tìm kiếm sản phẩm
+  
+
 
 ---

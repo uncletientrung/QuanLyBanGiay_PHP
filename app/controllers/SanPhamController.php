@@ -188,5 +188,37 @@ class SanPhamController
         require VIEW_PATH_DIR . 'home.php';
     }
 
+    public function ajaxProducts()
+    {
+        $filters = [
+            'q'           => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
+            'hang'        => !empty($_GET['hang'])     ? array_map('intval', (array)$_GET['hang'])   : [],
+            'loai'        => !empty($_GET['loai'])     ? array_map('intval', (array)$_GET['loai'])   : [],
+            'gioitinh'    => !empty($_GET['gioitinh']) ? array_map('trim',   (array)$_GET['gioitinh']): [],
+            'mau'         => !empty($_GET['mau'])      ? array_map('intval', (array)$_GET['mau'])    : [],
+            'price_range' => $_GET['price_range'] ?? null,
+            'sort'        => $_GET['sort'] ?? 'default',
+        ];
 
+        $page  = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 9;
+
+        $listSP       = $this->getProducts($filters, $page, $limit);
+        $totalProducts = $this->countProducts($filters);
+        $totalPages   = ceil($totalProducts / $limit);
+
+        foreach ($listSP as &$sp) {
+            $sp['image']   = $this->hinhAnhModel->getImageMainById($sp['masp']);
+            $sp['tenhang'] = $this->hangModel->getNameById($sp['hang']);
+            $sp['giaban']  = $sp['gianhap'] + $sp['gianhap'] * $sp['tyleloinhuan'] / 100;
+        }
+        unset($sp);
+
+        echo json_encode([
+            'products'   => $listSP,
+            'page'       => $page,
+            'totalPages' => $totalPages,
+            'total'      => $totalProducts,
+        ]);
+    }
 }

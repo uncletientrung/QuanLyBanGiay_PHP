@@ -71,9 +71,10 @@ class SanPhamModel
     $where = [];
     $params = [];
 
-    // tìm theo tên
+    // tìm theo tên hoặc mô tả
     if (!empty($filters['q'])) {
-        $where[] = "tensp LIKE ?";
+        $where[] = "(tensp LIKE ? OR motasp LIKE ?)";
+        $params[] = '%' . $filters['q'] . '%';
         $params[] = '%' . $filters['q'] . '%';
     }
 
@@ -242,6 +243,15 @@ class SanPhamModel
     $stmt->execute();
     return (int)$stmt->fetchColumn();
 }
+    public function getStock($masp, $masize)
+    {
+        $sql = "SELECT soluong FROM sanphamsize WHERE masp = ? AND masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$masp, $masize]);
 
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['soluong'] ?? 0;
+    }
 }
 ?>

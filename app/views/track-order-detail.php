@@ -1,129 +1,209 @@
 <!-- Header (giữ nguyên) -->
 <div class="container-fluid page-header py-4">
-    <h1 class="text-center text-white display-6">Chi Tiết Đơn Hàng #<?= $madh ?></h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
-        <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>my-orders">Đơn hàng của tôi</a></li>
-        <li class="breadcrumb-item active text-white">#<?= $madh ?></li>
-    </ol>
+  <h1 class="text-center text-white display-6">Chi Tiết Đơn Hàng DH-<?= $madh ?></h1>
+  <ol class="breadcrumb justify-content-center mb-0">
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>track-order">Đơn hàng của tôi</a></li>
+    <li class="breadcrumb-item active text-white">DH-<?= $madh ?></li>
+  </ol>
 </div>
 
-<!-- Order Detail gọn - giống checkout -->
 <div class="container py-5">
-    <div class="row g-4">
+  <div class="row g-4">
+    <!-- Cột trái-->
+    <div class="col-lg-5">
+      <div class="checkout-section bg-light rounded-3 p-4 shadow-sm">
+        <h4 class="mb-4 fw-bold text-navy">Thông tin nhận hàng</h4>
 
-        <!-- Cột trái: Info nhận hàng + Phương thức thanh toán + Trạng thái (tất cả trong 1 khối) -->
-        <div class="col-lg-5">
-            <div class="checkout-section bg-light rounded-3 p-4">
-                <h4 class="mb-4 fw-bold text-navy">Thông tin nhận hàng</h4>
-                <p class="mb-2"><strong>Trung</strong></p>
-                <p class="mb-2">SĐT: 0123 456 789</p>
-                <p class="mb-4">Địa chỉ: 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
-
-                <h5 class="mb-3 fw-bold text-navy">Phương thức thanh toán</h5>
-                <p class="mb-4">Thanh toán khi nhận hàng (COD)</p>
-
-                <!-- Trạng thái đơn hàng - nằm trong cùng khung -->
-                <h5 class="mb-3 fw-bold text-navy">Trạng thái đơn hàng</h5>
-                <div class="d-flex justify-content-between text-center small">
-                    <div>
-                        <div class="step-circle bg-navy text-white mb-1">✓</div>
-                        <p class="mb-0 fw-bold">Chờ xác nhận</p>
-                    </div>
-                    <div class="flex-fill align-self-center"><hr class="my-0 bg-secondary"></div>
-                    <div>
-                        <div class="step-circle bg-light border border-navy text-navy mb-1">2</div>
-                        <p class="mb-0">Xử lý</p>
-                    </div>
-                    <div class="flex-fill align-self-center"><hr class="my-0 bg-secondary"></div>
-                    <div>
-                        <div class="step-circle bg-light border border-navy text-navy mb-1">3</div>
-                        <p class="mb-0">Đang giao</p>
-                    </div>
-                    <div class="flex-fill align-self-center"><hr class="my-0 bg-secondary"></div>
-                    <div>
-                        <div class="step-circle bg-light border border-navy text-navy mb-1">4</div>
-                        <p class="mb-0">Đã giao</p>
-                    </div>
-                </div>
-                <small class="text-muted mt-3 d-block">Cập nhật lần cuối: 12/03/2026 09:45</small>
-            </div>
+        <div class="order-info mb-4">
+          <div class="info-item d-flex justify-content-between mb-2">
+            <span class="text-muted">Người nhận:</span>
+            <strong class="text-dark"><?= $user['hoten'] ?></strong>
+          </div>
+          <div class="info-item d-flex justify-content-between mb-2">
+            <span class="text-muted">Số điện thoại:</span>
+            <strong class="text-dark"><?= $user['sdt'] ?></strong>
+          </div>
+          <div class="info-item d-flex justify-content-between mb-3">
+            <span class="text-muted">Địa chỉ:</span>
+            <strong class="text-dark text-end"><?= $order['diachigiaohang'] ?></strong>
+          </div>
+          <div class="info-item d-flex justify-content-between">
+            <span class="text-muted">Ngày đặt hàng:</span>
+            <strong class="text-dark"><?= $order_create ?></strong>
+          </div>
         </div>
 
-        <!-- Cột phải: Sản phẩm + Tổng tiền -->
-        <div class="col-lg-7">
-            <div class="order-summary bg-white border border-secondary-subtle rounded-3 p-4">
-                <h4 class="mb-4 fw-bold text-navy">Sản phẩm đã đặt</h4>
+        <hr class="my-4 border-secondary-subtle">
 
-                <div class="table-responsive">
-                    <table class="table table-borderless">
-                        <thead class="bg-light">
-                            <tr>
-                                <th>Sản phẩm</th>
-                                <th>Tên</th>
-                                <th>SL</th>
-                                <th>Thành tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Row ví dụ - bạn loop PHP -->
-                            <tr>
-                                <td><img src="path/to/product1.jpg" style="width:60px;height:60px;object-fit:cover;border-radius:6px;" alt=""></td>
-                                <td>
-                                    Áo Nike Dri-FIT<br>
-                                    <small class="text-muted">Size: L - Màu: Đen</small>
-                                </td>
-                                <td>2</td>
-                                <td class="fw-bold text-danger">1.960.000₫</td>
-                            </tr>
-                            <tr>
-                                <td><img src="path/to/product2.jpg" style="width:60px;height:60px;object-fit:cover;border-radius:6px;" alt=""></td>
-                                <td>
-                                    Giày Air Jordan 1 High<br>
-                                    <small class="text-muted">Size: 42 - Màu: Trắng</small>
-                                </td>
-                                <td>1</td>
-                                <td class="fw-bold text-danger">3.200.000₫</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <h5 class="mb-3 fw-bold text-navy">Phương thức thanh toán</h5>
+        <p class="mb-4 text-dark fw-medium">
+          <?= $order['hinhthucthanhtoan'] == "Tiền mặt"
+            ? 'Thanh toán khi nhận hàng (COD)'
+            : 'Chuyển khoản ngân hàng' ?>
+        </p>
 
-                <hr class="my-4">
-
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Tổng tiền hàng:</span>
-                    <span class="fw-bold">5.160.000₫</span>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Phí vận chuyển:</span>
-                    <span class="text-success">Miễn phí</span>
-                </div>
-                <div class="d-flex justify-content-between fs-5 fw-bold">
-                    <span>Tổng thanh toán:</span>
-                    <span class="text-danger">5.160.000₫</span>
-                </div>
-            </div>
-        </div>
+        <h5 class="mb-3 fw-bold text-navy">Trạng thái đơn hàng</h5>
+        <span class="badge 
+      <?php
+      $status = $order['trangthai'];
+      echo match ($status) {
+        0     => 'bg-warning text-dark',
+        1     => 'bg-success text-white',
+        2     => 'bg-primary text-white',
+        -1    => 'bg-danger text-white',
+        default => 'bg-secondary text-white'
+      };
+      ?>
+      px-4 py-2 fs-6 fw-bold d-inline-block">
+          <?= $order_status ?>
+        </span>
+        <?php if ($order['trangthai'] == 0): ?>
+          <div class="mt-3">
+            <a href="track-order/cancel-order?madh=<?= $order['madh'] ?>"
+              class="btn btn-outline-danger rounded-pill px-4"
+              onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">
+              Hủy đơn
+            </a>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
+
+    <!-- Cột phải-->
+    <div class="col-lg-7">
+      <div class="order-summary bg-white border border-secondary-subtle rounded-3 p-4">
+        <h4 class="mb-4 fw-bold text-navy">Sản phẩm đã đặt</h4>
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead class="bg-light">
+              <tr>
+                <th>Sản phẩm</th>
+                <th>Tên</th>
+                <th>SL</th>
+                <th>Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row ví dụ - bạn loop PHP -->
+              <?php if (!empty($order_details)): ?>
+                <?php foreach ($order_details as $detail): ?>
+                  <tr>
+                    <td><img src="<?= $detail['main-image'] ?>" style="width:60px;height:60px;object-fit:cover;border-radius:6px;" alt=""></td>
+                    <td>
+                      <?= $detail['sanpham']['tensp'] ?><br>
+                      <small class="text-muted">Size: <?= $detail['tensize'] ?> - Màu: <?= $detail['tenmau'] ?></small>
+                    </td>
+                    <td><?= $detail['soluong'] ?></td>
+                    <td class="fw-bold text-danger"><?= number_format($detail['dongia'] * $detail['soluong']) ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php endif ?>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Tổng tiền hàng:</span>
+          <span class="fw-bold"><?= number_format($tongtien) ?></span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span>Phí vận chuyển:</span>
+          <span class="text-success">Miễn phí</span>
+        </div>
+        <div class="d-flex justify-content-between fs-5 fw-bold">
+          <span>Tổng thanh toán:</span>
+          <span class="text-danger"><?= number_format($tongtien) ?></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- CSS (thêm hoặc cập nhật vào file CSS của bạn) -->
 <style>
-    .text-navy { color: var(--navy) !important; }
-    .step-circle {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        font-weight: bold;
-        margin: 0 auto 4px;
+  .text-navy {
+    color: var(--navy) !important;
+  }
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 auto 4px;
+  }
+
+  .order-summary {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .checkout-section {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .order-info {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .info-item {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .info-item span.text-muted {
+    min-width: 110px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .info-item strong {
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  .text-end {
+    text-align: right;
+  }
+
+  .badge.fs-6 {
+    font-size: 1.05rem !important;
+    padding: 0.65em 1.4em !important;
+    border-radius: 50px !important;
+    letter-spacing: 0.3px;
+  }
+
+  .bg-warning {
+    background-color: #ffc107 !important;
+  }
+
+  .bg-success {
+    background-color: var(--navy) !important;
+  }
+
+  .bg-danger {
+    background-color: #dc3545 !important;
+  }
+
+  /* Responsive nhỏ gọn hơn trên mobile */
+  @media (max-width: 576px) {
+    .info-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
     }
-    .checkout-section,
-    .order-summary {
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+
+    .info-item span.text-muted {
+      min-width: auto;
     }
+  }
 </style>
