@@ -1,5 +1,5 @@
-<?php 
-require_once __DIR__ . '/auth_helper.php'; 
+<?php
+require_once __DIR__ . '/auth_helper.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,16 +25,87 @@ require_once __DIR__ . '/auth_helper.php';
   <link href="<?= ROOT_URL ?>public/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
   <link href="<?= ROOT_URL ?>public/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-
   <!-- Customized Bootstrap Stylesheet -->
   <link href="<?= ROOT_URL ?>public/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Template Stylesheet -->
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
+
+  <style>
+    /* Tăng size cơ bản cho navbar */
+    .navbar {
+      font-size: 1.12rem;
+    }
+
+    /* Logo GalaxyShoes - to và đậm nổi bật */
+    .navbar-brand {
+      font-size: 2.4rem !important;       /* To rõ, có thể tăng lên 2.6rem nếu muốn cực to */
+      font-weight: 800 !important;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: #0d6efd !important;          /* Màu primary, đổi #000 nếu muốn đen */
+      padding: 0.4rem 0;
+    }
+
+    /* Các nav-link (menu item) */
+    .navbar-nav .nav-link,
+    .nav-item.dropdown .dropdown-toggle {
+      font-size: 1.18rem !important;      /* To hơn mặc định */
+      font-weight: 600 !important;
+      padding: 0.8rem 1.3rem !important;  /* Dễ click hơn */
+      transition: all 0.3s ease;
+    }
+
+    /* Hover */
+    .navbar-nav .nav-link:hover,
+    .nav-item.dropdown .dropdown-toggle:hover {
+      color: #fd7e14 !important;          /* Cam nổi bật */
+      font-weight: 700 !important;
+    }
+
+    /* Active - TO + ĐEN + SIÊU ĐẬM (như bạn yêu cầu) */
+    .navbar-nav .nav-link.active,
+    .nav-item.dropdown .dropdown-toggle.active,
+    .nav-item.dropdown .dropdown-toggle.show {
+      font-size: 1.28rem !important;      /* To rõ rệt hơn các item khác */
+      font-weight: 900 !important;        /* Đậm cực đại */
+      color: #000000 !important;          /* Đen tuyền */
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Bóng nhẹ tăng độ nổi */
+    }
+
+    /* Dropdown menu items to hơn */
+    .dropdown-menu .dropdown-item {
+      font-size: 1.08rem !important;
+      padding: 0.65rem 1.6rem !important;
+    }
+
+    /* Responsive - giảm size trên mobile để vừa màn hình */
+    @media (max-width: 1199.98px) {
+      .navbar-brand {
+        font-size: 2.1rem !important;
+      }
+      .navbar-nav .nav-link,
+      .nav-item.dropdown .dropdown-toggle {
+        font-size: 1.12rem !important;
+      }
+      .navbar-nav .nav-link.active,
+      .nav-item.dropdown .dropdown-toggle.active,
+      .nav-item.dropdown .dropdown-toggle.show {
+        font-size: 1.22rem !important;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar-brand {
+        font-size: 1.9rem !important;
+      }
+      .navbar-nav .nav-link {
+        padding: 0.7rem 1rem !important;
+      }
+    }
+  </style>
 </head>
 
-<div id="toast" class="toast-notify">
-</div>
 <body>
   <!-- Load trang -->
   <div id="spinner"
@@ -42,18 +113,18 @@ require_once __DIR__ . '/auth_helper.php';
     <div class="spinner-grow text-primary" role="status"></div>
   </div>
   <!-- Loading End -->
+
   <?php
   $currentPage = $_GET['url'] ?? 'home';
   ?>
+
   <!-- NAV start -->
   <div class="container-fluid fixed-top">
     <div class="container topbar bg-primary d-none d-lg-block">
       <div class="d-flex justify-content-between">
         <div class="top-info ps-2">
-          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a 
-              class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
-          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a 
-              class="text-white">shoesgalaxy@gmail.com</a></small>
+          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
+          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
         <div class="top-link pe-2">
           <a href="<?= ROOT_URL ?>privacy-policy" class="text-white"><small class="text-white mx-2">Chính sách bảo mật</small>/</a>
@@ -62,151 +133,112 @@ require_once __DIR__ . '/auth_helper.php';
         </div>
       </div>
     </div>
+
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
         <a href="<?= ROOT_URL ?>" class="navbar-brand">
           <h1 class="text-primary display-6">GalaxyShoes</h1>
         </a>
-        <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarCollapse">
+        <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
           <span class="fa fa-bars text-primary"></span>
         </button>
+
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="<?= ROOT_URL ?>" 
-            class="nav-item nav-link <?= $currentPage == 'home' ? 'active' : '' ?>">
-            Trang chủ
+            <a href="<?= ROOT_URL ?>"
+              class="nav-item nav-link <?= $currentPage == 'home' ? 'active' : '' ?>">
+              Trang chủ
             </a>
-       
-          
+
             <div class="nav-item dropdown">
-                <a class="nav-item nav-link dropdown-toggle 
-                <?= str_contains($currentPage,'products') ? 'active' : '' ?>" 
+              <a class="nav-item nav-link dropdown-toggle 
+                <?= $currentPage == 'products' || $currentPage == 'product-detail' ? 'active' : '' ?>"
                 data-bs-toggle="dropdown">
-                  Giày
-                </a>
+                Giày
+              </a>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                  <a href="<?= ROOT_URL ?>products" class="dropdown-item">Tất cả</a>
-                  <?php foreach($listHang as $hang): ?>
-                  <a href="<?= ROOT_URL ?>products?hang[]=<?= $hang['mahang'] ?>" class="dropdown-item"> <?= htmlspecialchars($hang['tenhang']) ?></a>
-                  <?php endforeach; ?>
-              </div>
-          </div>
-               <a href="<?= ROOT_URL ?>about-us" 
-            class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
-            Giới thiệu
-            </a>
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-              <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                <a href="<?= ROOT_URL ?>cart" class="dropdown-item">Cart</a>
-                <a href="<?= ROOT_URL ?>chackout" class="dropdown-item">Chackout</a>
-                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                <a href="<?= ROOT_URL ?>404" class="dropdown-item">404 Page</a>
+                <a href="<?= ROOT_URL ?>products" class="dropdown-item">Tất cả</a>
+                <?php foreach ($listHang as $hang): ?>
+                  <a href="<?= ROOT_URL ?>products?hang[]=<?= $hang['mahang'] ?>" class="dropdown-item"><?= htmlspecialchars($hang['tenhang']) ?></a>
+                <?php endforeach; ?>
               </div>
             </div>
-            <a href="<?= ROOT_URL ?>contact" 
-            class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
-            Liên hệ
+
+            <a href="<?= ROOT_URL ?>about-us"
+              class="nav-item nav-link <?= $currentPage == 'about-us' ? 'active' : '' ?>">
+              Giới thiệu
             </a>
-            <a href="<?= ROOT_URL ?>track-order" 
-            class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
-            Theo dõi đơn hàng
+
+            <a href="<?= ROOT_URL ?>contact"
+              class="nav-item nav-link <?= $currentPage == 'contact' ? 'active' : '' ?>">
+              Liên hệ
+            </a>
+
+            <a href="<?= ROOT_URL ?>track-order"
+              class="nav-item nav-link <?= $currentPage == 'track-order' ? 'active' : '' ?>">
+              Theo dõi đơn hàng
             </a>
           </div>
+
           <div class="d-flex m-3 me-0">
-            <!-- <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-              data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button> -->
             <!-- Button cart -->
             <a href="<?= ROOT_URL ?>cart" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
-              <?php if($isLogin && $cartCount > 0): ?>
-                <span
-                  id="cart-count"
+              <?php if ($isLogin && $cartCount > 0): ?>
+                <span id="cart-count"
                   class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
                   style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
                   <?= $cartCount ?>
                 </span>
-                <?php endif; ?>
+              <?php endif; ?>
             </a>
 
-<!-- Button user / Avatar -->
-<!-- <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
-  <?php 
-  $initial = null;
+            <!-- Button user / Avatar -->
+            <a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
+              <?php
+              $initial = null;
 
-  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
-      $hoten = trim($user['hoten']);
-      $initial = mb_strtoupper(mb_substr($hoten, 0, 1), 'UTF-8');
-  }
-  ?>
+              if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
+                $hoten = trim($user['hoten']);
 
-  <?php if ($initial !== null): ?>
-    <div class="avatar-initials">
-      <?= htmlspecialchars($initial) ?>
-    </div>
-  <?php else: ?>
-    <i class="fas fa-user fa-2x text-primary"></i>
-  <?php endif; ?>
-</a> -->
+                function remove_accents($str) {
+                  $utf8 = [
+                    'a' => 'á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ',
+                    'A' => 'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ằ|Ẳ|Ẵ|Ặ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+                    'd' => 'đ', 'D' => 'Đ',
+                    'e' => 'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+                    'E' => 'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+                    'i' => 'í|ì|ỉ|ĩ|ị', 'I' => 'Í|Ì|Ỉ|Ĩ|Ị',
+                    'o' => 'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+                    'O' => 'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+                    'u' => 'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+                    'U' => 'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+                    'y' => 'ý|ỳ|ỷ|ỹ|ỵ', 'Y' => 'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+                  ];
+                  foreach ($utf8 as $ascii => $unicode) {
+                    $str = preg_replace("/($unicode)/i", $ascii, $str);
+                  }
+                  return $str;
+                }
 
-<!-- Button user / Avatar -->
-<a href="<?= ROOT_URL . ($isLogin ? 'account' : 'account/login') ?>" class="my-auto position-relative">
-  <?php 
-  $initial = null;
+                $hoten_no_accent = remove_accents($hoten);
+                $words = preg_split('/\s+/', $hoten_no_accent);
+                $lastWord = end($words);
 
-  if ($isLogin && isset($user['hoten']) && trim($user['hoten']) !== '') {
-      $hoten = trim($user['hoten']);
-      
-      // Hàm loại bỏ dấu tiếng Việt
-      function remove_accents($str) {
-          $utf8 = [
-              'a'=>'á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ',
-              'A'=>'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ằ|Ẳ|Ẵ|Ặ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
-              'd'=>'đ',
-              'D'=>'Đ',
-              'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
-              'E'=>'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
-              'i'=>'í|ì|ỉ|ĩ|ị',
-              'I'=>'Í|Ì|Ỉ|Ĩ|Ị',
-              'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
-              'O'=>'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
-              'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
-              'U'=>'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
-              'y'=>'ý|ỳ|ỷ|ỹ|ỵ',
-              'Y'=>'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
-          ];
-          
-          foreach ($utf8 as $ascii => $unicode) {
-              $str = preg_replace("/($unicode)/i", $ascii, $str);
-          }
-          return $str;
-      }
+                if ($lastWord !== '') {
+                  $initial = strtoupper(substr($lastWord, 0, 1));
+                }
+              }
+              ?>
 
-      // Loại bỏ dấu trước
-      $hoten_no_accent = remove_accents($hoten);
-      
-      // Tách các từ (dùng preg_split để xử lý khoảng trắng thừa tốt hơn explode)
-      $words = preg_split('/\s+/', $hoten_no_accent);
-      
-      // Lấy từ cuối cùng
-      $lastWord = end($words);
-      
-      if ($lastWord !== '') {
-          // Lấy ký tự đầu, in hoa (không còn dấu nên dùng strtoupper bình thường cũng được)
-          $initial = strtoupper(substr($lastWord, 0, 1));
-      }
-  }
-  ?>
-
-  <?php if ($initial !== null): ?>
-    <div class="avatar-initials">
-      <?= htmlspecialchars($initial) ?>
-    </div>
-  <?php else: ?>
-    <i class="fas fa-user fa-2x text-primary"></i>
-  <?php endif; ?>
-</a>
+              <?php if ($initial !== null): ?>
+                <div class="avatar-initials">
+                  <?= htmlspecialchars($initial) ?>
+                </div>
+              <?php else: ?>
+                <i class="fas fa-user fa-2x text-primary"></i>
+              <?php endif; ?>
+            </a>
           </div>
         </div>
       </nav>

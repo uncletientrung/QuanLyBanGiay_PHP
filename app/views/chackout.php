@@ -47,10 +47,11 @@
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Checkout</h1>
+  <h1 class="text-center text-white display-6">Thanh toán</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item active text-white">Checkout</li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>cart">Giỏ hàng</a></li>
+    <li class="breadcrumb-item active text-white">Thanh toán</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
@@ -59,35 +60,35 @@
 <!-- Checkout Page Start -->
 <div class="container py-3">
   <div class="container py-3">
-    <h1 class="mb-4">Thông tin hóa đơn</h1>
+    <h1 class="mb-4 text-primary">Thông tin hóa đơn</h1>
     <form action="<?= ROOT_URL ?>chackout/add-order" method="POST" id="checkout-form">
       <div class="row g-5">
         <!-- Thông tin người dùng -->
         <div class="col-md-12 col-lg-7 col-xl-6">
           <div class="form-item">
-            <label class="form-label my-3">Họ và Tên<sup>*</sup></label>
+            <label class="form-label my-3 text-primary">Họ và Tên<sup>*</sup></label>
             <input type="text" class="form-control"
               name="hoten" value="<?= $user['hoten'] ?>" readonly>
           </div>
           <div class="form-item">
-            <label class="form-label my-3">Địa chỉ nhận hàng <sup>*</sup></label>
+            <label class="form-label my-3 text-primary">Địa chỉ nhận hàng <sup>*</sup></label>
             <input type="text" class="form-control" placeholder="Địa chỉ mặc định của người dùng"
               name="diachi" value="<?= $user['diachi'] ?>" readonly>
           </div>
           <div class="form-item">
-            <label class="form-label my-3">Số điện thoại<sup>*</sup></label>
+            <label class="form-label my-3 text-primary">Số điện thoại<sup>*</sup></label>
             <input type="tel" class="form-control"
               name="sdt" value="<?= $user['sdt'] ?>" readonly>
           </div>
           <div class="form-item">
-            <label class="form-label my-3">Email<sup>*</sup></label>
+            <label class="form-label my-3 text-primary">Email<sup>*</sup></label>
             <input type="email" class="form-control"
               name="email" value="<?= $user['email'] ?>" readonly>
           </div>
           <hr>
           <div class="form-check my-3">
             <input class="form-check-input" type="checkbox" id="chackout-address-checkbox">
-            <label class="form-check-label" for="Address-1">
+            <label class="form-check-label text-primary" for="Address-1">
               Giao hàng đến 1 địa chỉ khác?</label>
           </div>
           <div class="form-item" id="chackout-address-textarea" style="display: none;">
@@ -99,7 +100,7 @@
         <div class="col-md-12 col-lg-7 col-xl-6">
           <div class="table-responsive">
             <table class="table">
-              <thead>
+              <thead class="text-primary">
                 <tr>
                   <th scope="col">Sản Phẩm</th>
                   <th scope="col">Tên Sản Phẩm</th>
@@ -136,7 +137,7 @@
             </table>
           </div>
           <!-- Tổng đơn hàng -->
-          <div class="text-end fw-bold fs-5 mt-3">
+          <div class="text-end fw-bold fs-5 mt-3 text-primary">
             Tổng tiền: <?= number_format($tongtien) ?> đ
           </div>
           <!-- PT thanh toán -->
