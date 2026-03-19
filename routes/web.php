@@ -93,6 +93,12 @@ if ($uri == 'products') {
     require VIEW_PATH_DIR . 'partials/footer.php';
     exit;
 }
+if ($uri == 'api/products') {
+    header('Content-Type: application/json');
+    $controller = new SanPhamController($conn);
+    $controller->ajaxProducts();
+    exit;
+}
 
 // sản phẩm END
 
