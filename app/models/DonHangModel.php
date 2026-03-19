@@ -62,10 +62,36 @@ class DonHangModel
 
     public function updateStatusMulti($ids, $status)
     {
-        $placeholders = implode(',', array_fill(0, count($ids), '?'));
-        $sql = "UPDATE donhang SET trangthai = ? WHERE madh IN ($placeholders)";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute(array_merge([$status], $ids));
+        try {
+            $this->db->beginTransaction();
+
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $sql = "UPDATE donhang SET trangthai = ? WHERE madh IN ($placeholders)";
+            $stmt = $this->db->prepare($sql);
+            $result = $stmt->execute(array_merge([$status], $ids));
+
+            // giao thanh cong
+            if ($status == 2) {
+                foreach ($ids as $madh) {
+                    $items = $this->getItems($madh);
+
+                    foreach ($items as $item) {
+                        // Cộng soluongdaban
+                        $sqlSp = "UPDATE sanpham 
+                                 SET soluongdaban = soluongdaban + ? 
+                                 WHERE masp = ?";
+                        $stmtSp = $this->db->prepare($sqlSp);
+                        $stmtSp->execute([$item['soluong'], $item['masp']]);
+                    }
+                }
+            }
+
+            $this->db->commit();
+            return $result;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
     }
 
     public function getDetail($id)
