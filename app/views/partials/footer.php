@@ -67,6 +67,7 @@
   <script src="<?= ROOT_URL ?>public/js/account.js"></script>
   <script src="<?= ROOT_URL ?>public/js/track-order.js"></script>
   <script src="<?= ROOT_URL ?>public/js/auth.js"></script>
+  <script src="<?= ROOT_URL ?>public/js/contact.js"></script>
 
   </body>
 

@@ -6,6 +6,7 @@ require_once APP_PATH_DIR . 'controllers/AccountController.php';
 require_once APP_PATH_DIR . 'controllers/SanPhamController.php';
 require_once APP_PATH_DIR . 'controllers/TrackOrderController.php';
 require_once APP_PATH_DIR . 'controllers/AuthController.php';
+require_once APP_PATH_DIR . 'controllers/ContactController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace(APP_PATH, '', $uri);
 $uri = trim($uri, '/');
@@ -214,6 +215,13 @@ if ($uri == 'contact') {
     render('contact', $conn);
     exit;
 }
+if ($uri == 'contact/send-email') {
+    requireLogin();
+    $contact = new ContactController($conn);
+    $contact ->sendEmail();
+    exit;
+}
+
 if ($uri == 'product-detail') {
     $headerData = prepareHeader($conn);
     extract($headerData);
