@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 class ContactController
 {
@@ -47,15 +47,15 @@ class ContactController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'thihachcf@gmail.com';
-            $mail->Password = 'ejph lznl yseg rpir';
+            $mail->Username = 'thihachcf@gmail.com'; // email người gửi
+            $mail->Password = 'ejph lznl yseg rpir'; // app password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
             $mail->CharSet = 'UTF-8';
 
-            $mail->setFrom('thihachcf@gmail.com', 'Shoes Galaxy');
-            $mail->addAddress('thihachcf@gmail.com');
-            $mail->addReplyTo($emailInput, $userInput);
+            $mail->setFrom('thihachcf@gmail.com', 'Shoes Galaxy'); // set người gửi
+            $mail->addAddress('dathachcf@gmail.com'); // người nhận
+            $mail->addReplyTo($emailInput, $userInput); // Nhấn reply thì trả lời mail của khách hàng chứ k phải người gửi
 
             $mail->isHTML(true);
             $mail->Subject = 'Liên hệ mới từ website Shoes Galaxy';
@@ -83,7 +83,7 @@ class ContactController
         } catch (Exception $e) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Gửi email thất bại: ' . $mail->ErrorInfo
+                'message' => 'Gửi email thất bại chúng tôi sẽ khắc phục sau ' //. $mail->ErrorInfo
             ]);
             exit;
         }
