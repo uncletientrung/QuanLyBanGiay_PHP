@@ -147,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // nut them gio hang
-  // ================== ADD TO CART (Modal đẹp thay alert) ==================
   if (addToCartBtn) {
     addToCartBtn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -164,33 +163,40 @@ document.addEventListener("DOMContentLoaded", function () {
         totalPrice: totalPrice,
       };
 
-      // Hiển thị thông báo trong modal
-      showCartSuccess(productName, tensize, qty, totalPrice);
+      // ✅ Disable nút tránh click 2 lần
+      addToCartBtn.disabled = true;
 
-      // GỬI AJAX THẬT LÊN SERVER (tùy chọn - sau này implement)
-      console.log("Add to cart data:", data);
-      console.log("DATA SEND:", data);
       fetch(BASE_URL + "add-cart", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       })
         .then((res) => res.json())
         .then((data) => {
-          if (!data.success) return;
+          if (data.success) {
+            // ✅ Chỉ hiện modal khi server xác nhận thành công
+            showCartSuccess(productName, tensize, qty, totalPrice);
 
-          const cartCount = document.getElementById("cart-count");
-
-          if (cartCount) {
-            if (data.cartCount == 0) {
-              cartCount.remove();
-            } else {
-              cartCount.innerText = data.cartCount;
-              cartCount.style.display = "flex";
+            const cartCount = document.getElementById("cart-count");
+            if (cartCount) {
+              if (data.cartCount == 0) {
+                cartCount.remove();
+              } else {
+                cartCount.innerText = data.cartCount;
+                cartCount.style.display = "flex";
+              }
             }
+          } else {
+            // Server báo lỗi (vượt tồn kho) → alert
+            alert(data.error || "Không thể thêm vào giỏ hàng!");
           }
+        })
+        .catch(() => alert("Lỗi kết nối, vui lòng thử lại!"))
+        .finally(() => {
+          //  Luôn mở lại nút sau khi xong
+          addToCartBtn.disabled = false;
+          qtyInput.value = 1;
+          updateDisplayedPrice();
         });
     });
   }
