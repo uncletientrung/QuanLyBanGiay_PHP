@@ -104,13 +104,15 @@ class DonHangModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Left join nếu ko có ảnh -> null
     public function getItems($id)
     {
-        $sql = "SELECT ct.*, sp.tensp, s.tensize, m.tenmau 
+        $sql = "SELECT ct.*, sp.tensp, s.tensize, m.tenmau, ha.path 
             FROM ctdonhang ct
             JOIN sanpham sp ON ct.masp = sp.masp
             JOIN size s ON ct.masize = s.masize
             JOIN mau m ON sp.mau = m.mamau
+            LEFT JOIN hinhanh ha ON sp.masp = ha.masp AND ha.ismain = 1
             WHERE ct.madh = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
