@@ -423,10 +423,12 @@ document.addEventListener('DOMContentLoaded', function () {
         debounceTimer = setTimeout(() => fetchProducts(1), 400);
     });
 
-    //  Nút xóa bộ lọc — reset form rồi fetch lại
+    //  Nút xóa bộ lọc
     document.getElementById('btn-reset-filter').addEventListener('click', () => {
         form.reset();
         document.getElementById('sort').value = 'default';
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        form.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
         history.pushState(null, '', window.location.pathname);
         fetchProducts(1);
     });
