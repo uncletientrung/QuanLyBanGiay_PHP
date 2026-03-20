@@ -8,7 +8,7 @@ class SizeModel
     }
     public function getAll()
     {
-        $sql = "SELECT * FROM size where trangthai = 1";
+        $sql = "SELECT * FROM size";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

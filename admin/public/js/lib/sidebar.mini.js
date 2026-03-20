@@ -4,7 +4,7 @@ Dashmix.onLoad(() => {
     $("#sidebar").addClass("no-transition");
     $("#sidebar *").addClass("no-transition");
 
-    $(document).on("click", "#sidebar-mini-toggle", function () {
+    $(document).on("click", "#sidebar-mini-toggle", function() {
         localStorage.getItem("sidebarToggle") ? localStorage.removeItem("sidebarToggle") : localStorage.setItem("sidebarToggle", true);
     });
 });

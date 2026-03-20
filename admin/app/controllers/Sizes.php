@@ -19,10 +19,18 @@ class Sizes extends Controller
         ]);
     }
 
-public function getData()
-    { 
-        //Gán kết quả vào Tab Response của HTTP Request
-        echo json_encode($this->sizeModel->getAll());
-        exit;
+    public function getData()
+        { 
+            //Gán kết quả vào Tab Response của HTTP Request
+            echo json_encode($this->sizeModel->getAll());
+            exit;
+        }
+        
+    public function getDataByProd() {
+        $id  = $_GET['id'] ?? [];
+        if (!empty($id)) {
+            echo json_encode($this->sizeModel->getSizeBySanPham($id));
+        }
+        exit();
     }
 }

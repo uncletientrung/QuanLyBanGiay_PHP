@@ -46,6 +46,18 @@ if (isset($Plugin["chartjs"]) && $Plugin["chartjs"] == 1) {
     $dm->get_js('js/plugins/chart.js/chart.min.js');
 }
 
+//Plugin: Select2
+if (isset($Plugin['select2']) && $Plugin['select2'] == 1) {
+    $dm->get_js('js\plugins\select2\js\select2.full.min.js');
+    $dm->get_css('js\plugins\select2\css\select2.min.css');
+}
+
+//Plugin: Ion-rangeslider
+if (isset($Plugin['ionrangeslider']) && $Plugin['ionrangeslider'] == 1) {
+    $dm->get_js('js\plugins\ion-rangeslider\js\ion.rangeSlider.min.js');
+    $dm->get_css('js\plugins\ion-rangeslider\css\ion.rangeSlider.min.css');
+}
+
 // Page JS Code
 if (isset($Script) && $Script) {
     $dm->get_js('js/pages/' . $Script . '.js');
