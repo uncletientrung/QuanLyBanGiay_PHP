@@ -66,7 +66,7 @@
                                     <?php endforeach; ?>
 
                                     <tr class="bg-body-light">
-                                        <td colspan="6" class="text-end fw-bold text-uppercase">Tổng tiền:</td>
+                                        <td colspan="7" class="text-end fw-bold text-uppercase">Tổng tiền:</td>
                                         <td class="text-end fw-bold text-primary fs-5">
                                             <?= number_format($order['tongtien'], 0, ',', '.') ?>đ
                                         </td>

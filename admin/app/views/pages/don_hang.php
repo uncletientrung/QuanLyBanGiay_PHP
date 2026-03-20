@@ -55,7 +55,7 @@
                             <th class="text-center">MÃ ĐƠN</th>
                             <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
-                            <th class="text-center d-none d-sm-table-cell" style="width: 100px;">THỜI GIAN</th>
+                            <th class="text-center d-none d-sm-table-cell" style="width: 150px;">THỜI GIAN</th>
                             <th class="text-center d-none d-lg-table-cell">ĐỊA CHỈ</th>
                             <th class="text-center">THANH TOÁN</th>
                             <th class="text-center">TRẠNG THÁI</th>
