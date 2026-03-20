@@ -1,3 +1,9 @@
+<style> .btn-minus:focus,
+.btn-minus:active,
+.btn-plus:focus,
+.btn-plus:active {
+  box-shadow: 0 0 0 0.2rem rgba(46, 46, 91, 0.3) !important;
+}</style>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Giỏ hàng</h1>

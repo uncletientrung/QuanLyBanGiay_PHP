@@ -1,9 +1,9 @@
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Shop Detail</h1>
+  <h1 class="text-center text-white display-6">Chi Tiết</h1>
   <ol class="breadcrumb justify-content-center mb-0">
-    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Home</a></li>
-    <li class="breadcrumb-item active text-white">Shop Detail</li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item active text-white">Chi tiết</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
@@ -26,7 +26,7 @@
 
                 <?php foreach ($listHinh as $index => $hinh): ?>
                   <img src="<?= $hinh['path'] ?>"
-                    class="img-fluid rounded thumb-img <?= $index == 0 ? 'active' : '' ?>"
+                    class="img-fluid thumb-img <?= $index == 0 ? 'active' : '' ?>"
                     onclick="changeImage(this)"
                     style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
                 <?php endforeach; ?>
@@ -35,7 +35,7 @@
 
                 <?php for ($i = 0; $i < 6; $i++): ?>
                   <img src="<?= ROOT_URL . NO_IMAGE ?>"
-                    class="img-fluid rounded thumb-img <?= $i == 0 ? 'active' : '' ?>"
+                    class="img-fluid thumb-img <?= $i == 0 ? 'active' : '' ?>"
                     onclick="changeImage(this)"
                     style="cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; width: 95px; height: 95px; object-fit: cover;">
                 <?php endfor; ?>
@@ -47,12 +47,12 @@
 
               <!-- Ảnh lớn  -->
               <div class="col-10">
-                <div class="rounded product-image-container"
+                <div class=" product-image-container"
                   style="min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #ffffff; position: relative;">
                   <img id="mainImage"
                     src="<?= $currentSP['image'] ?>"
                     class="img-fluid product-main-image"
-                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%; border-radius: 0.375rem;"> <!-- thêm border-radius ở đây -->
+                    style="transition: all 0.4s ease; max-height: 580px; object-fit: contain; cursor: zoom-in; width: 100%;"> <!-- thêm border-radius ở đây -->
                 </div>
               </div>
             </div>
@@ -210,30 +210,42 @@
               <?= number_format($giaBan, 0, ',', '.') ?> ₫
             </p>
 
-            <div class="mb-4">
-              <p class="fw-bold mb-2">Size</p>
-              <div class="d-flex gap-2 flex-wrap">
-                <?php if (!empty($listSize)): ?>
-                  <?php foreach ($listSize as $size): ?>
-                    <button
-                      type="button"
-                      class="btn btn-outline-secondary btn-sm size-btn
-                        <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
-                      data-size-id="<?= $size['masize'] ?>"
-                      data-size="<?= $size['tensize'] ?>"
-                      data-stock="<?= $size['soluong'] ?>"
-                      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>>
-                      <?= $size['tensize'] ?>
-                    </button>
-                  <?php endforeach; ?>
-                <?php else: ?>
-                  <p class="text-danger">Sản phẩm này hiện chưa có size nào.</p>
+           <div class="mb-4">
+            <p class="fw-bold mb-2">Size</p>
 
-                <?php endif; ?>
-              </div>
+            <div class="d-flex gap-2 flex-wrap">
+              <?php if (!empty($listSize)): ?>
+                <?php foreach ($listSize as $size): ?>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm size-btn 
+                      <?= $size['soluong'] == 0 ? 'disabled' : '' ?>"
+                    data-size-id="<?= $size['masize'] ?>"
+                    data-size="<?= $size['tensize'] ?>"
+                    data-stock="<?= $size['soluong'] ?>"
+                    <?= $size['soluong'] == 0 ? 'disabled' : '' ?>>
+                    <?= $size['tensize'] ?>
+                  </button>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <p class="none-size">Sản phẩm này hiện chưa có size!</p>
+              <?php endif; ?>
             </div>
 
+            <!-- Hiển thị số lượng -->
+          <!-- Hiển thị số lượng -->
+<p class="meta-stock fw-bold mb-2">
+    Tình trạng: 
+    <?php if($soluongtonkho > 0): ?>
+        <span class="stock-status in-stock">Còn hàng (<?= $soluongtonkho ?>)</span>
+    <?php else: ?>
+        <span class="stock-status out-of-stock">Hết hàng</span>
+    <?php endif; ?>
+</p>
 
+
+
+          </div>
             <div class="d-flex align-items-center gap-3 mb-4">
               <div class="input-group quantity" style="width: 130px;">
                 <button class="btn btn-sm btn-minus rounded-circle bg-light border">
@@ -249,7 +261,7 @@
                 class="btn border border-secondary rounded-pill px-5 py-2 text-primary add-to-cart-btn"
                 data-masp="<?= $currentSP['masp'] ?>"
                 data-tensp="<?= htmlspecialchars($currentSP['tensp']) ?>">
-                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ
               </a>
             </div>
               <?php if (!isset($_SESSION['user-id'])): ?>
@@ -474,7 +486,66 @@
     letter-spacing: -0.3px;
     line-height: 1.1;
   }
+ .meta-stock {
 
+    margin-bottom: -13px !important;          
+    margin-top: 13px;
+    padding: 10px -15px;                 /* padding 0 như mẫu */
+
+    font-family: "Open Sans", sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;          
+
+    line-height: 1.4;
+
+}
+
+
+
+.meta-stock::after {
+
+    content: " ";             
+
+}
+
+
+
+.stock-status {
+
+    font-weight: 600;           
+
+    padding-left: 6px;         
+
+}
+
+
+
+/* Còn hàng */
+
+.in-stock {
+
+    color: #1e40af;           
+
+}
+
+
+
+/* Hết hàng */
+
+.out-of-stock {
+
+    color: #dc2626;            
+
+    font-weight: 700;         
+
+}
+  .none-size{
+    color: #dc3545;
+    margin-bottom: -5px;
+    font-style: italic;
+  }
   .product-name {
     color: #2e2e5b !important;
   }
@@ -484,7 +555,12 @@
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 12px 20px;
   }
-
+  .btn-minus:focus,
+  .btn-minus:active,
+  .btn-plus:focus,
+  .btn-plus:active {
+    box-shadow: 0 0 0 0.2rem rgba(46, 46, 91, 0.3) !important;
+  }
   .attr {
     display: flex;
     flex-direction: column;
@@ -512,10 +588,9 @@
   }
 
   .size-btn.active {
-    background-color: #0d6efd;
-    color: #fff;
-    border-color: #0d6efd;
-  }
+  color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(251, 191, 36, 0.4);
+}
 
 
   /* Modal tone dịu - pastel nhẹ nhàng */

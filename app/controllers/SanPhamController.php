@@ -161,6 +161,7 @@ class SanPhamController
         $gioitinh = ($currentSP['gioitinh']==1) ? 'Nam' : 'Nữ';
         $giaBan = $currentSP['gianhap'] + $currentSP['gianhap'] * $currentSP['tyleloinhuan'] / 100;
         $currentSP['image']  = $this->hinhAnhModel->getImageMainById($masp);
+        $soluongtonkho = $this->model->getStockAll($masp);
 
         foreach ($listSP as &$sp) {
             $sp['image'] = $this->hinhAnhModel->getImageMainById($sp['masp']);

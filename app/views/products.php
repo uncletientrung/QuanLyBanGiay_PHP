@@ -5,7 +5,7 @@
   <h1 class="text-center text-white display-6">Giày</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Shop</li>
+    <li class="breadcrumb-item active text-white">Giày</li>
   </ol>
 </div>
 <!-- Single Page Header End -->

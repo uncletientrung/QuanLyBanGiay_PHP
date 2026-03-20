@@ -32,6 +32,12 @@
 /*** Spinner End ***/
 /*** NAVY THEME ***/
 /* Avatar initials  */
+.sold-text {
+  color: #000;
+  margin-top: 100px !important;
+  margin-bottom: -20px !important;
+  font-size: 14px;
+}
 #btn-reset-filter:focus {
   outline: none;
   box-shadow: none;
@@ -971,16 +977,6 @@
   background-color: #f8f9fa;
   padding: 5px 10px;
   border-radius: 5px;
-}
-.thumb-img:hover {
-  transform: scale(1.08);
-  border-color: #667eea !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
-}
-
-.thumb-img.active {
-  border-color: #667eea !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 .product-main-image {
