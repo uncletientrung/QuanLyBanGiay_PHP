@@ -203,55 +203,91 @@ class GioHangController
 
 
     public function addToCart()
-    {
-        $data = json_decode(file_get_contents("php://input"), true);
+{
+    $data = json_decode(file_get_contents("php://input"), true);
 
-        $masp = $data['masp'] ?? null;
-        $size = $data['size'] ?? null;
-        $qty  = $data['qty'] ?? 1;
+    $masp = $data['masp'] ?? null;
+    $size = $data['size'] ?? null;
+    $qty  = (int)($data['qty'] ?? 1);
 
-        if (!$masp || !$size) {
+    if (!$masp || !$size) {
+        echo json_encode(["success" => false, "error" => "Invalid data"]);
+        return;
+    }
+
+    $user_id = $_SESSION['user-id'] ?? null;
+
+    //  Lấy tồn kho thực tế
+    $stock = $this->SanPhamModel->getStock($masp, $size);
+
+    if ($user_id) {
+        // Lấy số lượng hiện tại trong giỏ DB
+        $currentQty = $this->model->getQuantity($user_id, $masp, $size);
+
+        //  Kiểm tra tổng có vượt tồn kho không
+        if ($currentQty + $qty > $stock) {
+            $remaining = $stock - $currentQty;
+            if ($remaining <= 0) {
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Sản phẩm này đã đủ số lượng tồn kho trong giỏ hàng của bạn! (Tối đa: {$stock})"
+                ]);
+            } else {
+                echo json_encode([
+                    "success" => false,
+                    "error" => "Giỏ hàng đã có {$currentQty} sản phẩm, chỉ có thể thêm tối đa {$remaining} nữa! (Tồn kho: {$stock})"
+                ]);
+            }
+            return;
+        }
+
+        $this->model->insertOrUpdateCart($user_id, $masp, $size, $qty);
+        $cartCount = $this->model->countCartItem_Model($user_id);
+
+        echo json_encode(["success" => true, "cartCount" => $cartCount]);
+        return;
+    }
+
+    // ===== Chưa login - check session cart =====
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    //  Tính tổng qty cùng masp + masize trong session cart
+    $currentQty = 0;
+    foreach ($_SESSION['cart'] as $item) {
+        if ($item['masp'] == $masp && $item['masize'] == $size) {
+            $currentQty += $item['soluong'];
+        }
+    }
+
+    if ($currentQty + $qty > $stock) {
+        $remaining = $stock - $currentQty;
+        if ($remaining <= 0) {
             echo json_encode([
                 "success" => false,
-                "error" => "Invalid data"
+                "error" => "Sản phẩm này đã đủ số lượng tồn kho trong giỏ hàng! (Tối đa: {$stock})"
             ]);
-            return;
-        }
-
-        $user_id = $_SESSION['user-id'] ?? null;
-
-        // ===== Đã login =====
-        if ($user_id) {
-
-            $this->model->insertOrUpdateCart($user_id, $masp, $size, $qty);
-
-            // đếm lại giỏ hàng
-            $cartCount = $this->model->countCartItem_Model($user_id);
-
+        } else {
             echo json_encode([
-                "success" => true,
-                "cartCount" => $cartCount
+                "success" => false,
+                "error" => "Giỏ hàng đã có {$currentQty} sản phẩm, chỉ có thể thêm tối đa {$remaining} nữa! (Tồn kho: {$stock})"
             ]);
-
-            return;
         }
-
-        // ===== Chưa login =====
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
-
-        $_SESSION['cart'][] = [
-            'masp' => $masp,
-            'masize' => $size,
-            'soluong' => $qty
-        ];
-
-        echo json_encode([
-            "success" => true,
-            "cartCount" => count($_SESSION['cart'])
-        ]);
+        return;
     }
+
+    $_SESSION['cart'][] = [
+        'masp'    => $masp,
+        'masize'  => $size,
+        'soluong' => $qty
+    ];
+
+    echo json_encode([
+        "success"   => true,
+        "cartCount" => count($_SESSION['cart'])
+    ]);
+}
     public function mergeCartAfterLogin($user_id)
     {
         if (!isset($_SESSION['cart'])) {

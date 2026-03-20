@@ -65,7 +65,6 @@ Dashmix.onLoad(() =>
                 language: {
                     search: `
                         <div class="input-group flex-nowrap">
-                            <span class="input-group-text bg-body-light"><i class="fa fa-search"></i></span>
                             _INPUT_
                         </div>
                     `,

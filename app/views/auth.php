@@ -6,7 +6,67 @@ unset($_SESSION['login-errors']);
 unset($_SESSION['login-data']);
 ?>
 
+<style>
+    /* Màu chữ chính cho các tiêu đề cần đổi */
+    .nav-link.active,
+    .nav-link.fw-bold,
+    .form-label.fw-bold,
+    #checkOrderForm .form-label.fw-bold {
+        color: #2e2e5b !important;
+    }
 
+    .form-check-input:checked {
+        background-color: #2e2e5b;
+        border-color: #2e2e5b;
+    }
+
+    .btn.border-secondary {
+        color: #2e2e5b;
+        border-color: #2e2e5b;
+        background-color: transparent;
+        transition: all 0.3s ease;
+    }
+
+    .btn.border-secondary:hover,
+    .btn.border-secondary:focus,
+    .btn.border-secondary:active {
+        background-color: #2e2e5b;
+        color: white;
+        border-color: #2e2e5b;
+    }
+
+    /* Khi nút bị disabled vẫn giữ tone navy nhẹ */
+    .btn.border-secondary:disabled {
+        color: #5c5c8a;
+        border-color: #5c5c8a;
+        opacity: 0.65;
+    }
+
+    /* Hover cho eye icon (tùy chọn) */
+    .toggle-password:hover,
+    .toggle-password-reg:hover {
+        color: #2e2e5b;
+    }
+    /* Bỏ hoàn toàn viền focus (box-shadow xanh) của Bootstrap 5 */
+    .form-control:focus,
+    .form-check-input:focus,
+    .btn:focus,
+    input:focus,
+    textarea:focus,
+    select:focus {
+        box-shadow: none !important;     /* quan trọng nhất */
+        outline: none !important;        /* phòng trường hợp browser dùng outline */
+    }
+    *:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .form-control:focus,
+    .form-check-input:focus {
+        /* box-shadow: 0 0 0 0.2rem rgba(46, 46, 91, 0.25); */  /* comment nếu muốn bỏ hẳn */
+        border-color: #2e2e5b;   /* viền input đổi thành navy khi focus */}
+</style>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Chào mừng bạn</h1>
@@ -263,7 +323,7 @@ unset($_SESSION['login-data']);
 
           <div class="col-lg-6">
             <div class="border p-4 rounded shadow-sm bg-white h-100">
-              <h5 class="mb-3 fw-bold" style="color: var(--bs-primary);">
+              <h5 class="mb-3 fw-bold" style="color: #2e2e5b;">
                 Kiểm tra trạng thái đơn hàng
               </h5>
               <p class="text-muted mb-4">

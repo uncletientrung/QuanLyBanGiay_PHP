@@ -5,7 +5,7 @@
   <h1 class="text-center text-white display-6">Giày</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Shop</li>
+    <li class="breadcrumb-item active text-white">Giày</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
@@ -24,8 +24,8 @@ echo '</pre>';
     <div class="row g-4" >
       <div class="col-lg-12">
         <form method="GET" action="#start-products" id="filterForm">
-          <div class="row g-4"  id="product-list">
-            <div class="col-xl-3" id="start-products">
+          <div class="row g-4"  id="start-products">
+            <div class="col-xl-3">
               <div class="input-group w-100 mx-auto d-flex">
                 <input 
                   type="search" 
@@ -50,7 +50,7 @@ echo '</pre>';
             <div class="col-xl-3">
               <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                 <label for="sort">Sắp xếp</label>
-                <select id="sort" name="sort" class="border-0 form-select-sm bg-light me-3" onchange="this.form.submit()">
+                <select id="sort" name="sort" class="border-0 form-select-sm bg-light me-3">
                   <option value="default" <?= ($filters['sort'] ?? 'default') === 'default' ? 'selected' : '' ?>>Tất cả</option>
                   <option value="price_asc" <?= $filters['sort'] === 'price_asc' ? 'selected' : '' ?>>Giá tăng dần</option>
                   <option value="price_desc" <?= $filters['sort'] === 'price_desc' ? 'selected' : '' ?>>Giá giảm dần</option>
@@ -152,7 +152,7 @@ echo '</pre>';
                           id="mau-<?= $mau['mamau'] ?>"
                           name="mau[]"
                           value="<?= $mau['mamau'] ?>"
-                          <?= in_array($mau['mamau'], $_GET['mau'] ?? []) ? 'checked' : '' ?>
+                          <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
                         >
                         <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
                           <?= htmlspecialchars($mau['tenmau']) ?>
@@ -194,9 +194,9 @@ echo '</pre>';
                 <!-- Nút xóa bộ lọc -->
                 <div class="col-lg-12">
                   <div class="d-grid">
-                    <a href="<?= ROOT_URL ?>products#start-products" class="btn btn-filter-reset">
-                      <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
-                    </a>
+                    <button type="button" id="btn-reset-filter" class="btn btn-filter-reset w-100">
+                        <i class="fas fa-redo me-2"></i>Xóa tất cả bộ lọc
+                    </button>
                   </div>
                 </div>
 
@@ -207,7 +207,7 @@ echo '</pre>';
 
             <!-- Danh sách sản phẩm -->
             <div class="col-lg-9">
-              <div class="row g-4"> 
+              <div class="row g-4" id="product-grid"> 
                 <?php if (!empty($listSP)): ?>
                   
                   <?php foreach ($listSP as $sp): ?>
@@ -298,29 +298,148 @@ echo '</pre>';
 
 <!-- Xử lý checkbox tự submit -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('filterForm');
-    
-    // Checkbox màu sắc
-    document.querySelectorAll('.color-checkbox').forEach(cb => {
-        cb.addEventListener('change', () => form.submit());
+document.addEventListener('DOMContentLoaded', function () {
+    const form     = document.getElementById('filterForm');
+    const grid     = document.getElementById('product-grid');
+    const ROOT_URL = '<?= ROOT_URL ?>';
+    const NO_IMAGE = '<?= NO_IMAGE ?>';
+
+    //  Scroll lên đầu danh sách sản phẩm
+    function scrollToProductList() {
+        const target = document.getElementById('start-products');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // Gọi AJAX lấy sản phẩm
+    function fetchProducts(page = 1, shouldScroll = true) {
+        const params = new URLSearchParams(new FormData(form));
+        params.set('page', page);
+        params.delete('url');
+
+        // Cập nhật URL trên trình duyệt (không reload)
+        history.pushState(null, '', window.location.pathname + '?' + params.toString());
+
+        // Hiển thị loading
+        grid.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Đang tải...</span>
+                </div>
+            </div>`;
+
+        //  Scroll khi lọc 
+        if (shouldScroll) scrollToProductList();
+
+        fetch(ROOT_URL + 'api/products?' + params.toString())
+            .then(r => r.json())
+            .then(data => renderProducts(data))
+            .catch(() => {
+                grid.innerHTML = '<div class="col-12 text-center py-5 text-danger">Lỗi tải sản phẩm.</div>';
+            });
+    }
+
+    // Render danh sách sản phẩm + phân trang
+    function renderProducts({ products, page, totalPages }) {
+        let html = '';
+
+        if (products.length === 0) {
+            html = `
+                <div class="col-12">
+                    <div class="no-product-found text-center py-5">
+                        <i class="fa fa-search fa-3x mb-3"></i>
+                        <h5>Không tìm thấy sản phẩm</h5>
+                        <p class="text-muted">
+                            Không có sản phẩm nào phù hợp với bộ lọc của bạn.<br>
+                            Hãy thử thay đổi từ khóa hoặc điều kiện lọc.
+                        </p>
+                    </div>
+                </div>`;
+        } else {
+            products.forEach(sp => {
+                const img   = sp.image ? sp.image : NO_IMAGE;
+                const price = Number(sp.giaban).toLocaleString('vi-VN') + ' ₫';
+                html += `
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="product-item position-relative">
+                            <div class="product-img">
+                                <a href="${ROOT_URL}product-detail?masp=${sp.masp}">
+                                    <img src="${img}" class="img-fluid w-100" alt="${sp.tensp}">
+                                </a>
+                            </div>
+                            <div class="brand-tag">${sp.tenhang}</div>
+                            <div class="product-content p-2">
+                                <p class="product-price">${price}</p>
+                                <p class="product-name">${sp.tensp}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        html += renderPagination(page, totalPages);
+        grid.innerHTML = html;
+
+        // Gắn lại sự kiện cho nút phân trang
+        grid.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                fetchProducts(+btn.dataset.page, true);
+            });
+        });
+    }
+
+    // Render phân trang
+    function renderPagination(page, totalPages) {
+        if (totalPages <= 1) return '';
+        let p = '<div class="col-12"><div class="pagination d-flex justify-content-center mt-5">';
+
+        if (page > 1)
+            p += `<a class="rounded page-btn" data-page="${page - 1}" href="#">&laquo;</a>`;
+
+        for (let i = 1; i <= totalPages; i++)
+            p += `<a class="rounded page-btn ${i === page ? 'active' : ''}" data-page="${i}" href="#">${i}</a>`;
+
+        if (page < totalPages)
+            p += `<a class="rounded page-btn" data-page="${page + 1}" href="#">&raquo;</a>`;
+
+        p += '</div></div>';
+        return p;
+    }
+
+    //  Checkbox & radio
+    form.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => {
+        el.addEventListener('change', () => fetchProducts(1));
     });
-    
-    // Checkbox giới tính
-    document.querySelectorAll('.gender-checkbox').forEach(cb => {
-        cb.addEventListener('change', () => form.submit());
+
+    //  Select sắp xếp (không còn onchange trên HTML nữa)
+    document.getElementById('sort').addEventListener('change', () => fetchProducts(1));
+
+    //  Tìm kiếm debounce 400ms
+    let debounceTimer;
+    form.querySelector('input[name="q"]').addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => fetchProducts(1), 400);
     });
-    
-    // Checkbox loại giày & thương hiệu
-    document.querySelectorAll('input[name="loai[]"], input[name="hang[]"]').forEach(cb => {
-        cb.addEventListener('change', () => form.submit());
+
+    //  Nút xóa bộ lọc
+    document.getElementById('btn-reset-filter').addEventListener('click', () => {
+        form.reset();
+        document.getElementById('sort').value = 'default';
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        form.querySelectorAll('input[type="radio"]').forEach(rb => rb.checked = false);
+        history.pushState(null, '', window.location.pathname);
+        fetchProducts(1);
     });
-    
-    // Radio tầm giá tự submit khi thay đổi
-    document.querySelectorAll('input[name="price_range"]').forEach(radio => {
-        radio.addEventListener('change', () => form.submit());
+
+    // Chặn submit form
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetchProducts(1);
     });
-    
-    
+
+    // Load lần đầu (không scroll)
+    fetchProducts(<?= $page ?>, false);
 });
 </script>

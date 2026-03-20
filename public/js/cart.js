@@ -152,3 +152,34 @@ document.addEventListener("click", function (e) {
     })
     .catch(() => alert("Có lỗi xảy ra khi xóa sản phẩm."));
 });
+document.getElementById('proceed-to-checkout')?.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  // Optional: Disable nút ngay để tránh click lặp
+  this.disabled = true;
+  this.innerText = 'Đang kiểm tra...';
+
+  fetch(ROOT_URL + 'cart/validate-for-checkout', {  // Route mới bạn tạo
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({})  // Không cần body nếu chỉ check giỏ của user
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      window.location.href = ROOT_URL + 'chackout';  // Chữ "chackout" có lẽ typo, sửa thành checkout nếu cần
+    } else {
+      // Hiển thị lỗi (dùng modal hoặc alert)
+      alert(data.error || 'Một số sản phẩm không đủ hàng. Vui lòng kiểm tra giỏ hàng!');
+      // Optional: Reload giỏ để update qty nếu bạn adjust tự động
+      // location.reload();
+    }
+  })
+  .catch(err => {
+    alert('Lỗi kết nối, vui lòng thử lại.');
+  })
+  .finally(() => {
+    this.disabled = false;
+    this.innerText = 'Tiến hành thanh toán';
+  });
+});

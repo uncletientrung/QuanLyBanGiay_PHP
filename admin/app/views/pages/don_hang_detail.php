@@ -35,6 +35,7 @@
                                 <thead class="bg-body-light">
                                     <tr class="fs-sm text-uppercase">
                                         <th class="text-center" style="width: 70px;">Mã</th>
+                                        <th class="text-center" style="width: 80px;">Ảnh</th>
                                         <th class="text-center">Sản phẩm</th>
                                         <th class="text-center">Size</th>
                                         <th class="text-center">Màu sắc</th>
@@ -47,6 +48,14 @@
                                     <?php foreach ($items as $item): ?>
                                         <tr>
                                             <td class="text-center fw-bold text-primary"><?= $item['masp'] ?></td>
+                                            <td class="text-center">
+                                                <?php
+                                                $imageSrc = !empty($item['path']) ? ROOT_URL . $item['path'] : ROOT_URL . NO_IMAGE;
+                                                ?>
+                                                <img src="<?= $imageSrc ?>" alt="<?= $item['tensp'] ?>"
+                                                    style="width: 60px; height: 60px; object-fit: cover;"
+                                                    class="rounded">
+                                            </td>
                                             <td class="fw-semibold text-primary"><?= $item['tensp'] ?></td>
                                             <td class="text-center"><?= $item['tensize'] ?></td>
                                             <td class="text-center"><?= $item['tenmau'] ?></td>
@@ -57,7 +66,7 @@
                                     <?php endforeach; ?>
 
                                     <tr class="bg-body-light">
-                                        <td colspan="6" class="text-end fw-bold text-uppercase">Tổng tiền:</td>
+                                        <td colspan="7" class="text-end fw-bold text-uppercase">Tổng tiền:</td>
                                         <td class="text-end fw-bold text-primary fs-5">
                                             <?= number_format($order['tongtien'], 0, ',', '.') ?>đ
                                         </td>

@@ -35,7 +35,21 @@
     color: white !important;
     border-color: var(--primary) !important;
   }
+/* 4.1 Bỏ box-shadow khi click nút */
+#account-btn-logout:focus,
+#account-btn-edit-profile:focus,
+#account-btn-edit-password-mobile:focus,
+#account-btn-edit-password-desktop:focus,
+.btn.border-secondary.fw-bold:focus,
 
+#account-btn-logout:active,
+#account-btn-edit-profile:active,
+#account-btn-edit-password-mobile:active,
+#account-btn-edit-password-desktop:active,
+.btn.border-secondary.fw-bold:active {
+  box-shadow: none !important;
+  outline: none !important;
+}
   /* 5. Alert success / error - đồng bộ màu */
   .alert-success {
     background-color: rgba(11, 42, 91, 0.1) !important;

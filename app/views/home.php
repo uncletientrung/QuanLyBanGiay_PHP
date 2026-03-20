@@ -41,19 +41,19 @@
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active rounded">
               <img src="public/img/hero-img-nike.jpg" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
-              <a href="#" class="btn px-4 py-2 text-white rounded">Nike</a>
+              <a href="<?= ROOT_URL ?>products" class="btn px-4 py-2 text-white rounded">Nike</a>
             </div>
             <div class="carousel-item rounded">
               <img src="public/img/hero-img-converse.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-              <a href="#" class="btn px-4 py-2 text-white rounded">Converse</a>
+              <a href="<?= ROOT_URL ?>products" class="btn px-4 py-2 text-white rounded">Converse</a>
             </div>
             <div class="carousel-item rounded">
               <img src="public/img/hero-img-clark.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-              <a href="#" class="btn px-4 py-2 text-white rounded">Clark</a>
+              <a href="<?= ROOT_URL ?>products" class="btn px-4 py-2 text-white rounded">Clark</a>
             </div>
             <div class="carousel-item rounded">
               <img src="public/img/hero-img-puma.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-              <a href="#" class="btn px-4 py-2 text-white rounded">Puma</a>
+              <a href="<?= ROOT_URL ?>products" class="btn px-4 py-2 text-white rounded">Puma</a>
             </div>
           </div>
           <button class="carousel-btn prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
@@ -81,7 +81,7 @@
             <i class="fas fa-car-side fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Vận chuyển toàn quốc</h5>
+            <p class="custom-title">Vận chuyển toàn quốc</p>
             <p class="mb-0">Vận chuyển nhanh chóng</p>
           </div>
         </div>
@@ -92,7 +92,7 @@
             <i class="fas fa-medal fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Bảo đảm chất lượng</h5>
+            <p class="custom-title">Bảo đảm chất lượng</p>
             <p class="mb-0">Sản phẩm đã được kiểm định</p>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <i class="fas fa-gift fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Ưu đãi hấp dẫn</h5>
+            <p class="custom-title">Ưu đãi hấp dẫn</p>
             <p class="mb-0">Nhiều ưu đãi khuyến mãi hot</p>
           </div>
         </div>
@@ -114,7 +114,7 @@
             <i class="fa fa-phone-volume fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Hotline: 0984898154</h5>
+            <p class="custom-title">Hotline: 0984898154</p>
             <p class="mb-0">Vui lòng gọi hotline để được hỗ trợ</p>
           </div>
         </div>
@@ -131,7 +131,7 @@
     <div class="tab-class text-center">
       <div class="row g-4">
         <div class="col-lg-4 text-start">
-          <h1>Sản phẩm nổi bật</h1>
+          <h1 class="text-primary">Sản phẩm nổi bật</h1>
         </div>
         <!-- <div class="col-lg-8 text-end">
           <ul class="nav nav-pills d-inline-flex text-center mb-3">
@@ -382,11 +382,11 @@
 <!-- Ảnh model Start -->
 <div class="container-fluid service py-3">
   <div class="container py-3">
-    <h1 class="mb-3">Đại sứ phong cách</h1>
+    <h1 class="mb-3 text-primary" >Đại sứ phong cách</h1>
     <div class="row g-4 justify-content-center">
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
        
-          <div class="service-item bg-dark rounded border border-dark">
+          <div class="service-item rounded border border-dark" style="background-color: #2e2e5b;">
             <img src="public/img/model-img-2.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
               <div class="text-center py-2 rounded">
@@ -412,7 +412,7 @@
       </div>
       <div class="col-12 col-sm-6 col-lg-3 d-flex">
       
-          <div class="service-item bg-dark rounded border border-dark">
+          <div class="service-item rounded border border-dark" style="background-color: #2e2e5b;">
             <img src="public/img/model-img-3.jpg" class="img-fluid rounded-top w-100" style="height:486.163px; object-fit:cover;" alt="">
             <div class="px-4 rounded-bottom" style="height:80px;">
               <div class="text-center py-2 rounded">
@@ -444,7 +444,7 @@
 <!-- Danh sách sản phẩm Start-->
 <div class="container-fluid vesitable py-3 pb-1">
   <div class="container py-3 pb-2 mb-0">
-    <h1 class="mb-2">Gợi ý sản phẩm</h1>
+    <h1 class="mb-2 text-primary">Gợi ý sản phẩm</h1>
     <div class="owl-carousel vegetable-carousel justify-content-center">
       <?php if (!empty($listSP)): ?>
         <?php foreach ($listSP as $sp): ?>

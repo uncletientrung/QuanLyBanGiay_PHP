@@ -292,5 +292,19 @@ class SanPhamModel
 
         return $row['soluong'] ?? 0;
     }
+
+   public function getSoluongdaban($masp){
+    $sql = "SELECT soluongdaban FROM sanpham WHERE masp = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$masp]);
+    return $stmt->fetchColumn(); 
+}
+public function getStockAll($masp){
+    $sql = "SELECT SUM(soluong) as tong_kho FROM sanphamsize WHERE masp = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$masp]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row['tong_kho'] ?? 0;
+}
 }
 ?>

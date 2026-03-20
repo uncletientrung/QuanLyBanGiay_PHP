@@ -1,6 +1,7 @@
 <!-- Page JS Plugins CSS -->
 <?php $dm->get_css('js/plugins/flatpickr/flatpickr.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css'); ?>
+<?php $dm->get_css('css/dashmix.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
@@ -54,7 +55,7 @@
                             <th class="text-center">MÃ ĐƠN</th>
                             <th class="text-center">KHÁCH HÀNG</th>
                             <th class="text-center">TỔNG TIỀN</th>
-                            <th class="text-center d-none d-sm-table-cell" style="width: 100px;">THỜI GIAN</th>
+                            <th class="text-center d-none d-sm-table-cell" style="width: 150px;">THỜI GIAN</th>
                             <th class="text-center d-none d-lg-table-cell">ĐỊA CHỈ</th>
                             <th class="text-center">THANH TOÁN</th>
                             <th class="text-center">TRẠNG THÁI</th>

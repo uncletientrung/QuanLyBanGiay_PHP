@@ -61,10 +61,36 @@ class DonHangModel
 
     public function updateStatusMulti($ids, $status)
     {
-        $placeholders = implode(',', array_fill(0, count($ids), '?'));
-        $sql = "UPDATE donhang SET trangthai = ? WHERE madh IN ($placeholders)";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute(array_merge([$status], $ids));
+        try {
+            $this->db->beginTransaction();
+
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $sql = "UPDATE donhang SET trangthai = ? WHERE madh IN ($placeholders)";
+            $stmt = $this->db->prepare($sql);
+            $result = $stmt->execute(array_merge([$status], $ids));
+
+            // giao thanh cong
+            if ($status == 2) {
+                foreach ($ids as $madh) {
+                    $items = $this->getItems($madh);
+
+                    foreach ($items as $item) {
+                        // Cộng soluongdaban
+                        $sqlSp = "UPDATE sanpham 
+                                 SET soluongdaban = soluongdaban + ? 
+                                 WHERE masp = ?";
+                        $stmtSp = $this->db->prepare($sqlSp);
+                        $stmtSp->execute([$item['soluong'], $item['masp']]);
+                    }
+                }
+            }
+
+            $this->db->commit();
+            return $result;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
     }
 
     public function getDetail($id)
@@ -78,13 +104,15 @@ class DonHangModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    // Left join nếu ko có ảnh -> null
     public function getItems($id)
     {
-        $sql = "SELECT ct.*, sp.tensp, s.tensize, m.tenmau 
+        $sql = "SELECT ct.*, sp.tensp, s.tensize, m.tenmau, ha.path 
             FROM ctdonhang ct
             JOIN sanpham sp ON ct.masp = sp.masp
             JOIN size s ON ct.masize = s.masize
             JOIN mau m ON sp.mau = m.mamau
+            LEFT JOIN hinhanh ha ON sp.masp = ha.masp AND ha.ismain = 1
             WHERE ct.madh = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
