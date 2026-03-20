@@ -3,6 +3,7 @@
   <h1 class="text-center text-white display-6">Chi Tiết</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a href="<?= ROOT_URL . '/products'?>">Giày</a></li>
     <li class="breadcrumb-item active text-white">Chi tiết</li>
   </ol>
 </div>
@@ -304,7 +305,7 @@
 
             <!-- Khung Tại sao chọn GalaxyShoes - cũng dài bằng nút Mua ngay -->
             <div class="border rounded p-4 mb-4 w-100">
-              <h6 class="fw-bold mb-3" style="font-size: 1.25rem;">Tại sao khách hàng lựa chọn GalaxyShoes?</h6>
+              <h6 class="fw-bold mb-3 text-primary" style="font-size: 1.25rem;">Tại sao khách hàng lựa chọn GalaxyShoes?</h6>
               <ul class="list-unstyled mb-0">
                 <li class="mb-2">✓ 100% Hàng chính hãng</li>
                 <li class="mb-2">✓ Đổi hàng 30 ngày</li>
@@ -321,7 +322,7 @@
       </div>
     </div>
 
-    <h1 class="fw-bold mb-0">Gợi ý sản phẩm</h1>
+    <h1 class="fw-bold mb-0 text-primary">Gợi ý sản phẩm</h1>
 
     <div class="vesitable">
       <div class="owl-carousel vegetable-carousel justify-content-center">

@@ -31,79 +31,89 @@ require_once __DIR__ . '/auth_helper.php';
   <!-- Template Stylesheet -->
   <link href="<?= ROOT_URL ?>public/css/style.css" rel="stylesheet">
 
-  <style>
-    /* Tăng size cơ bản cho navbar */
-    .navbar {
-      font-size: 1.12rem;
-    }
+<style>
+  /* Tăng size cơ bản cho navbar */
+  .navbar {
+    font-size: 1.12rem;
+  }
 
-    /* Logo GalaxyShoes - to và đậm nổi bật */
+  /* Logo GalaxyShoes */
+  .navbar-brand {
+    font-size: 2.4rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: #0d6efd !important;
+    padding: 0.4rem 0;
+  }
+
+  /* Các nav-link (menu item) */
+  .navbar-nav .nav-link,
+  .nav-item.dropdown .dropdown-toggle {
+    font-size: 1.18rem !important;
+    font-weight: 600 !important;
+    padding: 0.8rem 1.3rem !important;
+    transition: all 0.3s ease;
+  }
+
+  /* Hover — màu đậm đen */
+  .navbar-nav .nav-link:hover,
+  .nav-item.dropdown .dropdown-toggle:hover {
+    color: #000000 !important;
+    font-weight: 700 !important;
+  }
+
+  /* Active — màu cam */
+  .navbar-nav .nav-link.active,
+  .nav-item.dropdown .dropdown-toggle.active {
+    font-size: 1.28rem !important;
+    font-weight: 900 !important;
+    color: #fd7e14 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+
+  /* Dropdown đang mở (.show) — không giống active */
+  .nav-item.dropdown .dropdown-toggle.show {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-size: 1.18rem !important;
+    text-shadow: none;
+  }
+
+  /* Dropdown menu items */
+  .dropdown-menu .dropdown-item {
+    font-size: 1.08rem !important;
+    padding: 0.65rem 1.6rem !important;
+  }
+
+  /* Responsive tablet */
+  @media (max-width: 1199.98px) {
     .navbar-brand {
-      font-size: 2.4rem !important;       /* To rõ, có thể tăng lên 2.6rem nếu muốn cực to */
-      font-weight: 800 !important;
-      line-height: 1.1;
-      letter-spacing: -1px;
-      color: #0d6efd !important;          /* Màu primary, đổi #000 nếu muốn đen */
-      padding: 0.4rem 0;
+      font-size: 2.1rem !important;
     }
-
-    /* Các nav-link (menu item) */
     .navbar-nav .nav-link,
     .nav-item.dropdown .dropdown-toggle {
-      font-size: 1.18rem !important;      /* To hơn mặc định */
-      font-weight: 600 !important;
-      padding: 0.8rem 1.3rem !important;  /* Dễ click hơn */
-      transition: all 0.3s ease;
+      font-size: 1.12rem !important;
     }
-
-    /* Hover */
-    .navbar-nav .nav-link:hover,
-    .nav-item.dropdown .dropdown-toggle:hover {
-      color: #fd7e14 !important;          /* Cam nổi bật */
-      font-weight: 700 !important;
-    }
-
-    /* Active - TO + ĐEN + SIÊU ĐẬM (như bạn yêu cầu) */
     .navbar-nav .nav-link.active,
-    .nav-item.dropdown .dropdown-toggle.active,
+    .nav-item.dropdown .dropdown-toggle.active {
+      font-size: 1.22rem !important;
+    }
     .nav-item.dropdown .dropdown-toggle.show {
-      font-size: 1.28rem !important;      /* To rõ rệt hơn các item khác */
-      font-weight: 900 !important;        /* Đậm cực đại */
-      color: #000000 !important;          /* Đen tuyền */
-      text-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Bóng nhẹ tăng độ nổi */
+      font-size: 1.12rem !important;
     }
+  }
 
-    /* Dropdown menu items to hơn */
-    .dropdown-menu .dropdown-item {
-      font-size: 1.08rem !important;
-      padding: 0.65rem 1.6rem !important;
+  /* Responsive mobile */
+  @media (max-width: 575.98px) {
+    .navbar-brand {
+      font-size: 1.9rem !important;
     }
-
-    /* Responsive - giảm size trên mobile để vừa màn hình */
-    @media (max-width: 1199.98px) {
-      .navbar-brand {
-        font-size: 2.1rem !important;
-      }
-      .navbar-nav .nav-link,
-      .nav-item.dropdown .dropdown-toggle {
-        font-size: 1.12rem !important;
-      }
-      .navbar-nav .nav-link.active,
-      .nav-item.dropdown .dropdown-toggle.active,
-      .nav-item.dropdown .dropdown-toggle.show {
-        font-size: 1.22rem !important;
-      }
+    .navbar-nav .nav-link {
+      padding: 0.7rem 1rem !important;
     }
-
-    @media (max-width: 575.98px) {
-      .navbar-brand {
-        font-size: 1.9rem !important;
-      }
-      .navbar-nav .nav-link {
-        padding: 0.7rem 1rem !important;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body>
@@ -151,11 +161,11 @@ require_once __DIR__ . '/auth_helper.php';
             </a>
 
             <div class="nav-item dropdown">
-              <a class="nav-item nav-link dropdown-toggle 
+              <span class="nav-item nav-link dropdown-toggle 
                 <?= $currentPage == 'products' || $currentPage == 'product-detail' ? 'active' : '' ?>"
-                data-bs-toggle="dropdown">
+                data-bs-toggle="dropdown" style="cursor: pointer;">
                 Giày
-              </a>
+              </span>
               <div class="dropdown-menu m-0 bg-secondary rounded-0">
                 <a href="<?= ROOT_URL ?>products" class="dropdown-item">Tất cả</a>
                 <?php foreach ($listHang as $hang): ?>

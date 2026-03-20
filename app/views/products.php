@@ -152,7 +152,7 @@ echo '</pre>';
                           id="mau-<?= $mau['mamau'] ?>"
                           name="mau[]"
                           value="<?= $mau['mamau'] ?>"
-                          <?= in_array($mau['mamau'], $_GET['mau'] ?? []) ? 'checked' : '' ?>
+                          <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
                         >
                         <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
                           <?= htmlspecialchars($mau['tenmau']) ?>
@@ -427,6 +427,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btn-reset-filter').addEventListener('click', () => {
         form.reset();
         document.getElementById('sort').value = 'default';
+        history.pushState(null, '', window.location.pathname);
         fetchProducts(1);
     });
 

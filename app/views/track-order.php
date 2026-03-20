@@ -1,9 +1,9 @@
 <style>
-  :root {
-    --primary: #0b2a5b;       /* xanh navy chính */
-    --primary-dark: #081f44;  /* hover đậm hơn */
-    --navy: #0b2a5b;          /* alias cho badge */
-  }
+ :root {
+  --order-primary: #0b2a5b;
+  --order-primary-dark: #081f44;
+  --order-navy: #0b2a5b;
+}
   .nav-tabs .nav-link {
     color: #495057 !important;           
     background: none !important;
@@ -19,7 +19,7 @@
     color: #0b2a5b !important;           /* chữ xanh navy */
     background: none !important;
     border: none !important;
-    border-bottom: 4px solid #0b2a5b !important;  /* gạch chân đậm hơn */
+    border-bottom: 2px solid #0b2a5b !important;  /* gạch chân đậm hơn */
     font-weight: 700 !important;
   }
 
@@ -76,8 +76,8 @@
 
   /* Nút "Xem chi tiết" */
   .btn-outline-secondary {
-    color: var(--primary) !important;
-    border-color: var(--primary) !important;
+    color: var(--order-primary) !important;
+    border-color: var(--order-primary) !important;
     font-weight: 500;
     transition: all 0.25s;
   }
@@ -85,9 +85,9 @@
   .btn-outline-secondary:hover,
   .btn-outline-secondary:focus,
   .btn-outline-secondary:active {
-    background-color: var(--primary) !important;
+    background-color: var(--order-primary) !important;
     color: white !important;
-    border-color: var(--primary) !important;
+    border-color: var(--order-primary) !important;
     box-shadow: 0 0 0 0.25rem rgba(11, 42, 91, 0.25);
   }
 
@@ -106,7 +106,7 @@
   .alert-success {
     background-color: rgba(11, 42, 91, 0.08) !important;
     border-color: rgba(11, 42, 91, 0.25) !important;
-    color: var(--primary) !important;
+    color: var(--order-primary) !important;
   }
 
   .alert-danger {

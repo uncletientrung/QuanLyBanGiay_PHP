@@ -81,7 +81,7 @@
             <i class="fas fa-car-side fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Vận chuyển toàn quốc</h5>
+            <p class="custom-title">Vận chuyển toàn quốc</p>
             <p class="mb-0">Vận chuyển nhanh chóng</p>
           </div>
         </div>
@@ -92,7 +92,7 @@
             <i class="fas fa-medal fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Bảo đảm chất lượng</h5>
+            <p class="custom-title">Bảo đảm chất lượng</p>
             <p class="mb-0">Sản phẩm đã được kiểm định</p>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <i class="fas fa-gift fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Ưu đãi hấp dẫn</h5>
+            <p class="custom-title">Ưu đãi hấp dẫn</p>
             <p class="mb-0">Nhiều ưu đãi khuyến mãi hot</p>
           </div>
         </div>
@@ -114,7 +114,7 @@
             <i class="fa fa-phone-volume fa-3x text-white"></i>
           </div>
           <div class="featurs-content text-center">
-            <h5>Hotline: 0984898154</h5>
+            <p class="custom-title">Hotline: 0984898154</p>
             <p class="mb-0">Vui lòng gọi hotline để được hỗ trợ</p>
           </div>
         </div>

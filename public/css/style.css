@@ -28,7 +28,12 @@
   transition: 0.5s;
   z-index: 99;
 }
-
+.featurs-content p.custom-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #45595b;
+}
 /*** Spinner End ***/
 /*** NAVY THEME ***/
 /* Avatar initials  */
