@@ -1,6 +1,7 @@
 <!-- Page JS Plugins CSS -->
 <?php $dm->get_css('js/plugins/flatpickr/flatpickr.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css'); ?>
+<?php $dm->get_css('css/dashmix.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>

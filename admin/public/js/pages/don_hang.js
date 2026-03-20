@@ -193,6 +193,7 @@ Dashmix.onLoad(() =>
                 </select>
             `);
             $('#filter-status').on('change', function () {
+                selectedIds.clear();
                 let val = $(this).val();
                 userTable.column(7).search(val ? `^${val}$` : '', true, false).draw();
 
@@ -351,17 +352,16 @@ Dashmix.onLoad(() =>
             // Checkbox
             // Default ẩn checkbox
             userTable.column(0).visible(false);
+            let selectedIds = new Set();
 
             function updateBulkActionUI() {
-                let checkedRows = $('#user-table tbody .js-check-row:checked');
-                let count = checkedRows.length;
+                let count = selectedIds.size;
 
                 if (count > 0) {
                     $('#selected-count').text(count);
                     $('#bulk-action-bar').removeClass('d-none').addClass('d-flex animate__animated animate__fadeInDown');
                 } else {
                     $('#bulk-action-bar').addClass('d-none').removeClass('d-flex');
-                    $('#check-all').prop('checked', false);
                 }
             }
 
@@ -376,8 +376,15 @@ Dashmix.onLoad(() =>
                  * .prop( propertyName, function ): Thiết lập giá trị thông qua một hàm xử lý.
                  */
                 let isChecked = $(this).prop('checked');
-                let rows = userTable.rows({ page: 'current' }).nodes();
-                $(rows).find('.js-check-row').prop('checked', isChecked);
+                if (isChecked) {
+                    let allData = userTable.rows({ search: 'applied' }).data();
+                    allData.each(function (rowData) {
+                        selectedIds.add(rowData.madh.toString());
+                    });
+                } else {
+                    selectedIds.clear();
+                }
+                $('#user-table tbody .js-check-row').prop('checked', isChecked);
                 updateBulkActionUI();
             });
 
@@ -390,6 +397,14 @@ Dashmix.onLoad(() =>
              * handler, Kiểu DL: Function. 
              */
             $('#user-table tbody').on('change', '.js-check-row', function () { // Delegation 
+                let id = $(this).val().toString();
+
+                if (this.checked) {
+                    selectedIds.add(id);
+                } else {
+                    selectedIds.delete(id);
+                }
+
                 let total = $('#user-table tbody .js-check-row').length;
                 let checked = $('#user-table tbody .js-check-row:checked').length;
 
@@ -404,18 +419,33 @@ Dashmix.onLoad(() =>
              * - settings, Kiểu DL: DataTables.Settings
              */
             userTable.on('draw', function () {
-                $('#check-all').prop('checked', false);
+                let allOnPageChecked = true;
+                let hasRows = false;
+
+                $('#user-table tbody .js-check-row').each(function () {
+                    hasRows = true;
+                    let id = $(this).val().toString();
+                    if (selectedIds.has(id)) {
+                        $(this).prop('checked', true);
+                    } else {
+                        $(this).prop('checked', false);
+                        allOnPageChecked = false;
+                    }
+                });
+
+                $('#check-all').prop('checked', hasRows && allOnPageChecked);
                 updateBulkActionUI();
             });
 
             // Đổi trạng thái multi
             $('#btn-apply-bulk').on('click', function () {
                 let status = $('#bulk-status-select').val();
-                let selectedIds = [];
+                let idsArray = Array.from(selectedIds);
 
-                $('#user-table tbody .js-check-row:checked').each(function () {
-                    selectedIds.push($(this).val());
-                });
+                if (idsArray.length === 0) {
+                    Dashmix.helpers('jq-notify', { type: 'warning', icon: 'fa fa-exclamation-triangle', message: 'Vui lòng chọn ít nhất một đơn hàng!' });
+                    return;
+                }
 
                 if (!status) {
                     Dashmix.helpers('jq-notify', { type: 'warning', icon: 'fa fa-exclamation-triangle', message: 'Vui lòng chọn trạng thái!' });
@@ -435,10 +465,11 @@ Dashmix.onLoad(() =>
                             url: './don_hang/updateBulkStatus',
                             type: 'POST',
                             data: {
-                                ids: selectedIds,
+                                ids: idsArray,
                                 status: status
                             },
                             success: function (res) {
+                                selectedIds.clear();
                                 userTable.ajax.reload();
                                 Dashmix.helpers('jq-notify', { type: 'success', icon: 'fa fa-check', message: 'Cập nhật thành công!' });
                             },
