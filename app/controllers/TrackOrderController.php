@@ -53,9 +53,7 @@ class TrackOrderController
             $order['trangthaiDH'] = $this->getStatusText($order['trangthai']);
             $order['thoigiantao'] = date('d-m-Y H:i', strtotime($order['thoigiantao']));
         }
-        echo '<script> console.log(' . json_encode($orders) . ')</script>';
         unset($order);
-        echo '<script> console.log(' . json_encode($orders) . ')</script>';
         require VIEW_PATH_DIR . 'track-order.php';
     }
     public function showTrackOrderDetail()
@@ -76,10 +74,6 @@ class TrackOrderController
             $tongtien += $detail['dongia'] * $detail['soluong'];
         }
         unset($detail);
-        echo "<script>console.log(" . json_encode($order) . ")</script>";
-        echo "<script>console.log(" . json_encode($user) . ")</script>";
-        echo "<script>console.log(" . json_encode($order_details) . ")</script>";
-
         require VIEW_PATH_DIR . 'track-order-detail.php';
     }
 }

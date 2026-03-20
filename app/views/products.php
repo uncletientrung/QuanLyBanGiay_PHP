@@ -2,23 +2,16 @@
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Giày</h1>
+  <h1 class="text-center text-white display-6">Danh sách sản phẩm</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Giày</li>
+    <li class="breadcrumb-item active text-white">Danh sách sản phẩm</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-2">
-
-<!-- <?php
-echo '<pre>';
-print_r($sp['image']);
-echo '</pre>';
-
-?>  -->
   <div class="container py-3">
     <!-- <h1 class="mb-4">SHOP giày</h1> -->
     <div class="row g-4" >
