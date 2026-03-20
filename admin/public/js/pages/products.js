@@ -179,13 +179,13 @@ Dashmix.onLoad(() =>
                         render: function(data)
                         { 
                             return `
-                                    <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem mô tả sản phẩm">
+                                    <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem chi tiết sản phẩm">
                                         <i class="fa fa-fw fa-bars text-primary-darker"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Sửa">
                                         <i class="fa fa-fw fa-pen-to-square text-info"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
+                                    <button type="button" class="fast-delete btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
                                         <i class="fa fa-fw fa-times text-danger"></i>
                                     </button>
                             `
@@ -212,6 +212,14 @@ Dashmix.onLoad(() =>
             `);
 
             table.column(0).visible(false);
+
+            $("#sp-table").on('click', '.fast-delete',function() {
+                const arr = []
+                const data = $(this).data();
+                arr.push(data.id);
+                $.post("./products/delete", {ids: arr})
+                table.ajax.reload();
+            });
         }
 
         static initFilterBox() {
@@ -460,7 +468,6 @@ Dashmix.onLoad(() =>
             });
 
             table.on('draw', function() {
-                console.log(ids_arr);
                 $("#sp-table tbody .form-check-input").each(function () {
                     if (ids_arr.indexOf($(this).val()) != -1)
                         $(this).prop('checked', true);
@@ -474,7 +481,6 @@ Dashmix.onLoad(() =>
             });
 
             $("#delete-button").on('click', function() {
-                    console.log(ids_arr);
                     if (ids_arr.length != 0) $.post("./products/delete", {ids: ids_arr});
                     table.ajax.reload();
                 });

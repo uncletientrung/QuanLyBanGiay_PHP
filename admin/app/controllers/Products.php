@@ -33,6 +33,18 @@ class Products extends Controller
         exit();
     }
 
+    public function detail($id = null)
+    {
+        $this->renderView("main_layout", [
+            "page" => "product_detail",
+            "id" => $id,
+            "Plugin"  => [
+                "sweetalert2" => 1,
+                "select2" => 1,
+            ],
+            "Script"  => "product_detail"
+        ]);
+    }
     public function delete()
     { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
