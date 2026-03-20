@@ -303,10 +303,10 @@ Dashmix.onLoad(() =>
                         </div>
 
                         <div class="row justify-content-end mb-4 mt-3">
-                            <button id="reset-filter" class="col-lg-1 me-4 btn btn-outline-danger">
-                                <i class="fa fa-rotate-left me-2"></i>Đặt lại</button>
-                            <button id="apply-filter" class="col-lg-1 btn btn-outline-info">
-                                <i class="fa fa-check me-2"></i>Áp dụng</button>
+                            <a id="reset-filter" href="#sp-table" class="col-lg-1 me-4 btn btn-outline-danger">
+                                <i class="fa fa-rotate-left me-2"></i>Đặt lại</a>
+                            <a id="apply-filter" href="#sp-table" class="col-lg-1 btn btn-outline-info">
+                                <i class="fa fa-check me-2"></i>Áp dụng</a>
                         </div>
                     </div>
                 </div> 
@@ -447,23 +447,30 @@ Dashmix.onLoad(() =>
             $(".select2-container--default .select2-search--inline .select2-search__field").css('width', "initial !important");
         });
         }
-
+        
         static interaction()
         {
-            table.on('init', function() {
-                let arr = [];
+            table.on('draw', function() {
+                let arr = [''];
                 //Select mode interactions
                 $("#select-mode").on("click", ".btn", function() {
+                    if (table.rows().count() == 0)
+                    {          
+                        return;
+                    }
+
                     if(table.column(0).visible())
                     {
-                        $(".table").find(".form-check-input").prop('checked',false);
                         $("#delete-button").addClass("invisible");
                         $(".btn-group").addClass("invisible");
                         $("#status-dropdown").text("Đổi trạng thái");
+                        $(".table").find(".form-check-input").prop('checked',false);
                     }
 
                     table.column(0).visible(!table.column(0).visible());
                     $("#check-all").on('click', function() {
+                        if ($("#check-all").prop('checked')) arr = table.column(1).data().toArray();
+                        else arr = [];
                         $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
                     });
 
@@ -472,12 +479,17 @@ Dashmix.onLoad(() =>
                             if ($(".table").find(".form-check-input:checked").length != 0){
                                 $("#delete-button").removeClass("invisible");
                                 $(".btn-group").removeClass("invisible");
+                                if (arr.indexOf($(this).val()) == -1)
+                                    arr.push($(this).val());
+                                else
+                                    arr.splice(arr.indexOf($(this).val()), 1);
                             }
                             else{
                                 $("#delete-button").addClass("invisible");
                                 $(".btn-group").addClass("invisible");
                                 $("#status-dropdown").text("Đổi trạng thái");
                             }
+                            if (!$(this).prop('checked')) $("#check-all").prop('checked', false);
                         });
                     });
                     
@@ -485,26 +497,18 @@ Dashmix.onLoad(() =>
                         $("#status-dropdown").text($(this).text());
                     });
 
-                    $("a.page-link").on('click', function() {
-                        console.log("Check");
-                        table.on('draw.dt', function() {
-                        $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
-                        });
+                    table.on('draw.dt', function() {
+                        if ($("#check-all").prop("checked"))
+                            $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
                     });
                 });
                 //End of select mode interaction
 
                 $("#delete-button").on('click', function() {
-                    let arr = [];
-                    if ($("#check-all").prop('checked')) {
-                        console.log("all is checked");
-                    }
-                    $(".table").find(".form-check-input:checked").each(function () {
-                        arr.push($(this).val());
-                    })
+                    arr.splice(arr.indexOf(''), 1);
                     console.log(arr);
-                    // if (arr[0] == "") arr.splice(0, 1);
-                    // if (arr.length != 0) $.post("./products/delete", {ids: arr});
+                    if (arr.length != 0) $.post("./products/delete", {ids: arr});
+                    table.ajax.reload();
                 });
             })
         }

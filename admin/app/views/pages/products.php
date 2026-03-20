@@ -12,7 +12,7 @@
     </div>
     <div class="block-content block-content-full">
       <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-      <table class="table table-hover table-vcenter js-dataTable-responsive">
+      <table id="sp-table" class="table table-hover table-vcenter js-dataTable-responsive">
         <thead>
           <tr class="bg-body-dark">
             <th class="text-center" style="width: 60px">
