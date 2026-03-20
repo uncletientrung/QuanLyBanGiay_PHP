@@ -3,8 +3,8 @@
 <?php $dm->get_css('js\plugins\select2\css\select2.min.css') ?>
 <?php $dm->get_css('css/dashmix.min.css'); ?>
 
-<div class="content">
-  <div class="block block-rounded row g-0">
+<div class="content row justify-content-center">
+  <div class="block block-rounded row g-0 col-lg-10">
     <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-2" role="tablist">
       <li class="nav-item d-md-flex flex-md-column">
         <button class="nav-link text-md-start active" id="btabs-vertical-home-tab" data-bs-toggle="tab" data-bs-target="#btabs-vertical-home" role="tab" aria-controls="btabs-vertical-home" aria-selected="true">
@@ -23,27 +23,42 @@
         <!-- Thông tin chi tiết -->
         <div class="block block-rounded">
           <div class="block-content">
-                <!-- Form thông tin -->
-                <form action="be_pages_ecom_product_edit.php" method="POST" onsubmit="return false;">
-                  <!-- Row Tên, loại, giới tính -->
-                  <div class="row mb-4">
-                    <div class="col-4">
-                      <label class="form-label" for="dm-ecom-product-name">Tên sản phẩm</label>
-                      <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">
-                    </div>
-                    <div class="col-4">
-                      <label class="form-label" for="dm-ecom-product-name">Loại</label>
-                      <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
-                    </div>
-                    <div class="col-4">
-                      <label class="form-label" for="dm-ecom-product-name">Giới tính</label>
-                      <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
-                    </div>
+              <!-- Form thông tin -->
+              <form action="be_pages_ecom_product_edit.php" method="POST" onsubmit="return false;">
+                <div class="row mb-4">
+                  <div class="col-5">
+                    <label class="form-label" for="dm-ecom-product-name">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">
                   </div>
-                  <!-- Kết thúc row Tên, loại, giới tính -->
-                  <!-- Row 
-                </form>
-                <!-- Kết thúc form thông tin -->
+                  <div class="col">
+                    <label class="form-label" for="dm-ecom-product-name">Loại</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
+                  </div>
+                  <div class="col">
+                    <label class="form-label" for="dm-ecom-product-name">Trạng thái</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col-3">
+                    <label class="form-label" for="dm-ecom-product-name">Giới tính</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label" for="dm-ecom-product-name">Hãng</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label" for="dm-ecom-product-name">Màu</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
+                  </div>
+                  <div class="col-3">
+                    <label class="form-label" for="dm-ecom-product-name">Size</label>
+                    <input type="text" class="form-control" id="dm-ecom-product-name" name="dm-ecom-product-name" value="Bloodborne">  
+                  </div>
+                </div>
+              </form>
+              <!-- Kết thúc form thông tin -->
           </div>
         </div>
       </div>

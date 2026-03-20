@@ -27,7 +27,8 @@ class SanPhamModel
                     s.tyleloinhuan,
                     h.tenhang,
                     m.tenmau,
-                    s.trangthai
+                    s.trangthai,
+                    GROUP_CONCAT(size.tensize SEPARATOR ', ') AS size
                 FROM
                     sanpham s
                 INNER JOIN loai l ON
@@ -35,10 +36,23 @@ class SanPhamModel
                 INNER JOIN hang h ON
                     s.hang = h.mahang
                 INNER JOIN mau m ON
-                    s.mau = m.mamau";
+                    s.mau = m.mamau
+                LEFT JOIN sanphamsize ss ON
+                	s.masp = ss.masp
+                LEFT JOIN size ON
+                	size.masize = ss.masize
+                GROUP BY s.masp";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteById($id)
+    {
+        $sql = "DELETE FROM sanpham WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return true;
     }
 
     public function getSpById($masp){

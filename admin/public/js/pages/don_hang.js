@@ -81,7 +81,6 @@ Dashmix.onLoad(() =>
                             `;
                         }
                     },
-
                     {
                         data: 'madh',
                         className: 'text-center',

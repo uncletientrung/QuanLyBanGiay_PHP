@@ -2,6 +2,8 @@
 class Products extends Controller
 {
     private $productsModel;
+    private $sizeModel;
+    private $mediaModel;
     public function __construct()
     {
         $this->productsModel = $this->model("SanPhamModel");
@@ -18,6 +20,8 @@ class Products extends Controller
             "title" => "Quản lý sản phẩm",
             "Plugin" => [
                 "datatables" => 1,
+                "ionrangeslider" => 1,
+                "select2" => 1,
             ],
             "Script" => "products"
         ]);
@@ -29,14 +33,23 @@ class Products extends Controller
         exit();
     }
 
-    public function detail($id = null)
-    {
-        $this->renderView("main_layout", [
-            "page" => "product_detail",
-            "title" => "Chi tiết sản phẩm " . $id,
-            "id" => $id,
-            "Plugin"  => ["select2" => 1],
-            "Script"  => "product_detail"
-        ]);
+    public function delete()
+    { 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $ids = $_POST['ids'] ?? []; // Mảng danh sách mã đơn hàng
+            if (!empty($ids)) {
+                $successCount = 0;
+                foreach ($ids as $id) {
+                    if ($this->productsModel->deleteById($id)) $successCount++;
+                }
+
+                if ($successCount > 0) {
+                    echo json_encode(['status' => 'success', 'message' => "Thay đổi $successCount dòng trong sản phẩm"]);
+                } else {
+                    echo json_encode(['status' => 'error', 'message' => 'Thất bại']);
+                }
+            }
+            exit;
+        }
     }
 }

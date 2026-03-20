@@ -7,7 +7,7 @@
   <div class="block block-rounded">
     <div class="block-header block-header-default">
       <h3 class="block-title">
-        Dynamic Table <small></small>
+        Danh sách sản phẩm
       </h3>
     </div>
     <div class="block-content block-content-full">
@@ -15,6 +15,12 @@
       <table class="table table-hover table-vcenter js-dataTable-responsive">
         <thead>
           <tr class="bg-body-dark">
+            <th class="text-center" style="width: 60px">
+                <div class="form-check d-flex justify-content-center">
+                    <input class="form-check-input" type="checkbox" value="" id="check-all" name="check-all"
+                        style="cursor: pointer;">
+                </div>
+            </th>
             <th class="text-center" style="width: 80px;">Mã</th>
             <th>Tên sản phẩm</th>
             <th>Loại</th>
@@ -23,6 +29,7 @@
             <th>Lợi nhuận (%)</th>
             <th>Hãng</th>
             <th>Màu</th>
+            <th>Sizes</th>
             <th>Trạng thái</th>
             <th>Hành động</th>
           </tr>

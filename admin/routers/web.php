@@ -33,12 +33,15 @@ $router->get('/colors/getData', 'Colors@getData');
 
 $router->get('/sizes', 'Sizes@default');
 $router->get('/sizes/getData', 'Sizes@getData');
+$router->get('/sizes/getDataByProd', 'Sizes@getDataByProd');
 
 $router->get('/suppliers', 'Suppliers@default');
 
 // San pham
 $router->get('/products', 'Products@default');
 $router->get('/products/getData', 'Products@getData');
+$router->post('/products/delete', 'Products@delete');
+
 
 // Kho hang
 $router->get('/nhap_hang', 'Nhap_hang@default');
