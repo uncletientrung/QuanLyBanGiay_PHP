@@ -34,9 +34,6 @@
             <th>Hành động</th>
           </tr>
         </thead>
-        <tbody>
-            <!-- The data of the table should be placed here -->
-        </tbody>
       </table>
     </div>
   </div>

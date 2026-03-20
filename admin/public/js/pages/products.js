@@ -450,67 +450,64 @@ Dashmix.onLoad(() =>
         
         static interaction()
         {
+            let ids_arr = [];
+            $("#select-mode").on("click", ".btn", function() {
+                const isVisible = table.column(0).visible();
+                table.column(0).visible(!isVisible);
+                $("#sp-table tbody .form-check-input").prop('checked', false);
+                $("#check-all").prop('checked', false);
+                ids_arr = [];
+                toggleUI(ids_arr);
+            });
+
+            $("#sp-table").on("click", "#check-all", function() {
+                const isChecked = $(this).prop('checked');
+                $("#sp-table tbody .form-check-input").prop('checked', isChecked);
+                isChecked ? ids_arr = table.column(1).data().toArray() : ids_arr = [];
+                toggleUI(ids_arr);
+            });
+
+            $("#sp-table").on('click', 'tbody .form-check-input',function() {
+                $(this).prop('checked') ? ids_arr.push($(this).val()) : ids_arr.splice(ids_arr.indexOf($(this).val()), 1);
+                if (ids_arr.length == table.column(0).rows().count())
+                    $("#check-all").prop('checked', true);
+                else
+                    $("#check-all").prop('checked', false);
+                toggleUI(ids_arr);
+            });
+
             table.on('draw', function() {
-                let arr = [''];
-                //Select mode interactions
-                $("#select-mode").on("click", ".btn", function() {
-                    if (table.rows().count() == 0)
-                    {          
-                        return;
-                    }
+                console.log(ids_arr);
+                $("#sp-table tbody .form-check-input").each(function () {
+                    if (ids_arr.indexOf($(this).val()) != -1)
+                        $(this).prop('checked', true);
+                    else
+                        $(this).prop('checked', false);
+                })
+            });
 
-                    if(table.column(0).visible())
-                    {
-                        $("#delete-button").addClass("invisible");
-                        $(".btn-group").addClass("invisible");
-                        $("#status-dropdown").text("Đổi trạng thái");
-                        $(".table").find(".form-check-input").prop('checked',false);
-                    }
+            $("#status-dropdown-item").on('click', 'a', function() {
+                $("#status-dropdown").text($(this).text());
+            });
 
-                    table.column(0).visible(!table.column(0).visible());
-                    $("#check-all").on('click', function() {
-                        if ($("#check-all").prop('checked')) arr = table.column(1).data().toArray();
-                        else arr = [];
-                        $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
-                    });
-
-                    $(".table").find(".form-check-input").each(function(){
-                        $(this).on('click', function(){
-                            if ($(".table").find(".form-check-input:checked").length != 0){
-                                $("#delete-button").removeClass("invisible");
-                                $(".btn-group").removeClass("invisible");
-                                if (arr.indexOf($(this).val()) == -1)
-                                    arr.push($(this).val());
-                                else
-                                    arr.splice(arr.indexOf($(this).val()), 1);
-                            }
-                            else{
-                                $("#delete-button").addClass("invisible");
-                                $(".btn-group").addClass("invisible");
-                                $("#status-dropdown").text("Đổi trạng thái");
-                            }
-                            if (!$(this).prop('checked')) $("#check-all").prop('checked', false);
-                        });
-                    });
-                    
-                    $("#status-dropdown-item").on('click', 'a', function() {
-                        $("#status-dropdown").text($(this).text());
-                    });
-
-                    table.on('draw.dt', function() {
-                        if ($("#check-all").prop("checked"))
-                            $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
-                    });
-                });
-                //End of select mode interaction
-
-                $("#delete-button").on('click', function() {
-                    arr.splice(arr.indexOf(''), 1);
-                    console.log(arr);
-                    if (arr.length != 0) $.post("./products/delete", {ids: arr});
+            $("#delete-button").on('click', function() {
+                    console.log(ids_arr);
+                    if (ids_arr.length != 0) $.post("./products/delete", {ids: ids_arr});
                     table.ajax.reload();
                 });
-            })
+
+            function toggleUI(arr)
+            {
+                if (arr.length != 0) {
+                    $("#delete-button").removeClass("invisible");
+                    $(".btn-group").removeClass("invisible");
+                }
+                else {
+                    $("#delete-button").addClass("invisible");
+                    $(".btn-group").addClass("invisible");
+                    $("#status-dropdown").text("Đổi trạng thái");       
+                }
+            }
         }
 
         static init() {
@@ -520,3 +517,65 @@ Dashmix.onLoad(() =>
         }
     }.init()
 )
+
+// table.on('draw', function() {
+//                 let arr = [''];
+//                 //Select mode interactions
+//                 $("#select-mode").on("click", ".btn", function() {
+//                     if (table.rows().count() == 0)
+//                     {          
+//                         return;
+//                     }
+
+//                     if(table.column(0).visible())
+//                     {
+//                         $("#delete-button").addClass("invisible");
+//                         $(".btn-group").addClass("invisible");
+//                         $("#status-dropdown").text("Đổi trạng thái");
+//                         $(".table").find(".form-check-input").prop('checked',false);
+//                     }
+
+//                     table.column(0).visible(!table.column(0).visible());
+//                     $("#check-all").on('click', function() {
+//                         if ($("#check-all").prop('checked')) arr = table.column(1).data().toArray();
+//                         else arr = [];
+//                         $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
+//                     });
+
+//                     $(".table").find(".form-check-input").each(function(){
+//                         $(this).on('click', function(){
+//                             if ($(".table").find(".form-check-input:checked").length != 0){
+//                                 $("#delete-button").removeClass("invisible");
+//                                 $(".btn-group").removeClass("invisible");
+//                                 if (arr.indexOf($(this).val()) == -1)
+//                                     arr.push($(this).val());
+//                                 else
+//                                     arr.splice(arr.indexOf($(this).val()), 1);
+//                             }
+//                             else{
+//                                 $("#delete-button").addClass("invisible");
+//                                 $(".btn-group").addClass("invisible");
+//                                 $("#status-dropdown").text("Đổi trạng thái");
+//                             }
+//                             if (!$(this).prop('checked')) $("#check-all").prop('checked', false);
+//                         });
+//                     });
+                    
+//                     $("#status-dropdown-item").on('click', 'a', function() {
+//                         $("#status-dropdown").text($(this).text());
+//                     });
+
+//                     table.on('draw.dt', function() {
+//                         if ($("#check-all").prop("checked"))
+//                             $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
+//                     });
+//                 });
+//                 //End of select mode interaction
+
+//                 $("#delete-button").on('click', function() {
+//                     arr.splice(arr.indexOf(''), 1);
+//                     console.log(arr);
+//                     if (arr.length != 0) $.post("./products/delete", {ids: arr});
+//                     table.ajax.reload();
+//                 });
+//             })
