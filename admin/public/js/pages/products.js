@@ -52,9 +52,6 @@ Dashmix.onLoad(() =>
                             <'col-lg-auto me-3'
                                 <"#delete-button.invisible">
                             >
-                            <'col-lg-auto me-3'
-                                <"btn-group invisible h-100">
-                            >
                         >
                         <'col-lg'
                             f
@@ -212,20 +209,6 @@ Dashmix.onLoad(() =>
                 <button type="button" class="btn btn-hero btn-outline-primary dropdown-toggle h-100" data-bs-toggle="collapse" data-bs-target="#filter-box-target">
                     <i class="fa fa-filter me-2"></i>Bộ lọc
                 </button>
-            `);
-
-            jQuery('.btn-group').html(`
-                <div class="dropdown">
-                    <button type="button" id="status-dropdown" class="btn btn-outline-primary h-100 dropdown-toggle" style="width: 192px;border-top-right-radius: 0; border-bottom-right-radius: 0" data-bs-toggle="dropdown">
-                        Đổi trạng thái
-                    </button>
-                    <div id="status-dropdown-item" class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0)" data-value="1">Ngừng bán</a>
-                        <a class="dropdown-item" href="javascript:void(0)" data-value="0">Đang kinh doanh</a>
-                    </div>
-                    <input type="hidden" id="bulk-status-select" value="">
-                </div>
-                <button type="button" class="btn btn-primary h-100">Áp dụng</button>
             `);
 
             table.column(0).visible(false);
@@ -500,11 +483,9 @@ Dashmix.onLoad(() =>
             {
                 if (arr.length != 0) {
                     $("#delete-button").removeClass("invisible");
-                    $(".btn-group").removeClass("invisible");
                 }
                 else {
                     $("#delete-button").addClass("invisible");
-                    $(".btn-group").addClass("invisible");
                     $("#status-dropdown").text("Đổi trạng thái");       
                 }
             }
@@ -517,65 +498,3 @@ Dashmix.onLoad(() =>
         }
     }.init()
 )
-
-// table.on('draw', function() {
-//                 let arr = [''];
-//                 //Select mode interactions
-//                 $("#select-mode").on("click", ".btn", function() {
-//                     if (table.rows().count() == 0)
-//                     {          
-//                         return;
-//                     }
-
-//                     if(table.column(0).visible())
-//                     {
-//                         $("#delete-button").addClass("invisible");
-//                         $(".btn-group").addClass("invisible");
-//                         $("#status-dropdown").text("Đổi trạng thái");
-//                         $(".table").find(".form-check-input").prop('checked',false);
-//                     }
-
-//                     table.column(0).visible(!table.column(0).visible());
-//                     $("#check-all").on('click', function() {
-//                         if ($("#check-all").prop('checked')) arr = table.column(1).data().toArray();
-//                         else arr = [];
-//                         $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
-//                     });
-
-//                     $(".table").find(".form-check-input").each(function(){
-//                         $(this).on('click', function(){
-//                             if ($(".table").find(".form-check-input:checked").length != 0){
-//                                 $("#delete-button").removeClass("invisible");
-//                                 $(".btn-group").removeClass("invisible");
-//                                 if (arr.indexOf($(this).val()) == -1)
-//                                     arr.push($(this).val());
-//                                 else
-//                                     arr.splice(arr.indexOf($(this).val()), 1);
-//                             }
-//                             else{
-//                                 $("#delete-button").addClass("invisible");
-//                                 $(".btn-group").addClass("invisible");
-//                                 $("#status-dropdown").text("Đổi trạng thái");
-//                             }
-//                             if (!$(this).prop('checked')) $("#check-all").prop('checked', false);
-//                         });
-//                     });
-                    
-//                     $("#status-dropdown-item").on('click', 'a', function() {
-//                         $("#status-dropdown").text($(this).text());
-//                     });
-
-//                     table.on('draw.dt', function() {
-//                         if ($("#check-all").prop("checked"))
-//                             $(".table").find(".form-check-input").prop('checked', $("#check-all").prop("checked"));
-//                     });
-//                 });
-//                 //End of select mode interaction
-
-//                 $("#delete-button").on('click', function() {
-//                     arr.splice(arr.indexOf(''), 1);
-//                     console.log(arr);
-//                     if (arr.length != 0) $.post("./products/delete", {ids: arr});
-//                     table.ajax.reload();
-//                 });
-//             })
