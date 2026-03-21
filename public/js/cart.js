@@ -29,7 +29,7 @@ function updateQuantity(masp, masize, action, quantity) {
         alert(data.error);
         // Nếu server trả về max_stock (vượt tồn kho) → set về đúng số tồn kho
         // Ngược lại rollback về giá trị cũ (ví dụ: số lượng tối thiểu là 1)
-        inputEl.value = data.max_stock !== undefined ? data.max_stock : oldVal;
+        inputEl.value = data.over_stock ? data.max_stock : oldVal;
       }
     })
     .catch(() => {

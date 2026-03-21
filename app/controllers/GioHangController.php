@@ -55,12 +55,12 @@ class GioHangController
             if ($soluong > 1) {
                 $new_soluong--;
             } else {
-                echo json_encode(['success' => false, 'error' => 'Số lượng tối thiểu là 1', 'max_stock' => $stock]);
+                echo json_encode(['success' => false, 'error' => 'Số lượng tối thiểu là 1']);
                 exit;
             }
         } elseif ($action === 'plus') {
             if ($soluong >= $stock) {
-                echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!", 'max_stock' => $stock]);
+                echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!", 'over_stock' => true, 'max_stock' => $stock]);
                 exit;
             }
             $new_soluong++;
@@ -68,7 +68,7 @@ class GioHangController
             $quantity = (int)($_POST['quantity'] ?? 1);
             if ($quantity < 1) $quantity = 1;
             if ($quantity > $stock) {
-                echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!", 'max_stock' => $stock]);
+                echo json_encode(['success' => false, 'error' => "Chỉ còn $stock sản phẩm trong kho!", 'over_stock' => true, 'max_stock' => $stock]);
                 exit;
             }
             $new_soluong = $quantity;
