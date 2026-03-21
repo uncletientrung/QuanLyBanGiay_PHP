@@ -91,7 +91,9 @@
   text-decoration: none;
   transition: 0.3s;
 }
-
+.page-header h1 {
+  white-space: nowrap !important;
+}
 /* hover trang chủ */
 .page-header .breadcrumb-item a:hover {
   color: #ffffff;

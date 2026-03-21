@@ -1,10 +1,10 @@
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Chi Tiết Sản Phẩm SP-<?= $masp ?></h1>
+  <h1 class="text-center text-white display-6">Chi Tiết Sản Phẩm</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
     <li class="breadcrumb-item"><a href="<?= ROOT_URL . '/products'?>">Danh sách sản phẩm</a></li>
-    <li class="breadcrumb-item active text-white">SP-<?= $masp ?></li>
+    <li class="breadcrumb-item active text-white">Chi Tiết Sản Phẩm</li>
   </ol>
 </div>
 <!-- Single Page Header End -->

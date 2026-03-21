@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 class ContactController
 {
+ 
     public function __construct($conn) {}
 
     public function sendEmail()

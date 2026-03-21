@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            // ✅ Chỉ hiện modal khi server xác nhận thành công
+            //  Chỉ hiện modal khi server xác nhận thành công
             showCartSuccess(productName, tensize, qty, totalPrice);
 
             const cartCount = document.getElementById("cart-count");
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
           } else {
-            // Server báo lỗi (vượt tồn kho) → alert
+            // Server báo lỗi
             alert(data.error || "Không thể thêm vào giỏ hàng!");
           }
         })
@@ -224,8 +224,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modal.show();
 
-    // Tự động đóng sau 6 giây
-    setTimeout(() => modal.hide(), 6000);
+    // Tự động đóng sau 3 giây
+    setTimeout(() => modal.hide(), 3000);
 
     // Nút tiếp tục mua
     document.getElementById("continueShopping").onclick = () => modal.hide();
