@@ -5,7 +5,7 @@
   }
 
   .form-check-input {
-    border: 1px solid #6c757d; 
+    border: 1px solid #6c757d;
   }
 
 
@@ -18,7 +18,7 @@
     box-shadow: 0 0 0 0.25rem rgba(11, 42, 91, 0.25) !important;
   }
 
-  .form-check-input:checked + .form-check-label {
+  .form-check-input:checked+.form-check-label {
     color: var(--primary);
     font-weight: 600;
   }
@@ -26,6 +26,7 @@
   .form-check:hover .form-check-label {
     color: var(--primary);
   }
+
   .toast-notify {
     position: fixed;
     top: 20px;
@@ -157,7 +158,7 @@
           </div>
           <div class="row g-4 text-center align-items-center justify-content-center border-bottom py-3">
             <div class="col-12">
-             <!-- Thanh Toán Khi Nhận Hàng (đã checked mặc định) -->
+              <!-- Thanh Toán Khi Nhận Hàng -->
               <div class="form-check text-start my-1">
                 <input type="radio" class="form-check-input" id="Delivery-1"
                   name="phuongthucthanhtoan" value="2" checked>
@@ -167,7 +168,8 @@
           </div>
 
           <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-            <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">
+            <button type="button" id="submitBtn"
+              class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">
               Đặt Hàng
             </button>
           </div>
@@ -177,6 +179,72 @@
   </div>
 </div>
 <!-- Checkout Page End -->
+
+<!-- Modal chuyển khoản START-->
+<div class="modal fade" id="transferModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 380px;">
+    <div class="modal-content border-0 rounded-4 shadow-sm">
+      <div class="modal-header border-0 pb-1">
+        <h6 class="modal-title fw-bold text-primary mb-0">
+          Thông tin chuyển khoản
+        </h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body pt-2 text-center">
+        <div style="position: relative; display: inline-block;">
+          <img src="https://api.vietqr.io/image/970436-9999999999-compact2.png?amount=&addInfo=DH123"
+            class="rounded-3 border"
+            style="width: 200px;">
+          <div style="
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 600;
+            color: red;
+          ">
+            <?= number_format($tongtien) ?> đ
+          </div>
+        </div>
+        <div class="mt-3 p-2 rounded-3 bg-light small">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="text-primary">Ngân hàng</span>
+            <strong class="text-primary">VietcomBank-VCB</strong>
+          </div>
+          <div class="d-flex justify-content-between mb-1">
+            <span class="text-primary">STK</span>
+            <strong class="text-primary">9999999999</strong>
+          </div>
+          <div class="d-flex justify-content-between mb-1">
+            <span class="text-primary">Chủ TK</span>
+            <strong class="text-primary">NGUYEN VAN GIAU</strong>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="text-primary">Nội dung</span>
+            <strong class="text-primary">THANH TOAN DON HANG</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer border-0 pt-1">
+        <button type="button" class="btn btn-sm btn-outline-secondary px-3"
+          data-bs-dismiss="modal">Hủy</button>
+        <button type="button"
+          class="btn btn-sm btn-primary px-4"
+          id="confirmTransfer">
+          Tôi đã chuyển khoản
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Modal chuyển khoản END-->
 <!-- Show Toast -->
 <?php if (isset($_SESSION['success']) && $_SESSION['success']): ?>
   <script>

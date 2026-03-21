@@ -1,11 +1,12 @@
 <style>
- :root {
-  --order-primary: #0b2a5b;
-  --order-primary-dark: #081f44;
-  --order-navy: #0b2a5b;
-}
+  :root {
+    --order-primary: #0b2a5b;
+    --order-primary-dark: #081f44;
+    --order-navy: #0b2a5b;
+  }
+
   .nav-tabs .nav-link {
-    color: #495057 !important;           
+    color: #495057 !important;
     background: none !important;
     border: none !important;
     border-radius: 0 !important;
@@ -16,10 +17,12 @@
   .nav-tabs .nav-link.active,
   .nav-tabs .nav-link.active:hover,
   .nav-tabs .nav-link.active:focus {
-    color: #0b2a5b !important;           /* chữ xanh navy */
+    color: #0b2a5b !important;
+    /* chữ xanh navy */
     background: none !important;
     border: none !important;
-    border-bottom: 2px solid #0b2a5b !important;  /* gạch chân đậm hơn */
+    border-bottom: 2px solid #0b2a5b !important;
+    /* gạch chân đậm hơn */
     font-weight: 700 !important;
   }
 
@@ -61,7 +64,8 @@
 
   .badge.bg-warning {
     background-color: #ffc107 !important;
-    color: #212529 !important; /* text tối hơn cho dễ đọc */
+    color: #212529 !important;
+    /* text tối hơn cho dễ đọc */
   }
 
   .badge.bg-danger {
@@ -198,17 +202,17 @@
                         <small class="fw-bold text-dark">Ngày đặt: <?= $order['thoigiantao'] ?></small>
                       </div>
                       <span class="badge px-3 py-2 fs-6 fw-bold <?php
-                          if ($order['trangthai'] == 0) {
-                              echo 'bg-warning text-dark';           
-                          } elseif ($order['trangthai'] == 1 || $order['trangthai'] == 2) {
-                              echo 'bg-navy text-white';             
-                          } elseif ($order['trangthai'] == -1) {
-                              echo 'bg-danger text-white';           
-                          } else {
-                              echo 'bg-secondary text-white';       
-                          }
-                      ?>">
-                          <?= $order['trangthaiDH'] ?>
+                                                                if ($order['trangthai'] == 0) {
+                                                                  echo 'bg-warning text-dark';
+                                                                } elseif ($order['trangthai'] == 1 || $order['trangthai'] == 2) {
+                                                                  echo 'bg-navy text-white';
+                                                                } elseif ($order['trangthai'] == -1) {
+                                                                  echo 'bg-danger text-white';
+                                                                } else {
+                                                                  echo 'bg-secondary text-white';
+                                                                }
+                                                                ?>">
+                        <?= $order['trangthaiDH'] ?>
                       </span>
                     </div>
 
@@ -249,8 +253,6 @@
   </div>
 </div>
 <!-- Orders Section End -->
-
-<!-- CSS bổ sung (thêm vào file CSS của bạn) -->
 <style>
   .badge {
     font-size: 0.9rem !important;

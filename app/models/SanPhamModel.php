@@ -16,6 +16,45 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllForAdmin() 
+    {
+        $sql = "SELECT
+                    s.masp,
+                    s.tensp,
+                    l.tenloai,
+                    s.gioitinh,
+                    s.gianhap,
+                    s.tyleloinhuan,
+                    h.tenhang,
+                    m.tenmau,
+                    s.trangthai,
+                    GROUP_CONCAT(size.tensize SEPARATOR ', ') AS size
+                FROM
+                    sanpham s
+                INNER JOIN loai l ON
+                    s.loai = l.maloai
+                INNER JOIN hang h ON
+                    s.hang = h.mahang
+                INNER JOIN mau m ON
+                    s.mau = m.mamau
+                LEFT JOIN sanphamsize ss ON
+                	s.masp = ss.masp
+                LEFT JOIN size ON
+                	size.masize = ss.masize
+                GROUP BY s.masp";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteById($id)
+    {
+        $sql = "DELETE FROM sanpham WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return true;
+    }
+
     public function getSpById($masp){
         $sql = "SELECT * FROM sanpham WHERE masp = ? AND trangthai = 1";
         $stmt = $this->conn->prepare($sql);
