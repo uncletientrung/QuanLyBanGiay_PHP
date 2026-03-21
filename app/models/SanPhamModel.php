@@ -306,5 +306,9 @@ public function getStockAll($masp){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     return $row['tong_kho'] ?? 0;
 }
+
+public function getStockofSize($masp, $masize){
+    
+}
 }
 ?>

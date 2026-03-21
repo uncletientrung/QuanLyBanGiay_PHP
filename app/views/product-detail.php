@@ -199,21 +199,15 @@
 
             </div>
 
-
-
-
-
-
-
-
             <!-- Giá -->
             <p class="gia-ban" data-gia="<?= $giaBan ?>">
               <?= number_format($giaBan, 0, ',', '.') ?> ₫
             </p>
 
            <div class="mb-4">
+          
             <p class="fw-bold mb-2">Size</p>
-
+                  
             <div class="d-flex gap-2 flex-wrap">
               <?php if (!empty($listSize)): ?>
                 <?php foreach ($listSize as $size): ?>
@@ -232,17 +226,20 @@
                 <p class="none-size">Sản phẩm này hiện chưa có size!</p>
               <?php endif; ?>
             </div>
+            <!-- số lượng từng size -->
+              <p id="stock-text" class="sl-tung-size" style="display: none;">
+                Còn lại: <span id="stock-value"></span> sản phẩm
+              </p>
 
-            <!-- Hiển thị số lượng -->
-          <!-- Hiển thị số lượng -->
-<p class="meta-stock fw-bold mb-2">
-    Tình trạng: 
-    <?php if($soluongtonkho > 0): ?>
-        <span class="stock-status in-stock">Còn hàng (<?= $soluongtonkho ?>)</span>
-    <?php else: ?>
-        <span class="stock-status out-of-stock">Hết hàng</span>
-    <?php endif; ?>
-</p>
+              <!-- số lượng tổng kho -->
+              <p class="meta-stock fw-bold mb-2">
+                  Tình trạng: 
+                  <?php if($soluongtonkho > 0): ?>
+                      <span class="stock-status in-stock">Còn hàng (<?= $soluongtonkho ?>)</span>
+                  <?php else: ?>
+                      <span class="stock-status out-of-stock">Hết hàng</span>
+                  <?php endif; ?>
+              </p>
 
 
 
@@ -534,7 +531,11 @@
 
 
 /* Hết hàng */
-
+.sl-tung-size{
+  font-size: 14px !important;
+  margin-bottom: -5px !important;
+  margin-top: 14px !important;
+}
 .out-of-stock {
 
     color: #dc2626;            

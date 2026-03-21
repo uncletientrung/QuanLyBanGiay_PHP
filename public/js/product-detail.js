@@ -45,6 +45,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const productName = addToCartBtn.dataset.tensp;
   const buyNowBtn = document.querySelector(".buy-now-btn");
 
+  // const sizeButtons = document.querySelectorAll(".size-btn");
+  const stockText = document.getElementById("stock-text");
+  const stockValue = document.getElementById("stock-value");
+
+  sizeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // bỏ active cũ
+      sizeButtons.forEach((b) => b.classList.remove("active"));
+
+      // active mới
+      btn.classList.add("active");
+
+      // lấy số lượng
+      const stock = btn.getAttribute("data-stock");
+
+      // cập nhật hiển thị
+      stockValue.textContent = stock;
+      stockText.style.display = "block";
+    });
+  });
   // Hàm cập nhật giá
   function updateDisplayedPrice() {
     if (!giaBanElement || !qtyInput) return;
