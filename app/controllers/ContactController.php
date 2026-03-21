@@ -79,7 +79,6 @@ class ContactController
                 'message' => 'Gửi liên hệ thành công'
             ]);
             exit;
-
         } catch (Exception $e) {
             echo json_encode([
                 'success' => false,

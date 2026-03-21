@@ -32,7 +32,7 @@
           G<span class="opacity-75">s</span>
         </span>
         <span class="smini-hidden">
-          Galaxy<span class="opacity-75">Shoe</span>
+          Galaxy<span class="opacity-75">Shoes</span>
         </span>
       </a>
       <!-- END Logo -->
