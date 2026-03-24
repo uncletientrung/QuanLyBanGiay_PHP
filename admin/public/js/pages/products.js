@@ -182,9 +182,6 @@ Dashmix.onLoad(() =>
                                     <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem chi tiết sản phẩm">
                                         <i class="fa fa-fw fa-bars text-primary-darker"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Sửa">
-                                        <i class="fa fa-fw fa-pen-to-square text-info"></i>
-                                    </button>
                                     <button type="button" class="fast-delete btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
                                         <i class="fa fa-fw fa-times text-danger"></i>
                                     </button>

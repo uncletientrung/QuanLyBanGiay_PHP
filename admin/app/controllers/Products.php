@@ -3,10 +3,19 @@ class Products extends Controller
 {
     private $productsModel;
     private $sizeModel;
-    private $mediaModel;
+    private $brandsModel;
+    private $categoriesModel;
+    private $colorsModel;
+
+    private $imgModel;
     public function __construct()
     {
         $this->productsModel = $this->model("SanPhamModel");
+        $this->imgModel = $this->model("HinhAnhModel");
+        $this->sizeModel = $this->model("SizeModel");
+        $this->brandsModel = $this->model("HangModel");
+        $this->categoriesModel = $this->model("LoaiModel");
+        $this->colorsModel = $this->model("MauSacModel");
     }
 
     public function default($id = null)
@@ -35,12 +44,35 @@ class Products extends Controller
 
     public function detail($id = null)
     {
+        $productInfo = $this->productsModel->getSingle($id);
+
+        if ($productInfo == null)
+            { 
+                header('Location: /products');
+                exit();
+            }
+
+        $productImg = $this->imgModel->getImageById($id);
+        $productSize = $this->sizeModel->getSizeBySanPham($id);
+        $size = $this->sizeModel->getAll();
+        $brands = $this->brandsModel->getAll();
+        $colors = $this->colorsModel->getAll();
+        $categories = $this->categoriesModel->getAll();
+
         $this->renderView("main_layout", [
             "page" => "product_detail",
+            "product" => $productInfo,
             "id" => $id,
+            "img" => $productImg,
+            "size" => $productSize,
+            "allSize" => $size,
+            "brands" => $brands,
+            "categories"=> $categories,
+            "colors"=> $colors,
             "Plugin"  => [
                 "sweetalert2" => 1,
                 "select2" => 1,
+                "datatables" => 1,
             ],
             "Script"  => "product_detail"
         ]);

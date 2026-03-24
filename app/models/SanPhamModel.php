@@ -46,6 +46,33 @@ class SanPhamModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getSingle($id) 
+    {
+        $sql = "SELECT
+                    s.masp,
+                    s.tensp,
+                    l.tenloai,
+                    s.gioitinh,
+                    s.gianhap,
+                    s.tyleloinhuan,
+                    h.tenhang,
+                    m.tenmau,
+                    s.trangthai,
+                    s.motasp
+                FROM
+                    sanpham s
+                INNER JOIN loai l ON
+                    s.loai = l.maloai
+                INNER JOIN hang h ON
+                    s.hang = h.mahang
+                INNER JOIN mau m ON
+                    s.mau = m.mamau
+                WHERE s.masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function deleteById($id)
     {
