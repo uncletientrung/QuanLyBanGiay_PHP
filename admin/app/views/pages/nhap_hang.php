@@ -13,9 +13,9 @@
             <h3 class="block-title">Nhập hàng</h3>
             <div class="block-options">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-hero btn-primary">
+                    <a class="btn btn-hero btn-primary" href="nhap_hang/add">
                         Tạo phiếu nhập <i class="fa fa-plus ms-1"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
