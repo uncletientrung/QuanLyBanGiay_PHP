@@ -72,7 +72,7 @@ Dashmix.onLoad(() =>
                         data: 'trangthai',
                         className: 'text-center',
                         render: function (data) {
-                            let status = data == 1 ? { t: "Hoàn tất", c: "bg-success" } : { t: "Chưa xử lý", c: "bg-warning" };
+                            let status = data == 1 ? { t: "Hoàn tất", c: "bg-success" } : { t: "Phiếu tạm", c: "bg-warning" };
                             return `<span class="badge ${status.c}">${status.t}</span>`;
                         }
                     },
@@ -98,7 +98,7 @@ Dashmix.onLoad(() =>
                 <select class="form-select" id="filter-status" style="width: 200px;">
                     <option value="">Tất cả trạng thái</option>
                     <option value="Hoàn tất">Hoàn tất</option>
-                    <option value="Chưa xử lý">Chưa xử lý</option>
+                    <option value="Phiếu tạm">Phiếu tạm</option>
                 </select>
             `);
 
