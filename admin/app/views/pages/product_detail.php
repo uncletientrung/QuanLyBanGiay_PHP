@@ -64,7 +64,7 @@
                       <table id="size-table" class="table table-vcenter">
                         <thead>
                           <tr>
-                            <th class="text-center" style="width: 50px;">#</th>
+                            <th class="text-center" style="width: 50px;">Mã</th>
                             <th>Kích cỡ</th>
                             <th style="width: 25%;">Số lượng (đôi)</th>
                             <th style="width: 10%;"></th>
@@ -73,7 +73,7 @@
                         <tbody>
                           <?php $totalStock = 0; foreach($size as $index=>$val) { $totalStock += $val['soluong'] ?>
                             <tr>
-                              <th class="text-center" scope="row"><?php echo $index + 1; ?></th>
+                              <th class="text-center" scope="row"><?php echo $val['masize']; ?></th>
                               <td class="fw-semibold text-primary tensize">
                                 <?php echo $val['tensize']; ?>
                               </td>
@@ -127,9 +127,9 @@
                         <option></option>
                         <?php foreach($colors as $value) {
                               if ($value['tenmau'] == $product[0]['tenmau']) { ?>
-                                <option selected value="<?= $value['tenmau']?>"><?= $value['tenmau']?></option>
+                                <option selected value="<?= $value['mamau']?>"><?= $value['tenmau']?></option>
                                 <?php } else {?>
-                                <option value="<?= $value['tenmau']?>"><?= $value['tenmau']?></option>
+                                <option value="<?= $value['mamau']?>"><?= $value['tenmau']?></option>
                           <?php } ?>
                         <?php } ?>
                       </select>
@@ -142,9 +142,9 @@
                         <option></option>
                         <?php foreach($categories as $value) {
                               if ($value['tenloai'] == $product[0]['tenloai']) { ?>
-                                <option selected value="<?= $value['tenloai']?>"><?= $value['tenloai']?></option>
+                                <option selected value="<?= $value['maloai']?>"><?= $value['tenloai']?></option>
                                 <?php } else {?>
-                                <option value="<?= $value['tenloai']?>"><?= $value['tenloai']?></option>
+                                <option value="<?= $value['maloai']?>"><?= $value['tenloai']?></option>
                           <?php } ?>
                         <?php } ?>
                       </select>
@@ -192,23 +192,29 @@
         </div>
       </div>
       <div class="block-content tab-pane" id="media-panel" role="tabpanel" aria-labelledby="media-panel-tab" tabindex="0">
-        <h4 class="fw-semibold">Thư viện ảnh mã <a class="fw-semibold"><strong>SP-<?= $product[0]['masp']?>, </strong><?= $product[0]['tensp']?></a></h4>
+        <div class="d-flex justify-content-between align-items-center mb-3 me-4">  
+          <h4 class="fw-semibold m-0">Thư viện ảnh mã <a class="fw-semibold"><strong>SP-<?= $product[0]['masp']?>, </strong><?= $product[0]['tensp']?></a></h4>
+          <form id="upload-form">
+            <input type="file" id="add-image" name="images[]" multiple hidden>
+            <label for="add-image">
+                <i class="btn btn-outline-primary fa fa-plus"></i>
+            </label>
+          </form>
+        </div>
         <div class="block-content d-flex justify-content-center flex-wrap">
-          <div class="row items-push js-gallery justify-content-between">
+          <div class="row items-push js-gallery justify-content-start">
             <?php foreach($img as $index=>$val) {?>
               <?php if ($val['ismain']) { ?>
-                <div class="col-lg-2 border border-3 border-primary rounded-4 animated fadeIn p-0 overflow-hidden me-4">
+                <div class="is-banner col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
               <?php } else { ?>
                 <div class="col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
               <?php } ?>
               <div class="options-container fx-item-zoom-in">
-                  <img class="img-fluid options-item" src="<?= "/QuanLyBanGiay_Php/" . $val['path'] ?>" alt="Product Image">
+                  <img class="img-fluid options-item" style="aspect-ratio: 1/1; object-fit: cover" src="<?= "/QuanLyBanGiay_Php/" . $val['path'] ?>" alt="Product Image">
                   <div class="options-overlay align-items-start" style="top: 10px; right: 10px; bottom: 0; left: 10px">
                     <div class="options-overlay-content d-inline-flex w-100 justify-content-between">
-                      <?php if ($val['ismain']) { ?>
-                      <?php } ?>
-                      <h4 class="text-primary m-0"><strong>Banner</strong></h4>
-                      <a class="btn btn-sm btn-secondary d-flex align-items-center" href="">
+                      <a class="set-banner fs-5 ps-2 pe-2 bg-primary text-white rounded" style="cursor: pointer"><strong>Set Banner</strong></a>
+                      <a class="delete btn btn-sm btn-secondary d-flex align-items-center" style="cursor: pointer">
                         <i class="fa fa-fw fa-times"></i>
                       </a>
                     </div>

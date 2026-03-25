@@ -41,6 +41,9 @@ $router->get('/suppliers', 'Suppliers@default');
 $router->get('/products', 'Products@default');
 $router->get('/products/getData', 'Products@getData');
 $router->post('/products/delete', 'Products@delete');
+$router->post('/products/upload', 'Products@upload');
+$router->post('/products/setBanner', 'Products@setBanner');
+$router->post('/products/deleteImage', 'Products@deleteImage');
 
 
 // Kho hang

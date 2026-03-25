@@ -96,4 +96,61 @@ class Products extends Controller
             exit;
         }
     }
+
+    public function upload() {
+        $targetDir = __DIR__ . "/../../../public/img/products/";
+        
+        $masp = $_POST['masp'] ?? null;
+        $uploadedFiles = [];
+
+        if (isset($_FILES['images'])) {
+            foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                $fileName = basename($_FILES['images']['name'][$key]);
+                $targetFilePath = $targetDir . $fileName;
+
+                if (move_uploaded_file($tmpName, $targetFilePath)) {
+                    $dbPath = "public/img/products/" . $fileName;
+                    $this->imgModel->insertImage($masp, $dbPath);
+                    $uploadedFiles[] = $dbPath;
+                }
+            }
+        }
+
+            $data = [
+                'status' => 'success',
+                'message' => 'It worked!',
+                'files' => $uploadedFiles
+            ];
+
+        // 2. Encode the ARRAY
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
+
+    public function setBanner() {
+        $path = $_POST['path'] ?? null;
+        $masp = $_POST['masp'] ?? null;
+
+        if ($path && $masp) {
+            $success = $this->imgModel->updateBanner($masp, $path);
+
+            header('Content-Type: application/json');
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
+
+    public function deleteImage() {
+        $path = $_POST['path'] ?? null;
+        $masp = $_POST['masp'] ?? null;
+
+        if ($path && $masp) {
+            $success = $this->imgModel->delete($masp, $path);
+
+            header('Content-Type: application/json');
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
 }
