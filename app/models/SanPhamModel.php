@@ -16,6 +16,71 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateSanPham($data)
+    { 
+        $sql = "UPDATE sanpham SET tensp = :tensp, loai = :loai, gioitinh = :gioitinh, gianhap = :gianhap, tyleloinhuan = :tyleloinhuan, motasp = :motasp
+                WHERE masp = :masp";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':masp' => $data['masp'],
+            ':tensp' => $data['tensp'],
+            ':loai' => $data['loai'],
+            ':gioitinh' => $data['gioitinh'],
+            ':gianhap' => $data['gianhap'],
+            ':tyleloinhuan' => $data['tyleloinhuan'],
+            ':motasp' => $data['motasp'],
+        ]);
+    }
+
+    public function updateSizeAndStock($data, $oldId)
+    {
+        $this->conn->beginTransaction();
+        $sql = "UPDATE sanphamsize SET soluong = :soluong, masize = :newId WHERE masp = :masp AND masize = :oldId";
+        $stmt = $this->conn->prepare($sql);
+        foreach ($data as $index => $value) {
+            $stmt->execute([
+                ":soluong"=> $value["soLuong"],
+                ":masp"=> $value["masp"],
+                ":newId"=> $value["masize"],
+                ":oldId"=> $oldId[$index],
+            ]);
+        }
+        return $this->conn->commit();
+    }
+
+    public function addNewSize($data, $oldId)
+    {
+        if ($oldId === null) $oldId = [];
+        $toInsert = array_filter($data, function($item) use ($oldId) {
+            return !in_array($item['masize'], $oldId);
+        });
+        $this->conn->beginTransaction();
+        $sql = "INSERT INTO sanphamsize (masp, masize, soluong) VALUES (:masp, :masize, :soluong)";
+        $stmt = $this->conn->prepare($sql);
+        foreach ($toInsert as $value) {
+            $stmt->execute([
+                ":soluong"=> $value["soLuong"],
+                ":masp"=> $value["masp"],
+                ":masize"=> $value["masize"],
+            ]);
+        }
+        return $this->conn->commit();
+    }
+
+    public function deleteSizeAndStock($data)
+    {
+        $this->conn->beginTransaction();
+        foreach ($data as $value) {
+            $sql = "DELETE FROM sanphamsize WHERE masp = :masp AND masize = :masize";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ":masp"=> $value["masp"],
+                ":masize"=> $value["masize"],
+            ]);
+        }
+        return $this->conn->commit();
+    }
+
     public function getAllForAdmin()
     {
         $sql = "SELECT

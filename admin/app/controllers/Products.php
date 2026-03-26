@@ -80,7 +80,7 @@ class Products extends Controller
     public function delete()
     { 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $ids = $_POST['ids'] ?? []; // Mảng danh sách mã đơn hàng
+            $ids = $_POST['ids'] ?? [];
             if (!empty($ids)) {
                 $successCount = 0;
                 foreach ($ids as $id) {
@@ -97,6 +97,48 @@ class Products extends Controller
         }
     }
 
+    public function updateInfo()
+    {
+        if (isset($_POST['data']))
+        {
+            $data = $_POST['data'];
+            $success = $this->productsModel->updateSanpham($data);
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
+
+    public function addNewSize() {
+        if(isset($_POST['data'])) {
+            $data = $_POST['data'];
+            $oldId = $_POST['oldId'];
+            $success = $this->productsModel->addNewSize($data, $oldId);
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+        echo json_encode("No param");
+        exit();
+    }
+
+    public function updateSizeAndStock() {
+        if(isset($_POST['data'])  && isset($_POST['oldId'])) {
+            $data = $_POST['data'];
+            $oldId = $_POST['oldId'];
+            $success = $this->productsModel->updateSizeAndStock($data, $oldId);
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
+
+    public function deleteSizeAndStock() {
+        if(isset($_POST['data'])) {
+            $data = $_POST['data'];
+            $success = $this->productsModel->deleteSizeAndStock($data);
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
+    
     public function upload() {
         $targetDir = __DIR__ . "/../../../public/img/products/";
         

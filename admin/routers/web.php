@@ -41,10 +41,14 @@ $router->get('/suppliers', 'Suppliers@default');
 $router->get('/products', 'Products@default');
 $router->get('/products/getData', 'Products@getData');
 $router->post('/products/delete', 'Products@delete');
+$router->post('/products/updateInfo', 'Products@updateInfo');
+$router->post('/products/updateSizeAndStock', 'Products@updateSizeAndStock');
+$router->post('/products/deleteSizeAndStock', 'Products@deleteSizeAndStock');
+$router->post('/products/addNewSize', 'Products@addNewSize');
+
 $router->post('/products/upload', 'Products@upload');
 $router->post('/products/setBanner', 'Products@setBanner');
 $router->post('/products/deleteImage', 'Products@deleteImage');
-
 
 // Kho hang
 $router->get('/nhap_hang', 'Nhap_hang@default');

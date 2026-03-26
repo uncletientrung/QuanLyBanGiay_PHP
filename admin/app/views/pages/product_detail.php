@@ -58,7 +58,7 @@
                   </div>
                   <div class="row mb-4">
                     <div class="w-100 d-flex justify-content-end">
-                      <btn hidden id="add-size" class="btn btn-sm btn-info col-lg-1"><i class="fa fa-plus"></i></btn>
+                      <btn hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích cỡ</btn>
                     </div>
                     <div id="table-div">
                       <table id="size-table" class="table table-vcenter">
@@ -81,9 +81,9 @@
                                 <?php echo $val['soluong']; ?>
                               </td>
                               <td>
-                                <a type="button" class="btn btn-sm btn-outline-danger">
+                                <button type="button" class="delete-sizestock btn btn-sm btn-outline-danger">
                                   <i class="fa fa-fw fa-times"></i>
-                                </a>
+                                </button>
                               </td>
                             </tr>
                           <?php } ?>
@@ -92,9 +92,9 @@
                           <tr>
                               <th class="text-center" scope="row"></th>
                               <td class="fw-semibold">
-                                <a href="be_pages_generic_profile.php" style="pointer-events: none;">Tổng số lượng</a>
+                                <a style="pointer-events: none;">Tổng số lượng</a>
                               </td>
-                              <td class="d-flex justify-content-center" style="text-align: center">
+                              <td class="d-flex justify-content-center" id="totalStock" style="text-align: center">
                                 <?php echo $totalStock ?>                               
                               </td>
                               <td></td>
@@ -123,7 +123,7 @@
                   <div class="row mb-4">
                     <div class="col">
                       <label class="form-label fw-bold" for="">Màu sắc</label>
-                      <select class="js-select2 form-control" id="mau" name="mau" data-placeholder="Màu hiện có">
+                      <select class="js-select2 form-select" id="mau" style="width: 100%" name="mau" data-placeholder="Màu hiện có">
                         <option></option>
                         <?php foreach($colors as $value) {
                               if ($value['tenmau'] == $product[0]['tenmau']) { ?>
