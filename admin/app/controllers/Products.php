@@ -44,15 +44,32 @@ class Products extends Controller
 
     public function detail($id = null)
     {
-        $productInfo = $this->productsModel->getSingle($id);
-
+        if ($id != 0)
+        {
+            $productInfo = $this->productsModel->getSingle($id);
+            $productImg = $this->imgModel->getImageById($id);
+        }
+        else {
+            $nextId = $this->productsModel->getNextId();
+            $productInfo = [[
+                "masp" => $nextId[0]['nextId'],
+                "tensp" => "", 
+                "tenloai" => "",
+                "gioitinh" => "",
+                "tenhang" => "",
+                "tenmau" => "",
+                "trangthai" => "",
+                "motasp" => ""
+            ]];
+            
+            $productImg = [];
+        }
         if ($productInfo == null)
-            { 
-                header('Location: /products');
-                exit();
-            }
+        { 
+            header('Location: /products');
+            exit();
+        }
 
-        $productImg = $this->imgModel->getImageById($id);
         $productSize = $this->sizeModel->getSizeBySanPham($id);
         $size = $this->sizeModel->getAll();
         $brands = $this->brandsModel->getAll();
@@ -84,7 +101,12 @@ class Products extends Controller
             if (!empty($ids)) {
                 $successCount = 0;
                 foreach ($ids as $id) {
-                    if ($this->productsModel->deleteById($id)) $successCount++;
+                    if ($this->productsModel->isInPhieuNhap($id)) { 
+                        $this->productsModel->changeStatus($id);
+                        $successCount++;
+                    } else {
+                        $this->productsModel->deleteById($id);
+                    }
                 }
 
                 if ($successCount > 0) {
@@ -97,6 +119,17 @@ class Products extends Controller
         }
     }
 
+    public function addNewProd()
+    { 
+        if (isset($_POST['data']))
+        {
+            $data = $_POST['data'];
+            $success = $this->productsModel->addSanPham($data);
+            echo json_encode(['status' => $success ? 'success' : 'error']);
+            exit();
+        }
+    }
+    
     public function updateInfo()
     {
         if (isset($_POST['data']))

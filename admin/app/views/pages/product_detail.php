@@ -16,7 +16,7 @@
           <i class="fa fa-fw fa-home opacity-50 me-1 d-none d-sm-inline-block"></i> Thông tin sản phẩm
         </button>
       </li>
-      <li class="nav-item d-md-flex flex-md-column">
+      <li id="img-panel" class="nav-item d-md-flex flex-md-column">
         <button class="nav-link text-md-start" id="media-panel-tab" data-bs-toggle="tab" data-bs-target="#media-panel" role="tab" aria-controls="media-panel" aria-selected="false">
           <i class="fa fa-fw fa-user-circle opacity-50 me-1 d-none d-sm-inline-block"></i> Hình ảnh
         </button>
@@ -25,13 +25,13 @@
     <div class="tab-content col-md-10 justify-content-center align-middle">
       <div class="block-content tab-pane active" id="thongtin-panel" role="tabpanel" aria-labelledby="thongtin-panel-tab" tabindex="0">
         <div class="d-flex justify-content-between align-items-center mb-3 me-4">  
-          <h4 class="fw-semibold m-0">Thông tin sản phẩm mã <a id="masp" class="fw-semibold" style="pointer-events: none;"><strong>SP-<?= $id ?></strong></a></h4>
+          <h4 class="fw-semibold m-0">Thông tin sản phẩm mã <a id="masp" class="fw-semibold" style="pointer-events: none;"><strong>SP-<?= $product[0]['masp'] ?></strong></a></h4>
           <button id="edit-btn" type="button" class="btn btn-hero btn-primary">Chỉnh sửa</button>
         </div>
           <!-- Thông tin chi tiết -->
         <div class="block block-rounded">
           <!-- Form thông tin -->
-          <form action="be_pages_ecom_product_edit.php" method="POST" onsubmit="return false;">
+          <form id="prod-form" data-id="<?= $id ?>">
             <div class="row col">
                 <div class="col-lg-7 border rounded pt-4 ps-4 pe-4 ms-3 me-5 h-100">
                   <div class="row mb-4">
@@ -41,19 +41,9 @@
                     </div>
                   </div>
                   <div class="row mb-4">
-                    <div class="col-6">
-                      <label class="form-label fw-bold" for="">Giá nhập (đồng)</label>
-                      <input type="text" class="form-control" id="gianhap" name="gianhap" placeholder="Giá nhập sản phẩm" value="<?= $product[0]['gianhap'] ?>">
-                    </div>
-                    <div class="col-6">
-                      <label class="form-label fw-bold" for="">Tỉ lệ lợi nhuận (%)</label>
-                      <input type="text" class="form-control" id="loinhuan" name="loinhuan" placeholder="Phần trăm lợi nhuận" value="<?= $product[0]['tyleloinhuan'] ?>">
-                    </div>
-                  </div>
-                  <div class="row mb-4">
                     <div class="col">
                       <label class="form-label fw-bold" for="">Mô tả sản phẩm</label>
-                      <textarea class="form-control" id="mota" name="mota" rows="4"><?= $product[0]['motasp'] ?></textarea>
+                      <textarea class="form-control" id="mota" name="mota" rows="4" placeholder="Nhập mô tả sản phẩm"><?= $product[0]['motasp'] ?></textarea>
                     </div>
                   </div>
                   <div class="row mb-4">
@@ -108,13 +98,16 @@
                   <div class="row mb-4">
                     <div class="col">
                       <label class="form-label fw-bold" for="">Giới tính</label>
-                      <select class="form-select" id="gioitinh" style="width: 100%">
+                      <select class="form-select" style="cursor: pointer" id="gioitinh" style="width: 100%">
                         <option disabled selected hidden>Giới tính</option>
                         <?php if ($product[0]['gioitinh'] == 0) { ?>
                           <option value="1">Nam</option>
                           <option value="0" selected>Nữ</option>
-                        <?php } else { ?>
+                        <?php } if ($product[0]['gioitinh'] == 1){ ?>
                           <option value="1" selected>Nam</option>
+                          <option value="0">Nữ</option>
+                        <?php } else {?>
+                          <option value="1">Nam</option>
                           <option value="0">Nữ</option>
                         <?php } ?>
                       </select>
@@ -168,21 +161,24 @@
                   <div class="row mb-4">
                     <div class="col">
                       <label class="form-label fw-bold" for="">Trạng thái</label>
-                      <select class="form-select" id="trangthai" style="width: 100%" >
-                        <option disabled hidden>Ngừng bán/Đang kinh doanh</option>
+                      <select class="form-select" style="cursor: pointer" id="trangthai" style="width: 100%" >
+                        <option selected disabled hidden>Chọn trạng thái</opt ion>
                         <?php if ($product[0]['trangthai'] == 0) { ?>
                           <option selected value="1">Ngừng bán</opt ion>
                           <option value="0">Đang kinh doanh</option>
-                        <?php } else {?>
+                        <?php } if ($product[0]['trangthai'] == 1) {?>
                           <option value="0">Ngừng bán</option>
                           <option selected value="1">Đang kinh doanh</option>
-                        <?php } ?>
+                        <?php } else { ?>
+                          <option value="0">Ngừng bán</option>
+                          <option value="1">Đang kinh doanh</option>
+                        <?php } ?>                        
                       </select>
                     </div>
                   </div>
                   <div class="row mt-4 mb-4 justify-content-end">
                     <div class="col-4">
-                      <button id="save-btn" class="btn btn-primary w-100 invisible">Save</button>
+                      <button type="button" id="save-btn" class="btn btn-primary w-100 invisible">Save</button>
                     </div>
                   </div>
                 </div>
@@ -202,8 +198,11 @@
           </form>
         </div>
         <div class="block-content d-flex justify-content-center flex-wrap">
+          <?php if(empty($img)) { ?>
+          <h3 id="gallery-state">Chưa có hình ảnh</h3>
+          <?php } ?>
           <div class="row items-push js-gallery justify-content-start">
-            <?php foreach($img as $index=>$val) {?>
+            <?php if(!empty($img)) {foreach($img as $index=>$val) {?>
               <?php if ($val['ismain']) { ?>
                 <div class="is-banner col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
               <?php } else { ?>
@@ -221,7 +220,7 @@
                   </div>
                 </div>
               </div>
-            <?php } ?>
+            <?php } } ?>
           </div>
         </div>
       </div>

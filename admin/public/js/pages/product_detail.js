@@ -25,11 +25,19 @@ Dashmix.onLoad(() => {
         $(this).data('prev-value', currStock);
     });
 
+    let isEditMode = false;
+    const isCreate = $('#prod-form').data('id');
+    if (isCreate == 0)
+    { 
+        console.log('create');
+        $('#edit-btn').prop('hidden', true);
+        $('#save-btn').text('Tạo mới');
+        $("#img-panel").addClass("invisible");
+    }
+
     $(document).ready(function() {
         //Thông tin sản phẩm trước sửa
         $("#tensp").data('prev-val', $("#tensp").val());
-        $("#gianhap").data('prev-val', $("#gianhap").val());
-        $("#loinhuan").data('prev-val', $("#loinhuan").val());
         $("#mota").data('prev-val', $("#mota").val());
         $("#gioitinh").data('prev-val', $("#gioitinh").val());
         $("#mau").data('prev-val', $("#mau").val());
@@ -37,11 +45,9 @@ Dashmix.onLoad(() => {
         $("#hang").data('prev-val', $("#hang").val());
         $("#trangthai").data('prev-val', $("#trangthai").val());
         
-        const initialData = {
+        let initialData = {
             masp: $("#masp").text().split('-')[1],
             tensp: $("#tensp").data('prev-val'),
-            gianhap: $("#gianhap").data('prev-val'),
-            tyleloinhuan: $("#loinhuan").data('prev-val'),
             motasp: $("#mota").data('prev-val'),
             gioitinh: $("#gioitinh").data('prev-val'),
             mausac: $("#mau").data('prev-val'),
@@ -72,25 +78,32 @@ Dashmix.onLoad(() => {
         const fields = $(".form-control, .form-select, .select2-selection");
         const save_btn = $("#save-btn");
         
-        fields.prop('disabled',true);
+        if (isCreate != 0)
+        {
+            fields.prop('disabled',true);
+        }
+        else {
+            toggleEditModeRender();
+            $("#size-table").on('change', 'select', function() {
+                const row = table.row($(this).closest('tr')).index();
+                const val = $(this).val()
+                table.cell(row, 0).data(val);
+                table.draw();
+                renderSelect2();
+            });
+            
+            $("#size-table").on("change", 'input', function() {
+                const $row = $(this).closest("tr");
+                const dtRow = table.row($row);
+                const val = $(this).val()
+                table.cell(dtRow.index(), 2).data(val).draw();
+                renderStockInput();
+                reCalcTotalStock();
+            });
+        }
 
-        let isEditMode = false;
         $("#edit-btn").on('click', function() {
-            isEditMode = !isEditMode;
-            //Bật borders cho các field
-            fields.prop('disabled', !isEditMode);
-            fields.toggleClass('border border-2 border-info rounded');
-            save_btn.toggleClass('invisible');
-            $("#table-div").toggleClass('border border-2 border-info rounded')
-            table.column(3).visible(isEditMode);
-            $("#totalStock").toggleClass("ms-1 me-3");
-            if (isEditMode)
-                $("#add-size").attr('hidden', false).parent().addClass('mb-3');
-            else 
-                $("#add-size").attr('hidden', true).parent().removeClass('mb-3');
-            //Chuyển ô kích thước thành select2 và số lượng thành input
-            renderSelect2();
-            renderStockInput();
+            toggleEditModeRender();
             
             //Cập nhật ID + resort sau chọn
             $("#size-table").on('change', 'select', function() {
@@ -112,8 +125,6 @@ Dashmix.onLoad(() => {
             
             if (!isEditMode) {
                 $("#tensp").val($("#tensp").data('prev-val'));
-                $("#gianhap").val($("#gianhap").data('prev-val'));
-                $("#loinhuan").val($("#loinhuan").data('prev-val'));
                 $("#mota").val($("#mota").data('prev-val'));
                 $("#gioitinh").val($("#gioitinh").data('prev-val'));
                 $("#mau").val($("#mau").data('prev-val')).trigger('change');
@@ -134,7 +145,6 @@ Dashmix.onLoad(() => {
                 masize: masize
             }
             delArr.push(obj);
-            console.log(delArr);
         });
 
         $(document).on('click', '#add-size', function() {
@@ -165,8 +175,6 @@ Dashmix.onLoad(() => {
             const data = {
                 masp: $("#masp").text().split('-')[1],
                 tensp: $("#tensp").val(),
-                gianhap: $("#gianhap").val(),
-                tyleloinhuan: $("#loinhuan").val(),
                 motasp: $("#mota").val(),
                 gioitinh: $("#gioitinh").val(),
                 mausac: $("#mau").val(),
@@ -174,6 +182,7 @@ Dashmix.onLoad(() => {
                 hang: $("#hang").val(),
                 trangthai: $("#trangthai").val(),
             }
+            console.log(data);
 
             let sizeDataArray = [];
             table.rows().every( function ( rowIdx, tableLoop, rowLoop ) {
@@ -186,63 +195,112 @@ Dashmix.onLoad(() => {
                 sizeDataArray.push(sizeData);
             } );
             console.log(sizeDataArray);
+            console.log(oldId);
+            if (isCreate == 0)
+            {
+                const required = ['tensp', 'gioitinh', 'loai', 'hang', 'trangthai', 'mausac'];
+                let isValid = true;
 
-            if (JSON.stringify(data) == JSON.stringify(initialData))
-                console.log("No changes in info");
-            else
-                $.ajax({
-                    url: '/QuanLyBanGiay_Php/admin/products/updateInfo',
-                    type: 'POST',
-                    data: { 
-                        data: data
-                    },
-                    success: function(response) {
-                        console.log(response);
+                for (const field of required) {
+                    const val = data[field];
+                    if (val === null || val === undefined || String(val).trim() === "") {
+                        isValid = false;
+                        break; 
                     }
-                });
-            if (JSON.stringify(sizeDataArray) == JSON.stringify(initialSizeDataArray))
-                console.log("No changes in sizes");
+                }
+
+                if (!isValid) {
+                    alert("Vui lòng điền đầy đủ thông tin sản phẩm!");
+                    return false;
+                } else {
+                    $.ajax({
+                        url: '/QuanLyBanGiay_Php/admin/products/addNewProd',
+                        type: 'POST',
+                        data: { 
+                            data: data
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if(response.status === 'success')
+                                window.location.href = '/QuanLyBanGiay_Php/admin/products';
+                            else
+                                alert("Kiểm tra lại thông tin");
+                        }
+                    });
+                    $.ajax({
+                            url: '/QuanLyBanGiay_Php/admin/products/addNewSize',
+                            type: 'POST',
+                            data: {
+                                oldId: oldId,
+                                data: sizeDataArray
+                            },
+                            success: function(response) {
+                                console.log(response);
+                            }
+                        });
+                    }
+            }
             else
             {
-                $.ajax({
-                    url: '/QuanLyBanGiay_Php/admin/products/addNewSize',
-                    type: 'POST',
-                    data: {
-                        oldId: oldId,
-                        data: sizeDataArray
-                    },
-                    success: function(response) {
-                        console.log(response);
-                    }
-                });
-            
-                $.ajax({
-                    url: '/QuanLyBanGiay_Php/admin/products/updateSizeAndStock',
-                    type: 'POST',
-                    data: {
-                        oldId: oldId,
-                        data: sizeDataArray
-                    },
-                    success: function(response) {
-                        console.log(response);
-                    }
-                });
-            }
-            if (delArr.length != 0)
-               $.ajax({
-                url: '/QuanLyBanGiay_Php/admin/products/deleteSizeAndStock',
-                type: 'POST',
-                data: {
-                    data: delArr,
-                },
-                success: function(response)
+                if (JSON.stringify(data) == JSON.stringify(initialData))
+                    console.log("No changes in info");
+                else
+                    $.ajax({
+                        url: '/QuanLyBanGiay_Php/admin/products/updateInfo',
+                        type: 'POST',
+                        data: { 
+                            data: data
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    });
+                if (JSON.stringify(sizeDataArray) == JSON.stringify(initialSizeDataArray))
+                    console.log("No changes in sizes");
+                else
                 {
-                    console.log(response);
+                    $.ajax({
+                        url: '/QuanLyBanGiay_Php/admin/products/addNewSize',
+                        type: 'POST',
+                        data: {
+                            oldId: oldId,
+                            data: sizeDataArray
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    });
+                
+                    $.ajax({
+                        url: '/QuanLyBanGiay_Php/admin/products/updateSizeAndStock',
+                        type: 'POST',
+                        data: {
+                            oldId: oldId,
+                            data: sizeDataArray
+                        },
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    });
                 }
-            })
+                if (delArr.length != 0)
+                $.ajax({
+                    url: '/QuanLyBanGiay_Php/admin/products/deleteSizeAndStock',
+                    type: 'POST',
+                    data: {
+                        data: delArr,
+                    },
+                    success: function(response)
+                    {
+                        console.log(response);
+                    }
+                })
 
-            initialSizeDataArray = sizeDataArray;
-            initialData = data;
+                console.log(data);
+                initialSizeDataArray = sizeDataArray;
+                initialData = data;
+                toggleEditModeRender();
+            }
         });
 
         $('#add-image').on('change', function() {
@@ -301,28 +359,24 @@ Dashmix.onLoad(() => {
             });
         });
 
-        $(document).on('click', '.delete', function() {
-            const btn = $(this);
-            const imgpath = $(this).closest(".options-container").find('img').attr('src');
-            const cleanPath = imgpath.replace('/QuanLyBanGiay_Php/', '');
-            $.ajax({
-                url: '/QuanLyBanGiay_Php/admin/products/deleteImage',
-                type: 'POST',
-                data: { 
-                    path: cleanPath, 
-                    masp: masp 
-                },
-                success: function(response) {
-                    if (response.status === 'success') {
-                        btn.closest(".options-container").parent().addClass("fadeOut");
-                        setTimeout(function() {
-                            btn.closest(".options-container").parent().remove();
-                        }, 1000);
-                    }
-                }
-            });
-        });
-        
+        function toggleEditModeRender() {
+            isEditMode = !isEditMode;
+            //Bật borders cho các field
+            fields.prop('disabled', !isEditMode);
+            fields.toggleClass('border border-2 border-info rounded');
+            save_btn.toggleClass('invisible');
+            $("#table-div").toggleClass('border border-2 border-info rounded')
+            table.column(3).visible(isEditMode);
+            $("#totalStock").toggleClass("ms-1 me-3");
+            if (isEditMode)
+                $("#add-size").attr('hidden', false).parent().addClass('mb-3');
+            else 
+                $("#add-size").attr('hidden', true).parent().removeClass('mb-3');
+            //Chuyển ô kích thước thành select2 và số lượng thành input
+            renderSelect2();
+            renderStockInput();
+        }
+
         function renderStockInput(){
             $("#table-div .soluong").each(function(index, value) {
                 const $cell = $(this);
@@ -368,7 +422,7 @@ Dashmix.onLoad(() => {
                     const currVal = dtRow.data()[0];
                     $(this).html(`
                         <div class="block m-0">
-                            <select class="js-select2 form-select" style="width: 100%">
+                            <select class="js-select2 form-select" style="width: 100%" data-placeholder="Chọn size">
                                 ${optionsHTML}
                             </select>
                         </div>
@@ -429,6 +483,28 @@ Dashmix.onLoad(() => {
                     terminateBanner();
                     btn.closest(".options-container").parent().addClass('is-banner');
                     initBanner();
+                }
+            }
+        });
+    });
+    
+    $(document).on('click', '.delete', function() {
+        const btn = $(this);
+        const imgpath = $(this).closest(".options-container").find('img').attr('src');
+        const cleanPath = imgpath.replace('/QuanLyBanGiay_Php/', '');
+        $.ajax({
+            url: '/QuanLyBanGiay_Php/admin/products/deleteImage',
+            type: 'POST',
+            data: { 
+                path: cleanPath, 
+                masp: masp 
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    btn.closest(".options-container").parent().addClass("fadeOut");
+                    setTimeout(function() {
+                        btn.closest(".options-container").parent().remove();
+                    }, 1000);
                 }
             }
         });

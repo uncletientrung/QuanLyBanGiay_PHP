@@ -42,6 +42,7 @@ $router->get('/products', 'Products@default');
 $router->get('/products/getData', 'Products@getData');
 $router->post('/products/delete', 'Products@delete');
 $router->post('/products/updateInfo', 'Products@updateInfo');
+$router->post('/products/addNewProd', 'Products@addNewProd');
 $router->post('/products/updateSizeAndStock', 'Products@updateSizeAndStock');
 $router->post('/products/deleteSizeAndStock', 'Products@deleteSizeAndStock');
 $router->post('/products/addNewSize', 'Products@addNewSize');

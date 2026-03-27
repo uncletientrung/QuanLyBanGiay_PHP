@@ -10,7 +10,7 @@
         Danh sách sản phẩm
       </h3>
       <div class="block-options">
-        <button type="button" class="btn btn-hero btn-primary">Thêm mới<i class="fa fa-plus ms-2"></i></button>
+        <a class="btn btn-hero btn-primary" href="./products/0">Thêm mới<i class="fa fa-plus ms-2"></i></a>
       </div>
     </div>
     <div class="block-content block-content-full">

@@ -16,6 +16,28 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function getNextId()
+    { 
+         $sql = "SELECT AUTO_INCREMENT as nextId
+                FROM information_schema.tables
+                WHERE table_schema = 'quanlybangiay'
+                AND table_name = 'sanpham';";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addSanPham($data)
+    { 
+        $sql = "INSERT INTO sanpham (tensp, loai, gioitinh, gianhap, tyleloinhuan, hang, mau, motasp, soluongdaban, trangthai) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            $data['tensp'], $data['loai'], $data['gioitinh'], 
+            0, 0, $data['hang'], 
+            $data['mausac'], $data['motasp'], 0, $data['trangthai']]);
+    }
+
     public function updateSanPham($data)
     { 
         $sql = "UPDATE sanpham SET tensp = :tensp, loai = :loai, gioitinh = :gioitinh, gianhap = :gianhap, tyleloinhuan = :tyleloinhuan, motasp = :motasp
@@ -119,8 +141,6 @@ class SanPhamModel
                     s.tensp,
                     l.tenloai,
                     s.gioitinh,
-                    s.gianhap,
-                    s.tyleloinhuan,
                     h.tenhang,
                     m.tenmau,
                     s.trangthai,
@@ -137,6 +157,21 @@ class SanPhamModel
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function isInPhieuNhap($id)
+    { 
+        $sql = "SELECT masp FROM ctphieunhap WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->rowCount() > 0;
+    }
+    
+    public function changeStatus($id)
+    { 
+        $sql = "UPDATE sanpham SET trangthai = 0 WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$id]);
     }
 
     public function deleteById($id)
