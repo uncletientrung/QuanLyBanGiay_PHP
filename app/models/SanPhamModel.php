@@ -196,6 +196,34 @@ class SanPhamModel
         return $stmt->execute([$newValue, $productId]);
     }
     
+    public function getAllStock()
+    { 
+        $sql = "SELECT 
+                    s.masp, 
+                    s.tensp, 
+                    COALESCE(SUM(ss.soluong), 0) AS tong_soluong
+                FROM sanpham AS s
+                LEFT JOIN sanphamsize AS ss ON s.masp = ss.masp
+                GROUP BY s.masp, s.tensp;";
+        $stmt = $this->conn->prepare($sql); 
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getStockById($id)
+    { 
+        $sql = "SELECT 
+                    ss.masize,
+                    tensize,
+                    soluong
+                FROM sanphamsize as ss
+                LEFT JOIN size as s ON ss.masize = s.masize
+                WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql); 
+        $stmt->execute([$id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getBestSellingProductByMaHang($maHang)
     {
 
