@@ -189,6 +189,13 @@ class SanPhamModel
         $stmt->execute([$masp]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updateLoiNhuan($productId, $newValue){
+        $sql = "UPDATE sanpham SET tyleloinhuan = ? WHERE masp = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$newValue, $productId]);
+    }
+    
     public function getBestSellingProductByMaHang($maHang)
     {
 

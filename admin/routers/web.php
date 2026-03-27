@@ -65,6 +65,10 @@ $router->post('/don_hang/updateStatus', 'Don_hang@updateStatus');
 $router->post('/don_hang/updateBulkStatus', 'Don_hang@updateBulkStatus');
 $router->post('/don_hang/delete', 'Don_hang@delete');
 
+// Gia ban
+$router->get('/gia_ban', 'GiaBan@default');
+$router->post('/gia_ban/updateLoiNhuan', 'GiaBan@updateLoiNhuan');
+
 // Ton kho
 $router->get('/ton_kho', 'Ton_kho@default');
 

@@ -110,6 +110,11 @@ $dm->main_nav                   = array(
         'url'   => APP_ADMIN_PATH . 'don_hang'
     ),
     array(
+        'name'  => 'Giá bán',
+        'icon'  => 'far fa-money-bill-1',
+        'url'   => APP_ADMIN_PATH . 'gia_ban'
+    ),
+    array(
         'name'  => 'Tồn kho',
         'icon'  => 'fa fa-warehouse',
         'url'   => APP_ADMIN_PATH . 'ton_kho'
