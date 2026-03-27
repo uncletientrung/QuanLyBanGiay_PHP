@@ -113,6 +113,15 @@ class SanPhamModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+        public function getNewestProducts(){
+        $sql = "SELECT * FROM sanpham 
+                WHERE trangthai = 1 
+                ORDER BY masp DESC 
+                LIMIT 12";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);   
+}
 
     public function countAll()
     {

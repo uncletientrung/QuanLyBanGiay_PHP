@@ -137,21 +137,23 @@
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
                     <h4 class="mb-2 pb-2 border-bottom border-navy">Màu sắc</h4>
-                    <?php foreach($listMauSac as $mau): ?>
-                      <div class="mb-2">
-                        <input
-                          type="checkbox"
-                          class="me-2 color-checkbox form-check-input-custom"
-                          id="mau-<?= $mau['mamau'] ?>"
-                          name="mau[]"
-                          value="<?= $mau['mamau'] ?>"
-                          <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
-                        >
-                        <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
-                          <?= htmlspecialchars($mau['tenmau']) ?>
-                        </label>
-                      </div>
-                    <?php endforeach; ?>
+                    <div class="color-list-scroll">
+                      <?php foreach($listMauSac as $mau): ?>
+                        <div class="mb-2">
+                          <input
+                            type="checkbox"
+                            class="me-2 color-checkbox form-check-input-custom"
+                            id="mau-<?= $mau['mamau'] ?>"
+                            name="mau[]"
+                            value="<?= $mau['mamau'] ?>"
+                            <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
+                          >
+                          <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
+                            <?= htmlspecialchars($mau['tenmau']) ?>
+                          </label>
+                        </div>
+                      <?php endforeach; ?>
+                    </div>
                   </div>
                 </div>
 
