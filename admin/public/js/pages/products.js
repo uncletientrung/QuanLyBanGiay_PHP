@@ -6,36 +6,36 @@ Dashmix.onLoad(() =>
         static initDataTables() {
             // Override a few default classes
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
-            sWrapper: "dataTables_wrapper dt-bootstrap5",
-            sFilterInput: "form-control",
-            sLengthSelect: "form-select"
+                sWrapper: "dataTables_wrapper dt-bootstrap5",
+                sFilterInput: "form-control",
+                sLengthSelect: "form-select"
             });
 
             // Override a few defaults
             jQuery.extend(true, jQuery.fn.dataTable.defaults, {
-            language: {
-                lengthMenu: "_MENU_",
-                search: "_INPUT_",
-                searchPlaceholder: "Search..",
-                info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
-                paginate: {
-                first: '<i class="fa fa-angle-double-left"></i>',
-                previous: '<i class="fa fa-angle-left"></i>',
-                next: '<i class="fa fa-angle-right"></i>',
-                last: '<i class="fa fa-angle-double-right"></i>'
+                language: {
+                    lengthMenu: "_MENU_",
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search..",
+                    info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
+                    paginate: {
+                        first: '<i class="fa fa-angle-double-left"></i>',
+                        previous: '<i class="fa fa-angle-left"></i>',
+                        next: '<i class="fa fa-angle-right"></i>',
+                        last: '<i class="fa fa-angle-double-right"></i>'
+                    }
                 }
-            }
             });
 
             // Override buttons default classes
             jQuery.extend(true, jQuery.fn.DataTable.Buttons.defaults, {
-            dom: {
-                button: {
-                className: 'btn btn-sm btn-primary'
-                },
-            }
+                dom: {
+                    button: {
+                        className: 'btn btn-sm btn-primary'
+                    },
+                }
             });
-            
+
             // Init full extra DataTable
             table = jQuery('.js-dataTable-responsive').DataTable({
                 pagingType: "full_numbers",
@@ -68,7 +68,7 @@ Dashmix.onLoad(() =>
                     url: './products/getData',
                     dataSrc: ''
                 },
-                order: [[1,'asc']],
+                order: [[1, 'asc']],
                 columns: [
                     {
                         data: null,
@@ -85,11 +85,11 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data:'masp',
+                        data: 'masp',
                         className: 'text-center',
-                        type:'num',
-                        render: function (data, type) { 
-                             if (type === 'sort' || type === 'type') {
+                        type: 'num',
+                        render: function (data, type) {
+                            if (type === 'sort' || type === 'type') {
                                 return parseInt(data);
                             }
                             return `
@@ -100,8 +100,8 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data:'tensp',
-                        render: function(data) {
+                        data: 'tensp',
+                        render: function (data) {
                             return `
                             <span class="fw-semibold">
                                 <strong>${data}</strong>
@@ -110,13 +110,12 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data:'tenloai',
+                        data: 'tenloai',
                     },
                     {
-                        data:'gioitinh',
-                        className:'text-center',
-                        render: function(data, type, row)
-                        { 
+                        data: 'gioitinh',
+                        className: 'text-center',
+                        render: function (data, type, row) {
                             let gender;
                             if (data == 1)
                                 gender = "Nam";
@@ -129,33 +128,32 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data:'gianhap',
+                        data: 'gianhap',
                         render: DataTable.render.number(null, null, null, null, ' đồng')
                     },
                     {
-                        data:'tyleloinhuan',
-                        className:'text-center'
+                        data: 'tyleloinhuan',
+                        className: 'text-center'
                     },
                     {
-                        data:'tenhang',
+                        data: 'tenhang',
                     },
                     {
-                        data:'tenmau',
+                        data: 'tenmau',
                     },
                     {
                         data: 'size',
-                        render: function(data, type, row) {
-                            if (data == null)
-                            { 
+                        render: function (data, type, row) {
+                            if (data == null) {
                                 return `Chưa có size`
                             }
                             return `${data}`
                         }
                     },
                     {
-                        data:'trangthai',
-                        className:'text-center',
-                        render: function(data, type, row) {
+                        data: 'trangthai',
+                        className: 'text-center',
+                        render: function (data, type, row) {
                             let status;
                             let bgcolor;
                             if (data == 0) {
@@ -174,18 +172,14 @@ Dashmix.onLoad(() =>
                     },
                     {
                         data: 'masp',
-                        className:'text-center',
+                        className: 'text-center',
                         orderable: false,
-                        render: function(data)
-                        { 
+                        render: function (data) {
                             return `
-                                    <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem mô tả sản phẩm">
+                                    <a type="button" class="btn btn-sm btn-alt-secondary" href="./products/${data}" title="Xem chi tiết sản phẩm">
                                         <i class="fa fa-fw fa-bars text-primary-darker"></i>
                                     </a>
-                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Sửa">
-                                        <i class="fa fa-fw fa-pen-to-square text-info"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
+                                    <button type="button" class="fast-delete btn btn-sm btn-alt-secondary" data-id="${data}" title="Xóa">
                                         <i class="fa fa-fw fa-times text-danger"></i>
                                     </button>
                             `
@@ -212,6 +206,14 @@ Dashmix.onLoad(() =>
             `);
 
             table.column(0).visible(false);
+
+            $("#sp-table").on('click', '.fast-delete', function () {
+                const arr = []
+                const data = $(this).data();
+                arr.push(data.id);
+                $.post("./products/delete", { ids: arr })
+                table.ajax.reload();
+            });
         }
 
         static initFilterBox() {
@@ -227,8 +229,8 @@ Dashmix.onLoad(() =>
                 data1.forEach(el => {
                     max_profit = Math.max(el, max_profit);
                 });
-            
-            jQuery('#filter-box-target').html(`
+
+                jQuery('#filter-box-target').html(`
                 <div class="ms-1 me-1 border rounded">
                     <div class="mt-4 ms-3 me-5">
                         <div class="row mb-4 mt-3">
@@ -286,155 +288,151 @@ Dashmix.onLoad(() =>
                         </div>
 
                         <div class="row justify-content-end mb-4 mt-3">
-                            <a id="reset-filter" href="#sp-table" class="col-lg-1 me-4 btn btn-outline-danger">
-                                <i class="fa fa-rotate-left me-2"></i>Đặt lại</a>
-                            <a id="apply-filter" href="#sp-table" class="col-lg-1 btn btn-outline-info">
-                                <i class="fa fa-check me-2"></i>Áp dụng</a>
+                            <div class="col-auto">
+                                <a id="reset-filter" href="#sp-table" class="btn btn-outline-danger me-2">
+                                    <i class="fa fa-rotate-left me-2"></i>Đặt lại
+                                </a>
+                                <a id="apply-filter" href="#sp-table" class="btn btn-outline-info">
+                                    <i class="fa fa-check me-2"></i>Áp dụng
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div> 
             `);
-            
-            Dashmix.helpers("jq-select2");
-            Dashmix.helpers("jq-rangeslider");
 
-            $.when(
-                $.getJSON("./categories/getData"),
-                $.getJSON("./brands/getData"),
-                $.getJSON("./colors/getData"),
-            ).done(function(categories, brands, colors) {
-                categories[0].forEach(el =>
-                    {
+                Dashmix.helpers("jq-select2");
+                Dashmix.helpers("jq-rangeslider");
+
+                $.when(
+                    $.getJSON("./categories/getData"),
+                    $.getJSON("./brands/getData"),
+                    $.getJSON("./colors/getData"),
+                ).done(function (categories, brands, colors) {
+                    categories[0].forEach(el => {
                         $("#filter-loai").append(`
                             <option value="${el.tenloai}">${el.tenloai}</option>
                             `);
                     }
-                )
+                    )
 
-                brands[0].forEach(el =>
-                    {
+                    brands[0].forEach(el => {
                         $("#filter-hang").append(`
                             <option value="${el.tenhang}">${el.tenhang}</option>
                             `);
                     }
-                )
+                    )
 
-                colors[0].forEach(el =>
-                    {
+                    colors[0].forEach(el => {
                         $("#filter-mau").append(`
                             <option value="${el.tenmau}">${el.tenmau}</option>
                             `);
                     }
-                )
+                    )
 
-                $("#filter-box-target").find(".btn").attr("data-toggle", "click-ripple");
-                $("#filter-box-target").find(".btn").addClass('border-dark');
+                    $("#filter-box-target").find(".btn").attr("data-toggle", "click-ripple");
+                    $("#filter-box-target").find(".btn").addClass('border-dark');
 
-                $("#filter-box-target").on("click", ".btn", function() {
-                    if ($(this).attr("id") != "reset-filter" && $(this).attr("id") != "apply-filter") {
-                        $(this).toggleClass("btn-primary");
-                        $(this).toggleClass("border-dark")
-                        $(this).toggleClass("border-primary")
-                    }
+                    $("#filter-box-target").on("click", ".btn", function () {
+                        if ($(this).attr("id") != "reset-filter" && $(this).attr("id") != "apply-filter") {
+                            $(this).toggleClass("btn-primary");
+                            $(this).toggleClass("border-dark")
+                            $(this).toggleClass("border-primary")
+                        }
+                    });
+                    Dashmix.helpers("dm-ripple");
+
+                    $("#filter-gioitinh").on('click', '.btn', function () {
+                        const val = $(this).val();
+                        if (gioitinh.indexOf(val) == -1) {
+                            gioitinh.push(val);
+                        }
+                        else {
+                            gioitinh.splice(gioitinh.indexOf(val), 1);
+                        }
+                    });
+
+                    $("#filter-trangthai").on('click', '.btn', function () {
+                        const val = $(this).val();
+                        if (trangthai.indexOf(val) == -1) {
+                            trangthai.push(val);
+                        }
+                        else {
+                            trangthai.splice(trangthai.indexOf(val), 1);
+                        }
+                    });
                 });
-                Dashmix.helpers("dm-ripple");
 
-                $("#filter-gioitinh").on('click', '.btn', function() {
-                    const val = $(this).val();
-                    if (gioitinh.indexOf(val) == -1)
-                    { 
-                        gioitinh.push(val);
-                    }
-                    else
-                    {
-                        gioitinh.splice(gioitinh.indexOf(val), 1);
-                    }
+                $("#reset-filter").on('click', function () {
+                    gioitinh = [];
+                    trangthai = [];
+                    $("#filter-box-target").find(".btn").removeClass("btn-primary border-primary").addClass("border-dark");
+
+                    $("#filter-loai, #filter-hang, #filter-mau").val('').trigger('change')
+                    const slider1 = $("#filter-gianhap").data('ionRangeSlider');
+                    slider1.reset();
+
+                    const slider2 = $("#filter-loinhuan").data('ionRangeSlider');
+                    slider2.reset();
+
+                    $.fn.dataTable.ext.search = [];
+                    table.columns().search('');
+                    table.draw();
                 });
 
-                $("#filter-trangthai").on('click', '.btn', function() {
-                    const val = $(this).val();
-                    if (trangthai.indexOf(val) == -1)
-                    { 
-                        trangthai.push(val);
-                    }
-                    else
-                    {
-                        trangthai.splice(trangthai.indexOf(val), 1);
-                    }
+                $("#apply-filter").on('click', function () {
+                    $.fn.dataTable.ext.search = [];
+                    const loai = ($("#filter-loai").select2('val')).join('|'); //col 2
+                    const hang = ($('#filter-hang').select2('val')).join('|'); // col 6
+                    const mau = ($('#filter-mau').select2('val')).join('|'); // col 7
+                    const gt = gioitinh.join('');
+                    const tt = trangthai.join('');
+
+                    const min_nhap = $("#filter-gianhap").data("from"); //col 4
+                    const max_nhap = $("#filter-gianhap").data("to");
+
+                    const min_profit = $("#filter-loinhuan").data("from"); //col 5
+                    const max_profit = $("#filter-loinhuan").data("to");
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        if (
+                            (isNaN(min_nhap) && isNaN(max_nhap)) ||
+                            (isNaN(min_nhap) && data[5] <= max_nhap) ||
+                            (min_nhap <= data[5] && isNaN(max_nhap)) ||
+                            (min_nhap <= data[5] && data[5] <= max_nhap) // Giá nhập
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        if (
+                            (isNaN(min_profit) && isNaN(max_profit)) ||
+                            (isNaN(min_profit) && data[6] <= max_profit) ||
+                            (min_profit <= data[6] && isNaN(max_profit)) ||
+                            (min_profit <= data[6] && data[6] <= max_profit) // Lợi nhuận
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    if (loai.length != 0) table.column(3).search("^(" + loai + ")$", true, false);
+                    if (hang.length != 0) table.column(7).search("^(" + hang + ")$", true, false);
+                    if (mau.length != 0) table.column(8).search("^(" + mau + ")$", true, false);
+                    if (gioitinh.length != 0) table.column(4).search("^([" + gt + "])$", true, false);
+                    if (trangthai.length != 0) table.column(10).search("^([" + tt + "])$", true, false);
+                    table.draw();
                 });
+                //Fix placeholder
+                $(".select2-container--default .select2-search--inline .select2-search__field").css('width', "initial !important");
             });
-            
-            $("#reset-filter").on('click', function() {
-                gioitinh = [];
-                trangthai = [];
-                $("#filter-box-target").find(".btn").removeClass("btn-primary border-primary").addClass("border-dark");
-
-                $("#filter-loai, #filter-hang, #filter-mau").val('').trigger('change')
-                const slider1 = $("#filter-gianhap").data('ionRangeSlider');
-                slider1.reset();
-
-                const slider2 = $("#filter-loinhuan").data('ionRangeSlider');
-                slider2.reset();
-
-                $.fn.dataTable.ext.search = [];
-                table.columns().search('');
-                table.draw();
-            });
-
-            $("#apply-filter").on('click', function() {
-                $.fn.dataTable.ext.search = [];
-                const loai = ($("#filter-loai").select2('val')).join('|'); //col 2
-                const hang = ($('#filter-hang').select2('val')).join('|'); // col 6
-                const mau = ($('#filter-mau').select2('val')).join('|'); // col 7
-                const gt = gioitinh.join('');
-                const tt = trangthai.join('');
-
-                const min_nhap = $("#filter-gianhap").data("from"); //col 4
-                const max_nhap = $("#filter-gianhap").data("to");
-
-                const min_profit = $("#filter-loinhuan").data("from"); //col 5
-                const max_profit = $("#filter-loinhuan").data("to");
-
-                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                    if (
-                        (isNaN(min_nhap) && isNaN(max_nhap)) ||
-                        (isNaN(min_nhap) && data[5] <= max_nhap) ||
-                        (min_nhap <= data[5] && isNaN(max_nhap)) ||
-                        (min_nhap <= data[5] && data[5] <= max_nhap) // Giá nhập
-                    ) {
-                        return true;
-                    }
-                    return false;
-                });
-
-                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                    if (
-                        (isNaN(min_profit) && isNaN(max_profit)) ||
-                        (isNaN(min_profit) && data[6] <= max_profit) ||
-                        (min_profit <= data[6] && isNaN(max_profit)) ||
-                        (min_profit <= data[6] && data[6] <= max_profit) // Lợi nhuận
-                    ) {
-                        return true;
-                    }
-                    return false;
-                });
-
-                if (loai.length != 0) table.column(3).search("^(" + loai + ")$", true, false);
-                if (hang.length != 0) table.column(7).search("^(" + hang + ")$", true, false);
-                if (mau.length != 0) table.column(8).search("^(" + mau + ")$", true, false);
-                if (gioitinh.length != 0) table.column(4).search("^([" + gt + "])$", true, false);
-                if (trangthai.length != 0) table.column(10).search("^([" + tt + "])$", true, false);
-                table.draw();
-            });
-            //Fix placeholder
-            $(".select2-container--default .select2-search--inline .select2-search__field").css('width', "initial !important");
-        });
         }
-        
-        static interaction()
-        {
+
+        static interaction() {
             let ids_arr = [];
-            $("#select-mode").on("click", ".btn", function() {
+            $("#select-mode").on("click", ".btn", function () {
                 const isVisible = table.column(0).visible();
                 table.column(0).visible(!isVisible);
                 $("#sp-table tbody .form-check-input").prop('checked', false);
@@ -443,14 +441,14 @@ Dashmix.onLoad(() =>
                 toggleUI(ids_arr);
             });
 
-            $("#sp-table").on("click", "#check-all", function() {
+            $("#sp-table").on("click", "#check-all", function () {
                 const isChecked = $(this).prop('checked');
                 $("#sp-table tbody .form-check-input").prop('checked', isChecked);
                 isChecked ? ids_arr = table.column(1).data().toArray() : ids_arr = [];
                 toggleUI(ids_arr);
             });
 
-            $("#sp-table").on('click', 'tbody .form-check-input',function() {
+            $("#sp-table").on('click', 'tbody .form-check-input', function () {
                 $(this).prop('checked') ? ids_arr.push($(this).val()) : ids_arr.splice(ids_arr.indexOf($(this).val()), 1);
                 if (ids_arr.length == table.column(0).rows().count())
                     $("#check-all").prop('checked', true);
@@ -459,8 +457,7 @@ Dashmix.onLoad(() =>
                 toggleUI(ids_arr);
             });
 
-            table.on('draw', function() {
-                console.log(ids_arr);
+            table.on('draw', function () {
                 $("#sp-table tbody .form-check-input").each(function () {
                     if (ids_arr.indexOf($(this).val()) != -1)
                         $(this).prop('checked', true);
@@ -469,24 +466,22 @@ Dashmix.onLoad(() =>
                 })
             });
 
-            $("#status-dropdown-item").on('click', 'a', function() {
+            $("#status-dropdown-item").on('click', 'a', function () {
                 $("#status-dropdown").text($(this).text());
             });
 
-            $("#delete-button").on('click', function() {
-                    console.log(ids_arr);
-                    if (ids_arr.length != 0) $.post("./products/delete", {ids: ids_arr});
-                    table.ajax.reload();
-                });
+            $("#delete-button").on('click', function () {
+                if (ids_arr.length != 0) $.post("./products/delete", { ids: ids_arr });
+                table.ajax.reload();
+            });
 
-            function toggleUI(arr)
-            {
+            function toggleUI(arr) {
                 if (arr.length != 0) {
                     $("#delete-button").removeClass("invisible");
                 }
                 else {
                     $("#delete-button").addClass("invisible");
-                    $("#status-dropdown").text("Đổi trạng thái");       
+                    $("#status-dropdown").text("Đổi trạng thái");
                 }
             }
         }

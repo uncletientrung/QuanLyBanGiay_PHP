@@ -9,6 +9,9 @@
       <h3 class="block-title">
         Danh sách sản phẩm
       </h3>
+      <div class="block-options">
+        <button type="button" class="btn btn-hero btn-primary">Thêm mới<i class="fa fa-plus ms-2"></i></button>
+      </div>
     </div>
     <div class="block-content block-content-full">
       <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
