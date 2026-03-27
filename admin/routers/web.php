@@ -43,11 +43,13 @@ $router->get('/products/getData', 'Products@getData');
 $router->post('/products/delete', 'Products@delete');
 
 
-// Kho hang
+// Nhap hang
 $router->get('/nhap_hang', 'Nhap_hang@default');
 $router->get('/nhap_hang/getData', 'Nhap_hang@getData');
+$router->post('/nhap_hang/getDetail', 'Nhap_hang@getDetail');
 $router->get('/nhap_hang/add',  'Nhap_hang@add');
 $router->post('/nhap_hang/add', 'Nhap_hang@add');
+$router->post('/nhap_hang/update', 'Nhap_hang@update');
 $router->post('/nhap_hang/delete', 'Nhap_hang@delete');
 
 // Don hang
