@@ -58,7 +58,8 @@ class Nhap_hang extends Controller
         $suppliers = $nccModel->getAll();
         $sanPhamModel = $this->model("SanPhamModel");
         $products  = $sanPhamModel->getAllWithStock();
-        $nextMaPN  = $this->phieuNhapModel->getNextMaPN();
+        $nextId = $this->phieuNhapModel->getNextMaPN();
+        $nextMaPN = $nextId;
 
         $this->renderView("main_layout", [
             "page"      => "nhap_hang_add",
@@ -118,10 +119,10 @@ class Nhap_hang extends Controller
 
         $this->renderView("main_layout", [
             "page"     => "nhap_hang_add",
-            "title"    => "Sửa phiếu nhập PN" . str_pad($id, 3, '0', STR_PAD_LEFT),
+            "title" => "Sửa phiếu nhập PN-{$id}",
             "Plugin"   => ["flatpickr" => 1, "sweetalert2" => 1],
             "products" => $products,
-            "nextMaPN" => 'PN' . str_pad($id, 3, '0', STR_PAD_LEFT),
+            "nextMaPN" => $id,
             "phieu"    => $phieu,
             "chiTiet"  => $chiTiet,
             "suppliers" => $suppliers,

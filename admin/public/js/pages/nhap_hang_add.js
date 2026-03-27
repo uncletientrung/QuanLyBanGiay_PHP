@@ -116,7 +116,7 @@ Dashmix.onLoad(() => {
                     <td class="text-center row-index"></td>
                     <td>
                         <div class="fw-semibold">${p.tensp}</div>
-                        <div class="fs-xs text-muted">SP${String(p.masp).padStart(3, '0')}</div>
+                        <div class="fs-xs text-muted">SP-${p.masp}</div>
                     </td>
                     <td class="text-center">
                         <span class="badge bg-info text-dark px-2 py-1">${p.tensize}</span>
@@ -245,7 +245,7 @@ Dashmix.onLoad(() => {
             }
 
             const payload = {
-                mapn: NhapHangAdd.mapn ? parseInt(NhapHangAdd.mapn.replace('PN', '')) : null,
+                mapn: NhapHangAdd.mapn ? parseInt(NhapHangAdd.mapn) : null,
                 ngaynhap,
                 mancc: parseInt(mancc),
                 trangthai,

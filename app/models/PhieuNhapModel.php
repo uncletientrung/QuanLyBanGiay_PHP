@@ -26,8 +26,7 @@ class PhieuNhapModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $row  = $stmt->fetch(PDO::FETCH_ASSOC);
-        $next = ($row['max_mapn'] ?? 0) + 1;
-        return 'PN' . str_pad($next, 3, '0', STR_PAD_LEFT);
+        return (int)($row['max_mapn'] ?? 0) + 1;
     }
 
     public function deleteById($id)
