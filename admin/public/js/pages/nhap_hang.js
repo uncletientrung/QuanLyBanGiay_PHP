@@ -298,7 +298,7 @@ Dashmix.onLoad(() =>
 
                     const p = res.phieu;
 
-                    $("#detail-mapn").val("PN" + String(p.mapn).padStart(3, '0'));
+                    $("#detail-mapn").val("PN-" + p.mapn);
                     $("#detail-tenadmin").val(p.tenadmin || "N/A");
                     $("#detail-tenncc").val(p.tenncc || "N/A");
                     $("#detail-thoigiantao").val(p.thoigiantao || "");
@@ -319,7 +319,7 @@ Dashmix.onLoad(() =>
                         rows += `
                 <tr>
                     <td class="text-center">${i + 1}</td>
-                    <td class="text-center">SP${String(ct.masp).padStart(3, '0')}</td>
+                   <td class="text-center">SP-${ct.masp}</td>
                     <td class="fw-semibold">${ct.tensp}</td>
                     <td class="text-center">${Number(ct.dongia).toLocaleString('vi-VN')} ₫</td>
                     <td class="text-center">${ct.soluong}</td>

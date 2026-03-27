@@ -25,7 +25,7 @@
 
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Mã phiếu nhập</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($nextMaPN) ?>" readonly>
+                        <input type="text" class="form-control" value="PN-<?= (int)$nextMaPN ?>" readonly>
                     </div>
 
                     <div class="mb-4">
@@ -123,7 +123,7 @@
                                     <div class="flex-grow-1 me-2">
                                         <div class="fw-semibold"><?= htmlspecialchars($p['tensp']) ?></div>
                                         <div class="fs-xs text-muted">
-                                            SP<?= str_pad($p['masp'], 3, '0', STR_PAD_LEFT) ?>
+                                            SP-<?= $p['masp'] ?>
                                             &nbsp;·&nbsp;<?= number_format($p['gianhap'], 0, ',', '.') ?> ₫
                                             &nbsp;·&nbsp;Tồn: <strong><?= (int)$p['tong_kho'] ?></strong>
                                         </div>
