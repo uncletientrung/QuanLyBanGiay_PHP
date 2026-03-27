@@ -13,7 +13,15 @@
             Quản lý tồn kho
         </h3>
         <div class="block-options">
-            <button class="btn btn-outline-primary" title="Cài đặt"><i class="fa fa-gear"></i></button>
+            <button type="button" class="btn btn-outline-primary dropdown-toggle" id="config-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-gear"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdown-dropleft-outline-dark">
+                <div class="block-content p-2">
+                    <label for="saphet">Sản phẩm sắp hết hàng khi dưới:</label>
+                    <input type="number" class="mt-3 form-control" id="saphet" name="saphet" placeholder="Nhập số lượng">
+                </div>
+              </div>
         </div>
     </div>
     <div class="block-content block-content-full">
@@ -22,7 +30,7 @@
         <thead>
           <tr>
             <th class="text-center" style="width: 100px;">Mã</th>
-            <th style="width: 50%" class="text-center">Tên sản phẩm</th>
+            <th style="width: 50%">Tên sản phẩm</th>
             <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
             <th style="width: 15%" class="text-center">Trạng thái</th>
             <th></th>

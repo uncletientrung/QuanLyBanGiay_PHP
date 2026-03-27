@@ -1,6 +1,23 @@
+let saphet_value = parseInt(localStorage.getItem('saphet')) ?? 0;
 Dashmix.onLoad(() =>
     class {
         static initDataTables() {
+            $('#saphet').val(saphet_value);
+            $(document).on('change', '#saphet', function() {
+                if ($(this).val() != saphet_value)
+                { 
+                    localStorage.setItem('saphet', $(this).val())
+                    saphet_value = $(this).val();
+                }
+            });
+
+            $(document).on('keydown', '#saphet', function(e) {
+                if (e.which == 13)
+                { 
+                    $(this).blur();
+                }
+            });
+
             // Override a few default classes
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
                 sWrapper: "dataTables_wrapper dt-bootstrap5",
@@ -96,7 +113,7 @@ Dashmix.onLoad(() =>
                         render: function(data) {
                             if (parseInt(data) == 0)
                                 return `Hết hàng`
-                            else if (parseInt(data) < 10)
+                            else if (parseInt(data) < saphet_value)
                                 return `Sắp hết`
                             else
                                 return `Còn hàng`
@@ -175,7 +192,7 @@ Dashmix.onLoad(() =>
                                 render: function(data) {
                                     if (parseInt(data) == 0)
                                         return `Hết hàng`
-                                    else if (parseInt(data) < 10)
+                                    else if (parseInt(data) < saphet_value)
                                         return `Sắp hết`
                                     else
                                         return `Còn hàng`
