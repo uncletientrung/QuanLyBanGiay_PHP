@@ -1,13 +1,12 @@
 <?php
 class Suppliers extends Controller
 {
-    /*
+    
     private $supplierModel;
     public function __construct()
     {
         $this->supplierModel = $this->model("NhaCungCapModel");
     }
-    */
 
     public function default()
     {
@@ -22,12 +21,10 @@ class Suppliers extends Controller
     }
 
     //Fetching the data
-    /*
     public function getData()
     { 
         //Gán kết quả vào Tab Response của HTTP Request
         echo json_encode($this->supplierModel->getAll());
         exit;
     }
-    */
 }

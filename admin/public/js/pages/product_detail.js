@@ -97,7 +97,6 @@ Dashmix.onLoad(() => {
                 const dtRow = table.row($row);
                 const val = $(this).val()
                 table.cell(dtRow.index(), 2).data(val).draw();
-                renderStockInput();
                 reCalcTotalStock();
             });
         }
@@ -119,7 +118,6 @@ Dashmix.onLoad(() => {
                 const dtRow = table.row($row);
                 const val = $(this).val()
                 table.cell(dtRow.index(), 2).data(val).draw();
-                renderStockInput();
                 reCalcTotalStock();
             });
             
@@ -167,7 +165,6 @@ Dashmix.onLoad(() => {
             $(td[0]).addClass("text-center fw-semibold");
             $(td[1]).addClass("fw-semibold text-primary tensize");
             $(td[2]).addClass("justify-content-center soluong");
-            renderStockInput();
             renderSelect2();
         });
 
@@ -374,26 +371,6 @@ Dashmix.onLoad(() => {
                 $("#add-size").attr('hidden', true).parent().removeClass('mb-3');
             //Chuyển ô kích thước thành select2 và số lượng thành input
             renderSelect2();
-            renderStockInput();
-        }
-
-        function renderStockInput(){
-            $("#table-div .soluong").each(function(index, value) {
-                const $cell = $(this);
-                const $row = $cell.closest('tr');
-                const dtRow = table.row($row);
-                if (isEditMode) {
-                    const currStock = dtRow.data()[2];
-                    $(this).html(`
-                        <input type="number" class="form-control" style="width: 100%; text-align: center;" value="${currStock}">
-                    `);
-                } else {
-                    const currStock = $(this).data('prev-value');
-                    $(this).html(`
-                        ${currStock}
-                    `);
-                }
-            })
         }
 
         function reCalcTotalStock()

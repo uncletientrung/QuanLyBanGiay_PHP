@@ -40,6 +40,26 @@ Dashmix.onLoad(() =>
                 pageLength: 10,
                 dom: '<ftip>',
                 autoWidth: false,
+                ajax: {
+                    url: './suppliers/getData',
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data:'mancc',
+                        className: 'text-center',
+                        type:'num'
+                    },
+                    {
+                        data:'tenncc',
+                    },
+                    {
+                        data:'sdt',
+                    },
+                    {
+                        data:'diachi',
+                    }
+                ]
             });
         }
 

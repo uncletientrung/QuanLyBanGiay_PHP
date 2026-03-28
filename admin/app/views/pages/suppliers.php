@@ -18,12 +18,8 @@
             <th>Tên nhà cung cấp</th>
             <th>Số điện thoại</th>
             <th>Địa chỉ</th>
-            <th>Trạng thái</th>
           </tr>
         </thead>
-        <tbody>
-            <!-- The data of the table should be placed here -->
-        </tbody>
       </table>
     </div>
   </div>

@@ -42,6 +42,7 @@ $router->get('/sizes/getData', 'Sizes@getData');
 $router->get('/sizes/getDataByProd', 'Sizes@getDataByProd');
 
 $router->get('/suppliers', 'Suppliers@default');
+$router->get('/suppliers/getData', 'Suppliers@getData');
 
 // San pham
 $router->get('/products', 'Products@default');
