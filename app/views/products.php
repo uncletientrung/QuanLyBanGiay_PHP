@@ -1,5 +1,3 @@
-
-
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
   <h1 class="text-center text-white display-6">Danh sách sản phẩm</h1>
@@ -59,7 +57,7 @@
             <div class="col-lg-3">
               <div class="row g-2">  
 
-                <!-- Khung Loại giày -->
+<!--               
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
                     <h4 class="mb-2 pb-2 border-bottom border-navy">Loại giày</h4>
@@ -79,7 +77,7 @@
                       </div>
                     <?php endforeach; ?>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Khung Thương hiệu -->
                 <div class="col-lg-12">
@@ -133,8 +131,8 @@
                   </div>
                 </div>
 
-                <!-- Màu sắc -->
-                <div class="col-lg-12">
+              
+                <!-- <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
                     <h4 class="mb-2 pb-2 border-bottom border-navy">Màu sắc</h4>
                     <div class="color-list-scroll">
@@ -155,9 +153,9 @@
                       <?php endforeach; ?>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <!-- Giới tính -->
+<!--                
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
                     <h4 class="mb-2 pb-2 border-bottom border-navy">Giới tính</h4>
@@ -184,7 +182,7 @@
                       <label for="gioitinh-nu" class="form-check-label">Nữ</label>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <!-- Nút xóa bộ lọc -->
                 <div class="col-lg-12">
@@ -299,16 +297,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const ROOT_URL = '<?= ROOT_URL ?>';
     const NO_IMAGE = '<?= NO_IMAGE ?>';
 
-    //  Scroll lên đầu danh sách sản phẩm
-    function scrollToProductList() {
-        const target = document.getElementById('start-products');
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
+    // CSS transition cho grid
+    grid.style.transition = 'opacity 0.25s ease';
 
     // Gọi AJAX lấy sản phẩm
-    function fetchProducts(page = 1, shouldScroll = true) {
+    function fetchProducts(page = 1) {
         const params = new URLSearchParams(new FormData(form));
         params.set('page', page);
         params.delete('url');
@@ -316,22 +309,17 @@ document.addEventListener('DOMContentLoaded', function () {
         // Cập nhật URL trên trình duyệt (không reload)
         history.pushState(null, '', window.location.pathname + '?' + params.toString());
 
-        // Hiển thị loading
-        grid.innerHTML = `
-            <div class="col-12 text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Đang tải...</span>
-                </div>
-            </div>`;
-
-        //  Scroll khi lọc 
-        if (shouldScroll) scrollToProductList();
+        // Mờ dần grid hiện tại (không xóa ngay)
+        grid.style.opacity = '0.35';
+        grid.style.pointerEvents = 'none';
 
         fetch(ROOT_URL + 'api/products?' + params.toString())
             .then(r => r.json())
             .then(data => renderProducts(data))
             .catch(() => {
                 grid.innerHTML = '<div class="col-12 text-center py-5 text-danger">Lỗi tải sản phẩm.</div>';
+                grid.style.opacity = '1';
+                grid.style.pointerEvents = '';
             });
     }
 
@@ -374,13 +362,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         html += renderPagination(page, totalPages);
+
+        // Cập nhật nội dung rồi fade in mượt mà
         grid.innerHTML = html;
+        requestAnimationFrame(() => {
+            grid.style.opacity = '1';
+            grid.style.pointerEvents = '';
+        });
 
         // Gắn lại sự kiện cho nút phân trang
         grid.querySelectorAll('.page-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                fetchProducts(+btn.dataset.page, true);
+                fetchProducts(+btn.dataset.page);
             });
         });
     }
@@ -434,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchProducts(1);
     });
 
-    // Load lần đầu (không scroll)
-    fetchProducts(<?= $page ?>, false);
+    // Load lần đầu
+    fetchProducts(<?= $page ?>);
 });
 </script>
