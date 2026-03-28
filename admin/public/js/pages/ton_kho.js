@@ -357,12 +357,12 @@ Dashmix.onLoad(() =>
                 const filterVal = $('#filter-status').val();
                 if (filterVal === "") return true;
 
-                const stockCount = parseInt(data[2]) || 0;
+                const stockCount = parseInt(data[3]) || 0;
                 
                 if (filterVal === "0") {
-                    return stockCount >= saphet_value;
+                    return stockCount > saphet_value;
                 } else if (filterVal === "1") {
-                    return stockCount > 0 && stockCount < saphet_value;
+                    return stockCount > 0 && stockCount <= saphet_value;
                 } else if (filterVal === "2") {
                     return stockCount === 0;
                 }
