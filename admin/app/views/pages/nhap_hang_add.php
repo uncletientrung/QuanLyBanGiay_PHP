@@ -1,6 +1,6 @@
 <?php $dm->get_css('js/plugins/flatpickr/flatpickr.min.css'); ?>
 <?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
-
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
 <!-- Page Content -->
 <div class="content">
 
