@@ -3,20 +3,7 @@ Dashmix.onLoad(() =>
     class {
         static initDataTables() {
             $('#saphet').val(saphet_value);
-            $(document).on('change', '#saphet', function() {
-                if ($(this).val() != saphet_value)
-                { 
-                    localStorage.setItem('saphet', $(this).val())
-                    saphet_value = $(this).val();
-                }
-            });
-
-            $(document).on('keydown', '#saphet', function(e) {
-                if (e.which == 13)
-                { 
-                    $(this).blur();
-                }
-            });
+            
 
             // Override a few default classes
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
@@ -168,6 +155,22 @@ Dashmix.onLoad(() =>
                         }
                     }
                 ]
+            });
+
+            $(document).on('change', '#saphet', function() {
+                if ($(this).val() != saphet_value)
+                { 
+                    localStorage.setItem('saphet', $(this).val())
+                    saphet_value = $(this).val();
+                    table.ajax.reload();
+                }
+            });
+
+            $(document).on('keydown', '#saphet', function(e) {
+                if (e.which == 13)
+                { 
+                    $(this).blur();
+                }
             });
 
             $(document).on('shown.bs.modal', '.modal', function (e) {
