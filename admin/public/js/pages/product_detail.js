@@ -20,11 +20,6 @@ Dashmix.onLoad(() => {
         $(this).data('prev-value', currName);
     });
 
-    $("#table-div .soluong").each(function (index, value) {
-        const currStock = table.cell(index, 2).data();
-        $(this).data('prev-value', currStock);
-    });
-
     let isEditMode = false;
     const isCreate = $('#prod-form').data('id');
     if (isCreate == 0)
@@ -371,15 +366,6 @@ Dashmix.onLoad(() => {
                 $("#add-size").attr('hidden', true).parent().removeClass('mb-3');
             //Chuyển ô kích thước thành select2 và số lượng thành input
             renderSelect2();
-        }
-
-        function reCalcTotalStock()
-        { 
-            let totalStock = 0;
-            $(".soluong > input").each(function(index, value) {
-                totalStock += parseInt($(value).val());
-            })
-            $('#totalStock').text(totalStock);
         }
 
         function renderSelect2() {

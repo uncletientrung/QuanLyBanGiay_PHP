@@ -72,81 +72,97 @@ class PhieuNhapModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($ngaynhap, $trangthai, $products, $maadmin, $mancc)
-    {
-        try {
-            $this->db->beginTransaction();
+public function create($ngaynhap, $trangthai, $products, $maadmin, $mancc)
+{
+    try {
+        $this->db->beginTransaction();
 
-            $tongtien = array_sum(array_map(fn($p) => $p['soluong'] * $p['dongia'], $products));
-            $stmt = $this->db->prepare(
-                "INSERT INTO phieunhap (maadmin, mancc, thoigiantao, trangthai, tongtien)
+        $tongtien = array_sum(array_map(fn($p) => $p['soluong'] * $p['dongia'], $products));
+        $stmt = $this->db->prepare(
+            "INSERT INTO phieunhap (maadmin, mancc, thoigiantao, trangthai, tongtien)
              VALUES (?, ?, ?, ?, ?)"
-            );
-            $stmt->execute([$maadmin, $mancc, $ngaynhap, $trangthai, $tongtien]);
-            $mapn = $this->db->lastInsertId();
+        );
+        $stmt->execute([$maadmin, $mancc, $ngaynhap, $trangthai, $tongtien]);
+        $mapn = $this->db->lastInsertId();
 
-            $ins = $this->db->prepare(
-                "INSERT INTO ctphieunhap (mapn, masp, masize, soluong, dongia)
+        $ins = $this->db->prepare(
+            "INSERT INTO ctphieunhap (mapn, masp, masize, soluong, dongia)
              VALUES (?, ?, ?, ?, ?)"
-            );
-            foreach ($products as $p) {
-                $ins->execute([$mapn, $p['masp'], $p['masize'], $p['soluong'], $p['dongia']]);
-            }
-
-            if ((int)$trangthai === 1) {
-                $upd = $this->db->prepare(
-                    "UPDATE sanphamsize SET soluong = soluong + ? WHERE masp = ? AND masize = ?"
-                );
-                foreach ($products as $p) {
-                    $upd->execute([$p['soluong'], $p['masp'], $p['masize']]);
-                }
-            }
-
-            $this->db->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            return false;
+        );
+        foreach ($products as $p) {
+            $ins->execute([$mapn, $p['masp'], $p['masize'], $p['soluong'], $p['dongia']]);
         }
+
+        if ((int)$trangthai === 1) {
+            // 1. Cập nhật số lượng tồn kho (đã có)
+            $updStock = $this->db->prepare(
+                "UPDATE sanphamsize SET soluong = soluong + ? WHERE masp = ? AND masize = ?"
+            );
+            
+            // 2. Cập nhật giá nhập mới nhất vào bảng sanpham (Thêm mới)
+            $updPrice = $this->db->prepare(
+                "UPDATE sanpham SET gianhap = ? WHERE masp = ?"
+            );
+
+            foreach ($products as $p) {
+                $updStock->execute([$p['soluong'], $p['masp'], $p['masize']]);
+                $updPrice->execute([$p['dongia'], $p['masp']]); // Cập nhật giá nhập
+            }
+        }
+
+        $this->db->commit();
+        return true;
+    } catch (Exception $e) {
+        $this->db->rollBack();
+        return false;
     }
+}
 
-    public function update($mapn, $ngaynhap, $trangthai, $products, $mancc)
-    {
-        try {
-            $this->db->beginTransaction();
+public function update($mapn, $ngaynhap, $trangthai, $products, $mancc)
+{
+    try {
+        $this->db->beginTransaction();
 
-            $tongtien = array_sum(array_map(fn($p) => $p['soluong'] * $p['dongia'], $products));
+        $tongtien = array_sum(array_map(fn($p) => $p['soluong'] * $p['dongia'], $products));
 
-            $stmt = $this->db->prepare(
-                "UPDATE phieunhap SET thoigiantao = ?, trangthai = ?, tongtien = ?, mancc = ?
+        $stmt = $this->db->prepare(
+            "UPDATE phieunhap SET thoigiantao = ?, trangthai = ?, tongtien = ?, mancc = ?
              WHERE mapn = ?"
-            );
-            $stmt->execute([$ngaynhap, $trangthai, $tongtien, $mancc, $mapn]);
+        );
+        $stmt->execute([$ngaynhap, $trangthai, $tongtien, $mancc, $mapn]);
 
-            $this->db->prepare("DELETE FROM ctphieunhap WHERE mapn = ?")->execute([$mapn]);
+        $this->db->prepare("DELETE FROM ctphieunhap WHERE mapn = ?")->execute([$mapn]);
 
-            $ins = $this->db->prepare(
-                "INSERT INTO ctphieunhap (mapn, masp, masize, soluong, dongia)
+        $ins = $this->db->prepare(
+            "INSERT INTO ctphieunhap (mapn, masp, masize, soluong, dongia)
              VALUES (?, ?, ?, ?, ?)"
-            );
-            foreach ($products as $p) {
-                $ins->execute([$mapn, $p['masp'], $p['masize'], $p['soluong'], $p['dongia']]);
-            }
-
-            if ((int)$trangthai === 1) {
-                $upd = $this->db->prepare(
-                    "UPDATE sanphamsize SET soluong = soluong + ? WHERE masp = ? AND masize = ?"
-                );
-                foreach ($products as $p) {
-                    $upd->execute([$p['soluong'], $p['masp'], $p['masize']]);
-                }
-            }
-
-            $this->db->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            return false;
+        );
+        foreach ($products as $p) {
+            $ins->execute([$mapn, $p['masp'], $p['masize'], $p['soluong'], $p['dongia']]);
         }
+
+        if ((int)$trangthai === 1) {
+            // Cập nhật tồn kho
+            $updStock = $this->db->prepare(
+                "UPDATE sanphamsize SET soluong = soluong + ? WHERE masp = ? AND masize = ?"
+            );
+            
+            // Cập nhật giá nhập mới (Thêm mới)
+            $updPrice = $this->db->prepare(
+                "UPDATE sanpham SET gianhap = ? WHERE masp = ?"
+            );
+
+            foreach ($products as $p) {
+                $updStock->execute([$p['soluong'], $p['masp'], $p['masize']]);
+                $updPrice->execute([$p['dongia'], $p['masp']]); 
+            }
+        }
+
+        $this->db->commit();
+        return true;
+    } catch (Exception $e) {
+        $this->db->rollBack();
+        return false;
     }
+}
 }

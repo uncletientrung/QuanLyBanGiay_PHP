@@ -29,7 +29,7 @@
       <table id="table" class="table table-hover table-vcenter js-dataTable-responsive">
         <thead>
           <tr>
-            <th class="text-center" style="width: 100px;">Mã</th>
+            <th class="text-center" style="width: 10%;">Mã</th>
             <th style="width: 40%">Tên sản phẩm</th>
             <th style="width: 20%">Loại sản phẩm</th>
             <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
