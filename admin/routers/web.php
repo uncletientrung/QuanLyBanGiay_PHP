@@ -24,9 +24,15 @@ $router->post('/user/checkExists', 'User@checkExists');
 // Thuoc tinh
 $router->get('/brands', 'Brands@default');
 $router->get('/brands/getData', 'Brands@getData');
+$router->post('/brands/add', 'Brands@add');
+$router->post('/brands/delete', 'Brands@delete');
+$router->post('/brands/update', 'Brands@update');
 
 $router->get('/categories', 'Categories@default');
 $router->get('/categories/getData', 'Categories@getData');
+$router->post('/categories/add', 'Categories@add');
+$router->post('/categories/delete', 'Categories@delete');
+$router->post('/categories/update', 'Categories@update');
 
 $router->get('/colors', 'Colors@default');
 $router->get('/colors/getData', 'Colors@getData');

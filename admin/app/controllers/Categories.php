@@ -24,4 +24,44 @@ class Categories extends Controller
         echo json_encode($this->categoriesModel->getAll());
         exit;
     }
+
+    public function add()
+    { 
+        header('Content-Type: application/json');
+        $tenloai = $_POST['tenloai'];
+        if (isset($tenloai)) {
+            $success = $this->categoriesModel->add($tenloai);
+            echo json_encode(['status' => $success ? 'success' : 'failed']);
+            exit();
+        }
+        echo json_encode("Didnt run");
+        exit();
+    }
+
+    public function delete()
+    { 
+        header('Content-Type: application/json');
+        $id = $_POST['id'];
+        if (isset($id)) {
+            $success = $this->categoriesModel->delete($id);
+            echo json_encode(['status' => $success ? 'success' : 'failed']);
+            exit();
+        }
+        echo json_encode("Didnt run");
+        exit();
+    }
+
+    public function update()
+    { 
+        header('Content-Type: application/json');
+        $id = $_POST['id'];
+        $tenloai = $_POST['tenloai'];
+        if (isset($id) && isset($tenloai)) {
+            $success = $this->categoriesModel->update($id, $tenloai);
+            echo json_encode(['status' => $success ? 'success' : 'failed']);
+            exit();
+        }
+        echo json_encode("Didnt run");
+        exit();
+    }
 }

@@ -16,6 +16,20 @@
           <tr>
             <th class="text-center" style="width: 100px;">Mã số</th>
             <th>Tên</th>
+            <th style="width: 120px">
+              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-plus"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdown-content-hero-primary">
+                  <div class="mb-2">
+                    <label class="form-label" for="tenloai">Tên</label>
+                    <input type="text" class="form-control" id="tenloai" name="tenloai" placeholder="Nhập tên loại">
+                  </div>
+                  <div class="block-content p-0 d-flex justify-content-end">
+                    <button type="button" id="add" class="btn btn-primary">Thêm</button>
+                  </div>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>

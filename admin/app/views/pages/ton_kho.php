@@ -30,7 +30,8 @@
         <thead>
           <tr>
             <th class="text-center" style="width: 100px;">Mã</th>
-            <th style="width: 50%">Tên sản phẩm</th>
+            <th style="width: 40%">Tên sản phẩm</th>
+            <th style="width: 20%">Loại sản phẩm</th>
             <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
             <th style="width: 15%" class="text-center">Trạng thái</th>
             <th></th>

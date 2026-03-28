@@ -201,9 +201,11 @@ class SanPhamModel
         $sql = "SELECT 
                     s.masp, 
                     s.tensp, 
+                    l.tenloai,
                     COALESCE(SUM(ss.soluong), 0) AS tong_soluong
                 FROM sanpham AS s
                 LEFT JOIN sanphamsize AS ss ON s.masp = ss.masp
+                INNER JOIN loai as l ON l.maloai = s.loai
                 GROUP BY s.masp, s.tensp;";
         $stmt = $this->conn->prepare($sql); 
         $stmt->execute();

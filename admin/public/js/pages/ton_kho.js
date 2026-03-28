@@ -55,16 +55,14 @@ Dashmix.onLoad(() =>
                 pagingType: "full_numbers",
                 pageLength: 7,
                 dom: `
-                    <'row justify-content-between'
-                        <'col-lg justify-content-left d-flex'
-                            <'col-lg-auto me-3'
-                                <"#status-filter">
-                            >
-                            <'col-lg-auto me-3'
-                                <"#filter-date">
-                            >
+                    <'row'
+                        <'col-sm-12 col-md-2'
+                            <"#status-filter">
                         >
-                        <'col-lg'
+                        <'col-sm-12 col-md-6'
+                            <"#filter-date">
+                        >
+                        <'col-sm-12 col-md-4'
                             f
                         >
                     >
@@ -102,6 +100,9 @@ Dashmix.onLoad(() =>
                             </span>
                             `;
                         }
+                    },
+                    {
+                        data: 'tenloai'
                     },
                     {
                         data: 'tong_soluong',
@@ -215,7 +216,7 @@ Dashmix.onLoad(() =>
             });
 
             jQuery("#status-filter").html(`
-                <select class="form-select" id="filter-status" style="width: 200px;">
+                <select class="form-select" id="filter-status">
                     <option value="">Tất cả trạng thái</option>
                     <option value="0">Còn hàng</option>
                     <option value="1">Sắp hết</option>
@@ -224,6 +225,10 @@ Dashmix.onLoad(() =>
             `);
 
             $("#status-filter").children().css('cursor', 'pointer');
+
+            $(document).on('change', '#filter-status', function() {
+                table.draw();
+            });
             
             $("#filter-date").html(`
                 <div class="input-group">
@@ -347,6 +352,19 @@ Dashmix.onLoad(() =>
             $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
                 if (settings.nTable.id !== 'table' && !$(settings.nTable).hasClass('js-dataTable-responsive')) {
                     return true;
+                }
+
+                const filterVal = $('#filter-status').val();
+                if (filterVal === "") return true;
+
+                const stockCount = parseInt(data[2]) || 0;
+                
+                if (filterVal === "0") {
+                    return stockCount >= saphet_value;
+                } else if (filterVal === "1") {
+                    return stockCount > 0 && stockCount < saphet_value;
+                } else if (filterVal === "2") {
+                    return stockCount === 0;
                 }
 
                 let minStr = jQuery("#filter-from").val();

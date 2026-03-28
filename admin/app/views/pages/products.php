@@ -28,8 +28,6 @@
             <th>Tên sản phẩm</th>
             <th>Loại</th>
             <th>Giới tính</th>
-            <th>Giá nhập</th>
-            <th>Lợi nhuận (%)</th>
             <th>Hãng</th>
             <th>Màu</th>
             <th>Sizes</th>

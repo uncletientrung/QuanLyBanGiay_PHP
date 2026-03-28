@@ -18,15 +18,29 @@
             $stmt->execute([$tenHang]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
-          public function getNameById($maHang)
-        {
+        public function getNameById($maHang){
             $sql = "SELECT tenhang FROM hang WHERE trangthai = 1 AND mahang = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$maHang]);
             return $stmt->fetchColumn(); 
         }
+
+        public function add($tenhang) {
+            $sql = "INSERT INTO hang(tenhang, trangthai) VALUES (?, 1)";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$tenhang]);
+        }
+        
+        public function delete($id) {
+            $sql = "DELETE FROM hang WHERE mahang = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$id]);
+        }
+
+        public function update($id, $tenhang) {
+            $sql = "UPDATE hang SET tenhang = ? WHERE mahang = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$tenhang, $id]);
+        }
     }
-
-
-
 ?>

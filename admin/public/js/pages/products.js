@@ -128,14 +128,6 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
-                        data: 'gianhap',
-                        render: DataTable.render.number(null, null, null, null, ' đồng')
-                    },
-                    {
-                        data: 'tyleloinhuan',
-                        className: 'text-center'
-                    },
-                    {
                         data: 'tenhang',
                     },
                     {
@@ -266,20 +258,6 @@ Dashmix.onLoad(() =>
                         </div>
 
                         <div class="row mb-4 mt-3">
-                            <span class="col-form-label col-lg-1 pt-4">Giá nhập</span>
-                            <div class="col-lg-11">
-                                <input type="text" id="filter-gianhap" class="js-rangeslider" data-type="double" data-grid="true" data-prettify-separator="," data-min="0" data-max="${max_nhap}" data-step="20000" data-postfix=" đồng">                            
-                            </div>
-                        </div>
-
-                        <div class="row mb-4 mt-3">
-                            <span class="col-form-label col-lg-1 pt-4">Lợi nhuận</span>
-                            <div class="col-lg-11">
-                                <input type="text" id="filter-loinhuan" class="js-rangeslider" data-type="double" data-grid="true" data-prettify-separator="," data-min="0" data-max="${max_profit}" data-postfix="%">                            
-                            </div>
-                        </div>
-
-                        <div class="row mb-4 mt-3">
                             <span class="col-form-label col-lg-1">Trạng thái</span>
                             <div id="filter-trangthai" class="col-lg-11">
                                 <button type="button" class="col-lg-2 btn btn-sm me-3" value="1">Đang kinh doanh</button>
@@ -302,7 +280,6 @@ Dashmix.onLoad(() =>
             `);
 
                 Dashmix.helpers("jq-select2");
-                Dashmix.helpers("jq-rangeslider");
 
                 $.when(
                     $.getJSON("./categories/getData"),
@@ -369,12 +346,7 @@ Dashmix.onLoad(() =>
                     $("#filter-box-target").find(".btn").removeClass("btn-primary border-primary").addClass("border-dark");
 
                     $("#filter-loai, #filter-hang, #filter-mau").val('').trigger('change')
-                    const slider1 = $("#filter-gianhap").data('ionRangeSlider');
-                    slider1.reset();
-
-                    const slider2 = $("#filter-loinhuan").data('ionRangeSlider');
-                    slider2.reset();
-
+                
                     $.fn.dataTable.ext.search = [];
                     table.columns().search('');
                     table.draw();
@@ -388,41 +360,11 @@ Dashmix.onLoad(() =>
                     const gt = gioitinh.join('');
                     const tt = trangthai.join('');
 
-                    const min_nhap = $("#filter-gianhap").data("from"); //col 4
-                    const max_nhap = $("#filter-gianhap").data("to");
-
-                    const min_profit = $("#filter-loinhuan").data("from"); //col 5
-                    const max_profit = $("#filter-loinhuan").data("to");
-
-                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                        if (
-                            (isNaN(min_nhap) && isNaN(max_nhap)) ||
-                            (isNaN(min_nhap) && data[5] <= max_nhap) ||
-                            (min_nhap <= data[5] && isNaN(max_nhap)) ||
-                            (min_nhap <= data[5] && data[5] <= max_nhap) // Giá nhập
-                        ) {
-                            return true;
-                        }
-                        return false;
-                    });
-
-                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                        if (
-                            (isNaN(min_profit) && isNaN(max_profit)) ||
-                            (isNaN(min_profit) && data[6] <= max_profit) ||
-                            (min_profit <= data[6] && isNaN(max_profit)) ||
-                            (min_profit <= data[6] && data[6] <= max_profit) // Lợi nhuận
-                        ) {
-                            return true;
-                        }
-                        return false;
-                    });
-
                     if (loai.length != 0) table.column(3).search("^(" + loai + ")$", true, false);
-                    if (hang.length != 0) table.column(7).search("^(" + hang + ")$", true, false);
-                    if (mau.length != 0) table.column(8).search("^(" + mau + ")$", true, false);
+                    if (hang.length != 0) table.column(5).search("^(" + hang + ")$", true, false);
+                    if (mau.length != 0) table.column(6).search("^(" + mau + ")$", true, false);
                     if (gioitinh.length != 0) table.column(4).search("^([" + gt + "])$", true, false);
-                    if (trangthai.length != 0) table.column(10).search("^([" + tt + "])$", true, false);
+                    if (trangthai.length != 0) table.column(8).search("^([" + tt + "])$", true, false);
                     table.draw();
                 });
                 //Fix placeholder

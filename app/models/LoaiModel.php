@@ -38,8 +38,22 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function add($ten) {
+            $sql = "INSERT INTO loai(tenloai, trangthai) VALUES (?, 1)";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$ten]);
+        }
+        
+        public function delete($id) {
+            $sql = "DELETE FROM loai WHERE maloai = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$id]);
+        }
+
+        public function update($id, $ten) {
+            $sql = "UPDATE loai SET tenloai = ? WHERE maloai = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$ten, $id]);
+        }
     }
-
-
-
 ?>
