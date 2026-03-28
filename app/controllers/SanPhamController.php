@@ -113,7 +113,8 @@ class SanPhamController
 
         $listHang = $this->hangModel->getAll();
         $listMauSac = $this->mauModel->getAll();
-        $listLoai = $this->loaiModel->getLoaivaSoluongTuongUng();
+        // $listLoai = $this->loaiModel->getLoaivaSoluongTuongUng();
+        $listLoai = $this->loaiModel->getAll();
 
         $filters = [
             'q' => isset($_GET['q']) && trim($_GET['q']) !== '' ? trim($_GET['q']) : null,
@@ -175,7 +176,7 @@ class SanPhamController
 
     public function showHome(){
         $listSP = $this->model->getAll();
-        $listBestSellingALL = $this->model->getBestSellingProduct();
+        $listBestSellingALL = $this->model->getNewestProducts();
         foreach ($listBestSellingALL as &$sp) {
             $sp['image'] = $this->hinhAnhModel->getImageMainById($sp['masp']);
             $sp['tenhang'] = $this->hangModel->getNameById($sp['hang']);

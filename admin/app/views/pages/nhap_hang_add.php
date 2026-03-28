@@ -5,7 +5,7 @@
 <div class="content">
 
     <div class="mb-3">
-        <a class="btn btn-alt-secondary" href="../nhap_hang">
+        <a class="btn btn-alt-primary" href="../nhap_hang">
             <i class="fa fa-chevron-left me-1"></i> Danh sách phiếu nhập
         </a>
     </div>
@@ -25,7 +25,7 @@
 
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Mã phiếu nhập</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($nextMaPN) ?>" readonly>
+                        <input type="text" class="form-control" value="PN-<?= (int)$nextMaPN ?>" readonly>
                     </div>
 
                     <div class="mb-4">
@@ -39,8 +39,18 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label fw-semibold" for="ghichu">Ghi chú</label>
-                        <textarea class="form-control" id="ghichu" rows="2" placeholder="Nhập ghi chú (nếu có)..."></textarea>
+                        <label class="form-label fw-semibold" for="mancc">
+                            Nhà cung cấp <span class="text-danger">*</span>
+                        </label>
+                        <select class="form-select" id="mancc" name="mancc">
+                            <option value="">Chọn nhà cung cấp</option>
+                            <?php foreach ($suppliers as $ncc): ?>
+                                <option value="<?= $ncc['mancc'] ?>"
+                                    <?= (isset($phieu) && $phieu['mancc'] == $ncc['mancc']) ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($ncc['tenncc']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                     <div class="mb-2">
@@ -54,6 +64,7 @@
                                     <tr class="fs-sm text-uppercase">
                                         <th class="text-center" style="width:40px;">#</th>
                                         <th>Tên sản phẩm</th>
+                                        <th class="text-center" style="width:100px;">Size</th>
                                         <th class="text-center" style="width:100px;">Số lượng</th>
                                         <th class="text-center" style="width:130px;">Đơn giá (đ)</th>
                                         <th class="text-end" colspan="2" style="width:165px; padding-right: 25px;">Thành tiền</th>
@@ -61,7 +72,7 @@
                                 </thead>
                                 <tbody id="selected-products-body">
                                     <tr id="empty-row">
-                                        <td colspan="6" class="text-center text-muted py-4">
+                                        <td colspan="7" class="text-center text-muted py-4">
                                             <i class="fa fa-box-open fa-2x mb-2 d-block opacity-50"></i>
                                             Chưa có sản phẩm. Thêm từ danh sách bên phải.
                                         </td>
@@ -69,7 +80,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr class="bg-body-light">
-                                        <td colspan="4" class="text-end fw-bold text-uppercase">Tổng tiền hàng:</td>
+                                        <td colspan="5" class="text-end fw-bold text-uppercase">Tổng tiền hàng:</td>
                                         <td colspan="2" class="text-end fw-bold text-primary fs-5" id="total-amount" style="padding-right: 25px;">0 ₫</td>
                                     </tr>
                                 </tfoot>
@@ -112,7 +123,7 @@
                                     <div class="flex-grow-1 me-2">
                                         <div class="fw-semibold"><?= htmlspecialchars($p['tensp']) ?></div>
                                         <div class="fs-xs text-muted">
-                                            SP<?= str_pad($p['masp'], 3, '0', STR_PAD_LEFT) ?>
+                                            SP-<?= $p['masp'] ?>
                                             &nbsp;·&nbsp;<?= number_format($p['gianhap'], 0, ',', '.') ?> ₫
                                             &nbsp;·&nbsp;Tồn: <strong><?= (int)$p['tong_kho'] ?></strong>
                                         </div>
@@ -142,3 +153,12 @@
 
     </div>
 </div>
+
+<script>
+    const editProducts = <?= isset($chiTiet) ? json_encode($chiTiet) : '[]' ?>;
+    const isEditMode = <?= isset($isEdit) && $isEdit ? 'true' : 'false' ?>;
+</script>
+
+<?php if (isset($isEdit) && $isEdit): ?>
+    <input type="hidden" id="mapn" value="<?= htmlspecialchars($phieu['mapn']) ?>">
+<?php endif; ?>

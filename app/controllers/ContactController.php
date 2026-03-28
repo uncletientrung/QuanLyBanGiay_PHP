@@ -2,11 +2,11 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 class ContactController
 {
+ 
     public function __construct($conn) {}
 
     public function sendEmail()
@@ -79,7 +79,6 @@ class ContactController
                 'message' => 'Gửi liên hệ thành công'
             ]);
             exit;
-
         } catch (Exception $e) {
             echo json_encode([
                 'success' => false,

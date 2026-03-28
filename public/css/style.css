@@ -91,7 +91,9 @@
   text-decoration: none;
   transition: 0.3s;
 }
-
+.page-header h1 {
+  white-space: nowrap !important;
+}
 /* hover trang chủ */
 .page-header .breadcrumb-item a:hover {
   color: #ffffff;
@@ -109,7 +111,39 @@
 .text-primary {
   color: #2e2e5b !important; /* navy */
 }
+/* Scroll cho danh sách màu sắc */
+.color-list-scroll {
+  max-height: 220px; /* Chiều cao cố định bạn muốn */
+  overflow-y: auto; /* Scroll dọc khi vượt quá */
+  overflow-x: hidden;
+  padding-right: 8px; /* Tạo khoảng cho thanh scroll */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #888 #f1f1f1;
+}
 
+/* Style thanh scroll cho Chrome, Edge, Safari */
+.color-list-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.color-list-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.color-list-scroll::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.color-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Tùy chọn: Làm cho label không bị lệch khi scroll */
+.color-list-scroll .mb-2 {
+  margin-bottom: 10px !important;
+}
 :root {
   --navy: #2e2e5b;
   --navy-dark: #2e2e5b;

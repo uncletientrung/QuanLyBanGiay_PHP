@@ -26,7 +26,7 @@ $dm = new Template('Dashmix', '5.5', '/QuanLyBanGiay_PHP/public');
 // **************************************************************************************************
 
 //                              : The data is added in the <head> section of the page
-$dm->author                     = 'GalaxyShoe';
+$dm->author                     = 'GalaxyShoes';
 $dm->robots                     = 'noindex, nofollow';
 $dm->title                      = 'Admin - Cửa hàng giày';
 $dm->description                = 'Robots wear roboots during the winter';

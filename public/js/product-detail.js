@@ -45,6 +45,26 @@ document.addEventListener("DOMContentLoaded", function () {
   const productName = addToCartBtn.dataset.tensp;
   const buyNowBtn = document.querySelector(".buy-now-btn");
 
+  // const sizeButtons = document.querySelectorAll(".size-btn");
+  const stockText = document.getElementById("stock-text");
+  const stockValue = document.getElementById("stock-value");
+
+  sizeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // bỏ active cũ
+      sizeButtons.forEach((b) => b.classList.remove("active"));
+
+      // active mới
+      btn.classList.add("active");
+
+      // lấy số lượng
+      const stock = btn.getAttribute("data-stock");
+
+      // cập nhật hiển thị
+      stockValue.textContent = stock;
+      stockText.style.display = "block";
+    });
+  });
   // Hàm cập nhật giá
   function updateDisplayedPrice() {
     if (!giaBanElement || !qtyInput) return;
@@ -174,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            // ✅ Chỉ hiện modal khi server xác nhận thành công
+            //  Chỉ hiện modal khi server xác nhận thành công
             showCartSuccess(productName, tensize, qty, totalPrice);
 
             const cartCount = document.getElementById("cart-count");
@@ -187,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
               }
             }
           } else {
-            // Server báo lỗi (vượt tồn kho) → alert
+            // Server báo lỗi
             alert(data.error || "Không thể thêm vào giỏ hàng!");
           }
         })
@@ -224,8 +244,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     modal.show();
 
-    // Tự động đóng sau 6 giây
-    setTimeout(() => modal.hide(), 6000);
+    // Tự động đóng sau 3 giây
+    setTimeout(() => modal.hide(), 3000);
 
     // Nút tiếp tục mua
     document.getElementById("continueShopping").onclick = () => modal.hide();

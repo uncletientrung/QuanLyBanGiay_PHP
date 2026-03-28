@@ -2,23 +2,16 @@
 
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-  <h1 class="text-center text-white display-6">Giày</h1>
+  <h1 class="text-center text-white display-6">Danh sách sản phẩm</h1>
   <ol class="breadcrumb justify-content-center mb-0">
     <li class="breadcrumb-item"><a href="<?= ROOT_URL ?>">Trang chủ</a></li>
-    <li class="breadcrumb-item active text-white">Giày</li>
+    <li class="breadcrumb-item active text-white">Danh sách sản phẩm</li>
   </ol>
 </div>
 <!-- Single Page Header End -->
 
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-2">
-
-<!-- <?php
-echo '<pre>';
-print_r($sp['image']);
-echo '</pre>';
-
-?>  -->
   <div class="container py-3">
     <!-- <h1 class="mb-4">SHOP giày</h1> -->
     <div class="row g-4" >
@@ -144,21 +137,23 @@ echo '</pre>';
                 <div class="col-lg-12">
                   <div class="bg-white border border-2 rounded p-3 mb-2 shadow-sm">  
                     <h4 class="mb-2 pb-2 border-bottom border-navy">Màu sắc</h4>
-                    <?php foreach($listMauSac as $mau): ?>
-                      <div class="mb-2">
-                        <input
-                          type="checkbox"
-                          class="me-2 color-checkbox form-check-input-custom"
-                          id="mau-<?= $mau['mamau'] ?>"
-                          name="mau[]"
-                          value="<?= $mau['mamau'] ?>"
-                          <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
-                        >
-                        <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
-                          <?= htmlspecialchars($mau['tenmau']) ?>
-                        </label>
-                      </div>
-                    <?php endforeach; ?>
+                    <div class="color-list-scroll">
+                      <?php foreach($listMauSac as $mau): ?>
+                        <div class="mb-2">
+                          <input
+                            type="checkbox"
+                            class="me-2 color-checkbox form-check-input-custom"
+                            id="mau-<?= $mau['mamau'] ?>"
+                            name="mau[]"
+                            value="<?= $mau['mamau'] ?>"
+                            <?= in_array($mau['mamau'], $filters['mau'] ?? []) ? 'checked' : '' ?>
+                          >
+                          <label for="mau-<?= $mau['mamau'] ?>" class="form-check-label">
+                            <?= htmlspecialchars($mau['tenmau']) ?>
+                          </label>
+                        </div>
+                      <?php endforeach; ?>
+                    </div>
                   </div>
                 </div>
 

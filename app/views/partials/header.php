@@ -37,53 +37,66 @@ require_once __DIR__ . '/auth_helper.php';
     font-size: 1.12rem;
   }
 
-  /* Logo GalaxyShoes */
+  /* Logo GalaxyShoes – dùng xanh navy */
   .navbar-brand {
     font-size: 2.4rem !important;
     font-weight: 800 !important;
     line-height: 1.1;
     letter-spacing: -1px;
-    color: #0d6efd !important;
+    color: #2e2e5b !important;
     padding: 0.4rem 0;
   }
 
-  /* Các nav-link (menu item) */
+  /* Hiệu ứng hover mượt cho các menu chính */
   .navbar-nav .nav-link,
   .nav-item.dropdown .dropdown-toggle {
     font-size: 1.18rem !important;
     font-weight: 600 !important;
     padding: 0.8rem 1.3rem !important;
-    transition: all 0.3s ease;
+    color: #2e2e5b !important;           /* Màu mặc định: xanh navy */
+    transition: all 0.35s ease;
+    transform: scale(1);
+    display: inline-block;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Hover — màu đậm đen */
+  /* Hover: phóng to nhẹ, giữ nguyên màu xanh navy */
   .navbar-nav .nav-link:hover,
   .nav-item.dropdown .dropdown-toggle:hover {
-    color: #000000 !important;
+    transform: scale(1.08) translateZ(0);
+    color: #2e2e5b !important;           /* Vẫn xanh navy khi hover */
     font-weight: 700 !important;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Active — màu cam */
+  /* Active: chỉ dùng màu cam  */
   .navbar-nav .nav-link.active,
   .nav-item.dropdown .dropdown-toggle.active {
     font-size: 1.28rem !important;
     font-weight: 900 !important;
-    color: #fd7e14 !important;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    color: #FFB524 !important;           /* Màu cam khi active */
+    transform: scale(1.05) translateZ(0);
+    backface-visibility: hidden;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15); /* bóng nhẹ cho nổi bật */
   }
 
-  /* Dropdown đang mở (.show) — không giống active */
+  /* Khi dropdown đang mở – dùng xanh navy đậm hơn một chút */
   .nav-item.dropdown .dropdown-toggle.show {
-    color: #000000 !important;
+    transform: scale(1.04) translateZ(0);
+    color: #2e2e5b !important;
     font-weight: 700 !important;
-    font-size: 1.18rem !important;
-    text-shadow: none;
+    backface-visibility: hidden;
   }
 
-  /* Dropdown menu items */
-  .dropdown-menu .dropdown-item {
-    font-size: 1.08rem !important;
-    padding: 0.65rem 1.6rem !important;
+  /* Responsive – giảm scale trên mobile để tránh mờ */
+  @media (max-width: 991.98px) {
+    .navbar-nav .nav-link:hover,
+    .nav-item.dropdown .dropdown-toggle:hover {
+      transform: scale(1.04) translateZ(0);
+    }
   }
 
   /* Responsive tablet */
@@ -132,7 +145,7 @@ require_once __DIR__ . '/auth_helper.php';
   <div class="container-fluid fixed-top">
     <div class="container topbar bg-primary d-none d-lg-block">
       <div class="d-flex justify-content-between">
-        <div class="top-info ps-2">
+          <div class="top-info ps-2">
           <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a class="text-white">273 An Dương Vương, P.2, Quận 5</a></small>
           <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a class="text-white">shoesgalaxy@gmail.com</a></small>
         </div>
