@@ -14,6 +14,8 @@ class Categories extends Controller
             "title" => "Quản lý danh mục",
             "Plugin" => [
                 "datatables" => 1,
+                "sweetalert2" => 1,
+                "notify" => 1,
             ],
             "Script" => "categories"
         ]);
@@ -21,7 +23,7 @@ class Categories extends Controller
 
     public function getData()
     {
-        echo json_encode($this->categoriesModel->getAll());
+        echo json_encode($this->categoriesModel->getAllForAdmin());
         exit;
     }
 
@@ -43,7 +45,10 @@ class Categories extends Controller
         header('Content-Type: application/json');
         $id = $_POST['id'];
         if (isset($id)) {
-            $success = $this->categoriesModel->delete($id);
+            if ($this->categoriesModel->isInProds($id))
+                $success = $this->categoriesModel->changeStatus($id, 0);
+            else 
+                $success = $this->categoriesModel->delete($id);
             echo json_encode(['status' => $success ? 'success' : 'failed']);
             exit();
         }

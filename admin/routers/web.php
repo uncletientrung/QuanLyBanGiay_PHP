@@ -27,6 +27,7 @@ $router->get('/brands/getData', 'Brands@getData');
 $router->post('/brands/add', 'Brands@add');
 $router->post('/brands/delete', 'Brands@delete');
 $router->post('/brands/update', 'Brands@update');
+$router->post('/brands/show', 'Brands@show');
 
 $router->get('/categories', 'Categories@default');
 $router->get('/categories/getData', 'Categories@getData');

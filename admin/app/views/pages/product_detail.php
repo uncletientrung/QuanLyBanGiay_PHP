@@ -161,18 +161,13 @@
                   <div class="row mb-4">
                     <div class="col">
                       <label class="form-label fw-bold" for="">Trạng thái</label>
-                      <select class="form-select" style="cursor: pointer" id="trangthai" style="width: 100%" >
-                        <option selected disabled hidden>Chọn trạng thái</opt ion>
-                        <?php if ($product[0]['trangthai'] == 0) { ?>
-                          <option selected value="1">Ngừng bán</opt ion>
-                          <option value="0">Đang kinh doanh</option>
-                        <?php } if ($product[0]['trangthai'] == 1) {?>
-                          <option value="0">Ngừng bán</option>
-                          <option selected value="1">Đang kinh doanh</option>
-                        <?php } else { ?>
-                          <option value="0">Ngừng bán</option>
-                          <option value="1">Đang kinh doanh</option>
-                        <?php } ?>                        
+                      <select class="form-select" style="cursor: pointer" id="trangthai" name="trangthai">
+                        <option value="1" <?= ($product[0]['trangthai'] == 1) ? 'selected' : '' ?>>
+                            Đang kinh doanh
+                        </option>
+                        <option value="0" <?= ($product[0]['trangthai'] == 0) ? 'selected' : '' ?>>
+                            Ngừng bán
+                        </option>
                       </select>
                     </div>
                   </div>

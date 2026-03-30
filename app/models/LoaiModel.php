@@ -13,6 +13,13 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getAllForAdmin(){
+            $sql = "SELECT * FROM loai";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
        public function getNameById($maLoai)
         {
             $sql = "SELECT tenloai FROM loai WHERE trangthai = 1 AND maloai = ?";
@@ -21,28 +28,27 @@
             return $stmt->fetchColumn(); 
         }
 
-
-    public function getLoaivaSoluongTuongUng(){
-        $sql ="select l.maloai,l.tenloai,
-        SUM(spsize.soluong) AS tongsoluong
-        FROM loai l
-        JOIN sanpham sp ON sp.loai=l.maloai
-        JOIN sanphamsize spsize ON spsize.masp=sp.masp
-        where 
-            l.trangthai=1 AND sp.trangthai=1
-        GROUP BY l.maloai,l.tenloai
-        ";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function add($ten) {
-            $sql = "INSERT INTO loai(tenloai, trangthai) VALUES (?, 1)";
+        public function getLoaivaSoluongTuongUng(){
+            $sql ="select l.maloai,l.tenloai,
+            SUM(spsize.soluong) AS tongsoluong
+            FROM loai l
+            JOIN sanpham sp ON sp.loai=l.maloai
+            JOIN sanphamsize spsize ON spsize.masp=sp.masp
+            where 
+                l.trangthai=1 AND sp.trangthai=1
+            GROUP BY l.maloai,l.tenloai
+            ";
             $stmt = $this->db->prepare($sql);
-            return $stmt->execute([$ten]);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function add($ten) {
+                $sql = "INSERT INTO loai(tenloai, trangthai) VALUES (?, 1)";
+                $stmt = $this->db->prepare($sql);
+                return $stmt->execute([$ten]);
+            }
         
         public function delete($id) {
             $sql = "DELETE FROM loai WHERE maloai = ?";
@@ -54,6 +60,21 @@
             $sql = "UPDATE loai SET tenloai = ? WHERE maloai = ?";
             $stmt = $this->db->prepare($sql);
             return $stmt->execute([$ten, $id]);
+        }
+
+        public function isInProds($id)
+        { 
+            $sql = "SELECT masp from sanpham WHERE loai = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->rowCount() > 0;
+        }
+
+        public function changeStatus($id, $status)
+        { 
+            $sql = "UPDATE hang SET trangthai = ? WHERE loai = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$status, $id]);
         }
     }
 ?>
