@@ -56,6 +56,19 @@ class Categories extends Controller
         exit();
     }
 
+    public function show()
+    { 
+        header('Content-Type: application/json');
+        $id = $_POST['id'];
+        if (isset($id)) {
+            $success = $this->categoriesModel->changeStatus($id, 1);
+            echo json_encode(['status' => $success ? 'success' : 'failed']);
+            exit();
+        }
+        echo json_encode("Delete failed");
+        exit();
+    }
+
     public function update()
     { 
         header('Content-Type: application/json');

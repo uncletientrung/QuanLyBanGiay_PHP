@@ -34,6 +34,7 @@ $router->get('/categories/getData', 'Categories@getData');
 $router->post('/categories/add', 'Categories@add');
 $router->post('/categories/delete', 'Categories@delete');
 $router->post('/categories/update', 'Categories@update');
+$router->post('/categories/show', 'Categories@show');
 
 $router->get('/colors', 'Colors@default');
 $router->get('/colors/getData', 'Colors@getData');

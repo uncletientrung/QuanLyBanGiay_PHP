@@ -72,7 +72,7 @@
 
         public function changeStatus($id, $status)
         { 
-            $sql = "UPDATE hang SET trangthai = ? WHERE loai = ?";
+            $sql = "UPDATE loai SET trangthai = ? WHERE maloai = ?";
             $stmt = $this->db->prepare($sql);
             return $stmt->execute([$status, $id]);
         }

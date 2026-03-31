@@ -259,6 +259,50 @@ Dashmix.onLoad(() =>
                     Swal.fire('Thông tin', 'Bạn chưa thay đổi tên loại.', 'info');
                 }
             });
+
+            $(document).on('click', '.btn-show', function() {
+                const id = $(this).data('id');
+                const $btn = $(this);
+
+                Swal.fire({
+                    title: 'Hiển thị lại loại?',
+                    text: "Loại này sẽ xuất hiện lại trên web bán hành",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
+
+                        $.ajax({
+                            url: './categories/show',
+                            method: 'POST',
+                            data: { id: id },
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    Dashmix.helpers('jq-notify', { 
+                                        type: 'success', 
+                                        icon: 'fa fa-check me-1', 
+                                        message: 'Đã hiển thị hãng thành công!' 
+                                    });
+                                    table.ajax.reload(null, false);
+                                } else {
+                                    Swal.fire('Lỗi!', response.message, 'error');
+                                    $btn.prop('disabled', false).html('<i class="fa fa-check"></i>');
+                                }
+                            },
+                            error: function() {
+                                Swal.fire('Lỗi!', 'Đã xảy ra lỗi hệ thống.', 'error');
+                                $btn.prop('disabled', false).html('<i class="fa fa-check"></i>');
+                            }
+                        });
+                    }
+                });
+            });
         }
 
         static init() {
