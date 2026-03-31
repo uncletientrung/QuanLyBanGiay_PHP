@@ -15,6 +15,8 @@ class Brands extends Controller
             "title" => "Quản lý thương hiệu",
             "Plugin"  => [
                 "datatables" => 1,
+                "sweetalert2" => 1,
+                "notify" => 1,
             ],
             "Script" => "brands"
         ]);
@@ -24,7 +26,7 @@ class Brands extends Controller
     public function getData()
     { 
         //Gán kết quả vào Tab Response của HTTP Request
-        echo json_encode($this->brandsModel->getAll());
+        echo json_encode($this->brandsModel->getAllForAdmin());
         exit;
     }
 
@@ -46,11 +48,27 @@ class Brands extends Controller
         header('Content-Type: application/json');
         $id = $_POST['id'];
         if (isset($id)) {
-            $success = $this->brandsModel->delete($id);
+            if ($this->brandsModel->isInProds($id))
+                $success = $this->brandsModel->changeStatus($id, 0);
+            else 
+                $success = $this->brandsModel->delete($id);
             echo json_encode(['status' => $success ? 'success' : 'failed']);
             exit();
         }
-        echo json_encode("Didnt run");
+        echo json_encode("Delete failed");
+        exit();
+    }
+    
+    public function show()
+    { 
+        header('Content-Type: application/json');
+        $id = $_POST['id'];
+        if (isset($id)) {
+            $success = $this->brandsModel->changeStatus($id, 1);
+            echo json_encode(['status' => $success ? 'success' : 'failed']);
+            exit();
+        }
+        echo json_encode("Delete failed");
         exit();
     }
 

@@ -12,6 +12,14 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function getAllForAdmin(){
+            $sql = "SELECT * FROM hang";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function getIdByName($tenHang){
             $sql = "SELECT mahang FROM hang where trangthai = 1 AND LOWER(tenhang) = LOWER(?) LIMIT 1";
             $stmt = $this->db->prepare($sql);
@@ -41,6 +49,21 @@
             $sql = "UPDATE hang SET tenhang = ? WHERE mahang = ?";
             $stmt = $this->db->prepare($sql);
             return $stmt->execute([$tenhang, $id]);
+        }
+
+        public function isInProds($id)
+        { 
+            $sql = "SELECT masp from sanpham WHERE hang = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->rowCount() > 0;
+        }
+
+        public function changeStatus($id, $status)
+        { 
+            $sql = "UPDATE hang SET trangthai = ? WHERE mahang = ?";
+            $stmt = $this->db->prepare($sql);
+            return $stmt->execute([$status, $id]);
         }
     }
 ?>

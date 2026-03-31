@@ -204,7 +204,9 @@ Dashmix.onLoad(() =>
                 const data = $(this).data();
                 arr.push(data.id);
                 $.post("./products/delete", { ids: arr })
-                table.ajax.reload();
+                $.post("./products/delete", { ids: arr }, function(response) {
+                        table.ajax.reload(null, false);                       
+                });
             });
         }
 

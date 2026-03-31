@@ -101,7 +101,7 @@ class Products extends Controller
             if (!empty($ids)) {
                 $successCount = 0;
                 foreach ($ids as $id) {
-                    if ($this->productsModel->isInPhieuNhap($id)) { 
+                    if ($this->productsModel->hasDependencies($id)) { 
                         $this->productsModel->changeStatus($id);
                         $successCount++;
                     } else {

@@ -40,7 +40,7 @@ class SanPhamModel
 
     public function updateSanPham($data)
     { 
-        $sql = "UPDATE sanpham SET tensp = :tensp, loai = :loai, gioitinh = :gioitinh, gianhap = :gianhap, tyleloinhuan = :tyleloinhuan, motasp = :motasp
+        $sql = "UPDATE sanpham SET tensp = :tensp, loai = :loai, gioitinh = :gioitinh, motasp = :motasp, trangthai = :trangthai
                 WHERE masp = :masp";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
@@ -48,9 +48,8 @@ class SanPhamModel
             ':tensp' => $data['tensp'],
             ':loai' => $data['loai'],
             ':gioitinh' => $data['gioitinh'],
-            ':gianhap' => $data['gianhap'],
-            ':tyleloinhuan' => $data['tyleloinhuan'],
             ':motasp' => $data['motasp'],
+            ':trangthai' => $data['trangthai'],
         ]);
     }
 
@@ -159,12 +158,17 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function isInPhieuNhap($id)
+    public function hasDependencies($id)
     { 
-        $sql = "SELECT masp FROM ctphieunhap WHERE masp = ?";
+        $sql = "SELECT 
+            (SELECT COUNT(*) FROM ctdonhang WHERE masp = ?) + 
+            (SELECT COUNT(*) FROM ctphieunhap WHERE masp = ?) as total";
+        
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->rowCount() > 0;
+        $stmt->execute([$id, $id]);
+        $result = $stmt->fetch();
+        
+        return $result['total'] > 0;
     }
     
     public function changeStatus($id)

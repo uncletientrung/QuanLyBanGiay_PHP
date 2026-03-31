@@ -86,14 +86,6 @@ Dashmix.onLoad(() => {
                 table.draw();
                 renderSelect2();
             });
-            
-            $("#size-table").on("change", 'input', function() {
-                const $row = $(this).closest("tr");
-                const dtRow = table.row($row);
-                const val = $(this).val()
-                table.cell(dtRow.index(), 2).data(val).draw();
-                reCalcTotalStock();
-            });
         }
 
         $("#edit-btn").on('click', function() {
@@ -101,19 +93,13 @@ Dashmix.onLoad(() => {
             
             //Cập nhật ID + resort sau chọn
             $("#size-table").on('change', 'select', function() {
-                const row = table.row($(this).closest('tr')).index();
-                const val = $(this).val()
-                table.cell(row, 0).data(val);
-                table.draw();
-                renderSelect2();
-            });
-            
-            $("#size-table").on("change", 'input', function() {
-                const $row = $(this).closest("tr");
+                const $cell = $(this);
+                const $row = $cell.closest('tr');
                 const dtRow = table.row($row);
                 const val = $(this).val()
-                table.cell(dtRow.index(), 2).data(val).draw();
-                reCalcTotalStock();
+                table.cell(dtRow.index(), 0).data(val);
+                table.draw();
+                renderSelect2();
             });
             
             if (!isEditMode) {
@@ -288,10 +274,11 @@ Dashmix.onLoad(() => {
                     }
                 })
 
-                console.log(data);
                 initialSizeDataArray = sizeDataArray;
                 initialData = data;
                 toggleEditModeRender();
+                console.log("Table: ");
+                console.log(table.rows().data().toArray());
             }
         });
 
