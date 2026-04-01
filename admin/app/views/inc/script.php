@@ -59,6 +59,13 @@ if (isset($Plugin['ionrangeslider']) && $Plugin['ionrangeslider'] == 1) {
 }
 
 // Page JS Code
-if (isset($Script) && $Script) {
-    $dm->get_js('js/pages/' . $Script . '.js');
+if (isset($Script) && !empty($Script)) {
+    // Array
+    if (is_array($Script)) {
+        foreach ($Script as $s) {
+            $dm->get_js('js/pages/' . $s . '.js');
+        }
+    } else {
+        $dm->get_js('js/pages/' . $Script . '.js');
+    }
 }

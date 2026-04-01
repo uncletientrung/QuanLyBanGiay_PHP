@@ -17,8 +17,8 @@ class SanPhamModel
     }
 
     function getNextId()
-    { 
-         $sql = "SELECT AUTO_INCREMENT as nextId
+    {
+        $sql = "SELECT AUTO_INCREMENT as nextId
                 FROM information_schema.tables
                 WHERE table_schema = 'quanlybangiay'
                 AND table_name = 'sanpham';";
@@ -28,18 +28,26 @@ class SanPhamModel
     }
 
     public function addSanPham($data)
-    { 
+    {
         $sql = "INSERT INTO sanpham (tensp, loai, gioitinh, gianhap, tyleloinhuan, hang, mau, motasp, soluongdaban, trangthai) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([
-            $data['tensp'], $data['loai'], $data['gioitinh'], 
-            0, 0, $data['hang'], 
-            $data['mausac'], $data['motasp'], 0, $data['trangthai']]);
+            $data['tensp'],
+            $data['loai'],
+            $data['gioitinh'],
+            0,
+            0,
+            $data['hang'],
+            $data['mausac'],
+            $data['motasp'],
+            0,
+            $data['trangthai']
+        ]);
     }
 
     public function updateSanPham($data)
-    { 
+    {
         $sql = "UPDATE sanpham SET tensp = :tensp, loai = :loai, gioitinh = :gioitinh, motasp = :motasp, trangthai = :trangthai
                 WHERE masp = :masp";
         $stmt = $this->conn->prepare($sql);
@@ -60,10 +68,10 @@ class SanPhamModel
         $stmt = $this->conn->prepare($sql);
         foreach ($data as $index => $value) {
             $stmt->execute([
-                ":soluong"=> $value["soLuong"],
-                ":masp"=> $value["masp"],
-                ":newId"=> $value["masize"],
-                ":oldId"=> $oldId[$index],
+                ":soluong" => $value["soLuong"],
+                ":masp" => $value["masp"],
+                ":newId" => $value["masize"],
+                ":oldId" => $oldId[$index],
             ]);
         }
         return $this->conn->commit();
@@ -72,7 +80,7 @@ class SanPhamModel
     public function addNewSize($data, $oldId)
     {
         if ($oldId === null) $oldId = [];
-        $toInsert = array_filter($data, function($item) use ($oldId) {
+        $toInsert = array_filter($data, function ($item) use ($oldId) {
             return !in_array($item['masize'], $oldId);
         });
         $this->conn->beginTransaction();
@@ -80,9 +88,9 @@ class SanPhamModel
         $stmt = $this->conn->prepare($sql);
         foreach ($toInsert as $value) {
             $stmt->execute([
-                ":soluong"=> $value["soLuong"],
-                ":masp"=> $value["masp"],
-                ":masize"=> $value["masize"],
+                ":soluong" => $value["soLuong"],
+                ":masp" => $value["masp"],
+                ":masize" => $value["masize"],
             ]);
         }
         return $this->conn->commit();
@@ -95,8 +103,8 @@ class SanPhamModel
             $sql = "DELETE FROM sanphamsize WHERE masp = :masp AND masize = :masize";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([
-                ":masp"=> $value["masp"],
-                ":masize"=> $value["masize"],
+                ":masp" => $value["masp"],
+                ":masize" => $value["masize"],
             ]);
         }
         return $this->conn->commit();
@@ -159,20 +167,20 @@ class SanPhamModel
     }
 
     public function hasDependencies($id)
-    { 
+    {
         $sql = "SELECT 
             (SELECT COUNT(*) FROM ctdonhang WHERE masp = ?) + 
             (SELECT COUNT(*) FROM ctphieunhap WHERE masp = ?) as total";
-        
+
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id, $id]);
         $result = $stmt->fetch();
-        
+
         return $result['total'] > 0;
     }
-    
+
     public function changeStatus($id)
-    { 
+    {
         $sql = "UPDATE sanpham SET trangthai = 0 WHERE masp = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$id]);
@@ -194,14 +202,15 @@ class SanPhamModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateLoiNhuan($productId, $newValue){
+    public function updateLoiNhuan($productId, $newValue)
+    {
         $sql = "UPDATE sanpham SET tyleloinhuan = ? WHERE masp = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$newValue, $productId]);
     }
-    
+
     public function getAllStock()
-    { 
+    {
         $sql = "SELECT 
                     s.masp, 
                     s.tensp, 
@@ -211,13 +220,13 @@ class SanPhamModel
                 LEFT JOIN sanphamsize AS ss ON s.masp = ss.masp
                 INNER JOIN loai as l ON l.maloai = s.loai
                 GROUP BY s.masp, s.tensp;";
-        $stmt = $this->conn->prepare($sql); 
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getStockById($id)
-    { 
+    {
         $sql = "SELECT 
                     ss.masize,
                     tensize,
@@ -225,7 +234,7 @@ class SanPhamModel
                 FROM sanphamsize as ss
                 LEFT JOIN size as s ON ss.masize = s.masize
                 WHERE masp = ?";
-        $stmt = $this->conn->prepare($sql); 
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -254,15 +263,16 @@ class SanPhamModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-        public function getNewestProducts(){
+    public function getNewestProducts()
+    {
         $sql = "SELECT * FROM sanpham 
                 WHERE trangthai = 1 
                 ORDER BY masp DESC 
                 LIMIT 12";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);   
-}
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function countAll()
     {
@@ -497,9 +507,109 @@ class SanPhamModel
                 LEFT JOIN sanphamsize ss ON s.masp = ss.masp
                 WHERE s.trangthai = 1
                 GROUP BY s.masp
-                ORDER BY s.tensp ASC";
+                ORDER BY s.masp DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // THỐNG KÊ PHIẾU NHẬP - XUẤT
+    public function getThongKeNhapXuat($fromDate = null, $toDate = null)
+    {
+        $whereNhap = "WHERE pn.trangthai = 1";
+        $whereXuat = "WHERE dh.trangthai IN (1, 2)";
+        $params = [];
+
+        if ($fromDate && $toDate) {
+            $whereNhap .= " AND pn.thoigiantao BETWEEN ? AND ?";
+            $whereXuat .= " AND dh.thoigiantao BETWEEN ? AND ?";
+            // Nhập(from, to), Xuất(from, to)
+            $params = [$fromDate, $toDate, $fromDate, $toDate];
+        }
+
+        $sql = "SELECT 
+                s.masp, 
+                s.tensp,
+                (SELECT COALESCE(SUM(ctpn.soluong), 0) 
+                 FROM ctphieunhap ctpn 
+                 JOIN phieunhap pn ON ctpn.mapn = pn.mapn 
+                 $whereNhap AND ctpn.masp = s.masp) as tong_nhap,
+                (SELECT COALESCE(SUM(ctdh.soluong), 0) 
+                 FROM ctdonhang ctdh 
+                 JOIN donhang dh ON ctdh.madh = dh.madh 
+                 $whereXuat AND ctdh.masp = s.masp) as tong_xuat
+            FROM sanpham s
+            WHERE s.trangthai = 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getChiTietNhapXuat($masp, $fromDate = null, $toDate = null)
+    {
+        // Điều kiện thời gian
+        $condNhap = "pn.trangthai = 1 AND ctpn.masp = ?";
+        $condXuat = "dh.trangthai IN (1, 2) AND ctdh.masp = ?";
+        $paramsNhap = [$masp];
+        $paramsXuat = [$masp];
+
+        if ($fromDate && $toDate) {
+            $condNhap .= " AND pn.thoigiantao BETWEEN ? AND ?";
+            $condXuat .= " AND dh.thoigiantao BETWEEN ? AND ?";
+            array_push($paramsNhap, $fromDate, $toDate);
+            array_push($paramsXuat, $fromDate, $toDate);
+        } elseif ($fromDate) {
+            $condNhap .= " AND pn.thoigiantao >= ?";
+            $condXuat .= " AND dh.thoigiantao >= ?";
+            $paramsNhap[] = $fromDate;
+            $paramsXuat[] = $fromDate;
+        } elseif ($toDate) {
+            $condNhap .= " AND pn.thoigiantao <= ?";
+            $condXuat .= " AND dh.thoigiantao <= ?";
+            $paramsNhap[] = $toDate;
+            $paramsXuat[] = $toDate;
+        }
+
+        // Phiếu nhập
+        $sqlNhap = "SELECT 
+                    pn.mapn,
+                    pn.thoigiantao,
+                    a.hoten as tenadmin,
+                    n.tenncc,
+                    ctpn.soluong,
+                    ctpn.dongia
+                FROM ctphieunhap ctpn
+                JOIN phieunhap pn ON ctpn.mapn = pn.mapn
+                LEFT JOIN admin a ON pn.maadmin = a.maadmin
+                LEFT JOIN nhacungcap n ON pn.mancc = n.mancc
+                WHERE {$condNhap}
+                ORDER BY pn.thoigiantao DESC";
+
+        $stmtNhap = $this->conn->prepare($sqlNhap);
+        $stmtNhap->execute($paramsNhap);
+        $phieuNhap = $stmtNhap->fetchAll(PDO::FETCH_ASSOC);
+
+        // Đơn hàng
+        $sqlXuat = "SELECT 
+                    dh.madh,
+                    dh.thoigiantao,
+                    kh.hoten as tenkhachhang,
+                    ctdh.soluong,
+                    ctdh.dongia
+                FROM ctdonhang ctdh
+                JOIN donhang dh ON ctdh.madh = dh.madh
+                LEFT JOIN khachhang kh ON dh.makh = kh.makh
+                WHERE {$condXuat}
+                ORDER BY dh.thoigiantao DESC";
+
+        $stmtXuat = $this->conn->prepare($sqlXuat);
+        $stmtXuat->execute($paramsXuat);
+        $donHang = $stmtXuat->fetchAll(PDO::FETCH_ASSOC);
+
+        return [
+            'phieu_nhap' => $phieuNhap,
+            'don_hang'   => $donHang,
+        ];
     }
 }

@@ -84,6 +84,8 @@ $router->post('/gia_ban/updateLoiNhuan', 'GiaBan@updateLoiNhuan');
 $router->get('/ton_kho', 'Ton_kho@default');
 $router->get('/ton_kho/getAllStock', 'Ton_kho@getAllStock');
 $router->get('/ton_kho/getStockById', 'Ton_kho@getStockById');
+$router->get('/ton_kho/getThongKeNhapXuat', 'Ton_kho@getThongKeNhapXuat');
+$router->get('/ton_kho/getChiTietThongKe', 'Ton_kho@getChiTietThongKe');
 
 
 // Thong ke

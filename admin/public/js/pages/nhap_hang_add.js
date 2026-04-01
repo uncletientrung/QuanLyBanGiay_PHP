@@ -111,6 +111,9 @@ Dashmix.onLoad(() => {
             const rowId = NhapHangAdd.rowId(key);
             const safeKey = key;
 
+            // QUAN TRỌNG: Ép kiểu Number trước khi toLocaleString để hiện dấu chấm
+            const formattedPrice = Number(p.dongia).toLocaleString('vi-VN');
+
             const html = `
                 <tr id="${rowId}">
                     <td class="text-center row-index"></td>
@@ -128,9 +131,9 @@ Dashmix.onLoad(() => {
                             data-key="${safeKey}">
                     </td>
                     <td>
-                        <input type="number"
+                        <input type="text"
                             class="form-control form-control-sm price-input text-center"
-                            value="${p.dongia}" min="0"
+                            value="${formattedPrice}" 
                             data-key="${safeKey}">
                     </td>
                     <td class="text-end fw-semibold row-total" id="rowtotal-${rowId}">0 ₫</td>
@@ -170,15 +173,19 @@ Dashmix.onLoad(() => {
             // Sửa số lượng / đơn giá
             jQuery(document).on('input', '.qty-input, .price-input', function () {
                 const key = $(this).data('key');
-                let val = parseInt($(this).val()) || 0;
-
                 if ($(this).hasClass('qty-input')) {
+                    let val = parseInt($(this).val()) || 0;
                     if (val < 1) { val = 1; $(this).val(1); }
                     NhapHangAdd.selectedProducts[key].soluong = val;
-                } else {
-                    if (val < 0) { val = 0; $(this).val(0); }
-                    NhapHangAdd.selectedProducts[key].dongia = val;
                 }
+                else {
+                    let inputVal = $(this).val();
+                    let rawVal = inputVal.replace(/\D/g, "");
+                    let numericVal = parseInt(rawVal) || 0;
+                    NhapHangAdd.selectedProducts[key].dongia = numericVal;
+                    $(this).val(numericVal === 0 ? "" : numericVal.toLocaleString('vi-VN'));
+                }
+
                 NhapHangAdd.updateUI();
             });
 

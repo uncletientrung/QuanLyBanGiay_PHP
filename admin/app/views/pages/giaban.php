@@ -9,9 +9,6 @@
       <h3 class="block-title">
         Quản lý giá bán
       </h3>
-      <div class="block-options">
-        <button id="toggle-edit" class="btn btn-outline-primary">Sửa</button>
-      </div>
     </div>
     <div class="block-content block-content-full">
       <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->

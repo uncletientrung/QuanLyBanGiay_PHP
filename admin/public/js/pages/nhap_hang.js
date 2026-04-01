@@ -49,6 +49,9 @@ Dashmix.onLoad(() =>
                     <span class="input-group-text input-group-text-alt">
                         <i class="fa-solid fa-calendar"></i>
                     </span>
+                    <button class="btn btn-light" type="button" id="btn-reset-filter">
+                        <i class="fa fa-rotate-left"></i>
+                    </button>
                 </div>
             `;
 
@@ -171,6 +174,17 @@ Dashmix.onLoad(() =>
 
             // Thêm bộ lọc ngày tháng
             jQuery("#date-filter-box").html(dateRangeHtml);
+
+            $(document).on('click', '#btn-reset-filter', function () {
+                fromPicker.clear();
+                toPicker.clear();
+
+                toPicker.set('minDate', null);
+                fromPicker.set('maxDate', null);
+
+                $('#filter-status').val('');
+                userTable.draw();
+            });
 
             const baseFpConfig = {
                 enableTime: true,

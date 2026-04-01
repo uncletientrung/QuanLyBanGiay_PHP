@@ -23,12 +23,12 @@
                 </div>
                 <div class="block-content">
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold">Mã phiếu nhập</label>
                         <input type="text" class="form-control" value="PN-<?= (int)$nextMaPN ?>" readonly>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold" for="ngaynhap">Ngày nhập <span class="text-danger">*</span></label>
                         <input type="text"
                             class="form-control"
@@ -38,7 +38,7 @@
                             value="<?= date('Y-m-d H:i') ?>">
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <label class="form-label fw-semibold" for="mancc">
                             Nhà cung cấp <span class="text-danger">*</span>
                         </label>
@@ -58,45 +58,40 @@
                             <h5 class="fw-bold mb-0">Danh sách sản phẩm</h5>
                             <span class="badge bg-primary" id="item-count">0 sản phẩm</span>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-vcenter">
-                                <thead class="bg-body-light">
-                                    <tr class="fs-sm text-uppercase">
+                        <div style="max-height: 380px; overflow-y: auto; border: 1px solid #ebedef; border-radius: 4px;">
+                            <table class="table table-bordered table-vcenter mb-0">
+                                <thead class="bg-body-light sticky-top" style="z-index: 10;">
+                                    <tr class="fs-xs text-uppercase">
                                         <th class="text-center" style="width:40px;">#</th>
                                         <th>Tên sản phẩm</th>
-                                        <th class="text-center" style="width:100px;">Size</th>
-                                        <th class="text-center" style="width:100px;">Số lượng</th>
-                                        <th class="text-center" style="width:130px;">Đơn giá (đ)</th>
-                                        <th class="text-end" colspan="2" style="width:165px; padding-right: 25px;">Thành tiền</th>
+                                        <th class="text-center" style="width:80px;">Size</th>
+                                        <th class="text-center" style="width:90px;">SL</th>
+                                        <th class="text-center" style="width:120px;">Đơn giá</th>
+                                        <th class="text-end" style="width:140px;">Thành tiền</th>
+                                        <th class="text-center" style="width:40px;"></th>
                                     </tr>
                                 </thead>
-                                <tbody id="selected-products-body">
+                                <tbody id="selected-products-body" class="fs-sm">
                                     <tr id="empty-row">
-                                        <td colspan="7" class="text-center text-muted py-4">
-                                            <i class="fa fa-box-open fa-2x mb-2 d-block opacity-50"></i>
-                                            Chưa có sản phẩm. Thêm từ danh sách bên phải.
-                                        </td>
+                                        <td colspan="7" class="text-center text-muted py-4">Chưa có sản phẩm.</td>
                                     </tr>
                                 </tbody>
-                                <tfoot>
-                                    <tr class="bg-body-light">
-                                        <td colspan="5" class="text-end fw-bold text-uppercase">Tổng tiền hàng:</td>
-                                        <td colspan="2" class="text-end fw-bold text-primary fs-5" id="total-amount" style="padding-right: 25px;">0 ₫</td>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
-                    </div>
 
-                    <div class="py-3 border-top d-flex gap-2 flex-wrap">
-                        <button type="button" class="btn btn-primary" id="btn-hoan-thanh">
+                        <div class="d-flex justify-content-end align-items-center p-3 bg-body-light border border-top-0">
+                            <span class="fw-bold text-uppercase me-3 fs-xs">Tổng tiền hàng:</span>
+                            <span class="fw-bold text-primary fs-5" id="total-amount">0 ₫</span>
+                        </div>
+                    </div>
+                    <div class="py-3 border-top d-flex gap-2 flex-wrap justify-content-end">
+                        <button type="button" class="btn btn-hero btn-primary" id="btn-hoan-thanh">
                             <i class="fa fa-check me-1"></i> Hoàn thành
                         </button>
-                        <button type="button" class="btn btn-warning" id="btn-luu-tam">
+                        <button type="button" class="btn btn-hero btn-warning" id="btn-luu-tam">
                             <i class="fa fa-save me-1"></i> Lưu tạm
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -106,7 +101,7 @@
             <div class="block block-rounded" style="position:sticky; top:80px;">
                 <div class="block-header block-header-default">
                     <h3 class="block-title">
-                        <i class="fa fa-boxes me-2 text-info"></i>
+                        <i class="fa-sharp-duotone fa-solid fa-box me-2"></i>
                         Sản phẩm trong kho
                     </h3>
                 </div>

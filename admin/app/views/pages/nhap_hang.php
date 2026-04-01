@@ -44,7 +44,7 @@
 
     <!-- Modal Chi Tiết Phiếu Nhập -->
     <div class="modal fade" id="modal-chitiet-phieunhap" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="block block-rounded block-transparent mb-0">
                     <div class="block-header bg-primary">
@@ -58,45 +58,51 @@
                         </div>
                     </div>
                     <div class="block-content fs-sm">
-                        <!-- Header info -->
+                        <!-- Header info: Giữ nguyên các trường thông tin chung -->
                         <div class="row g-3 mb-4">
                             <div class="col-md-3">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Mã phiếu</label>
-                                <input type="text" class="form-control" id="detail-mapn" readonly>
+                                <input type="text" class="form-control form-control-alt" id="detail-mapn" readonly>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Nhân viên nhập</label>
-                                <input type="text" class="form-control" id="detail-tenadmin" readonly>
+                                <input type="text" class="form-control form-control-alt" id="detail-tenadmin" readonly>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Nhà cung cấp</label>
-                                <input type="text" class="form-control" id="detail-tenncc" readonly>
+                                <input type="text" class="form-control form-control-alt" id="detail-tenncc" readonly>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-semibold text-muted small text-uppercase">Thời gian tạo</label>
-                                <input type="text" class="form-control" id="detail-thoigiantao" readonly>
+                                <input type="text" class="form-control form-control-alt" id="detail-thoigiantao" readonly>
                             </div>
                         </div>
 
-                        <!-- Bảng chi tiết sản phẩm -->
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-vcenter" id="detail-chitiet-table">
-                                <thead class="table-primary">
-                                    <tr class="text-uppercase fs-sm text-center">
-                                        <th style="width:50px;">STT</th>
-                                        <th style="width:90px;">Mã SP</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th style="width:110px;">Đơn giá</th>
-                                        <th style="width:120px;">Số lượng</th>
-                                        <th style="width:140px;">Thành tiền</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="detail-chitiet-body">
-                                </tbody>
+                        <!-- Cấu trúc bảng cuộn với Footer cố định -->
+                        <div style="display: flex; flex-direction: column; max-height: 55vh;">
+                            <div style="overflow-y: auto; flex: 1; border: 1px solid #e1e1e1; border-radius: 4px 4px 0 0;">
+                                <table class="table table-borderless table-striped table-vcenter mb-0">
+                                    <thead class="sticky-top bg-white shadow-sm" style="z-index: 1;">
+                                        <tr class="text-uppercase fs-sm text-center">
+                                            <th style="width: 60px;">STT</th>
+                                            <th style="width: 100px;">Mã SP</th>
+                                            <th style="width: auto;">Tên sản phẩm</th>
+                                            <th style="width: 140px;">Đơn giá</th>
+                                            <th style="width: 120px;">Số lượng</th>
+                                            <th style="width: 160px;">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail-chitiet-body">
+                                        <!-- Dữ liệu JS render vào đây -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- Footer bảng cố định nằm ngay dưới vùng cuộn -->
+                            <table class="table table-borderless mb-0 border-top bg-body-light">
                                 <tfoot>
-                                    <tr class="table-light">
-                                        <td colspan="5" class="text-end fw-bold text-uppercase">Tổng tiền:</td>
-                                        <td class="text-center fw-bold text-primary fs-5" id="detail-tongtien"></td>
+                                    <tr class="fw-bold">
+                                        <td colspan="5" class="text-end text-uppercase py-3" style="width: calc(100% - 160px);">Tổng cộng:</td>
+                                        <td class="text-center text-primary fs-5 py-3" style="width: 160px;" id="detail-tongtien">0đ</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -104,12 +110,12 @@
 
                         <!-- Trạng thái -->
                         <div class="mt-3 d-flex align-items-center gap-2">
-                            <span class="fw-semibold text-muted small text-uppercase">Trạng thái:</span>
+                            <span class="fw-semibold text-muted small text-uppercase">Trạng thái phiếu:</span>
                             <span id="detail-trangthai"></span>
                         </div>
                     </div>
-                    <div class="block-content block-content-full text-end bg-body-light">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <div class="block-content block-content-full text-end bg-body-light mt-3">
+                        <button type="button" class="btn btn-hero btn-danger" data-bs-dismiss="modal">
                             <i class="fa fa-times me-1"></i> Đóng
                         </button>
                     </div>

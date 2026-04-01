@@ -11,10 +11,10 @@
 ?>
 
 <!-- Footer -->
-<footer id="page-footer" class="bg-body-light">
+<!-- <footer id="page-footer" class="bg-body-light">
   <div class="content py-0">
     <div class="row fs-sm">
     </div>
   </div>
-</footer>
+</footer> -->
 <!-- END Footer -->

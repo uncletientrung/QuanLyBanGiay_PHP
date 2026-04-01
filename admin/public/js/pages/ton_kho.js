@@ -3,7 +3,7 @@ Dashmix.onLoad(() =>
     class {
         static initDataTables() {
             $('#saphet').val(saphet_value);
-            
+
 
             // Override a few default classes
             jQuery.extend(jQuery.fn.dataTable.ext.classes, {
@@ -38,7 +38,7 @@ Dashmix.onLoad(() =>
             });
 
             // Init full extra DataTable
-            const table = jQuery('.js-dataTable-responsive').DataTable({
+            const table = jQuery('#table').DataTable({
                 pagingType: "full_numbers",
                 pageLength: 7,
                 dom: `
@@ -98,7 +98,7 @@ Dashmix.onLoad(() =>
                     {
                         data: 'tong_soluong',
                         className: 'text-center',
-                        render: function(data) {
+                        render: function (data) {
                             if (parseInt(data) == 0)
                                 return `Hết hàng`
                             else if (parseInt(data) < saphet_value)
@@ -157,18 +157,16 @@ Dashmix.onLoad(() =>
                 ]
             });
 
-            $(document).on('change', '#saphet', function() {
-                if ($(this).val() != saphet_value)
-                { 
+            $(document).on('change', '#saphet', function () {
+                if ($(this).val() != saphet_value) {
                     localStorage.setItem('saphet', $(this).val())
                     saphet_value = $(this).val();
                     table.ajax.reload();
                 }
             });
 
-            $(document).on('keydown', '#saphet', function(e) {
-                if (e.which == 13)
-                { 
+            $(document).on('keydown', '#saphet', function (e) {
+                if (e.which == 13) {
                     $(this).blur();
                 }
             });
@@ -181,19 +179,19 @@ Dashmix.onLoad(() =>
                 if (!$.fn.DataTable.isDataTable(tableId)) {
                     $(tableId).DataTable({
                         ajax: {
-                            url: `./ton_kho/getStockById`, 
+                            url: `./ton_kho/getStockById`,
                             dataSrc: '',
                             data: {
-                            id: productId
+                                id: productId
                             },
                         },
                         columns: [
                             { data: 'tensize', className: 'text-center' },
                             { data: 'soluong', className: 'text-center' },
-                            { 
-                                data: 'soluong', 
+                            {
+                                data: 'soluong',
                                 className: 'text-center',
-                                render: function(data) {
+                                render: function (data) {
                                     if (parseInt(data) == 0)
                                         return `Hết hàng`
                                     else if (parseInt(data) < saphet_value)
@@ -229,10 +227,10 @@ Dashmix.onLoad(() =>
 
             $("#status-filter").children().css('cursor', 'pointer');
 
-            $(document).on('change', '#filter-status', function() {
+            $(document).on('change', '#filter-status', function () {
                 table.draw();
             });
-            
+
             $("#filter-date").html(`
                 <div class="input-group">
                     <span class="input-group-text input-group-text-alt">
@@ -258,18 +256,18 @@ Dashmix.onLoad(() =>
                 </div>
             `);
 
-            $(document).on('click', '#btn-reset-filter', function() {
+            $(document).on('click', '#btn-reset-filter', function () {
                 fromPicker.clear();
                 toPicker.clear();
-                
+
                 toPicker.set('minDate', null);
                 fromPicker.set('maxDate', null);
 
                 $('#filter-status').val('');
-                table.draw(); 
+                table.draw();
             });
 
-            
+
             const baseFpConfig = {
                 enableTime: true,
                 time_24hr: true,
@@ -353,7 +351,7 @@ Dashmix.onLoad(() =>
             });
 
             $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                if (settings.nTable.id !== 'table' && !$(settings.nTable).hasClass('js-dataTable-responsive')) {
+                if (settings.nTable.id !== 'table') {
                     return true;
                 }
 
@@ -361,7 +359,7 @@ Dashmix.onLoad(() =>
                 if (filterVal === "") return true;
 
                 const stockCount = parseInt(data[3]) || 0;
-                
+
                 if (filterVal === "0") {
                     return stockCount > saphet_value;
                 } else if (filterVal === "1") {
