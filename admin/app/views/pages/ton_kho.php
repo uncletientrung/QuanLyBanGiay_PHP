@@ -1,11 +1,11 @@
 <!-- Page JS Plugins CSS -->
 <?php $dm->get_css('js/plugins/flatpickr/flatpickr.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css'); ?>
-<?php $dm->get_css('css/dashmix.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css'); ?>
 <?php $dm->get_css('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css'); ?>
-<?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
 <?php $dm->get_css('js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css'); ?>
+<?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
+<?php $dm->get_css('css/dashmix.min.css'); ?>
 
 <div class="content">
   <div class="block block-rounded">
@@ -23,40 +23,144 @@
     <div class="block-content tab-content">
       <!-- TAB TỔNG QUAN -->
       <div class="tab-pane active" id="tab-tongquan" role="tabpanel" aria-labelledby="btab-tongquan" tabindex="0">
-        <div class="block block-rounded">
-          <div class="block-header block-header-default">
-            <div class="block-options">
-              <button type="button" class="btn btn-outline-primary dropdown-toggle" id="config-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-gear"></i>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdown-dropleft-outline-dark">
-                <div class="block-content p-2">
-                  <label for="saphet">Sản phẩm sắp hết hàng khi dưới:</label>
-                  <input type="number" class="mt-3 form-control" id="saphet" name="saphet" placeholder="Nhập số lượng">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="block-content block-content-full">
-            <table id="table" class="table table-hover table-vcenter js-dataTable-responsive">
-              <thead>
-                <tr>
-                  <th class="text-center" style="width: 10%;">Mã</th>
-                  <th style="width: 40%">Tên sản phẩm</th>
-                  <th style="width: 20%">Loại sản phẩm</th>
-                  <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
-                  <th style="width: 15%" class="text-center">Trạng thái</th>
-                  <th></th>
-                </tr>
-              </thead>
-            </table>
-          </div>
-        </div>
+      <!-- Dynamic Table Full Pagination -->
+      <div class="block block-rounded">
+        <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
+        <table id="table" class="table table-hover table-vcenter js-dataTable-responsive">
+          <thead>
+            <tr class="bg-body-dark">
+              <th class="text-center" style="width: 10%;">Mã</th>
+              <th style="width: 40%">Tên sản phẩm</th>
+              <th style="width: 20%">Loại sản phẩm</th>
+              <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
+              <th style="width: 15%" class="text-center">Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
       </div>
       <!-- TAB TRA CỨU -->
       <div class="tab-pane" id="tab-tracuu" role="tabpanel" aria-labelledby="btab-tracuu" tabindex="0">
-        <h4 class="fw-normal">Tra cứu sản phẩm theo thời gian</h4>
-        <p>...</p>
+        <div class="block block-rounded">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+              <select id="select-tracuu" class="form-select select2">
+                <option></option>
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-5 ms-auto">
+              <div class="input-group" id="datepicker-wrap">
+                <span class="input-group-text input-group-text-alt" data-toggle>
+                    <i class="fa-solid fa-calendar"></i>
+                </span>
+                <input type="text" class="form-control form-control-alt text-center" 
+                      id="filter-from" placeholder="Chọn ngày tra cứu" data-input readonly>
+                <button class="btn btn-light" type="button" id="btn-reset-date" data-clear>
+                    <i class="fa fa-rotate-left"></i>
+                </button>
+              </div>
+            </div>
+            <div class="w-auto ps-0">
+              <button type="button" id="tracuu-btn" class="btn btn-outline-primary">Áp dụng</button>
+            </div>
+          </div>
+          <div class="mt-3 mb-3 p-3 bg-light rounded border-start border-4 border-primary shadow-sm">
+            <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
+              <div class="col-sm-2 border-end">
+                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>
+                  <span id="ma-tracuu" class="fw-bold text-dark">H001</span>
+              </div>
+
+              <div class="col-sm-4 border-end">
+                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên hãng</small>
+                  <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
+              </div>
+
+              <div class="col-sm text-center">
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng nhập</small>
+                  <span id="slnhap-tracuu" class="fs-4 badge rounded-pill bg-info-light text-info px-3 py-2 fw-bold">
+                      <i class="fa fa-arrow-down me-1"></i> 1.250
+                  </span>
+              </div>
+
+              <div class="col-sm text-center">
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng xuất</small>
+                  <span id="slxuat-tracuu" class="fs-4 badge rounded-pill bg-warning-light text-warning px-3 py-2 fw-bold">
+                      <i class="fa fa-arrow-up me-1"></i> 850
+                  </span>
+              </div>
+
+              <div class="col-sm text-center">
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng tồn</small>
+                  <span id="ton-tracuu" class="badge fs-4 rounded-pill bg-success text-white px-3 py-2 fw-bold shadow-sm">
+                      400
+                  </span>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="block block-rounded block-bordered">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Bảng phiếu nhập</h3>
+                    </div>
+                    <div class="block-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 100px;">Mã</th>
+                                        <th>Ngày</th>
+                                        <th class="d-none d-sm-table-cell">Giá</th>
+                                        <th class="text-center">SL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center font-w600">NK001</td>
+                                        <td class="font-size-sm">01/04/2026</td>
+                                        <td class="d-none d-sm-table-cell">500,000đ</td>
+                                        <td class="text-center">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="block block-rounded block-bordered">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Bảng đơn hàng</h3>
+                    </div>
+                    <div class="block-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-vcenter">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="width: 100px;">Mã</th>
+                                        <th>Ngày</th>
+                                        <th class="d-none d-sm-table-cell">Giá</th>
+                                        <th class="text-center">SL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center font-w600">NK002</td>
+                                        <td class="font-size-sm">02/04/2026</td>
+                                        <td class="d-none d-sm-table-cell">1,200,000đ</td>
+                                        <td class="text-center">5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
       </div>
       <!-- TAB THỐNG KÊ -->
       <div class="tab-pane" id="tab-thongke" role="tabpanel" aria-labelledby="btab-thongke" tabindex="0">

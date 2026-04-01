@@ -15,6 +15,9 @@ class Ton_kho extends Controller
             "Plugin" => [
                 "datatables" => 1,
                 "flatpickr" => 1,
+                "notify" => 1,
+                "select2" => 1,
+                "sweetalert2" => 1,                
             ],
             "Script" => ["ton_kho", "report_nhapxuat"],
         ]);

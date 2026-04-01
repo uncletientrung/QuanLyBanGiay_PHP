@@ -25,11 +25,11 @@
                 </div>
             </th>
             <th class="text-center" style="width: 80px;">Mã</th>
-            <th>Tên sản phẩm</th>
-            <th>Loại</th>
+            <th style="width: 25%">Tên sản phẩm</th>
+            <th style="width: 10%">Loại</th>
             <th>Giới tính</th>
             <th>Hãng</th>
-            <th>Màu</th>
+            <th style="width: 13%">Màu</th>
             <th>Sizes</th>
             <th>Trạng thái</th>
             <th>Hành động</th>

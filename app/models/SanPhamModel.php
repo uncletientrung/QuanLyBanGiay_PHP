@@ -16,6 +16,14 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getIdAndName()
+    { 
+        $sql = "SELECT masp as id, tensp as text FROM sanpham";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     function getNextId()
     {
         $sql = "SELECT AUTO_INCREMENT as nextId

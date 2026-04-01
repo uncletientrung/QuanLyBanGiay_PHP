@@ -42,6 +42,12 @@ class Products extends Controller
         exit();
     }
 
+    public function getIdAndName()
+    { 
+        echo json_encode($this->productsModel->getIdAndName());
+        exit();
+    }
+
     public function detail($id = null)
     {
         if ($id != 0)
