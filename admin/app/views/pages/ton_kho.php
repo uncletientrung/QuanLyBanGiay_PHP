@@ -65,101 +65,99 @@
               <button type="button" id="tracuu-btn" class="btn btn-outline-primary">Áp dụng</button>
             </div>
           </div>
-          <div class="mt-3 mb-3 p-3 bg-light rounded border-start border-4 border-primary shadow-sm">
-            <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
-              <div class="col-sm-2 border-end">
-                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>
-                  <span id="ma-tracuu" class="fw-bold text-dark">H001</span>
+          <div class="block-content ps-0 visually-" id="thongtin-tracuu">
+            <div class="mt-3 mb-3 p-3 bg-light rounded border-start border-4 border-primary shadow-sm">
+              <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
+                <div class="col-sm-2 border-end">
+                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>
+                    <span id="ma-tracuu" class="fw-bold text-dark">H001</span>
+                </div>
+
+                <div class="col-sm-4 border-end">
+                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên hãng</small>
+                    <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
+                </div>
+
+                <div class="col-sm text-center">
+                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng nhập</small>
+                    <span id="slnhap-tracuu" class="fs-4 badge rounded-pill bg-info-light text-info px-3 py-2 fw-bold">
+                        <i class="fa fa-arrow-down me-1"></i> 1.250
+                    </span>
+                </div>
+
+                <div class="col-sm text-center">
+                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng xuất</small>
+                    <span id="slxuat-tracuu" class="fs-4 badge rounded-pill bg-warning-light text-warning px-3 py-2 fw-bold">
+                        <i class="fa fa-arrow-up me-1"></i> 850
+                    </span>
+                </div>
+
+                <div class="col-sm text-center">
+                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng tồn</small>
+                    <span id="ton-tracuu" class="badge fs-4 rounded-pill bg-success text-white px-3 py-2 fw-bold shadow-sm">
+                        400
+                    </span>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6">
+                  <div class="block block-rounded block-bordered">
+                      <div class="block-header block-header-default">
+                          <h3 class="block-title">Lịch sử phiếu nhập</h3>
+                      </div>
+                      <div class="block-content">
+                          <div class="table-responsive">
+                              <table id="nhap-tracuu-table" class="table table-striped table-vcenter w-100">
+                                  <thead>
+                                      <tr>
+                                          <th class="text-center" style="width: 100px;">Mã</th>
+                                          <th>Ngày</th>
+                                          <th class="text-center" style="width: 150px">Số lượng</th>
+                                      </tr>
+                                  </thead>
+                                  <tfoot>
+                                    <tr>
+                                      <th></th>
+                                      <th>Tổng số lượng nhập: </th>
+                                      <th class="text-center">10</th>
+                                    </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
               </div>
 
-              <div class="col-sm-4 border-end">
-                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên hãng</small>
-                  <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
-              </div>
-
-              <div class="col-sm text-center">
-                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng nhập</small>
-                  <span id="slnhap-tracuu" class="fs-4 badge rounded-pill bg-info-light text-info px-3 py-2 fw-bold">
-                      <i class="fa fa-arrow-down me-1"></i> 1.250
-                  </span>
-              </div>
-
-              <div class="col-sm text-center">
-                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng xuất</small>
-                  <span id="slxuat-tracuu" class="fs-4 badge rounded-pill bg-warning-light text-warning px-3 py-2 fw-bold">
-                      <i class="fa fa-arrow-up me-1"></i> 850
-                  </span>
-              </div>
-
-              <div class="col-sm text-center">
-                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng tồn</small>
-                  <span id="ton-tracuu" class="badge fs-4 rounded-pill bg-success text-white px-3 py-2 fw-bold shadow-sm">
-                      400
-                  </span>
+              <div class="col-md-6">
+                  <div class="block block-rounded block-bordered">
+                      <div class="block-header block-header-default">
+                          <h3 class="block-title">Lịch sử đơn hàng đơn hàng</h3>
+                      </div>
+                      <div class="block-content">
+                          <div class="table-responsive">
+                              <table id="xuat-tracuu-table" class="table table-striped table-vcenter" class="w-100">
+                                  <thead>
+                                      <tr>
+                                          <th class="text-center" style="width: 100px;">Mã</th>
+                                          <th>Ngày</th>
+                                          <th class="text-center" style="width: 150px">Số lượng</th>
+                                      </tr>
+                                  </thead>
+                                  <tfoot>
+                                    <tr>
+                                      <th></th>
+                                      <th>Tổng số lượng xuất: </th>
+                                      <th class="text-center">10</th>
+                                    </tr>
+                                  </tfoot>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="block block-rounded block-bordered">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Bảng phiếu nhập</h3>
-                    </div>
-                    <div class="block-content">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-vcenter">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" style="width: 100px;">Mã</th>
-                                        <th>Ngày</th>
-                                        <th class="d-none d-sm-table-cell">Giá</th>
-                                        <th class="text-center">SL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center font-w600">NK001</td>
-                                        <td class="font-size-sm">01/04/2026</td>
-                                        <td class="d-none d-sm-table-cell">500,000đ</td>
-                                        <td class="text-center">10</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="block block-rounded block-bordered">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Bảng đơn hàng</h3>
-                    </div>
-                    <div class="block-content">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-vcenter">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" style="width: 100px;">Mã</th>
-                                        <th>Ngày</th>
-                                        <th class="d-none d-sm-table-cell">Giá</th>
-                                        <th class="text-center">SL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center font-w600">NK002</td>
-                                        <td class="font-size-sm">02/04/2026</td>
-                                        <td class="d-none d-sm-table-cell">1,200,000đ</td>
-                                        <td class="text-center">5</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </div>
       </div>
       <!-- TAB THỐNG KÊ -->

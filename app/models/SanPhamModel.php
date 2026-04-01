@@ -620,4 +620,74 @@ class SanPhamModel
             'don_hang'   => $donHang,
         ];
     }
+
+    public function getTotalStockByDateAndId($id, $date)
+    { 
+        $sql = "SELECT
+                    COALESCE(
+                        (
+                        SELECT
+                            SUM(ctpn.soluong)
+                        FROM
+                            ctphieunhap AS ctpn
+                        INNER JOIN phieunhap AS pn
+                        ON
+                            ctpn.mapn = pn.mapn
+                        WHERE
+                            ctpn.masp = ? AND DATE(pn.thoigiantao) <= ?
+                    ),
+                    0
+                    ) as tongnhap, 
+                    COALESCE(
+                        (
+                        SELECT
+                            SUM(ctdh.soluong)
+                        FROM
+                            ctdonhang AS ctdh
+                        INNER JOIN donhang AS dh
+                        ON
+                            ctdh.madh = dh.madh
+                        WHERE
+                            ctdh.masp = ? AND DATE(dh.thoigiantao) <= ?
+                    ),
+                    0
+                    ) as tongxuat,
+                    (
+                        COALESCE(
+                            (
+                            SELECT
+                                SUM(ctpn.soluong)
+                            FROM
+                                ctphieunhap AS ctpn
+                            INNER JOIN phieunhap AS pn
+                            ON
+                                ctpn.mapn = pn.mapn
+                            WHERE
+                                ctpn.masp = ? AND DATE(pn.thoigiantao) <= ?
+                        ),
+                        0
+                        ) - COALESCE(
+                            (
+                            SELECT
+                                SUM(ctdh.soluong)
+                            FROM
+                                ctdonhang AS ctdh
+                            INNER JOIN donhang AS dh
+                            ON
+                                ctdh.madh = dh.madh
+                            WHERE
+                                ctdh.masp = ? AND DATE(dh.thoigiantao) <= ?
+                        ),
+                        0
+                        )
+                    ) AS tongsl;";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            $id, $date, // for tongnhap
+            $id, $date, // for tongxuat
+            $id, $date, // for tongsl (first half)
+            $id, $date  // for tongsl (second half)
+        ]);        
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

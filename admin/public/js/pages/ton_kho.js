@@ -312,10 +312,18 @@ Dashmix.onLoad(() =>
         }
 
         static initTraCuuTab(){
+            let hasId = false;
+            let dateStr = '';
+            let prodId = '';
             const picker = flatpickr("#datepicker-wrap", {
             wrap: true,
-            dateFormat: "d/m/Y",
+            dateFormat: "Y-m-d", // This is what .val() will return
+            altFormat: "d/m/Y",  // This is what the user sees
+            altInput: true,
             allowInput: false,
+            onReady: function(selectedDates, dateStr, instance) {
+                $(instance.altInput).css('cursor', 'pointer');
+            }
             });
             
             $("#select-tracuu").select2({
@@ -332,9 +340,106 @@ Dashmix.onLoad(() =>
                 });
             });
 
+            const nhapTable = $('#nhap-tracuu-table').DataTable({
+                dom: 'ftp',
+                paging: true,
+                pageLength: 5,
+                pagingType: 'full_numbers',
+                autoWidth: false,
+                order: [[0, 'desc']],
+                info: false,
+                language: {
+                    emptyTable: "Không có dữ liệu nhập cho sản phẩm này"
+                },
+                ajax: {
+                    url: './ton_kho/getListPN',
+                    type: 'GET',
+                    data: function (d) {
+                        d.id = $('#select-tracuu').val();
+                        d.date = $('#datepicker-wrap input').val();
+                    },
+                    beforeSend: function(jqXHR, settings) {
+                        if (!hasId) {
+                            jqXHR.abort();
+                            return false;
+                        }
+                    },
+                    dataType: 'json',
+                    dataSrc: ""
+                },
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api();
+
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    var total = api
+                        .column(2)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    $(api.column(2).footer()).html(total);
+                },
+            });
+
+            const xuatTable = $('#xuat-tracuu-table').DataTable({
+                dom: 'ftp',
+                paging: true,
+                pageLength: 5,
+                pagingType: 'full_numbers',
+                autoWidth: false,
+                order: [[0, 'desc']],
+                info: false,
+                language: {
+                    emptyTable: "Không có dữ liệu xuất cho sản phẩm này"
+                },
+                ajax: {
+                    url: './ton_kho/getListDH',
+                    type: 'GET',
+                    data: function (d) {
+                        d.id = $('#select-tracuu').val();
+                        d.date = $('#datepicker-wrap input').val();
+                    },
+                    beforeSend: function(jqXHR, settings) {
+                        if (!hasId) {
+                            jqXHR.abort();
+                            return false;
+                        }
+                    },
+                    dataType: 'json',
+                    dataSrc: ""
+                },
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api();
+
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    var total = api
+                        .column(2)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    $(api.column(2).footer()).html(total);
+                },
+            });
+
             $("#tracuu-btn").on('click', function() {
-                let dateStr = $('#datepicker-wrap input').val();
-                let prodId= $('#select-tracuu').val();
+                dateStr = $('#datepicker-wrap input').val();
+                prodId= $('#select-tracuu').val();
+                let prodName = $('#select-tracuu option:selected').text().trim();
                 let message = "";
                 if (!dateStr && !prodId) {
                     message = "Vui lòng chọn ngày và sản phẩm.";
@@ -345,9 +450,31 @@ Dashmix.onLoad(() =>
                 }
 
                 if (message !== "") {
-                    Swal.fire('Thông báo', message, 'danger');
+                    Swal.fire('Thông báo', message, 'info');
                     return;
                 }
+
+                hasId = true;
+                $.ajax({
+                    url: './ton_kho/getTotalStockByDateAndId',
+                    type: 'GET',
+                    data: {
+                        id: prodId, 
+                        date: dateStr 
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        $("#thongtin-tracuu").removeClass('visually-hidden');
+                        $("#ma-tracuu").text("SP-" + prodId);
+                        $("#ten-tracuu").text(prodName);
+                        $("#slnhap-tracuu").html('<i class="fa fa-arrow-down me-1"></i> ' + response.tongnhap);
+                        $("#slxuat-tracuu").html('<i class="fa fa-arrow-up me-1"></i> ' + response.tongxuat);
+                        $("#ton-tracuu").text(response.tongsl);
+                        
+                        nhapTable.ajax.reload();
+                        xuatTable.ajax.reload();
+                    },
+                });
             });
         }
 

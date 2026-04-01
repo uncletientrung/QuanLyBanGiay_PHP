@@ -111,4 +111,17 @@ class Ton_kho extends Controller
         echo json_encode(['success' => true, 'data' => $data]);
         exit();
     }
+
+    public function getTotalStockByDateAndId()
+    { 
+        $id = $_GET['id'];
+        $date = $_GET['date'];
+        header('Content-Type: application/json');
+        if ($id && $date) {
+            echo json_encode($this->productModel->getTotalStockByDateAndId($id, $date));
+            exit();
+        }
+        echo json_encode("Không thể kết nối");
+        exit();
+    }
 }
