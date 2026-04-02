@@ -29,7 +29,7 @@
             <th style="width: 10%">Loại</th>
             <th>Giới tính</th>
             <th>Hãng</th>
-            <th style="width: 13%">Màu</th>
+            <th style="width: 12%">Màu</th>
             <th>Sizes</th>
             <th>Trạng thái</th>
             <th>Hành động</th>

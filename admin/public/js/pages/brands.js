@@ -212,7 +212,7 @@ Dashmix.onLoad(() =>
 
                 Swal.fire({
                     title: 'Hiển thị lại hãng?',
-                    text: "Hãng này sẽ xuất hiện lại trên web bán hành",
+                    text: "Hãng này sẽ xuất hiện lại trên web bán hàng",
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

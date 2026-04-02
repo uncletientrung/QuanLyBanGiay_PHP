@@ -171,7 +171,7 @@ Dashmix.onLoad(() =>
                 const $btn = $(this);
 
                 Swal.fire({
-                    title: 'Xác nhận xóa?',
+                    title: 'Xác nhận xóa/ẩn?',
                     text: "Hành động này không thể hoàn tác!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -266,7 +266,7 @@ Dashmix.onLoad(() =>
 
                 Swal.fire({
                     title: 'Hiển thị lại loại?',
-                    text: "Loại này sẽ xuất hiện lại trên web bán hành",
+                    text: "Loại này sẽ xuất hiện lại trên web bán hàng",
                     icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

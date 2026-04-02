@@ -77,7 +77,7 @@
           </div>
 
           <div class="block-content ps-0 visually-hidden" id="thongtin-tracuu">
-            <div class="mt-3 mb-3 p-3 bg-light rounded border-start border-4 border-primary shadow-sm">
+            <div class="mt-3 mb-3 p-3 bg-light rounded border border-4 shadow-sm">
               <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
                 <div class="col-sm-2 border-end">
                     <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>

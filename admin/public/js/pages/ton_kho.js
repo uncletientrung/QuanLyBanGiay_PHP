@@ -64,6 +64,10 @@ Dashmix.onLoad(() =>
                     url: './ton_kho/getAllStock',
                     dataSrc: ''
                 },
+                language: {
+                    emptyTable: "Không tìm thấy sản phẩm",
+                    zeroRecords: "Không có sản phẩm thỏa bộ lọc"
+                },
                 columns: [
                     {
                         data: 'masp',
@@ -95,18 +99,21 @@ Dashmix.onLoad(() =>
                     },
                     {
                         data: 'tong_soluong',
-                        className: 'text-center'
+                        className: 'text-center',
+                        render: function(data) {
+                            return `<strong>${data}</strong>`
+                        }
                     },
                     {
                         data: 'tong_soluong',
                         className: 'text-center',
                         render: function (data) {
                             if (parseInt(data) == 0)
-                                return `Hết hàng`
+                                return `<span class="badge bg-red w-50">Hết hàng</span>`
                             else if (parseInt(data) < saphet_value)
-                                return `Sắp hết`
+                                return `<span class="badge bg-warning w-50">Sắp hết</span>`
                             else
-                                return `Còn hàng`
+                                return `<span class="badge bg-info w-50">Còn hàng</span>`;
                         }
                     },
                     {
@@ -184,7 +191,7 @@ Dashmix.onLoad(() =>
 
             $("#canhbaohethang").html(`
                 <div class="input-group">
-                    <span class="input-group-text bg-light pe-none pe-3">Nhập số lượng hàng cảnh báo:</span>
+                    <span class="input-group-text bg-light pe-none pe-3">Nhập số lượng hàng muốn xem:</span>
                     <input type="number" id="canhbao-input" class="form-control" placeholder="...">
                     <button type="button" id="reset-canhbao" class="btn btn-outline-secondary"><i class="fa fa-rotate-left"></i></button>
                 </div>
@@ -193,7 +200,7 @@ Dashmix.onLoad(() =>
             let activeFilter = 'none';
             
             $("#canhbaohethang").on('click', '#reset-canhbao', function (e) {
-                activeFilter = 'status';
+                activeFilter = 'none';
                 $("#canhbao-input").val('');
                 table.draw();
             });
@@ -262,6 +269,7 @@ Dashmix.onLoad(() =>
             $("#status-filter").children().css('cursor', 'pointer');
 
             $(document).on('change', '#filter-status', function() {
+                activeFilter = 'status';
                 $("#canhbao-input").val('');
                 table.draw();
             });
@@ -280,6 +288,7 @@ Dashmix.onLoad(() =>
                                 id: productId
                             },
                         },
+                        dom: 'tip',
                         columns: [
                             { data: 'tensize', className: 'text-center' },
                             { data: 'soluong', className: 'text-center' },
@@ -288,15 +297,17 @@ Dashmix.onLoad(() =>
                                 className: 'text-center',
                                 render: function (data) {
                                     if (parseInt(data) == 0)
-                                        return `Hết hàng`
+                                        return `<span class="badge bg-red">Hết hàng</span>`
                                     else if (parseInt(data) < saphet_value)
-                                        return `Sắp hết`
+                                        return `<span class="badge bg-warning">Sắp hết</span>`
                                     else
-                                        return `Còn hàng`
+                                        return `<span class="badge bg-info">Còn hàng</span>`
                                 }
                             }
                         ],
-                        paging: false,
+                        paging: true,
+                        pageLength: 5,
+                        pagingType: 'simple_numbers',
                         searching: false,
                         info: false,
                         autoWidth: false,

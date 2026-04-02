@@ -38,13 +38,24 @@ $router->post('/categories/show', 'Categories@show');
 
 $router->get('/colors', 'Colors@default');
 $router->get('/colors/getData', 'Colors@getData');
+$router->post('/colors/add', 'Colors@add');
+$router->post('/colors/delete', 'Colors@delete');
+$router->post('/colors/update', 'Colors@update');
+$router->post('/colors/show', 'Colors@show');
 
 $router->get('/sizes', 'Sizes@default');
 $router->get('/sizes/getData', 'Sizes@getData');
 $router->get('/sizes/getDataByProd', 'Sizes@getDataByProd');
+$router->post('/sizes/add', 'Sizes@add');
+$router->post('/sizes/delete', 'Sizes@delete');
+$router->post('/sizes/show', 'Sizes@show');
 
 $router->get('/suppliers', 'Suppliers@default');
 $router->get('/suppliers/getData', 'Suppliers@getData');
+$router->post('/suppliers/delete', 'Suppliers@delete');
+$router->post('/suppliers/show', 'Suppliers@show');
+$router->post('/suppliers/add', 'Suppliers@add');
+$router->post('/suppliers/update', 'Suppliers@update');
 
 // San pham
 $router->get('/products', 'Products@default');

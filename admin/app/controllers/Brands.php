@@ -68,7 +68,7 @@ class Brands extends Controller
             echo json_encode(['status' => $success ? 'success' : 'failed']);
             exit();
         }
-        echo json_encode("Delete failed");
+        echo json_encode("Show failed");
         exit();
     }
 

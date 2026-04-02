@@ -2,9 +2,9 @@
 class SizeModel
 {
     private $conn;
-    public function __construct($db)
+    public function __construct($conn)
     {
-        $this->conn = $db;
+        $this->conn = $conn;
     }
     public function getAll()
     {
@@ -63,5 +63,32 @@ class SizeModel
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$maSize]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function add($tensize) {
+        $sql = "INSERT INTO size(tensize, trangthai) VALUES (?, 1)";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$tensize]);
+    }
+    
+    public function delete($id) {
+        $sql = "DELETE FROM size WHERE masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$id]);
+    }
+
+    public function isInProds($id)
+    { 
+        $sql = "SELECT masp from sanphamsize WHERE masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function changeStatus($id, $status)
+    { 
+        $sql = "UPDATE size SET trangthai = ? WHERE masize = ?";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([$status, $id]);
     }
 }

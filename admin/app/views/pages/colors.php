@@ -1,4 +1,5 @@
 <?php $dm->get_css('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css'); ?>
+<?php $dm->get_css('js/plugins/sweetalert2/sweetalert2.min.css'); ?>
 <?php $dm->get_css('css/dashmix.min.css'); ?>
 
 <div class="content">
@@ -16,6 +17,21 @@
           <tr>
             <th class="text-center" style="width: 100px;">Mã số</th>
             <th>Tên</th>
+            <th style="width: 10%" class="text-center">Trạng thái</th>
+            <th style="width: 15%">
+              <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-plus"></i>
+              </button> 
+              <div class="dropdown-menu" aria-labelledby="dropdown-content-hero-primary">
+                  <div class="mb-2">
+                    <label class="form-label" for="tenmau">Tên</label>
+                    <input type="text" class="form-control" id="tenmau" name="tenmau" placeholder="Nhập tên màu">
+                  </div>
+                  <div class="block-content p-0 d-flex justify-content-end">
+                    <button type="button" id="add" class="btn btn-primary">Thêm</button>
+                  </div>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
