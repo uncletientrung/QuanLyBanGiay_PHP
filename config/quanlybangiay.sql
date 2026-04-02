@@ -844,18 +844,19 @@ INSERT INTO `sanphamsize` (`masp`, `masize`, `soluong`) VALUES
 
 CREATE TABLE `size` (
   `masize` int(11) NOT NULL,
-  `tensize` int(20) NOT NULL
+  `tensize` int(20) NOT NULL,
+  `trangthai` int(1) NOT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `size`
 --
 
-INSERT INTO `size` (`masize`, `tensize`) VALUES
-(1, 40),
-(2, 41),
-(3, 42),
-(4, 43);
+INSERT INTO `size` (`masize`, `tensize`, `trangthai`) VALUES
+(1, 40, 1),
+(2, 41, 1),
+(3, 42, 1),
+(4, 43, 1);
 
 --
 -- Indexes for dumped tables
