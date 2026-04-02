@@ -352,11 +352,12 @@ Dashmix.onLoad(() =>
                     emptyTable: "Không có dữ liệu nhập cho sản phẩm này"
                 },
                 ajax: {
-                    url: './ton_kho/getListPN',
+                    url: './ton_kho/getList',
                     type: 'GET',
                     data: function (d) {
                         d.id = $('#select-tracuu').val();
                         d.date = $('#datepicker-wrap input').val();
+                        d.table = 'nhap';
                     },
                     beforeSend: function(jqXHR, settings) {
                         if (!hasId) {
@@ -364,6 +365,19 @@ Dashmix.onLoad(() =>
                             return false;
                         }
                     },
+                    columns: [
+                        {
+                            data: 'mapn',
+                            className: 'text-center'
+                        },
+                        {
+                            data: 'thoigiantao',
+                        },
+                        {
+                            data: 'soluong',
+                            className: 'text-center'
+                        }
+                    ],
                     dataType: 'json',
                     dataSrc: ""
                 },
@@ -400,11 +414,12 @@ Dashmix.onLoad(() =>
                     emptyTable: "Không có dữ liệu xuất cho sản phẩm này"
                 },
                 ajax: {
-                    url: './ton_kho/getListDH',
+                    url: './ton_kho/getList',
                     type: 'GET',
                     data: function (d) {
                         d.id = $('#select-tracuu').val();
                         d.date = $('#datepicker-wrap input').val();
+                        d.table = 'xuat';
                     },
                     beforeSend: function(jqXHR, settings) {
                         if (!hasId) {
@@ -415,6 +430,19 @@ Dashmix.onLoad(() =>
                     dataType: 'json',
                     dataSrc: ""
                 },
+                columns: [
+                    {
+                        data: 'madh',
+                        className: 'text-center'
+                    },
+                    {
+                        data: 'thoigiantao',
+                    },
+                    {
+                        data: 'soluong',
+                        className: 'text-center'
+                    }
+                ],
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api();
 
@@ -464,6 +492,7 @@ Dashmix.onLoad(() =>
                     },
                     dataType: 'json',
                     success: function(response) {
+                        $("#tracuu-status-banner").addClass("visually-hidden");
                         $("#thongtin-tracuu").removeClass('visually-hidden');
                         $("#ma-tracuu").text("SP-" + prodId);
                         $("#ten-tracuu").text(prodName);

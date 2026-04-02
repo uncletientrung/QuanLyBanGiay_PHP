@@ -124,4 +124,17 @@ class Ton_kho extends Controller
         echo json_encode("Không thể kết nối");
         exit();
     }
+
+    public function getList()
+    {
+        $id = $_GET['id'];
+        $date = $_GET['date'];
+        $table = $_GET['table'];
+        if ($id && $date) {
+            echo json_encode( $this->productModel->getList($id, $date, $table));
+            exit();
+        }
+        echo json_encode("No params: " + $id + $date + $table);
+        exit(); 
+    }
 }

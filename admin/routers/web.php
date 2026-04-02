@@ -88,6 +88,7 @@ $router->get('/ton_kho/getStockById', 'Ton_kho@getStockById');
 $router->get('/ton_kho/getThongKeNhapXuat', 'Ton_kho@getThongKeNhapXuat');
 $router->get('/ton_kho/getChiTietThongKe', 'Ton_kho@getChiTietThongKe');
 $router->get('/ton_kho/getTotalStockByDateAndId', 'Ton_kho@getTotalStockByDateAndId');
+$router->get('/ton_kho/getList', 'Ton_kho@getList');
 
 // Thong ke
 $router->get('/reports', 'Reports@default');

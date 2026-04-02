@@ -690,4 +690,36 @@ class SanPhamModel
         ]);        
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getList($id, $date, $table) {
+        if ($table === 'nhap') {
+            $sql = "SELECT
+                        ctpn.mapn,
+                        thoigiantao,
+                        soluong
+                    FROM
+                        phieunhap AS pn
+                    INNER JOIN ctphieunhap AS ctpn
+                    ON
+                        pn.mapn = ctpn.mapn
+                    WHERE
+                        masp = ? AND DATE(thoigiantao) <= ?";
+        } else {
+            $sql = "SELECT
+                        ctdh.madh,
+                        thoigiantao,
+                        soluong
+                    FROM
+                        donhang AS dh
+                    INNER JOIN ctdonhang AS ctdh
+                    ON
+                        dh.madh = ctdh.madh
+                    WHERE
+                        masp = ? AND DATE(thoigiantao) <= ?";
+        }
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$id, $date]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

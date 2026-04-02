@@ -65,7 +65,18 @@
               <button type="button" id="tracuu-btn" class="btn btn-outline-primary">Áp dụng</button>
             </div>
           </div>
-          <div class="block-content ps-0 visually-" id="thongtin-tracuu">
+
+          <div id="tracuu-status-banner" class="alert alert-info d-flex align-items-center mt-3 shadow-sm" role="alert">
+            <div class="flex-shrink-0 me-3">
+              <i class="fa-solid fa-circle-info fa-2x"></i>
+            </div>
+            <div>
+              <h6 class="alert-heading mb-1">Chờ nhập thông tin...</h6>
+              <span>Vui lòng chọn <strong>Sản phẩm</strong> và <strong>Ngày</strong>, sau đó nhấn nút <strong>Áp dụng</strong> để tải dữ liệu.</span>
+            </div>
+          </div>
+
+          <div class="block-content ps-0 visually-hidden" id="thongtin-tracuu">
             <div class="mt-3 mb-3 p-3 bg-light rounded border-start border-4 border-primary shadow-sm">
               <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
                 <div class="col-sm-2 border-end">
@@ -74,7 +85,7 @@
                 </div>
 
                 <div class="col-sm-4 border-end">
-                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên hãng</small>
+                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên sản phẩm</small>
                     <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
                 </div>
 
@@ -103,7 +114,7 @@
             <div class="row mt-3">
               <div class="col-md-6">
                   <div class="block block-rounded block-bordered">
-                      <div class="block-header block-header-default">
+                      <div class="block-header block-header-default bg-info-light">
                           <h3 class="block-title">Lịch sử phiếu nhập</h3>
                       </div>
                       <div class="block-content">
@@ -131,7 +142,7 @@
 
               <div class="col-md-6">
                   <div class="block block-rounded block-bordered">
-                      <div class="block-header block-header-default">
+                      <div class="block-header block-header-default bg-warning-light">
                           <h3 class="block-title">Lịch sử đơn hàng đơn hàng</h3>
                       </div>
                       <div class="block-content">
