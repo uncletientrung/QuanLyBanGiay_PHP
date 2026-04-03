@@ -20,11 +20,38 @@ Dashmix.onLoad(() => {
 
         static initFlatpickr() {
             if (typeof flatpickr !== 'undefined') {
-                flatpickr('#ngaynhap', {
+                const fp = flatpickr('#ngaynhap', {
                     enableTime: true,
                     dateFormat: "Y-m-d H:i",
-                    time_24hr: true
+                    time_24hr: true,
+                    onChange: (selectedDates) => {
+                        this.validateDate(selectedDates[0]);
+                    },
+                    onReady: (selectedDates) => {
+                        this.validateDate(selectedDates[0]);
+                    }
                 });
+
+                if (fp.selectedDates.length > 0) {
+                    this.validateDate(fp.selectedDates[0]);
+                }
+            }
+        }
+
+        static validateDate(selectedDate) {
+            if (!selectedDate) return;
+            const now = new Date();
+            const btnHoanThanh = jQuery('#btn-hoan-thanh');
+
+            if (selectedDate.getTime() > now.getTime()) {
+                btnHoanThanh.prop('disabled', true);
+                btnHoanThanh.attr('title', 'Không thể hoàn thành phiếu nhập ở thời gian tương lai');
+                btnHoanThanh.addClass('btn-secondary').removeClass('btn-primary');
+            } else {
+                btnHoanThanh.prop('disabled', false);
+                btnHoanThanh.removeAttr('title');
+                btnHoanThanh.addClass('btn-primary').removeClass('btn-secondary');
+                jQuery('#date-warning').remove();
             }
         }
 

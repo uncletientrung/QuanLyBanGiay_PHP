@@ -35,7 +35,7 @@
                             id="ngaynhap"
                             name="ngaynhap"
                             placeholder="Chọn ngày và giờ"
-                            value="<?= date('Y-m-d H:i') ?>">
+                            value="<?= isset($phieu) ? date('Y-m-d H:i', strtotime($phieu['thoigiantao'])) : date('Y-m-d H:i') ?>">
                     </div>
 
                     <div class="mb-3">
