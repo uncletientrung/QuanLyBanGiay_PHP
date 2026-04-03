@@ -37,7 +37,7 @@ Dashmix.onLoad(() =>
             // Init full extra DataTable
             const table = jQuery('.js-dataTable-full-pagination').DataTable({
                 pagingType: "full_numbers",
-                pageLength: 10,
+                pageLength: 6,
                 dom: '<ftip>',
                 autoWidth: false,
                 ajax: {

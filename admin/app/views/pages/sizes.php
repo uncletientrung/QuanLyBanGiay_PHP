@@ -7,7 +7,7 @@
   <div class="block block-rounded">
     <div class="block-header block-header-default">
       <h3 class="block-title">
-        Dynamic Table <small>Full pagination</small>
+        Quản lý kích cỡ
       </h3>
     </div>
     <div class="block-content block-content-full">
@@ -17,7 +17,7 @@
           <tr>
             <th class="text-center" style="width: 100px;">Mã số</th>
             <th>Số size</th>
-            <th style="width: 10%" class="text-center">Trạng thái</th>
+            <th style="width: 12%" class="text-center">Trạng thái</th>
             <th style="width: 15%">
               <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-plus"></i>

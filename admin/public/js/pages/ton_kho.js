@@ -109,11 +109,11 @@ Dashmix.onLoad(() =>
                         className: 'text-center',
                         render: function (data) {
                             if (parseInt(data) == 0)
-                                return `<span class="badge bg-danger-light text-danger">Hết hàng</span>`
+                                return `<span class="badge bg-danger-light text-danger" style="width: 60%">Hết hàng</span>`
                             else if (parseInt(data) < saphet_value)
-                                return `<span class="badge bg-warning-light text-warning">Sắp hết</span>`
+                                return `<span class="badge bg-warning-light text-warning" style="width: 60%">Sắp hết</span>`
                             else
-                                return `<span class="badge bg-info-light text-info">Còn hàng</span>`;
+                                return `<span class="badge bg-info-light text-info" style="width: 60%">Còn hàng</span>`;
                         }
                     },
                     {

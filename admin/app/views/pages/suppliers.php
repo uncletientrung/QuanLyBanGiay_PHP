@@ -7,7 +7,7 @@
   <div class="block block-rounded">
     <div class="block-header block-header-default">
       <h3 class="block-title">
-        Dynamic Table <small>Full pagination</small>
+        Quản lý nhà cung cấp
       </h3>
     </div>
     <div class="block-content block-content-full">
@@ -16,10 +16,10 @@
         <thead>
           <tr>
             <th class="text-center" style="width: 100px;">Mã NCC</th>
-            <th style="width: 25%;">Tên nhà cung cấp</th>
+            <th style="width: 20%;">Tên nhà cung cấp</th>
             <th style="width: 45%;">Địa chỉ</th>
             <th>Trạng thái</th>
-            <th style="width: 10%">
+            <th style="width: 15%">
               <button type="button" class="btn btn-outline-primary btn" data-bs-toggle="modal" data-bs-target="#add-supplier">
                 <i class="fa fa-plus"></i>
               </button>

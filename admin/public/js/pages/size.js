@@ -65,11 +65,11 @@ Dashmix.onLoad(() =>
                         render: function(data) {
                             if (data == 1)
                                 return `
-                                    <span class="badge bg-success fs-6" style="width: 60%">Hiện</span>
+                                    <span class="badge bg-success fs-6">Hiện</span>
                                 `;
                             else
                                 return `
-                                    <span class="badge bg-danger fs-6" style="width: 60%">Ẩn</span>
+                                    <span class="badge bg-danger fs-6">Ẩn</span>
                                 `;
                         }
                     },
