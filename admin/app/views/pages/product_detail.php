@@ -12,20 +12,24 @@
   <div class="block block-rounded row g-0">
     <ul class="nav nav-tabs nav-tabs-block flex-md-column col-md-2" role="tablist">
       <li class="nav-item d-md-flex flex-md-column">
-        <button class="nav-link text-md-start active" id="thongtin-panel-tab" data-bs-toggle="tab" data-bs-target="#thongtin-panel" role="tab" aria-controls="thongtin-panel" aria-selected="true">
+        <button class="nav-link text-md-start active" id="thongtin-panel-tab" data-bs-toggle="tab"
+          data-bs-target="#thongtin-panel" role="tab" aria-controls="thongtin-panel" aria-selected="true">
           <i class="fa fa-fw fa-home opacity-50 me-1 d-none d-sm-inline-block"></i> Thông tin sản phẩm
         </button>
       </li>
       <li id="img-panel" class="nav-item d-md-flex flex-md-column">
-        <button class="nav-link text-md-start" id="media-panel-tab" data-bs-toggle="tab" data-bs-target="#media-panel" role="tab" aria-controls="media-panel" aria-selected="false">
+        <button class="nav-link text-md-start" id="media-panel-tab" data-bs-toggle="tab" data-bs-target="#media-panel"
+          role="tab" aria-controls="media-panel" aria-selected="false">
           <i class="fa fa-fw fa-user-circle opacity-50 me-1 d-none d-sm-inline-block"></i> Hình ảnh
         </button>
       </li>
     </ul>
     <div class="tab-content col-md-10 justify-content-center align-middle">
-      <div class="block-content tab-pane active" id="thongtin-panel" role="tabpanel" aria-labelledby="thongtin-panel-tab" tabindex="0">
+      <div class="block-content tab-pane active" id="thongtin-panel" role="tabpanel"
+        aria-labelledby="thongtin-panel-tab" tabindex="0">
         <div class="d-flex justify-content-between align-items-center mb-3 me-4">
-          <h4 class="fw-semibold m-0">Thông tin sản phẩm mã <a id="masp" class="fw-semibold" style="pointer-events: none;"><strong>SP-<?= $product[0]['masp'] ?></strong></a></h4>
+          <h4 class="fw-semibold m-0">Thông tin sản phẩm mã <a id="masp" class="fw-semibold"
+              style="pointer-events: none;"><strong>SP-<?= $product[0]['masp'] ?></strong></a></h4>
           <button id="edit-btn" type="button" class="btn btn-hero btn-primary">Chỉnh sửa</button>
         </div>
         <!-- Thông tin chi tiết -->
@@ -37,18 +41,21 @@
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Tên sản phẩm</label>
-                    <input type="text" class="form-control" id="tensp" name="tensp" placeholder="Tên sản phẩm" value="<?= $product[0]['tensp'] ?>">
+                    <input type="text" class="form-control" id="tensp" name="tensp" placeholder="Tên sản phẩm"
+                      value="<?= $product[0]['tensp'] ?>">
                   </div>
                 </div>
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Mô tả sản phẩm</label>
-                    <textarea class="form-control" id="mota" name="mota" rows="4" placeholder="Nhập mô tả sản phẩm"><?= $product[0]['motasp'] ?></textarea>
+                    <textarea class="form-control" id="mota" name="mota" rows="7"
+                      placeholder="Nhập mô tả sản phẩm"><?= $product[0]['motasp'] ?></textarea>
                   </div>
                 </div>
                 <div class="row mb-4">
                   <div class="w-100 d-flex justify-content-end">
-                    <btn hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích cỡ</btn>
+                    <button hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích
+                      cỡ</button>
                   </div>
                   <div id="table-div">
                     <table id="size-table" class="table table-vcenter">
@@ -100,7 +107,8 @@
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Giới tính</label>
-                    <select class="form-select" style="cursor: pointer" id="gioitinh" name="gioitinh" style="width: 100%">
+                    <select class="form-select" style="cursor: pointer" id="gioitinh" name="gioitinh"
+                      style="width: 100%">
                       <option disabled selected hidden>Giới tính</option>
                       <?php if ($product[0]['gioitinh'] == 0) { ?>
                         <option value="1">Nam</option>
@@ -119,7 +127,8 @@
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Màu sắc</label>
-                    <select class="js-select2 form-select" id="mau" style="width: 100%" name="mau" data-placeholder="Màu hiện có">
+                    <select class="js-select2 form-select" id="mau" style="width: 100%" name="mau"
+                      data-placeholder="Màu hiện có">
                       <option></option>
                       <?php foreach ($colors as $value) {
                         if ($value['tenmau'] == $product[0]['tenmau']) { ?>
@@ -134,7 +143,8 @@
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Loại</label>
-                    <select class="js-select2 form-select" id="loai" name="loai" style="width: 100%" data-placeholder="Loại giày">
+                    <select class="js-select2 form-select" id="loai" name="loai" style="width: 100%"
+                      data-placeholder="Loại giày">
                       <option></option>
                       <?php foreach ($categories as $value) {
                         if ($value['tenloai'] == $product[0]['tenloai']) { ?>
@@ -149,7 +159,8 @@
                 <div class="row mb-4">
                   <div class="col">
                     <label class="form-label fw-bold" for="">Hãng</label>
-                    <select class="js-select2 form-select" id="hang" name="hang" style="width: 100%" data-placeholder="Hãng">
+                    <select class="js-select2 form-select" id="hang" name="hang" style="width: 100%"
+                      data-placeholder="Hãng">
                       <option></option>
                       <?php foreach ($brands as $value) {
                         if ($value['tenhang'] == $product[0]['tenhang']) { ?>
@@ -175,122 +186,64 @@
                   </div>
                 </div>
                 <div class="row mt-4 mb-4 justify-content-end">
-                  <div class="col-auto">
+                  <div class="col-4">
                     <button type="button" id="save-btn" class="btn btn-primary w-100 invisible">Save</button>
                   </div>
                 </div>
               </div>
-              <div class="row mb-4">
-                <div class="col">
-                  <label class="form-label fw-bold" for="">Màu sắc</label>
-                  <select class="js-select2 form-select" id="mau" style="width: 100%" name="mau" data-placeholder="Màu hiện có">
-                    <option></option>
-                    <?php foreach ($colors as $value) {
-                      if ($value['tenmau'] == $product[0]['tenmau']) { ?>
-                        <option selected value="<?= $value['mamau'] ?>"><?= $value['tenmau'] ?></option>
-                      <?php } else { ?>
-                        <option value="<?= $value['mamau'] ?>"><?= $value['tenmau'] ?></option>
-                      <?php } ?>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
-              <div class="row mb-4">
-                <div class="col">
-                  <label class="form-label fw-bold" for="">Loại</label>
-                  <select class="js-select2 form-select" id="loai" style="width: 100%" data-placeholder="Loại giày">
-                    <option></option>
-                    <?php foreach ($categories as $value) {
-                      if ($value['tenloai'] == $product[0]['tenloai']) { ?>
-                        <option selected value="<?= $value['maloai'] ?>"><?= $value['tenloai'] ?></option>
-                      <?php } else { ?>
-                        <option value="<?= $value['maloai'] ?>"><?= $value['tenloai'] ?></option>
-                      <?php } ?>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
-              <div class="row mb-4">
-                <div class="col">
-                  <label class="form-label fw-bold" for="">Hãng</label>
-                  <select class="js-select2 form-select" id="hang" style="width: 100%" data-placeholder="Hãng">
-                    <option></option>
-                    <?php foreach ($brands as $value) {
-                      if ($value['tenhang'] == $product[0]['tenhang']) { ?>
-                        <option selected value="<?= $value['mahang'] ?>"><?= $value['tenhang'] ?></option>
-                      <?php } else { ?>
-                        <option value="<?= $value['mahang'] ?>"><?= $value['tenhang'] ?></option>
-                      <?php } ?>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
-              <div class="row mb-4">
-                <div class="col">
-                  <label class="form-label fw-bold" for="">Trạng thái</label>
-                  <select class="form-select" style="cursor: pointer" id="trangthai" name="trangthai">
-                    <option value="1" <?= ($product[0]['trangthai'] == 1) ? 'selected' : '' ?>>
-                      Đang kinh doanh
-                    </option>
-                    <option value="0" <?= ($product[0]['trangthai'] == 0) ? 'selected' : '' ?>>
-                      Ngừng bán
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div class="row mt-4 mb-4 justify-content-end">
-                <div class="col-auto">
-                  <button type="button" id="save-btn" class="btn btn-primary invisible">Save</button>
-                </div>
-              </div>
             </div>
+          </form>
         </div>
-        </form>
         <!-- Kết thúc form thông tin -->
       </div>
-    </div>
-    <div class="block-content tab-pane" id="media-panel" role="tabpanel" aria-labelledby="media-panel-tab" tabindex="0">
-      <div class="d-flex justify-content-between align-items-center mb-3 me-4">
-        <h4 class="fw-semibold m-0">Thư viện ảnh mã <a class="fw-semibold"><strong>SP-<?= $product[0]['masp'] ?>, </strong><?= $product[0]['tensp'] ?></a></h4>
-        <form id="upload-form">
-          <input type="file" id="add-image" name="images[]" multiple hidden>
-          <label for="add-image">
-            <i class="btn btn-outline-primary fa fa-plus"></i>
-          </label>
-        </form>
-      </div>
-      <div class="block-content d-flex justify-content-center flex-wrap">
-        <?php if (empty($img)) { ?>
-          <h3 id="gallery-state">Chưa có hình ảnh</h3>
-        <?php } ?>
-        <div class="row items-push js-gallery justify-content-start">
-          <?php if (!empty($img)) {
-            foreach ($img as $index => $val) { ?>
-              <?php if ($val['ismain']) { ?>
-                <div class="is-banner col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
-                <?php } else { ?>
-                  <div class="col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
-                  <?php } ?>
-                  <div class="options-container fx-item-zoom-in">
-                    <img class="img-fluid options-item" style="aspect-ratio: 1/1; object-fit: cover" src="<?= "/QuanLyBanGiay_Php/" . $val['path'] ?>" alt="Product Image">
-                    <div class="options-overlay align-items-start" style="top: 10px; right: 10px; bottom: 0; left: 10px">
-                      <div class="options-overlay-content d-inline-flex w-100 justify-content-between">
-                        <a class="set-banner fs-5 ps-2 pe-2 bg-primary text-white rounded" style="cursor: pointer"><strong>Set Banner</strong></a>
-                        <a class="delete btn btn-sm btn-secondary d-flex align-items-center" style="cursor: pointer">
-                          <i class="fa fa-fw fa-times"></i>
-                        </a>
+
+      <div class="block-content tab-pane" id="media-panel" role="tabpanel" aria-labelledby="media-panel-tab"
+        tabindex="0">
+        <div class="d-flex justify-content-between align-items-center mb-3 me-4">
+          <h4 class="fw-semibold m-0">Thư viện ảnh mã <a class="fw-semibold"><strong>SP-<?= $product[0]['masp'] ?>,
+              </strong><?= $product[0]['tensp'] ?></a></h4>
+          <form id="upload-form">
+            <input type="file" id="add-image" name="images[]" multiple hidden>
+            <label for="add-image">
+              <i class="btn btn-outline-primary fa fa-plus"></i>
+            </label>
+          </form>
+        </div>
+        <div class="block-content d-flex justify-content-center flex-wrap">
+          <?php if (empty($img)) { ?>
+            <h3 id="gallery-state">Chưa có hình ảnh</h3>
+          <?php } ?>
+          <div class="row items-push js-gallery justify-content-start">
+            <?php if (!empty($img)) {
+              foreach ($img as $index => $val) { ?>
+                <?php if ($val['ismain']) { ?>
+                  <div class="is-banner col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
+                  <?php } else { ?>
+                    <div class="col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
+                    <?php } ?>
+                    <div class="options-container fx-item-zoom-in">
+                      <img class="img-fluid options-item" style="aspect-ratio: 1/1; object-fit: cover"
+                        src="<?= "/QuanLyBanGiay_Php/" . $val['path'] ?>" alt="Product Image">
+                      <div class="options-overlay align-items-start" style="top: 10px; right: 10px; bottom: 0; left: 10px">
+                        <div class="options-overlay-content d-inline-flex w-100 justify-content-between">
+                          <a class="set-banner fs-5 ps-2 pe-2 bg-primary text-white rounded"
+                            style="cursor: pointer"><strong>Set Banner</strong></a>
+                          <a class="delete btn btn-sm btn-secondary d-flex align-items-center" style="cursor: pointer">
+                            <i class="fa fa-fw fa-times"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  </div>
-              <?php }
-          } ?>
-                </div>
+                <?php }
+            } ?>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+    <span hidden id="allSizeFetcher">
+      <?= json_encode($allSize) ?>
+    </span>
   </div>
-  <span hidden id="allSizeFetcher">
-    <?= json_encode($allSize) ?>
-  </span>
-</div>
