@@ -70,7 +70,7 @@ Dashmix.onLoad(() =>
                         data: 'mapn',
                         className: 'text-center',
                         render: function (data) {
-                            return `<strong>PN-${data}</strong>`;
+                            return `<strong class="text-primary">PN-${data}</strong>`;
                         }
                     },
                     {
@@ -109,7 +109,7 @@ Dashmix.onLoad(() =>
                     },
                     {
                         data: 'tongtien',
-                        className: 'text-center fw-bold',
+                        className: 'text-center',
                         render: function (data) {
                             return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data);
                         }
@@ -183,7 +183,10 @@ Dashmix.onLoad(() =>
                 fromPicker.set('maxDate', null);
 
                 $('#filter-status').val('');
-                userTable.draw();
+                nhapHangTable.search('').column(5).search('');
+
+                nhapHangTable.draw();
+                $('.dataTables_filter input').val('');
             });
 
             const baseFpConfig = {

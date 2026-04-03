@@ -104,15 +104,15 @@ Dashmix.onLoad(() =>
                         data: 'hoten',
                         className: 'text-center',
                         render: function (data) {
-                            return `
-                                <div class="fw-semibold">${data}</div>
-                            `;
+                            return `<span>${data}</span>`;
                         }
                     },
                     {
                         data: 'tongtien',
+                        className: 'text-center',
                         render: function (data) {
-                            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data);
+                            let formatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data);
+                            return `<span>${formatted}</span>`;
                         }
                     },
                     {
@@ -148,7 +148,7 @@ Dashmix.onLoad(() =>
                         data: 'hinhthucthanhtoan',
                         className: 'text-center',
                         render: function (data) {
-                            return `<span class="fw-bold text-uppercase text-muted">${data || 'N/A'}</span>`;
+                            return `<span>${data || 'N/A'}</span>`;
                         }
                     },
                     {
@@ -163,7 +163,7 @@ Dashmix.onLoad(() =>
                             };
                             let status = statusMap[data] || { text: "N/A", class: "bg-secondary" };
                             if (type === 'filter') return status.text;
-                            return `<span class="badge ${status.class}">${status.text}</span>`;
+                            return `<span class="badge ${status.class}" style="width: 100%">${status.text}</span>`;
                         }
                     },
                     {
@@ -172,12 +172,12 @@ Dashmix.onLoad(() =>
                         orderable: false,
                         render: function (data) {
                             return `
-                                <a class="btn btn-sm btn-alt-secondary btn-edit-user" href="./don_hang/${data}" title="Xem chi tiết">
+                                <a class="btn btn-sm btn-alt-secondary" href="./don_hang/${data}" title="Xem chi tiết">
                                     <i class="fa fa-fw fa-eye text-info"></i>
                                 </a>
-                                <a class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" href="javascript:void(0)" title="Xoá">
+                                <button type="button" class="btn btn-sm btn-alt-secondary btn-delete-user" data-id="${data}" title="Xoá">
                                     <i class="fa fa-fw fa-times text-danger"></i>
-                                </a>
+                                </button>
                             `;
                         }
                     }
@@ -232,15 +232,19 @@ Dashmix.onLoad(() =>
             // Lọc khoảng thời gian
             jQuery("#date-filter-box").html(dateRangeHtml);
 
-            $(document).on('click', '#btn-reset-filter', function() {
+            $(document).on('click', '#btn-reset-filter', function () {
                 fromPicker.clear();
                 toPicker.clear();
-                
+
                 toPicker.set('minDate', null);
                 fromPicker.set('maxDate', null);
 
                 $('#filter-status').val('');
-                userTable.draw(); 
+                userTable.search('').columns().search('');
+
+                $('.dataTables_filter input').val('');
+
+                userTable.draw();
             });
 
             const baseFpConfig = {
