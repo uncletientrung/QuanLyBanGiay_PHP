@@ -100,7 +100,7 @@ Dashmix.onLoad(() =>
                     {
                         data: 'tong_soluong',
                         className: 'text-center',
-                        render: function(data) {
+                        render: function (data) {
                             return `<strong>${data}</strong>`
                         }
                     },
@@ -109,11 +109,11 @@ Dashmix.onLoad(() =>
                         className: 'text-center',
                         render: function (data) {
                             if (parseInt(data) == 0)
-                                return `<span class="badge bg-danger-light text-danger fs-6 w-50">Hết hàng</span>`
+                                return `<span class="badge bg-danger-light text-danger">Hết hàng</span>`
                             else if (parseInt(data) < saphet_value)
-                                return `<span class="badge bg-warning-light text-warning fs-6 w-50">Sắp hết</span>`
+                                return `<span class="badge bg-warning-light text-warning">Sắp hết</span>`
                             else
-                                return `<span class="badge bg-info-light text-info fs-6 w-50">Còn hàng</span>`;
+                                return `<span class="badge bg-info-light text-info">Còn hàng</span>`;
                         }
                     },
                     {
@@ -198,7 +198,7 @@ Dashmix.onLoad(() =>
             `);
 
             let activeFilter = 'none';
-            
+
             $("#canhbaohethang").on('click', '#reset-canhbao', function (e) {
                 activeFilter = 'none';
                 $("#canhbao-input").val('');
@@ -217,7 +217,7 @@ Dashmix.onLoad(() =>
                 }
             });
 
-            $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
                 const stockCount = parseInt(data[3]) || 0;
                 if (activeFilter === 'warning') {
                     const warningLimit = parseInt($("#canhbao-input").val()) || 0;
@@ -228,7 +228,7 @@ Dashmix.onLoad(() =>
                 if (activeFilter === 'status') {
                     const filterVal = $('#filter-status').val();
                     if (filterVal === "") return true;
-                    
+
                     if (filterVal === "0") return stockCount > saphet_value;
                     if (filterVal === "1") return stockCount > 0 && stockCount <= saphet_value;
                     if (filterVal === "2") return stockCount === 0;
@@ -237,16 +237,15 @@ Dashmix.onLoad(() =>
                 return true;
             });
 
-            $(document).on('change', '#saphet', function() {
-                if ($(this).val() != saphet_value)
-                { 
+            $(document).on('change', '#saphet', function () {
+                if ($(this).val() != saphet_value) {
                     localStorage.setItem('saphet', $(this).val())
                     saphet_value = $(this).val();
                     table.ajax.reload(null, false);
-                    Dashmix.helpers('jq-notify', { 
-                        type: 'success', 
-                        icon: 'fa fa-check me-1', 
-                        message: `Sản phẩm sẽ được đánh dấu sắp hết khi có số lượng dưới ${saphet_value}` 
+                    Dashmix.helpers('jq-notify', {
+                        type: 'success',
+                        icon: 'fa fa-check me-1',
+                        message: `Sản phẩm sẽ được đánh dấu sắp hết khi có số lượng dưới ${saphet_value}`
                     });
                 }
             });
@@ -268,7 +267,7 @@ Dashmix.onLoad(() =>
 
             $("#status-filter").children().css('cursor', 'pointer');
 
-            $(document).on('change', '#filter-status', function() {
+            $(document).on('change', '#filter-status', function () {
                 activeFilter = 'status';
                 $("#canhbao-input").val('');
                 table.draw();
@@ -322,32 +321,32 @@ Dashmix.onLoad(() =>
             });
         }
 
-        static initTraCuuTab(){
+        static initTraCuuTab() {
             let hasId = false;
             let dateStr = '';
             let prodId = '';
             const picker = flatpickr("#datepicker-wrap", {
-            wrap: true,
-            dateFormat: "Y-m-d", // This is what .val() will return
-            altFormat: "d/m/Y",  // This is what the user sees
-            altInput: true,
-            allowInput: false,
-            onReady: function(selectedDates, dateStr, instance) {
-                $(instance.altInput).css('cursor', 'pointer');
-            }
+                wrap: true,
+                dateFormat: "Y-m-d", // This is what .val() will return
+                altFormat: "d/m/Y",  // This is what the user sees
+                altInput: true,
+                allowInput: false,
+                onReady: function (selectedDates, dateStr, instance) {
+                    $(instance.altInput).css('cursor', 'pointer');
+                }
             });
-            
+
             $("#select-tracuu").select2({
                 placeholder: "Chọn sản phẩm tra cứu",
                 allowClear: true,
                 width: '100%' // Crucial for Bootstrap grids
             });
 
-            $.getJSON('./products/getIdAndName', function(data) {
+            $.getJSON('./products/getIdAndName', function (data) {
                 $('.select2').select2({
                     placeholder: 'Chọn sản phẩm...',
                     width: '100%',
-                    data: data 
+                    data: data
                 });
             });
 
@@ -370,7 +369,7 @@ Dashmix.onLoad(() =>
                         d.date = $('#datepicker-wrap input').val();
                         d.table = 'nhap';
                     },
-                    beforeSend: function(jqXHR, settings) {
+                    beforeSend: function (jqXHR, settings) {
                         if (!hasId) {
                             jqXHR.abort();
                             return false;
@@ -379,25 +378,25 @@ Dashmix.onLoad(() =>
                     dataType: 'json',
                     dataSrc: ""
                 },
-                    columns: [
-                        {
-                            data: 'mapn',
-                            className: 'text-center',
-                            render: function(data, type, row) {
-                                if (type === 'display') {
+                columns: [
+                    {
+                        data: 'mapn',
+                        className: 'text-center',
+                        render: function (data, type, row) {
+                            if (type === 'display') {
                                 return `<strong class="text-primary">PN-${data}</strong>`;
-                                }
-                                return data;
                             }
-                        },
-                        {
-                            data: 'thoigiantao',
-                        },
-                        {
-                            data: 'soluong',
-                            className: 'text-center'
+                            return data;
                         }
-                    ],
+                    },
+                    {
+                        data: 'thoigiantao',
+                    },
+                    {
+                        data: 'soluong',
+                        className: 'text-center'
+                    }
+                ],
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api();
 
@@ -438,7 +437,7 @@ Dashmix.onLoad(() =>
                         d.date = $('#datepicker-wrap input').val();
                         d.table = 'xuat';
                     },
-                    beforeSend: function(jqXHR, settings) {
+                    beforeSend: function (jqXHR, settings) {
                         if (!hasId) {
                             jqXHR.abort();
                             return false;
@@ -451,9 +450,9 @@ Dashmix.onLoad(() =>
                     {
                         data: 'madh',
                         className: 'text-center',
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             if (type === 'display') {
-                            return `<strong class="text-primary">DH-${data}</strong>`
+                                return `<strong class="text-primary">DH-${data}</strong>`
                             }
                             return data;
                         }
@@ -487,9 +486,9 @@ Dashmix.onLoad(() =>
                 },
             });
 
-            $("#tracuu-btn").on('click', function() {
+            $("#tracuu-btn").on('click', function () {
                 dateStr = $('#datepicker-wrap input').val();
-                prodId= $('#select-tracuu').val();
+                prodId = $('#select-tracuu').val();
                 let prodName = $('#select-tracuu option:selected').text().trim();
                 let message = "";
                 if (!dateStr && !prodId) {
@@ -510,11 +509,11 @@ Dashmix.onLoad(() =>
                     url: './ton_kho/getTotalStockByDateAndId',
                     type: 'GET',
                     data: {
-                        id: prodId, 
-                        date: dateStr 
+                        id: prodId,
+                        date: dateStr
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
                         $("#tracuu-status-banner").addClass("visually-hidden");
                         $("#thongtin-tracuu").removeClass('visually-hidden');
                         $("#ma-tracuu").text("SP-" + prodId);
@@ -522,7 +521,7 @@ Dashmix.onLoad(() =>
                         $("#slnhap-tracuu").html('<i class="fa fa-arrow-down me-1"></i> ' + response.tongnhap);
                         $("#slxuat-tracuu").html('<i class="fa fa-arrow-up me-1"></i> ' + response.tongxuat);
                         $("#ton-tracuu").text(response.tongsl);
-                        
+
                         nhapTable.ajax.reload();
                         xuatTable.ajax.reload();
                     },
