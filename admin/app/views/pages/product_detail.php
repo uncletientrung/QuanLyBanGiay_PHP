@@ -54,8 +54,7 @@
                 </div>
                 <div class="row mb-4">
                   <div class="w-100 d-flex justify-content-end">
-                    <button hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích
-                      cỡ</button>
+                    <button hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích cỡ</button>
                   </div>
                   <div id="table-div">
                     <table id="size-table" class="table table-vcenter">
@@ -186,7 +185,7 @@
                   </div>
                 </div>
                 <div class="row mt-4 mb-4 justify-content-end">
-                  <div class="col-4">
+                  <div class="col-auto">
                     <button type="button" id="save-btn" class="btn btn-primary w-100 invisible">Save</button>
                   </div>
                 </div>
