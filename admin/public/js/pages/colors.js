@@ -48,7 +48,12 @@ Dashmix.onLoad(() =>
                     {
                         data:'mamau',
                         className: 'text-center',
-                        type:'num'
+                        type:'num',
+                        render: function(data, type, row) {
+                            if (type === 'display'){
+                            return `<strong class="text-primary">M-${data}</strong>`}
+                            return data;
+                        }
                     },
                     {
                         data:'tenmau',

@@ -85,11 +85,21 @@ class {
                     },
                     {
                         data: 'gianhap',
-                        render: DataTable.render.number(null, null, null, null, ' đồng')
+                        render: function(data) {
+                            let formattedNumber = new Intl.NumberFormat('vi-VN').format(data);
+                            return `
+                                <span class="badge bg-info-light text-info fs-6 fw-bold">${formattedNumber} đồng</span>
+                            `
+                        }
                     },
                     {
                         data: 'tyleloinhuan',
-                        className: 'text-center'
+                        className: 'text-center',
+                        render: function(data) {
+                            return `
+                                <span class="w-25 badge bg-info fw-bold">${data} %</span>
+                            `
+                        }
                     },
                     {
                         data: null,
@@ -97,8 +107,10 @@ class {
                             let result = parseFloat(row.gianhap) * (1 + parseFloat(row.tyleloinhuan)/100);
                             if (type == 'sort' || type == 'type')
                                 return result
-                            let renderer = DataTable.render.number(null, null, null, null, ' đồng').display;
-                            return renderer(result);
+                            let formattedNumber = new Intl.NumberFormat('vi-VN').format(result);
+                            return `
+                                <span class="badge bg-warning-light text-warning fs-6 fw-bold">${formattedNumber} đồng</span>
+                            `   
                         }
                     },
                     {

@@ -48,7 +48,13 @@ Dashmix.onLoad(() =>
                     {
                         data:'mahang',
                         className: 'text-center',
-                        type:'num'
+                        type:'num',
+                        render: function(data, type, row) {
+                            if (type === 'display'){
+                            return `<strong class="text-primary">H-${data}</strong>`
+                            }
+                            return data;
+                        }
                     },
                     {
                         data:'tenhang',

@@ -78,42 +78,122 @@
                               </button>
                             </td>
                           </tr>
-                        <?php } ?>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <th class="text-center" scope="row"></th>
-                          <td class="fw-semibold">
-                            <a style="pointer-events: none;">Tổng số lượng</a>
-                          </td>
-                          <td class="d-flex justify-content-center" id="totalStock" style="text-align: center">
-                            <?php echo $totalStock ?>
-                          </td>
-                          <td></td>
-                        </tr>
-                      </tfoot>
-                    </table>
+                        </thead>
+                        <tbody>
+                          <?php $totalStock = 0; foreach($size as $index=>$val) { $totalStock += $val['soluong'] ?>
+                            <tr>
+                              <th class="text-center" scope="row"><?php echo $val['masize']; ?></th>
+                              <td class="fw-semibold text-primary tensize">
+                                <?php echo $val['tensize']; ?>
+                              </td>
+                              <td class="justify-content-center soluong" style="text-align: center">
+                                <?php echo $val['soluong']; ?>
+                              </td>
+                              <td>
+                                <button type="button" class="delete-sizestock btn btn-sm btn-outline-danger">
+                                  <i class="fa fa-fw fa-times"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          <?php } ?>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                              <th class="text-center" scope="row"></th>
+                              <td class="fw-semibold">
+                                <a style="pointer-events: none;">Tổng số lượng</a>
+                              </td>
+                              <td class="text-center" id="totalStock">
+                                <?php echo $totalStock ?>                               
+                              </td>
+                              <td></td>
+                            </tr>
+                        </tfoot>
+                      </table>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="block col-lg-4 border rounded pt-4 ps-4 pe-4 pt-3 h-100">
-                <div class="row mb-4">
-                  <div class="col">
-                    <label class="form-label fw-bold" for="">Giới tính</label>
-                    <select class="form-select" style="cursor: pointer" id="gioitinh" style="width: 100%">
-                      <option disabled selected hidden>Giới tính</option>
-                      <?php if ($product[0]['gioitinh'] == 0) { ?>
-                        <option value="1">Nam</option>
-                        <option value="0" selected>Nữ</option>
-                      <?php }
-                      if ($product[0]['gioitinh'] == 1) { ?>
-                        <option value="1" selected>Nam</option>
-                        <option value="0">Nữ</option>
-                      <?php } else { ?>
-                        <option value="1">Nam</option>
-                        <option value="0">Nữ</option>
-                      <?php } ?>
-                    </select>
+                <div class="block col-lg-4 border rounded pt-4 ps-4 pe-4 pt-3 h-100">
+                  <div class="row mb-4">
+                    <div class="col">
+                      <label class="form-label fw-bold" for="">Giới tính</label>
+                      <select class="form-select" style="cursor: pointer" id="gioitinh" name="gioitinh" style="width: 100%">
+                        <option disabled selected hidden>Giới tính</option>
+                        <?php if ($product[0]['gioitinh'] == 0) { ?>
+                          <option value="1">Nam</option>
+                          <option value="0" selected>Nữ</option>
+                        <?php } if ($product[0]['gioitinh'] == 1){ ?>
+                          <option value="1" selected>Nam</option>
+                          <option value="0">Nữ</option>
+                        <?php } else {?>
+                          <option value="1">Nam</option>
+                          <option value="0">Nữ</option>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <label class="form-label fw-bold" for="">Màu sắc</label>
+                      <select class="js-select2 form-select" id="mau" style="width: 100%" name="mau" data-placeholder="Màu hiện có">
+                        <option></option>
+                        <?php foreach($colors as $value) {
+                              if ($value['tenmau'] == $product[0]['tenmau']) { ?>
+                                <option selected value="<?= $value['mamau']?>"><?= $value['tenmau']?></option>
+                                <?php } else {?>
+                                <option value="<?= $value['mamau']?>"><?= $value['tenmau']?></option>
+                          <?php } ?>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <label class="form-label fw-bold" for="">Loại</label>
+                      <select class="js-select2 form-select" id="loai" name="loai" style="width: 100%" data-placeholder="Loại giày">
+                        <option></option>
+                        <?php foreach($categories as $value) {
+                              if ($value['tenloai'] == $product[0]['tenloai']) { ?>
+                                <option selected value="<?= $value['maloai']?>"><?= $value['tenloai']?></option>
+                                <?php } else {?>
+                                <option value="<?= $value['maloai']?>"><?= $value['tenloai']?></option>
+                          <?php } ?>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <label class="form-label fw-bold" for="">Hãng</label>
+                      <select class="js-select2 form-select" id="hang" name="hang" style="width: 100%" data-placeholder="Hãng">
+                        <option></option>
+                        <?php foreach($brands as $value) {
+                              if ($value['tenhang'] == $product[0]['tenhang']) { ?>
+                                <option selected value="<?= $value['mahang']?>"><?= $value['tenhang']?></option>
+                                <?php } else {?>
+                                <option value="<?= $value['mahang']?>"><?= $value['tenhang']?></option>
+                          <?php } ?>
+                        <?php } ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <label class="form-label fw-bold" for="">Trạng thái</label>
+                      <select class="form-select" style="cursor: pointer" id="trangthai" name="trangthai">
+                        <option value="1" <?= ($product[0]['trangthai'] == 1) ? 'selected' : '' ?>>
+                            Đang kinh doanh
+                        </option>
+                        <option value="0" <?= ($product[0]['trangthai'] == 0) ? 'selected' : '' ?>>
+                            Ngừng bán
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mt-4 mb-4 justify-content-end">
+                    <div class="col-4">
+                      <button type="button" id="save-btn" class="btn btn-primary w-100 invisible">Save</button>
+                    </div>
                   </div>
                 </div>
                 <div class="row mb-4">

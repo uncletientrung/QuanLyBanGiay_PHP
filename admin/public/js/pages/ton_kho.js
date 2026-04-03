@@ -109,11 +109,11 @@ Dashmix.onLoad(() =>
                         className: 'text-center',
                         render: function (data) {
                             if (parseInt(data) == 0)
-                                return `<span class="badge bg-red w-50">Hết hàng</span>`
+                                return `<span class="badge bg-danger-light text-danger fs-6 w-50">Hết hàng</span>`
                             else if (parseInt(data) < saphet_value)
-                                return `<span class="badge bg-warning w-50">Sắp hết</span>`
+                                return `<span class="badge bg-warning-light text-warning fs-6 w-50">Sắp hết</span>`
                             else
-                                return `<span class="badge bg-info w-50">Còn hàng</span>`;
+                                return `<span class="badge bg-info-light text-info fs-6 w-50">Còn hàng</span>`;
                         }
                     },
                     {
@@ -205,7 +205,7 @@ Dashmix.onLoad(() =>
                 table.draw();
             });
 
-            $("#canhbaohethang").on('change', '#canhbao-input', function (e) {
+            $("#canhbaohethang").on('input', '#canhbao-input', function (e) {
                 activeFilter = 'warning';
                 $("#filter-status").val('');
                 table.draw();
@@ -376,10 +376,19 @@ Dashmix.onLoad(() =>
                             return false;
                         }
                     },
+                    dataType: 'json',
+                    dataSrc: ""
+                },
                     columns: [
                         {
                             data: 'mapn',
-                            className: 'text-center'
+                            className: 'text-center',
+                            render: function(data, type, row) {
+                                if (type === 'display') {
+                                return `<strong class="text-primary">PN-${data}</strong>`;
+                                }
+                                return data;
+                            }
                         },
                         {
                             data: 'thoigiantao',
@@ -389,9 +398,6 @@ Dashmix.onLoad(() =>
                             className: 'text-center'
                         }
                     ],
-                    dataType: 'json',
-                    dataSrc: ""
-                },
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api();
 
@@ -444,7 +450,13 @@ Dashmix.onLoad(() =>
                 columns: [
                     {
                         data: 'madh',
-                        className: 'text-center'
+                        className: 'text-center',
+                        render: function(data, type, row) {
+                            if (type === 'display') {
+                            return `<strong class="text-primary">DH-${data}</strong>`
+                            }
+                            return data;
+                        }
                     },
                     {
                         data: 'thoigiantao',

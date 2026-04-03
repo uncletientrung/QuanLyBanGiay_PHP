@@ -356,17 +356,42 @@ Dashmix.onLoad(() =>
 
                 $("#apply-filter").on('click', function () {
                     $.fn.dataTable.ext.search = [];
-                    const loai = ($("#filter-loai").select2('val')).join('|'); //col 2
-                    const hang = ($('#filter-hang').select2('val')).join('|'); // col 6
-                    const mau = ($('#filter-mau').select2('val')).join('|'); // col 7
+                    const loai = ($("#filter-loai").select2('val')).join('|');
+                    const hang = ($('#filter-hang').select2('val')).join('|');
+                    const mau = ($('#filter-mau').select2('val')).join('|');
                     const gt = gioitinh.join('');
                     const tt = trangthai.join('');
 
-                    if (loai.length != 0) table.column(3).search("^(" + loai + ")$", true, false);
-                    if (hang.length != 0) table.column(5).search("^(" + hang + ")$", true, false);
-                    if (mau.length != 0) table.column(6).search("^(" + mau + ")$", true, false);
-                    if (gioitinh.length != 0) table.column(4).search("^([" + gt + "])$", true, false);
-                    if (trangthai.length != 0) table.column(8).search("^([" + tt + "])$", true, false);
+                    if (loai.length != 0) {
+                        table.column(3).search("^(" + loai + ")$", true, false);
+                    } else {
+                        table.column(3).search('');
+                    }
+
+                    if (hang.length != 0) {
+                        table.column(5).search("^(" + hang + ")$", true, false);
+                    } else {
+                        table.column(5).search('');
+                    }
+
+                    if (mau.length != 0) {
+                        table.column(6).search("^(" + mau + ")$", true, false);
+                    } else {
+                        table.column(6).search('');
+                    }
+
+                    if (gioitinh.length != 0) {
+                        table.column(4).search("^([" + gt + "])$", true, false);
+                    } else {
+                        table.column(4).search('');
+                    }
+
+                    if (trangthai.length != 0) {
+                        table.column(8).search("^([" + tt + "])$", true, false);
+                    } else {
+                        table.column(8).search('');
+                    }
+
                     table.draw();
                 });
                 //Fix placeholder

@@ -72,9 +72,23 @@
 
         public function changeStatus($id, $status)
         { 
-            $sql = "UPDATE loai SET trangthai = ? WHERE maloai = ?";
-            $stmt = $this->db->prepare($sql);
-            return $stmt->execute([$status, $id]);
+            try {
+                $this->db->beginTransaction();
+
+                $sql = "UPDATE loai SET trangthai = ? WHERE maloai = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([$status, $id]);
+            
+                $sql2 = "UPDATE sanpham SET trangthai = ? WHERE loai = ?";
+                $stmt2 = $this->db->prepare($sql2);
+                $stmt2->execute([$status, $id]);
+
+                return $this->db->commit();
+
+            } catch (Exception $e) {
+                $this->db->rollBack();
+                return false;
+            }
         }
     }
 ?>

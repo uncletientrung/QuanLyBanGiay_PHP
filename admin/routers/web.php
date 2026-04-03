@@ -67,6 +67,7 @@ $router->post('/products/updateSizeAndStock', 'Products@updateSizeAndStock');
 $router->post('/products/deleteSizeAndStock', 'Products@deleteSizeAndStock');
 $router->post('/products/addNewSize', 'Products@addNewSize');
 $router->get('/products/getIdAndName', 'Products@getIdAndName');
+$router->post('/products/checkDuplicateName', 'Products@checkDuplicateName');
 
 $router->post('/products/upload', 'Products@upload');
 $router->post('/products/setBanner', 'Products@setBanner');

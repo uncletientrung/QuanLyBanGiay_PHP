@@ -722,4 +722,12 @@ class SanPhamModel
         $stmt->execute([$id, $date]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function checkDuplicateName($tensp)
+    {
+        $sql = "SELECT masp FROM sanpham WHERE tensp = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$tensp]);
+        return $stmt->rowCount() > 0;
+    }
 }

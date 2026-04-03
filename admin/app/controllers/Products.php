@@ -96,6 +96,7 @@ class Products extends Controller
                 "sweetalert2" => 1,
                 "select2" => 1,
                 "datatables" => 1,
+                "jquery-validate" => 1,
             ],
             "Script"  => "product_detail"
         ]);
@@ -233,5 +234,15 @@ class Products extends Controller
             echo json_encode(['status' => $success ? 'success' : 'error']);
             exit();
         }
+    }
+
+    public function checkDuplicateName() {
+        $tensp = $_POST['tensp'];
+        if (isset($tensp)) {
+            echo json_encode(!$this->productsModel->checkDuplicateName($tensp));
+            exit();
+        }
+        echo json_encode(false);
+        exit(); 
     }
 }
