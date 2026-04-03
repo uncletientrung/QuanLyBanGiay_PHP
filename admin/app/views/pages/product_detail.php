@@ -59,25 +59,6 @@
                           <th style="width: 25%;">Số lượng (đôi)</th>
                           <th style="width: 10%;"></th>
                         </tr>
-                      </thead>
-                      <tbody>
-                        <?php $totalStock = 0;
-                        foreach ($size as $index => $val) {
-                          $totalStock += $val['soluong'] ?>
-                          <tr>
-                            <th class="text-center" scope="row"><?php echo $val['masize']; ?></th>
-                            <td class="fw-semibold text-primary tensize">
-                              <?php echo $val['tensize']; ?>
-                            </td>
-                            <td class="justify-content-center soluong" style="text-align: center">
-                              <?php echo $val['soluong']; ?>
-                            </td>
-                            <td>
-                              <button type="button" class="delete-sizestock btn btn-sm btn-outline-danger">
-                                <i class="fa fa-fw fa-times"></i>
-                              </button>
-                            </td>
-                          </tr>
                         </thead>
                         <tbody>
                           <?php $totalStock = 0; foreach($size as $index=>$val) { $totalStock += $val['soluong'] ?>
@@ -309,4 +290,4 @@
     <span hidden id="allSizeFetcher">
       <?= json_encode($allSize) ?>
     </span>
-  </div>
+</div>
