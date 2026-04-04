@@ -54,7 +54,7 @@
                 </div>
                 <div class="row mb-4">
                   <div class="w-100 d-flex justify-content-end">
-                    <button hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích cỡ</button>
+                    <button type="button" hidden id="add-size" class="btn btn-sm btn-info pe-2"><i class="fa fa-plus me-2"></i>Thêm kích cỡ</button>
                   </div>
                   <div id="table-div">
                     <table id="size-table" class="table table-vcenter">
@@ -233,16 +233,16 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                    </div>
                 <?php }
             } ?>
-            </div>
+                  </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-    <span hidden id="allSizeFetcher">
-      <?= json_encode($allSize) ?>
-    </span>
   </div>
+  <span hidden id="allSizeFetcher">
+    <?= json_encode($allSize) ?>
+  </span>
+</div>
