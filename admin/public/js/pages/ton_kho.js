@@ -46,7 +46,7 @@ Dashmix.onLoad(() =>
                         <'w-auto pe-0'
                             <"#config">
                         >
-                        <'col-sm-12 col-lg-2'
+                        <'col-sm-12 col-lg-3'
                             <"#status-filter">
                         >
                         <'col-sm-12 col-lg-4 p-0'
