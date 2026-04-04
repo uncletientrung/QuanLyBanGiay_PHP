@@ -143,6 +143,7 @@ class SanPhamModel
                 	s.masp = ss.masp
                 LEFT JOIN size ON
                 	size.masize = ss.masize
+                WHERE s.trangthai != -1
                 GROUP BY s.masp";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -189,7 +190,7 @@ class SanPhamModel
 
     public function changeStatus($id)
     {
-        $sql = "UPDATE sanpham SET trangthai = 0 WHERE masp = ?";
+        $sql = "UPDATE sanpham SET trangthai = -1 WHERE masp = ?";
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute([$id]);
     }
@@ -728,6 +729,6 @@ class SanPhamModel
         $sql = "SELECT masp FROM sanpham WHERE tensp = ?";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$tensp]);
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount() > 1;
     }
 }
