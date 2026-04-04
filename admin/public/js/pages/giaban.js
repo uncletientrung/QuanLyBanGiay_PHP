@@ -1,39 +1,39 @@
-Dashmix.onLoad(() => 
-class {
-    static initDataTables() {
-        // Override a few default classes
-        jQuery.extend(jQuery.fn.dataTable.ext.classes, {
-            sWrapper: "dataTables_wrapper dt-bootstrap5",
-            sFilterInput: "form-control",
-            sLengthSelect: "form-select"
-        });
+Dashmix.onLoad(() =>
+    class {
+        static initDataTables() {
+            // Override a few default classes
+            jQuery.extend(jQuery.fn.dataTable.ext.classes, {
+                sWrapper: "dataTables_wrapper dt-bootstrap5",
+                sFilterInput: "form-control",
+                sLengthSelect: "form-select"
+            });
 
-        // Override a few defaults
-        jQuery.extend(true, jQuery.fn.dataTable.defaults, {
-            language: {
-                lengthMenu: "_MENU_",
-                search: "_INPUT_",
-                searchPlaceholder: "Search..",
-                info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
-                paginate: {
-                    first: '<i class="fa fa-angle-double-left"></i>',
-                    previous: '<i class="fa fa-angle-left"></i>',
-                    next: '<i class="fa fa-angle-right"></i>',
-                    last: '<i class="fa fa-angle-double-right"></i>'
+            // Override a few defaults
+            jQuery.extend(true, jQuery.fn.dataTable.defaults, {
+                language: {
+                    lengthMenu: "_MENU_",
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search..",
+                    info: "Page <strong>_PAGE_</strong> of <strong>_PAGES_</strong>",
+                    paginate: {
+                        first: '<i class="fa fa-angle-double-left"></i>',
+                        previous: '<i class="fa fa-angle-left"></i>',
+                        next: '<i class="fa fa-angle-right"></i>',
+                        last: '<i class="fa fa-angle-double-right"></i>'
+                    }
                 }
-            }
-        });
+            });
 
-        // Override buttons default classes
-        jQuery.extend(true, jQuery.fn.DataTable.Buttons.defaults, {
-            dom: {
-                button: {
-                    className: 'btn btn-sm btn-primary'
-                },
-            }
-        });
-            
-        const table = jQuery('.js-dataTable-responsive').DataTable({
+            // Override buttons default classes
+            jQuery.extend(true, jQuery.fn.DataTable.Buttons.defaults, {
+                dom: {
+                    button: {
+                        className: 'btn btn-sm btn-primary'
+                    },
+                }
+            });
+
+            const table = jQuery('.js-dataTable-responsive').DataTable({
                 pagingType: "full_numbers",
                 pageLength: 7,
                 dom: `
@@ -85,7 +85,7 @@ class {
                     },
                     {
                         data: 'gianhap',
-                        render: function(data) {
+                        render: function (data) {
                             let formattedNumber = new Intl.NumberFormat('vi-VN').format(data);
                             return `
                                 <span class="badge bg-info-light text-info fs-6 fw-bold">${formattedNumber} đồng</span>
@@ -95,29 +95,29 @@ class {
                     {
                         data: 'tyleloinhuan',
                         className: 'text-center',
-                        render: function(data) {
+                        render: function (data) {
                             return `
-                                <span class="w-25 badge bg-info fw-bold">${data} %</span>
+                                <span class="badge bg-info fw-bold">${data} %</span>
                             `
                         }
                     },
                     {
                         data: null,
-                        render: function(data, type, row) {
-                            let result = parseFloat(row.gianhap) * (1 + parseFloat(row.tyleloinhuan)/100);
+                        render: function (data, type, row) {
+                            let result = parseFloat(row.gianhap) * (1 + parseFloat(row.tyleloinhuan) / 100);
                             if (type == 'sort' || type == 'type')
                                 return result
                             let formattedNumber = new Intl.NumberFormat('vi-VN').format(result);
                             return `
                                 <span class="badge bg-warning-light text-warning fs-6 fw-bold">${formattedNumber} đồng</span>
-                            `   
+                            `
                         }
                     },
                     {
                         data: null,
                         className: 'text-center',
                         orderable: false,
-                        render: function(data, type, row) {
+                        render: function (data, type, row) {
                             const modalId = `modal-block-${row.masp}`;
                             return `
                                 <button type="button" class="m-0 btn btn-sm btn-outline-primary push" data-bs-toggle="modal" data-bs-target="#${modalId}"><i class="fa fa-fw fa-pen-to-square"></i></button>
@@ -153,12 +153,12 @@ class {
                 ]
             });
 
-        jQuery('#filter-button').html(`
+            jQuery('#filter-button').html(`
             <button type="button" class="btn btn-hero btn-outline-primary dropdown-toggle h-100" data-bs-toggle="collapse" data-bs-target="#filter-box-target">
                 <i class="fa fa-filter me-2"></i>Bộ lọc
             </button>
         `);
-        table.on('init', function () {
+            table.on('init', function () {
                 let max_nhap = 0;
                 const data = table.column(2).data().toArray();
                 data.forEach(el => {
@@ -202,92 +202,91 @@ class {
                 </div> 
             `);
 
-            Dashmix.helpers("jq-rangeslider");
-            
-            $("#reset-filter").on('click', function () {
-                const slider1 = $("#filter-gianhap").data('ionRangeSlider');
-                slider1.reset();
+                Dashmix.helpers("jq-rangeslider");
 
-                const slider2 = $("#filter-loinhuan").data('ionRangeSlider');
-                slider2.reset();
+                $("#reset-filter").on('click', function () {
+                    const slider1 = $("#filter-gianhap").data('ionRangeSlider');
+                    slider1.reset();
 
-                $.fn.dataTable.ext.search = [];
-                table.draw();
-            });
+                    const slider2 = $("#filter-loinhuan").data('ionRangeSlider');
+                    slider2.reset();
 
-            $("#apply-filter").on('click', function () {
-                $.fn.dataTable.ext.search = [];
-    
-                const min_nhap = $("#filter-gianhap").data("from"); //col 4
-                const max_nhap = $("#filter-gianhap").data("to");
-
-                const min_profit = $("#filter-loinhuan").data("from"); //col 5
-                const max_profit = $("#filter-loinhuan").data("to");
-
-                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                    if (
-                        (isNaN(min_nhap) && isNaN(max_nhap)) ||
-                        (isNaN(min_nhap) && data[5] <= max_nhap) ||
-                        (min_nhap <= data[2] && isNaN(max_nhap)) ||
-                        (min_nhap <= data[2] && data[2] <= max_nhap) // Giá nhập
-                    ) {
-                        return true;
-                    }
-                    return false;
+                    $.fn.dataTable.ext.search = [];
+                    table.draw();
                 });
 
-                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                    if (
-                        (isNaN(min_profit) && isNaN(max_profit)) ||
-                        (isNaN(min_profit) && data[6] <= max_profit) ||
-                        (min_profit <= data[3] && isNaN(max_profit)) ||
-                        (min_profit <= data[3] && data[3] <= max_profit) // Lợi nhuận
-                    ) {
-                        return true;
-                    }
-                    return false;
-                });
+                $("#apply-filter").on('click', function () {
+                    $.fn.dataTable.ext.search = [];
 
-                table.draw();
-            });
-            
-            $(document).on('click', '.updateLoiNhuan', function() {
-                const $button = $(this);
-                const $modal = $button.closest('.modal-content');
-                const $input = $modal.find('input[name="newloinhuan"]');
-                
-                const productId = $input.data('product-id');
-                const initialValue = $input.data('initial-value');
-                const newValue = $input.val();
+                    const min_nhap = $("#filter-gianhap").data("from"); //col 4
+                    const max_nhap = $("#filter-gianhap").data("to");
 
-                if (newValue == initialValue) {
-                    console.log("No changes detected for SP-" + productId);
-                    return; 
-                }
+                    const min_profit = $("#filter-loinhuan").data("from"); //col 5
+                    const max_profit = $("#filter-loinhuan").data("to");
 
-                // If we reached here, the value HAS changed
-                $.ajax({
-                    url: './gia_ban/updateLoiNhuan',
-                    type: 'POST',
-                    data: {
-                        productId: productId,
-                        newValue: newValue,
-                    },
-                    success: function(response)
-                    {
-                        if(response.status == 'success') {
-                            console.log('response');
-                            table.ajax.reload(null, false);
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        if (
+                            (isNaN(min_nhap) && isNaN(max_nhap)) ||
+                            (isNaN(min_nhap) && data[5] <= max_nhap) ||
+                            (min_nhap <= data[2] && isNaN(max_nhap)) ||
+                            (min_nhap <= data[2] && data[2] <= max_nhap) // Giá nhập
+                        ) {
+                            return true;
                         }
-                        console.log(response);
+                        return false;
+                    });
+
+                    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                        if (
+                            (isNaN(min_profit) && isNaN(max_profit)) ||
+                            (isNaN(min_profit) && data[6] <= max_profit) ||
+                            (min_profit <= data[3] && isNaN(max_profit)) ||
+                            (min_profit <= data[3] && data[3] <= max_profit) // Lợi nhuận
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    });
+
+                    table.draw();
+                });
+
+                $(document).on('click', '.updateLoiNhuan', function () {
+                    const $button = $(this);
+                    const $modal = $button.closest('.modal-content');
+                    const $input = $modal.find('input[name="newloinhuan"]');
+
+                    const productId = $input.data('product-id');
+                    const initialValue = $input.data('initial-value');
+                    const newValue = $input.val();
+
+                    if (newValue == initialValue) {
+                        console.log("No changes detected for SP-" + productId);
+                        return;
                     }
-                })                
+
+                    // If we reached here, the value HAS changed
+                    $.ajax({
+                        url: './gia_ban/updateLoiNhuan',
+                        type: 'POST',
+                        data: {
+                            productId: productId,
+                            newValue: newValue,
+                        },
+                        success: function (response) {
+                            if (response.status == 'success') {
+                                console.log('response');
+                                table.ajax.reload(null, false);
+                            }
+                            console.log(response);
+                        }
+                    })
+                });
             });
-        });
-    }
-    
-    static init() {
-        this.initDataTables();
-    }
-}.init()
+        }
+
+        static init() {
+            this.initDataTables();
+        }
+    }.init()
 )
