@@ -1,4 +1,4 @@
-let saphet_value = parseInt(localStorage.getItem('saphet')) ?? 0;
+let saphet_value = parseInt(localStorage.getItem('saphet')) ?? 10;
 Dashmix.onLoad(() =>
     class {
         static initTongQuanTab() {
@@ -191,7 +191,7 @@ Dashmix.onLoad(() =>
 
             $("#canhbaohethang").html(`
                 <div class="input-group">
-                    <span class="input-group-text bg-light pe-none pe-3">Nhập số lượng hàng muốn xem:</span>
+                    <span class="input-group-text bg-light pe-none pe-3">Xem sản phẩm dưới mức:</span>
                     <input type="number" id="canhbao-input" class="form-control" placeholder="...">
                     <button type="button" id="reset-canhbao" class="btn btn-outline-secondary"><i class="fa fa-rotate-left"></i></button>
                 </div>
