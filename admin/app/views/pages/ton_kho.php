@@ -23,22 +23,22 @@
     <div class="block-content tab-content">
       <!-- TAB TỔNG QUAN -->
       <div class="tab-pane active" id="tab-tongquan" role="tabpanel" aria-labelledby="btab-tongquan" tabindex="0">
-      <!-- Dynamic Table Full Pagination -->
-      <div class="block block-rounded">
-        <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-        <table id="table" class="table table-hover table-vcenter js-dataTable-responsive">
-          <thead>
-            <tr class="bg-body-dark">
-              <th class="text-center" style="width: 10%;">Mã</th>
-              <th style="width: 40%">Tên sản phẩm</th>
-              <th style="width: 20%">Loại sản phẩm</th>
-              <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
-              <th style="width: 15%" class="text-center">Trạng thái</th>
-              <th></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+        <!-- Dynamic Table Full Pagination -->
+        <div class="block block-rounded">
+          <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
+          <table id="table" class="table table-hover table-vcenter js-dataTable-responsive">
+            <thead>
+              <tr class="bg-body-dark">
+                <th class="text-center" style="width: 10%;">Mã</th>
+                <th style="width: 40%">Tên sản phẩm</th>
+                <th style="width: 20%">Loại sản phẩm</th>
+                <th style="width: 15%" class="text-center">Tổng tồn (Đôi)</th>
+                <th style="width: 15%" class="text-center">Trạng thái</th>
+                <th></th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
       <!-- TAB TRA CỨU -->
       <div class="tab-pane" id="tab-tracuu" role="tabpanel" aria-labelledby="btab-tracuu" tabindex="0">
@@ -52,12 +52,12 @@
             <div class="col-sm-12 col-md-6 col-lg-5 ms-auto">
               <div class="input-group" id="datepicker-wrap">
                 <span class="input-group-text input-group-text-alt" data-toggle>
-                    <i class="fa-solid fa-calendar"></i>
+                  <i class="fa-solid fa-calendar"></i>
                 </span>
-                <input type="text" class="form-control form-control-alt text-center" 
-                      id="filter-from" placeholder="Chọn ngày tra cứu" data-input readonly>
+                <input type="text" class="form-control form-control-alt text-center"
+                  id="filter-from" placeholder="Chọn ngày tra cứu" data-input readonly>
                 <button class="btn btn-light" type="button" id="btn-reset-date" data-clear>
-                    <i class="fa fa-rotate-left"></i>
+                  <i class="fa fa-rotate-left"></i>
                 </button>
               </div>
             </div>
@@ -80,92 +80,92 @@
             <div class="mt-3 mb-3 p-3 bg-light rounded border border-4 shadow-sm">
               <div class="row g-3 align-items-center py-3 bg-light-subtle rounded fs-5">
                 <div class="col-sm-2 border-end">
-                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>
-                    <span id="ma-tracuu" class="fw-bold text-dark">H001</span>
+                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Mã hãng</small>
+                  <span id="ma-tracuu" class="fw-bold text-dark">H001</span>
                 </div>
 
                 <div class="col-sm-4 border-end">
-                    <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên sản phẩm</small>
-                    <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
+                  <small class="text-muted d-block text-uppercase fw-bold ls-sm" style="font-size: 0.65rem;">Tên sản phẩm</small>
+                  <span id="ten-tracuu" class="fw-bold text-primary">NIKE VIETNAM</span>
                 </div>
 
                 <div class="col-sm text-center">
-                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng nhập</small>
-                    <span id="slnhap-tracuu" class="fs-4 badge rounded-pill bg-info-light text-info px-3 py-2 fw-bold">
-                        <i class="fa fa-arrow-down me-1"></i> 1.250
-                    </span>
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng nhập</small>
+                  <span id="slnhap-tracuu" class="fs-4 badge rounded-pill bg-info-light text-info px-3 py-2 fw-bold">
+                    <i class="fa fa-arrow-down me-1"></i> 1.250
+                  </span>
                 </div>
 
                 <div class="col-sm text-center">
-                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng xuất</small>
-                    <span id="slxuat-tracuu" class="fs-4 badge rounded-pill bg-warning-light text-warning px-3 py-2 fw-bold">
-                        <i class="fa fa-arrow-up me-1"></i> 850
-                    </span>
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng xuất</small>
+                  <span id="slxuat-tracuu" class="fs-4 badge rounded-pill bg-warning-light text-warning px-3 py-2 fw-bold">
+                    <i class="fa fa-arrow-up me-1"></i> 850
+                  </span>
                 </div>
 
                 <div class="col-sm text-center">
-                    <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng tồn</small>
-                    <span id="ton-tracuu" class="badge fs-4 rounded-pill bg-success text-white px-3 py-2 fw-bold shadow-sm">
-                        400
-                    </span>
+                  <small class="text-muted d-block text-uppercase fw-bold mb-1" style="font-size: 0.65rem;">Tổng tồn</small>
+                  <span id="ton-tracuu" class="badge fs-4 rounded-pill bg-success text-white px-3 py-2 fw-bold shadow-sm">
+                    400
+                  </span>
                 </div>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-md-6">
-                  <div class="block block-rounded block-bordered">
-                      <div class="block-header block-header-default bg-info-light">
-                          <h3 class="block-title">Lịch sử phiếu nhập</h3>
-                      </div>
-                      <div class="block-content">
-                          <div class="table-responsive">
-                              <table id="nhap-tracuu-table" class="table table-striped table-vcenter w-100">
-                                  <thead>
-                                      <tr>
-                                          <th class="text-center" style="width: 100px;">Mã</th>
-                                          <th>Ngày</th>
-                                          <th class="text-center" style="width: 150px">Số lượng</th>
-                                      </tr>
-                                  </thead>
-                                  <tfoot>
-                                    <tr>
-                                      <th></th>
-                                      <th>Tổng số lượng nhập: </th>
-                                      <th class="text-center">10</th>
-                                    </tr>
-                                  </tfoot>
-                              </table>
-                          </div>
-                      </div>
+                <div class="block block-rounded block-bordered">
+                  <div class="block-header block-header-default bg-info-light">
+                    <h3 class="block-title">Lịch sử phiếu nhập</h3>
                   </div>
+                  <div class="block-content">
+                    <div class="table-responsive">
+                      <table id="nhap-tracuu-table" class="table table-striped table-vcenter w-100">
+                        <thead>
+                          <tr>
+                            <th class="text-center" style="width: 100px;">Mã</th>
+                            <th>Ngày</th>
+                            <th class="text-center" style="width: 150px">Số lượng</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th></th>
+                            <th>Tổng số lượng nhập: </th>
+                            <th class="text-center">10</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div class="col-md-6">
-                  <div class="block block-rounded block-bordered">
-                      <div class="block-header block-header-default bg-warning-light">
-                          <h3 class="block-title">Lịch sử đơn hàng đơn hàng</h3>
-                      </div>
-                      <div class="block-content">
-                          <div class="table-responsive">
-                              <table id="xuat-tracuu-table" class="table table-striped table-vcenter" class="w-100">
-                                  <thead>
-                                      <tr>
-                                          <th class="text-center" style="width: 100px;">Mã</th>
-                                          <th>Ngày</th>
-                                          <th class="text-center" style="width: 150px">Số lượng</th>
-                                      </tr>
-                                  </thead>
-                                  <tfoot>
-                                    <tr>
-                                      <th></th>
-                                      <th>Tổng số lượng xuất: </th>
-                                      <th class="text-center">10</th>
-                                    </tr>
-                                  </tfoot>
-                              </table>
-                          </div>
-                      </div>
+                <div class="block block-rounded block-bordered">
+                  <div class="block-header block-header-default bg-warning-light">
+                    <h3 class="block-title">Lịch sử đơn hàng</h3>
                   </div>
+                  <div class="block-content">
+                    <div class="table-responsive">
+                      <table id="xuat-tracuu-table" class="table table-striped table-vcenter" class="w-100">
+                        <thead>
+                          <tr>
+                            <th class="text-center" style="width: 100px;">Mã</th>
+                            <th>Ngày</th>
+                            <th class="text-center" style="width: 150px">Số lượng</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th></th>
+                            <th>Tổng số lượng xuất: </th>
+                            <th class="text-center">10</th>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -232,11 +232,12 @@
                             <th>Nhà cung cấp</th>
                             <th>Số lượng</th>
                             <th>Đơn giá</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody id="chitiet-nhap-body">
                           <tr>
-                            <td colspan="6" class="text-center text-muted py-3">Đang tải...</td>
+                            <td colspan="7" class="text-center text-muted py-3">Đang tải...</td>
                           </tr>
                         </tbody>
                       </table>
@@ -244,7 +245,7 @@
                     <table class="table table-borderless mb-0 border-top">
                       <tfoot>
                         <tr class="fw-bold">
-                          <td colspan="4" class="text-end">Tổng nhập:</td>
+                          <td colspan="5" class="text-end">Tổng nhập:</td>
                           <td class="text-center text-success" id="chitiet-tong-nhap">0</td>
                           <td></td>
                         </tr>
@@ -265,6 +266,7 @@
                             <th>Khách hàng</th>
                             <th>Số lượng</th>
                             <th>Đơn giá</th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody id="chitiet-xuat-body">
@@ -277,7 +279,7 @@
                     <table class="table table-borderless mb-0 border-top">
                       <tfoot>
                         <tr class="fw-bold">
-                          <td colspan="3" class="text-end">Tổng xuất:</td>
+                          <td colspan="4" class="text-end">Tổng xuất:</td>
                           <td class="text-center text-danger" id="chitiet-tong-xuat">0</td>
                           <td></td>
                         </tr>
@@ -297,6 +299,159 @@
         </div>
       </div>
       <!-- END Modal Chi Tiết Thống Kê -->
+
+      <!-- Modal chi tiết nhập -->
+      <div class="modal fade" id="modal-chitiet-donhang" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+              <div class="block-header bg-warning">
+                <h3 class="block-title text-white">
+                  <i class="fa fa-file-alt me-2"></i>Thông tin đơn hàng
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-fw fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content fs-sm">
+                <div class="row g-3 mb-4">
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Mã đơn</label>
+                    <input type="text" class="form-control form-control-alt" id="dh-detail-madh" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Khách hàng</label>
+                    <input type="text" class="form-control form-control-alt" id="dh-detail-hoten" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Thời gian tạo</label>
+                    <input type="text" class="form-control form-control-alt" id="dh-detail-thoigiantao" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Thanh toán</label>
+                    <input type="text" class="form-control form-control-alt" id="dh-detail-thanhtoan" readonly>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; max-height: 55vh;">
+                  <div style="overflow-y: auto; flex: 1; border: 1px solid #e1e1e1; border-radius: 4px 4px 0 0;">
+                    <table class="table table-borderless table-striped table-vcenter mb-0">
+                      <thead class="sticky-top bg-white shadow-sm" style="z-index: 1;">
+                        <tr class="text-uppercase fs-sm text-center">
+                          <th style="width: 60px;">STT</th>
+                          <th style="width: 100px;">Mã SP</th>
+                          <th style="width: auto;">Tên sản phẩm</th>
+                          <th style="width: 140px;">Đơn giá</th>
+                          <th style="width: 120px;">Số lượng</th>
+                          <th style="width: 160px;">Thành tiền</th>
+                        </tr>
+                      </thead>
+                      <tbody id="dh-detail-chitiet-body"></tbody>
+                    </table>
+                  </div>
+                  <table class="table table-borderless mb-0 border-top bg-body-light">
+                    <tfoot>
+                      <tr class="fw-bold">
+                        <td colspan="5" class="text-end text-uppercase py-3" style="width: calc(100% - 160px);">Tổng cộng:</td>
+                        <td class="text-center text-warning fs-5 py-3" style="width: 160px;" id="dh-detail-tongtien">0đ</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+                <div class="mt-3 d-flex align-items-center gap-2">
+                  <span class="fw-semibold text-muted small text-uppercase">Trạng thái:</span>
+                  <span id="dh-detail-trangthai"></span>
+                </div>
+              </div>
+              <div class="block-content block-content-full text-end bg-body-light mt-3">
+                <button type="button" class="btn btn-hero btn-danger" data-bs-dismiss="modal">
+                  <i class="fa fa-times me-1"></i> Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Modal chi tiết nhập -->
+
+      <!-- Modal chi tiết xuất -->
+      <div class="modal fade" id="modal-chitiet-phieunhap" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+              <div class="block-header bg-primary">
+                <h3 class="block-title text-white">
+                  <i class="fa fa-file-alt me-2"></i>Thông tin phiếu nhập
+                </h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option text-white" data-bs-dismiss="modal">
+                    <i class="fa fa-fw fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content fs-sm">
+                <div class="row g-3 mb-4">
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Mã phiếu</label>
+                    <input type="text" class="form-control form-control-alt" id="detail-mapn" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Nhân viên nhập</label>
+                    <input type="text" class="form-control form-control-alt" id="detail-tenadmin" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Nhà cung cấp</label>
+                    <input type="text" class="form-control form-control-alt" id="detail-tenncc" readonly>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label fw-semibold text-muted small text-uppercase">Thời gian tạo</label>
+                    <input type="text" class="form-control form-control-alt" id="detail-thoigiantao" readonly>
+                  </div>
+                </div>
+                <div style="display: flex; flex-direction: column; max-height: 55vh;">
+                  <div style="overflow-y: auto; flex: 1; border: 1px solid #e1e1e1; border-radius: 4px 4px 0 0;">
+                    <table class="table table-borderless table-striped table-vcenter mb-0">
+                      <thead class="sticky-top bg-white shadow-sm" style="z-index: 1;">
+                        <tr class="text-uppercase fs-sm text-center">
+                          <th style="width: 60px;">STT</th>
+                          <th style="width: 100px;">Mã SP</th>
+                          <th style="width: auto;">Tên sản phẩm</th>
+                          <th style="width: 140px;">Đơn giá</th>
+                          <th style="width: 120px;">Số lượng</th>
+                          <th style="width: 160px;">Thành tiền</th>
+                        </tr>
+                      </thead>
+                      <tbody id="detail-chitiet-body"></tbody>
+                    </table>
+                  </div>
+                  <table class="table table-borderless mb-0 border-top bg-body-light">
+                    <tfoot>
+                      <tr class="fw-bold">
+                        <td colspan="6" class="text-end text-uppercase py-3">Tổng cộng:</td>
+                        <td class="text-center text-primary fs-5 py-3" id="detail-tongtien">0đ</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <div class="mt-3 d-flex align-items-center gap-2">
+                  <span class="fw-semibold text-muted small text-uppercase">Trạng thái phiếu:</span>
+                  <span id="detail-trangthai"></span>
+                </div>
+              </div>
+              <div class="block-content block-content-full text-end bg-body-light mt-3">
+                <button type="button" class="btn btn-hero btn-danger" data-bs-dismiss="modal">
+                  <i class="fa fa-times me-1"></i> Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END Modal chi tiết xuất -->
+
     </div>
   </div>
 </div>

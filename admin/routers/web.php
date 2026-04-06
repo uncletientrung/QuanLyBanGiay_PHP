@@ -85,6 +85,7 @@ $router->post('/nhap_hang/delete', 'Nhap_hang@delete');
 // Don hang
 $router->get('/don_hang', 'Don_hang@default');
 $router->get('/don_hang/getData', 'Don_hang@getData');
+$router->post('/don_hang/getDetail', 'Don_hang@getDetail');
 $router->post('/don_hang/updateStatus', 'Don_hang@updateStatus');
 $router->post('/don_hang/updateBulkStatus', 'Don_hang@updateBulkStatus');
 $router->post('/don_hang/delete', 'Don_hang@delete');

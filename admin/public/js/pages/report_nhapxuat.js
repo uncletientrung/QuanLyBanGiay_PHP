@@ -21,13 +21,6 @@ Dashmix.onLoad(() =>
                         d.to = jQuery("#thongke-filter-to").val();
                     },
                     dataSrc: function (json) {
-                        // console.log("Thống kê Nhập - Xuất:", {
-                        //     from: json._debug.parsed_from,
-                        //     to: json._debug.parsed_to,
-                        //     total_products: json._debug.total_products,
-                        //     products_with_import: json.data.filter(r => r.tong_nhap > 0).length,
-                        //     products_with_export: json.data.filter(r => r.tong_xuat > 0).length
-                        // });
                         return json.data;
                     }
                 },
@@ -102,14 +95,20 @@ Dashmix.onLoad(() =>
                         nhap.forEach(function (r) {
                             tongNhap += parseInt(r.soluong);
                             rowsNhap += `
-                            <tr>
-                                <td class="text-center fw-bold">PN-${r.mapn}<\/td>
-                                <td class="text-center">${r.thoigiantao}<\/td>
-                                <td class="text-center">${r.tenadmin || 'N/A'}<\/td>
-                                <td class="text-center">${r.tenncc || 'N/A'}<\/td>
-                                <td class="text-center"><span class="badge bg-success">${r.soluong}<\/span><\/td>
-                                <td class="text-center">${Number(r.dongia).toLocaleString('vi-VN')} ₫<\/td>
-                            <\/tr>`;
+                                <tr>
+                                    <td class="text-center fw-bold">PN-${r.mapn}</td>
+                                    <td class="text-center">${r.thoigiantao}</td>
+                                    <td class="text-center">${r.tenadmin || 'N/A'}</td>
+                                    <td class="text-center">${r.tenncc || 'N/A'}</td>
+                                    <td class="text-center"><span class="badge bg-success">${r.soluong}</span></td>
+                                    <td class="text-center">${Number(r.dongia).toLocaleString('vi-VN')} ₫</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-alt-info btn-view-pn-from-thongke"
+                                            data-id="${r.mapn}" title="Xem chi tiết phiếu nhập">
+                                            <i class="fa fa-fw fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>`;
                         });
                         if (!rowsNhap) rowsNhap = '<tr><td colspan="6" class="text-center text-muted py-3">Không có phiếu nhập<\/td><\/tr>';
                         $('#chitiet-nhap-body').html(rowsNhap);
@@ -122,13 +121,19 @@ Dashmix.onLoad(() =>
                         xuat.forEach(function (r) {
                             tongXuat += parseInt(r.soluong);
                             rowsXuat += `
-                            <tr>
-                                <td class="text-center fw-bold">DH-${r.madh}<\/td>
-                                <td class="text-center">${r.thoigiantao}<\/td>
-                                <td class="text-center">${r.tenkhachhang || 'N/A'}<\/td>
-                                <td class="text-center"><span class="badge bg-danger">${r.soluong}<\/span><\/td>
-                                <td class="text-center">${Number(r.dongia).toLocaleString('vi-VN')} ₫<\/td>
-                            <\/tr>`;
+                                <tr>
+                                    <td class="text-center fw-bold">DH-${r.madh}</td>
+                                    <td class="text-center">${r.thoigiantao}</td>
+                                    <td class="text-center">${r.tenkhachhang || 'N/A'}</td>
+                                    <td class="text-center"><span class="badge bg-danger">${r.soluong}</span></td>
+                                    <td class="text-center">${Number(r.dongia).toLocaleString('vi-VN')} ₫</td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-alt-info btn-view-dh-from-thongke"
+                                            data-id="${r.madh}" title="Xem chi tiết đơn hàng">
+                                            <i class="fa fa-fw fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>`;
                         });
                         if (!rowsXuat) rowsXuat = '<tr><td colspan="5" class="text-center text-muted py-3">Không có đơn hàng<\/td><\/tr>';
                         $('#chitiet-xuat-body').html(rowsXuat);
@@ -140,6 +145,95 @@ Dashmix.onLoad(() =>
                         $('#chitiet-xuat-body').html('<tr><td colspan="5" class="text-center text-danger">Lỗi tải dữ liệu<\/td><\/tr>');
                     }
                 });
+            });
+
+            $(document).on('click', '.btn-view-pn-from-thongke', function () {
+                const id = $(this).data('id');
+
+                $.post("./nhap_hang/getDetail", { id: id }, function (res) {
+                    if (!res.phieu) return;
+                    const p = res.phieu;
+
+                    $("#detail-mapn").val("PN-" + p.mapn);
+                    $("#detail-tenadmin").val(p.tenadmin || "N/A");
+                    $("#detail-tenncc").val(p.tenncc || "N/A");
+                    $("#detail-thoigiantao").val(p.thoigiantao || "");
+
+                    const ttMap = {
+                        1: '<span class="badge bg-success">Hoàn tất</span>',
+                        0: '<span class="badge bg-warning text-dark">Phiếu tạm</span>'
+                    };
+                    $("#detail-trangthai").html(ttMap[p.trangthai] || '<span class="badge bg-secondary">N/A</span>');
+
+                    let rows = '';
+                    let tongTien = 0;
+                    res.chiTiet.forEach((ct, i) => {
+                        const thanhtien = ct.soluong * ct.dongia;
+                        tongTien += thanhtien;
+                        rows += `
+                        <tr>
+                            <td class="text-center">${i + 1}</td>
+                            <td class="text-center">SP-${ct.masp}</td>
+                            <td class="fw-semibold">${ct.tensp}</td>
+                            <td class="text-center">${Number(ct.dongia).toLocaleString('vi-VN')} ₫</td>
+                            <td class="text-center">${ct.soluong}</td>
+                            <td class="text-center fw-semibold text-primary">${thanhtien.toLocaleString('vi-VN')} ₫</td>
+                        </tr>`;
+                    });
+
+                    if (!rows) rows = '<tr><td colspan="6" class="text-center text-muted py-3">Không có sản phẩm</td></tr>';
+
+                    $("#detail-chitiet-body").html(rows);
+                    $("#detail-tongtien").text(tongTien.toLocaleString('vi-VN') + ' ₫');
+
+                    $("#modal-chitiet-phieunhap").modal("show");
+                }, 'json');
+            });
+
+            $(document).on('click', '.btn-view-dh-from-thongke', function () {
+                const id = $(this).data('id');
+
+                $.post("./don_hang/getDetail", { id: id }, function (res) {
+                    if (!res.success || !res.phieu) return;
+
+                    const p = res.phieu;
+
+                    $("#dh-detail-madh").val("DH-" + p.madh);
+                    $("#dh-detail-hoten").val(p.hoten || "N/A");
+                    $("#dh-detail-thoigiantao").val(p.thoigiantao || "");
+                    $("#dh-detail-thanhtoan").val(p.hinhthucthanhtoan || "N/A");
+
+                    const ttMap = {
+                        0: '<span class="badge bg-warning text-dark">Chưa xử lý</span>',
+                        1: '<span class="badge bg-info">Đã xác nhận</span>',
+                        2: '<span class="badge bg-success">Đã giao thành công</span>',
+                        '-1': '<span class="badge bg-danger">Đã hủy</span>'
+                    };
+                    $("#dh-detail-trangthai").html(ttMap[p.trangthai] || '<span class="badge bg-secondary">N/A</span>');
+
+                    let rows = '';
+                    let tongTien = 0;
+                    res.chiTiet.forEach((ct, i) => {
+                        const thanhtien = ct.soluong * ct.dongia;
+                        tongTien += thanhtien;
+                        rows += `
+                        <tr>
+                            <td class="text-center">${i + 1}</td>
+                            <td class="text-center">SP-${ct.masp}</td>
+                            <td class="fw-semibold">${ct.tensp}</td>
+                            <td class="text-center">${Number(ct.dongia).toLocaleString('vi-VN')} ₫</td>
+                            <td class="text-center">${ct.soluong}</td>
+                            <td class="text-center fw-semibold text-warning">${thanhtien.toLocaleString('vi-VN')} ₫</td>
+                        </tr>`;
+                    });
+
+                    if (!rows) rows = '<tr><td colspan="6" class="text-center text-muted py-3">Không có sản phẩm</td></tr>';
+
+                    $("#dh-detail-chitiet-body").html(rows);
+                    $("#dh-detail-tongtien").text(tongTien.toLocaleString('vi-VN') + ' ₫');
+
+                    $("#modal-chitiet-donhang").modal("show");
+                }, 'json');
             });
 
             const dateRangeHtml = `

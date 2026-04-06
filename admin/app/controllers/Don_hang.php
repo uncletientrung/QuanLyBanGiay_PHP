@@ -116,4 +116,20 @@ class Don_hang extends Controller
         }
         exit;
     }
+
+    public function getDetail()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            header('Content-Type: application/json');
+            $id      = $_POST['id'] ?? null;
+            $phieu   = $this->donhangModel->getDetail($id);
+            $chiTiet = $this->donhangModel->getItems($id);
+            echo json_encode([
+                'success' => (bool)$phieu,
+                'phieu'   => $phieu,
+                'chiTiet' => $chiTiet
+            ]);
+            exit;
+        }
+    }
 }
