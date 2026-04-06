@@ -1,7 +1,7 @@
 <?php
 class AdminModel
 {
-    private $db;
+    private $db; // Biến lưu kết nối db
 
     public function __construct($conn)
     {
@@ -21,7 +21,7 @@ class AdminModel
             return json_encode(["status" => "error", "message" => "Tài khoản không tồn tại!"]);
         }
 
-        if (password_verify($password, $user['password'])) {
+        if ($password === $user['password']) {
             $token = bin2hex(random_bytes(32));
             $this->updateToken($user['maadmin'], $token);
             setcookie("admin_token", $token, time() + (7 * 24 * 3600), "/", "", false, true);
@@ -78,11 +78,10 @@ class AdminModel
 
     public function updatePassword($maadmin, $newPassword)
     {
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $sql = "UPDATE admin SET password = :pass WHERE maadmin = :id";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            ':pass' => $hashedPassword,
+            ':pass' => $newPassword,
             ':id' => $maadmin
         ]);
     }
@@ -91,7 +90,7 @@ class AdminModel
     {
         $user = $this->getAdminById($maadmin);
 
-        if (!password_verify($currentPassword, $user['password'])) {
+        if ($currentPassword !== $user['password']) {
             return json_encode(["status" => "danger", "message" => "Mật khẩu hiện tại không đúng!"]);
         }
 

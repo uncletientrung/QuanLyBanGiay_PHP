@@ -471,7 +471,7 @@ Dashmix.onLoad(() =>
 
                 Swal.fire({
                     title: 'Xác nhận?',
-                    text: `Bạn có chắc muốn đổi trạng thái ${selectedIds.length} đơn hàng đã chọn?`,
+                    text: `Bạn có chắc muốn đổi trạng thái ${selectedIds.size} đơn hàng đã chọn?`,
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'Đồng ý',

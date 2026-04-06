@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2026 at 02:54 PM
+-- Generation Time: Apr 06, 2026 at 03:49 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`maadmin`, `email`, `password`, `hoten`, `sdt`, `token`) VALUES
-(1, 'admin@gmail.com', '$2y$10$luxIDeVvN.cM9LIwK3y1g.CybX0ItqoK415lP6e8LHqUxvOrd6x16', 'Trương Minh Vũ', '0912345678', 'f595a34b98fffb4381b3385cdb06a935c460ae08b2fc8866916c533b2a6b1e14');
+(1, 'admin@gmail.com', '123', 'Trương Minh Vũ', '0912345678', 'c71e34b96eb6af386cba8b9cfa99c92cc7faed6e783f291683f094e062917e84');
 
 -- --------------------------------------------------------
 
@@ -62,104 +62,39 @@ CREATE TABLE `ctdonhang` (
 --
 
 INSERT INTO `ctdonhang` (`madh`, `masp`, `masize`, `soluong`, `dongia`) VALUES
-(1, 1, 1, 1, 550000),
-(1, 2, 2, 2, 110000),
-(2, 3, 1, 3, 110000),
-(2, 7, 2, 1, 100000),
-(3, 1, 3, 2, 550000),
-(4, 4, 1, 1, 110000),
-(4, 5, 2, 1, 110000),
-(4, 6, 3, 1, 110000),
-(5, 1, 1, 1, 550000),
-(5, 8, 2, 1, 110000),
-(5, 11, 3, 1, 110000),
-(5, 7, 4, 1, 100000),
-(6, 12, 1, 2, 110000),
-(6, 2, 2, 2, 110000),
-(7, 1, 2, 1, 550000),
-(7, 3, 3, 1, 110000),
-(7, 7, 4, 1, 100000),
-(8, 4, 1, 2, 110000),
-(8, 5, 2, 3, 110000),
-(9, 1, 1, 1, 550000),
-(9, 7, 2, 1, 100000),
-(10, 1, 3, 2, 550000),
-(10, 6, 4, 1, 110000),
-(11, 8, 1, 1, 110000),
-(11, 11, 2, 1, 110000),
-(11, 12, 3, 2, 110000),
-(12, 1, 4, 1, 550000),
-(12, 2, 1, 2, 110000),
-(13, 3, 2, 4, 110000),
-(13, 7, 3, 1, 100000),
-(14, 4, 4, 4, 110000),
-(14, 5, 1, 4, 110000),
-(15, 6, 2, 3, 110000),
-(16, 8, 3, 5, 110000),
-(16, 11, 4, 4, 110000),
-(17, 12, 1, 3, 110000),
-(17, 2, 2, 3, 110000),
-(18, 1, 3, 2, 550000),
-(19, 3, 4, 2, 110000),
-(19, 4, 1, 2, 110000),
-(20, 1, 2, 1, 550000),
-(20, 5, 3, 2, 110000),
-(21, 6, 4, 4, 110000),
-(21, 8, 1, 4, 110000),
-(22, 11, 2, 3, 110000),
-(22, 7, 3, 1, 100000),
-(23, 12, 4, 5, 110000),
-(24, 1, 1, 1, 550000),
-(24, 2, 2, 2, 110000),
-(25, 3, 3, 3, 110000),
-(26, 4, 4, 6, 110000),
-(26, 5, 1, 6, 110000),
-(27, 6, 2, 4, 110000),
-(28, 1, 3, 1, 550000),
-(28, 8, 4, 1, 110000),
-(28, 11, 1, 1, 110000),
-(28, 7, 2, 1, 100000),
-(29, 1, 3, 2, 550000),
-(30, 12, 4, 4, 110000),
-(31, 1, 1, 1, 550000),
-(31, 2, 2, 1, 110000),
-(31, 7, 3, 1, 100000),
-(32, 3, 4, 5, 110000),
-(33, 4, 1, 4, 110000),
-(33, 5, 2, 4, 110000),
-(34, 6, 3, 3, 110000),
-(34, 7, 4, 1, 100000),
-(35, 1, 1, 1, 550000),
-(35, 8, 2, 4, 110000),
-(36, 11, 3, 3, 110000),
-(37, 1, 4, 2, 550000),
-(37, 12, 1, 1, 110000),
-(38, 1, 2, 1, 550000),
-(38, 7, 3, 1, 100000),
-(39, 2, 4, 4, 110000),
-(40, 1, 1, 1, 550000),
-(40, 3, 2, 2, 110000),
-(41, 4, 3, 4, 110000),
-(41, 7, 4, 1, 100000),
-(42, 5, 1, 4, 110000),
-(42, 6, 2, 4, 110000),
-(43, 8, 3, 3, 110000),
-(44, 1, 4, 2, 550000),
-(45, 11, 1, 2, 110000),
-(45, 12, 2, 2, 110000),
-(46, 1, 3, 1, 550000),
-(46, 2, 4, 2, 110000),
-(47, 3, 1, 3, 110000),
-(48, 4, 2, 3, 110000),
-(48, 5, 3, 3, 110000),
-(49, 6, 4, 4, 110000),
-(50, 8, 1, 5, 110000),
-(51, 11, 2, 2, 110000),
-(52, 1, 3, 1, 550000),
-(52, 12, 4, 4, 110000),
-(53, 1, 1, 1, 550000),
-(53, 2, 2, 2, 110000),
-(54, 3, 3, 4, 110000);
+(1, 26, 4, 7, 1500000),
+(1, 37, 1, 2, 1248000),
+(1, 37, 4, 3, 1248000),
+(2, 15, 1, 1, 2240000),
+(2, 16, 1, 1, 2300000),
+(3, 33, 2, 5, 2120000),
+(4, 31, 2, 4, 1800000),
+(4, 32, 2, 3, 2354000),
+(4, 32, 4, 1, 2354000),
+(5, 30, 4, 1, 1836000),
+(6, 24, 4, 3, 1545000),
+(7, 11, 2, 3, 110000),
+(7, 12, 2, 3, 110000),
+(7, 34, 2, 3, 1792000),
+(7, 37, 4, 3, 1248000),
+(8, 12, 2, 3, 110000),
+(9, 12, 2, 3, 110000),
+(10, 3, 4, 1, 110000),
+(10, 4, 1, 1, 110000),
+(10, 5, 2, 1, 110000),
+(10, 6, 2, 1, 110000),
+(10, 11, 2, 1, 110000),
+(10, 12, 2, 1, 110000),
+(11, 28, 2, 1, 1166000),
+(12, 11, 2, 7, 110000),
+(13, 17, 1, 2, 1568000),
+(14, 7, 1, 1, 100000),
+(15, 7, 1, 1, 100000),
+(15, 26, 3, 1, 1500000),
+(15, 29, 4, 6, 1100000),
+(16, 27, 3, 8, 1155000),
+(17, 12, 2, 4, 110000),
+(18, 33, 2, 1, 2120000);
 
 -- --------------------------------------------------------
 
@@ -174,6 +109,34 @@ CREATE TABLE `ctphieunhap` (
   `soluong` int(11) NOT NULL,
   `dongia` decimal(12,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ctphieunhap`
+--
+
+INSERT INTO `ctphieunhap` (`mapn`, `masp`, `masize`, `soluong`, `dongia`) VALUES
+(1, 12, 1, 2, 100000),
+(1, 19, 1, 3, 1400000),
+(1, 21, 1, 1, 1000000),
+(2, 37, 1, 1, 1200000),
+(2, 36, 2, 1, 1200000),
+(2, 34, 1, 1, 1600000),
+(3, 35, 1, 2, 1600000),
+(3, 34, 1, 2, 1600000),
+(3, 30, 1, 1, 1800000),
+(3, 36, 2, 1, 1200000),
+(3, 33, 1, 1, 2000000),
+(4, 5, 1, 1, 100000),
+(4, 6, 1, 2, 100000),
+(4, 7, 1, 1, 100000),
+(4, 8, 1, 1, 100000),
+(5, 37, 1, 1, 1200000),
+(5, 36, 2, 1, 1200000),
+(5, 35, 1, 1, 1600000),
+(6, 36, 2, 1, 1200000),
+(6, 35, 1, 1, 1600000),
+(6, 34, 1, 1, 1600000),
+(6, 33, 1, 1, 2000000);
 
 -- --------------------------------------------------------
 
@@ -196,60 +159,24 @@ CREATE TABLE `donhang` (
 --
 
 INSERT INTO `donhang` (`madh`, `makh`, `tongtien`, `thoigiantao`, `diachigiaohang`, `hinhthucthanhtoan`, `trangthai`) VALUES
-(1, 1, 770000, '2026-03-20 20:14:43', '123 Lê Lợi, Quận 1, TP.HCM', 'Tiền mặt', 1),
-(2, 2, 430000, '2026-03-20 20:14:43', '45 Nguyễn Trãi, Hà Nội', 'Chuyển khoản', 0),
-(3, 3, 1100000, '2026-02-11 20:14:43', '88 Phan Chu Trinh, Đà Nẵng', 'Tiền mặt', 1),
-(4, 4, 330000, '2026-03-20 20:14:43', '202 Cách Mạng Tháng 8, Quận 3', 'Chuyển khoản', 0),
-(5, 5, 870000, '2026-03-20 20:14:43', '12 Ngõ Tự Do, Hà Nội', 'Tiền mặt', 2),
-(6, 6, 440000, '2026-03-20 20:14:43', '56 Nguyễn Văn Linh, Cần Thơ', 'Chuyển khoản', 0),
-(7, 7, 760000, '2026-03-20 20:14:43', '15 Trần Phú, Nha Trang', 'Tiền mặt', 1),
-(8, 8, 550000, '2026-02-09 20:14:43', '101 Láng Hạ, Hà Nội', 'Chuyển khoản', 0),
-(9, 9, 650000, '2026-03-20 20:14:43', '78 Quang Trung, TP.HCM', 'Tiền mặt', -1),
-(10, 10, 1210000, '2026-03-20 20:14:43', '34 Thống Nhất, Thủ Đức', 'Chuyển khoản', 1),
-(11, 11, 440000, '2026-03-20 20:14:43', '22 Hàm Nghi, Quận 1', 'Tiền mặt', 0),
-(12, 12, 770000, '2026-03-20 20:14:43', '09 Lê Hồng Phong, Nghệ An', 'Chuyển khoản', 1),
-(13, 13, 540000, '2026-03-20 20:14:43', '12B Lý Thường Kiệt, Hà Nội', 'Tiền mặt', 0),
-(14, 14, 880000, '2026-03-20 20:14:43', '18 Nguyễn Huệ, Huế', 'Chuyển khoản', 1),
-(15, 15, 330000, '2026-03-20 20:14:43', '456 Võ Văn Kiệt, Quận 5', 'Tiền mặt', 0),
-(16, 16, 990000, '2026-02-03 20:14:43', '123 Hùng Vương, Gia Lai', 'Chuyển khoản', 1),
-(17, 17, 660000, '2026-03-20 20:14:43', '67 Xuân Thủy, Hà Nội', 'Tiền mặt', 0),
-(18, 18, 1100000, '2026-03-20 20:14:43', '40 Kim Mã, Hà Nội', 'Chuyển khoản', 1),
-(19, 19, 440000, '2026-02-16 20:14:43', '25 Phổ Quang, Quận Tân Bình', 'Tiền mặt', 0),
-(20, 1, 770000, '2026-03-20 20:14:43', '123 Lê Lợi, Quận 1, TP.HCM', 'Chuyển khoản', 1),
-(21, 2, 880000, '2026-03-20 20:14:43', '45 Nguyễn Trãi, Hà Nội', 'Tiền mặt', 0),
-(22, 3, 430000, '2026-03-20 20:14:43', '88 Phan Chu Trinh, Đà Nẵng', 'Chuyển khoản', 1),
-(23, 4, 550000, '2026-03-20 20:14:43', '202 Cách Mạng Tháng 8, Quận 3', 'Tiền mặt', 0),
-(24, 5, 770000, '2026-03-20 20:14:43', '12 Ngõ Tự Do, Hà Nội', 'Chuyển khoản', 1),
-(25, 6, 330000, '2026-02-16 20:14:43', '56 Nguyễn Văn Linh, Cần Thơ', 'Tiền mặt', 0),
-(26, 7, 1320000, '2026-03-20 20:14:43', '15 Trần Phú, Nha Trang', 'Chuyển khoản', 1),
-(27, 8, 440000, '2026-03-20 20:14:43', '101 Láng Hạ, Hà Nội', 'Tiền mặt', 0),
-(28, 9, 870000, '2026-03-20 20:14:43', '78 Quang Trung, TP.HCM', 'Chuyển khoản', 1),
-(29, 10, 1100000, '2026-03-20 20:14:43', '34 Thống Nhất, Thủ Đức', 'Tiền mặt', 2),
-(30, 11, 440000, '2026-03-20 20:14:43', '22 Hàm Nghi, Quận 1', 'Chuyển khoản', 0),
-(31, 12, 760000, '2026-03-20 20:14:43', '09 Lê Hồng Phong, Nghệ An', 'Tiền mặt', 1),
-(32, 13, 550000, '2026-03-20 20:14:43', '12B Lý Thường Kiệt, Hà Nội', 'Chuyển khoản', 0),
-(33, 14, 880000, '2026-03-20 20:14:43', '18 Nguyễn Huệ, Huế', 'Tiền mặt', 1),
-(34, 15, 430000, '2026-03-20 20:14:43', '456 Võ Văn Kiệt, Quận 5', 'Chuyển khoản', 0),
-(35, 16, 990000, '2026-03-20 20:14:43', '123 Hùng Vương, Gia Lai', 'Tiền mặt', 1),
-(36, 17, 330000, '2026-03-20 20:14:43', '67 Xuân Thủy, Hà Nội', 'Chuyển khoản', 0),
-(37, 18, 1210000, '2026-03-20 20:14:43', '40 Kim Mã, Hà Nội', 'Tiền mặt', 1),
-(38, 19, 650000, '2026-03-20 20:14:43', '25 Phổ Quang, Quận Tân Bình', 'Chuyển khoản', -1),
-(39, 1, 440000, '2026-03-20 20:14:43', '123 Lê Lợi, Quận 1, TP.HCM', 'Tiền mặt', 0),
-(40, 2, 770000, '2026-03-20 20:14:43', '45 Nguyễn Trãi, Hà Nội', 'Chuyển khoản', 1),
-(41, 3, 540000, '2026-03-20 20:14:43', '88 Phan Chu Trinh, Đà Nẵng', 'Tiền mặt', 0),
-(42, 4, 880000, '2026-03-20 20:14:43', '202 Cách Mạng Tháng 8, Quận 3', 'Chuyển khoản', 1),
-(43, 5, 330000, '2026-03-20 20:14:43', '12 Ngõ Tự Do, Hà Nội', 'Tiền mặt', 0),
-(44, 6, 1100000, '2026-03-20 20:14:43', '56 Nguyễn Văn Linh, Cần Thơ', 'Chuyển khoản', 1),
-(45, 7, 440000, '2026-03-20 20:14:43', '15 Trần Phú, Nha Trang', 'Tiền mặt', 0),
-(46, 8, 770000, '2026-03-20 20:14:43', '101 Láng Hạ, Hà Nội', 'Chuyển khoản', 1),
-(47, 9, 330000, '2026-03-20 20:14:43', '78 Quang Trung, TP.HCM', 'Tiền mặt', 0),
-(48, 10, 660000, '2026-03-20 20:14:43', '34 Thống Nhất, Thủ Đức', 'Chuyển khoản', 1),
-(49, 11, 440000, '2026-03-20 20:14:43', '22 Hàm Nghi, Quận 1', 'Tiền mặt', 0),
-(50, 12, 550000, '2026-03-20 20:14:43', '09 Lê Hồng Phong, Nghệ An', 'Tiền mặt', 0),
-(51, 13, 220000, '2026-03-20 20:14:43', '12B Lý Thường Kiệt, Hà Nội', 'Chuyển khoản', 0),
-(52, 14, 990000, '2026-03-20 20:14:43', '18 Nguyễn Huệ, Huế', 'Tiền mặt', 1),
-(53, 15, 770000, '2026-03-20 20:14:43', '456 Võ Văn Kiệt, Quận 5', 'Chuyển khoản', 1),
-(54, 16, 440000, '2026-03-20 20:14:43', '123 Hùng Vương, Gia Lai', 'Tiền mặt', 1);
+(1, 1, 16740000, '2026-04-06 20:34:52', '123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM', 'Tiền mặt', 1),
+(2, 1, 4540000, '2026-04-06 20:35:21', '123 Lê Lợi, Phường Bến Thành, Quận 1, TP.HCM', 'Tiền mặt', -1),
+(3, 2, 10600000, '2026-04-06 20:35:54', '45 Nguyễn Trãi, Quận Thanh Xuân, Hà Nội', 'Tiền mặt', 1),
+(4, 2, 16616000, '2026-04-06 20:36:24', '45 Nguyễn Trãi, Quận Thanh Xuân, Hà Nội', 'Tiền mặt', -1),
+(5, 2, 1836000, '2026-04-06 20:36:35', '45 Nguyễn Trãi, Quận Thanh Xuân, Hà Nội', 'Tiền mặt', 2),
+(6, 3, 4635000, '2026-04-06 20:37:01', '88 Phan Chu Trinh, Quận Hải Châu, Đà Nẵng', 'Tiền mặt', 1),
+(7, 3, 9780000, '2026-04-06 20:37:35', '88 Phan Chu Trinh, Quận Hải Châu, Đà Nẵng', 'Tiền mặt', 1),
+(8, 17, 330000, '2026-04-06 20:38:06', '67 Xuân Thủy, Quận Cầu Giấy, Hà Nội', 'Tiền mặt', 0),
+(9, 12, 330000, '2026-04-06 20:38:30', '09 Lê Hồng Phong, TP. Vinh, Nghệ An', 'Tiền mặt', 1),
+(10, 12, 660000, '2026-04-06 20:39:15', '09 Lê Hồng Phong, TP. Vinh, Nghệ An', 'Tiền mặt', 1),
+(11, 14, 1166000, '2026-04-06 20:39:39', '18 Nguyễn Huệ, TP. Huế', 'Chuyển khoản', 0),
+(12, 14, 770000, '2026-04-06 20:39:59', '18 Nguyễn Huệ, TP. Huế', 'Chuyển khoản', 1),
+(13, 16, 3136000, '2026-04-06 20:40:33', '123 Hùng Vương, TP. Pleiku, Gia Lai', 'Chuyển khoản', 0),
+(14, 16, 100000, '2026-04-06 20:40:52', '123 Hùng Vương, TP. Pleiku, Gia Lai', 'Chuyển khoản', 1),
+(15, 16, 8200000, '2026-04-06 20:41:46', '123 Hùng Vương, TP. Pleiku, Gia Lai', 'Chuyển khoản', 0),
+(16, 11, 9240000, '2026-04-06 20:42:16', '22 Hàm Nghi, Quận 1, TP.HCM', 'Chuyển khoản', 0),
+(17, 11, 440000, '2026-04-06 20:42:31', '22 Hàm Nghi, Quận 1, TP.HCM', 'Chuyển khoản', 2),
+(18, 11, 2120000, '2026-04-06 20:42:49', '22 Hàm Nghi, Quận 1, TP.HCM', 'Chuyển khoản', 2);
 
 -- --------------------------------------------------------
 
@@ -669,6 +596,18 @@ CREATE TABLE `phieunhap` (
   `trangthai` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`mapn`, `maadmin`, `mancc`, `thoigiantao`, `tongtien`, `trangthai`) VALUES
+(1, 1, 3, '2026-04-06 20:47:00', 5400000, 1),
+(2, 1, 3, '2026-04-08 20:47:00', 4000000, 1),
+(3, 1, 13, '2026-04-03 20:48:00', 11400000, 1),
+(4, 1, 3, '2026-04-06 20:48:00', 500000, 1),
+(5, 1, 3, '2026-04-06 20:48:00', 4000000, 0),
+(6, 1, 4, '2026-04-05 20:49:00', 6400000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -703,7 +642,7 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `loai`, `gioitinh`, `gianhap`, `tyleloin
 (7, 'Nike Structure - Nữ', 1, 0, 100000, 0, 1, 7, 'Nike Structure 26 là mẫu giày thể thao mới nhất nổi bật của Nike trong năm nay, được thiết kế để phục vụ các hoạt động thể chất đa dạng như: chạy bộ, tập gym, đi bộ đường dài hoặc đơn giản là di chuyển hàng ngày. Với trọng tâm là độ ổn định, nâng đỡ và êm ái lâu dài, mẫu giày này tích hợp những công nghệ tiên tiến nhất của Nike, đặc biệt phù hợp cho người có bàn chân dễ mỏi hoặc cần kiểm soát chuyển động bàn chân.\r\nNike Structure 26 không chỉ là một đôi giày chạy bộ thông thường. Với sự kết hợp giữa đệm ReactX phản hồi cao, hệ thống hỗ trợ vòm chân, và thiết kế thân giày thông minh, đây là lựa chọn lý tưởng cho mọi nhu cầu vận động hàng ngày – từ thể thao cho đến di chuyển lâu dài.\r\nNếu bạn đang tìm kiếm một đôi giày thể thao đa năng, công nghệ cao, hỗ trợ tốt cho bàn chân – Nike Structure chính là sự đầu tư xứng đáng.', 0, 1),
 (8, 'Nike Metcon - Nam', 1, 1, 100000, 10, 1, 6, 'Giày Nike Metcon 10 là thế hệ mới nhất trong dòng giày training nổi tiếng của Nike, được thiết kế dành cho những người yêu thích tập luyện sức mạnh, crossfit và functional training cường độ cao. Phiên bản này mang đến sự ổn định vượt trội, độ linh hoạt tối ưu và khả năng hoàn trả năng lượng ấn tượng, giúp bạn chinh phục mọi thử thách trong phòng tập.\r\n\r\nPhần gót giày được trang bị tấm Hyperlift siêu cứng, giúp tăng độ ổn định tối đa khi nâng tạ nặng, squats, deadlifts hay cleans mà vẫn giữ cảm giác tự nhiên khi di chuyển. So với Metcon 9, Metcon 10 có hộp mũi rộng hơn, giúp ngón chân được thoải mái hơn và tăng khả năng truyền lực toàn bàn chân khi thực hiện động tác nặng.\r\n\r\nPhần midsole được nâng cấp với ReactX foam thế hệ mới, nhẹ hơn nhưng mang lại độ đàn hồi cao hơn, giúp tăng hoàn trả năng lượng và hỗ trợ các bài tập yêu cầu độ linh hoạt như box jump hay sprint. Các đường rãnh linh hoạt (flex grooves) trên đế ngoài giúp chuyển động mượt mà, phản hồi nhanh theo từng động tác.', 0, 1),
 (11, 'Puma Skye Clean Distressed - Nữ', 2, 0, 100000, 10, 2, 1, 'Giày Puma Skye Clean Distressed lấy cảm hứng từ thể thao, mang đến thiết kế hiện đại kết hợp cùng sự thoải mái tối ưu cho cuộc sống năng động. Với form dáng mid-boot cá tính, đế cao su bền bỉ và chi tiết branding đặc trưng, đây là lựa chọn hoàn hảo cho phong cách thường ngày.', 0, 1),
-(12, 'Puma Dribble - Nam', 2, 1, 100000, 10, 2, 4, 'Giày Puma Dribble lấy cảm hứng từ thể thao, mang đến thiết kế hiện đại kết hợp cùng sự thoải mái tối ưu cho cuộc sống năng động. Với form dáng mid-boot cá tính, đế cao su bền bỉ và chi tiết branding đặc trưng, đây là lựa chọn hoàn hảo cho phong cách thường ngày.\r\n\r\nĐặc điểm nổi bật:\r\nThiết kế thể thao trẻ trung, dễ phối đồ.\r\n\r\nForm dáng regular fit, mid-boot cho cảm giác chắc chắn.\r\n\r\nĐế cao su bền bỉ, tăng độ bám và linh hoạt khi di chuyển.\r\n\r\nDây buộc truyền thống ôm vừa vặn bàn chân.\r\n\r\nLogo PUMA đặc trưng, khẳng định phong cách thương hiệu.\r\n\r\nKhám phá ngay PUMA Dribble chính hãng tại Myshoes.vn để nâng tầm phong cách cùng sự thoải mái vượt trội!', 0, 1),
+(12, 'Puma Dribble - Nam', 2, 1, 100000, 10, 2, 4, 'Giày Puma Dribble lấy cảm hứng từ thể thao, mang đến thiết kế hiện đại kết hợp cùng sự thoải mái tối ưu cho cuộc sống năng động. Với form dáng mid-boot cá tính, đế cao su bền bỉ và chi tiết branding đặc trưng, đây là lựa chọn hoàn hảo cho phong cách thường ngày.\r\n\r\nĐặc điểm nổi bật:\r\nThiết kế thể thao trẻ trung, dễ phối đồ.\r\n\r\nForm dáng regular fit, mid-boot cho cảm giác chắc chắn.\r\n\r\nĐế cao su bền bỉ, tăng độ bám và linh hoạt khi di chuyển.\r\n\r\nDây buộc truyền thống ôm vừa vặn bàn chân.\r\n\r\nLogo PUMA đặc trưng, khẳng định phong cách thương hiệu.\r\n\r\nKhám phá ngay PUMA Dribble chính hãng tại Myshoes.vn để nâng tầm phong cách cùng sự thoải mái vượt trội!', 4, 1),
 (13, 'Nike Vomero - Nam', 1, 1, 1700000, 13, 1, 6, 'Giày Nike Vomero 18 không chỉ là một đôi giày chạy bộ hiệu suất cao, mà còn là lựa chọn hoàn hảo cho phong cách sống năng động hiện đại. Với thiết kế thanh lịch, chất liệu cao cấp và công nghệ đệm tiên tiến, Vomero 18 dễ dàng đồng hành cùng bạn từ buổi chạy sáng sớm đến những hoạt động thường ngày – vừa thoải mái vừa thời trang.', 0, 1),
 (14, 'Nike Quest - Nam', 1, 1, 1500000, 15, 1, 8, 'Giày Nike Quest 6 là mẫu giày thể thao mang phong cách hiện đại, phù hợp cho các hoạt động hàng ngày lẫn luyện tập thể chất. Thiết kế đẹp với đai ôm ở giữa bàn chân giúp giữ chân ổn định khi bạn di chuyển, mang lại cảm giác thoải mái và an toàn.\r\n\r\nTính năng nổi bật\r\nDây đai giữa bàn chân: Phần dây đai này giữ bàn chân cố định hơn khi bạn điều chỉnh dây giày, giúp tăng độ ôm và hỗ trợ thêm cho những bước chuyển động.\r\n\r\nĐệm giữa êm ái: Độ cao phần đệm giữa tăng thêm sự êm ái và đàn hồi, giúp tạo cảm giác thoải mái mỗi khi bước đi, từ việc di chuyển hàng ngày đến những hoạt động thể thao.\r\n\r\nĐế cao su bền bỉ: Đế ngoài làm từ cao su có độ bám tốt, giúp bạn tự tin trên mọi bề mặt mà không lo trơn trượt.\r\n\r\nNike Quest 6 là lựa chọn tuyệt vời cho những ai tìm kiếm một đôi giày thể thao vừa phong cách vừa thoải mái, đáp ứng tốt trong nhiều hoàn cảnh sử dụng.', 0, 1),
 (15, 'Nike Blazer Low \'77 Vintage - Nam ', 3, 1, 2000000, 12, 1, 10, 'Nike Blazer Low \'77 Vintage là mẫu giày thời trang mang phong cách cổ điển của Nike, lấy cảm hứng từ các thiết kế thập niên 70. Với kiểu dáng low-top gọn gàng, chất liệu da cao cấp và các chi tiết suede retro, đôi giày mang lại vẻ ngoài đơn giản nhưng đầy cá tính, dễ dàng phối với nhiều phong cách trang phục hằng ngày.\r\n\r\nThiết kế retro mang đậm dấu ấn Nike\r\nNike Blazer Low \'77 Vintage giữ nguyên phong cách cổ điển, với logo Swoosh retro và đường nét thiết kế tối giản. Phần upper kết hợp da cao cấp cùng các chi tiết suede mềm mại, vừa tăng độ bền vừa tạo nên vẻ ngoài vintage đặc trưng.\r\n\r\nCảm giác thoải mái khi mang hằng ngày\r\nĐôi giày được thiết kế với cổ giày thấp và lớp đệm êm, giúp mang lại cảm giác thoải mái khi di chuyển trong thời gian dài. Kiểu dáng gọn gàng và form ôm chân giúp đôi giày phù hợp cho các hoạt động thường ngày.\r\nKết cấu vulcanized bền bỉ\r\nNike sử dụng kết cấu vulcanized giúp liên kết chặt chẽ giữa phần đế ngoài và thân giày, mang lại độ bền cao và vẻ ngoài gọn ', 0, 1),
@@ -721,10 +660,10 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `loai`, `gioitinh`, `gianhap`, `tyleloin
 (27, 'Asics GT-1000 - Nam', 2, 1, 1100000, 5, 5, 10, 'Giày Asics GT-1000 14 được thiết kế dành cho người chạy bộ cần sự ổn định, hỗ trợ tốt và cảm giác êm ái trong suốt quãng đường chạy. Với cấu trúc nhẹ cùng các công nghệ đệm tiên tiến của Asics, đôi giày giúp bạn duy trì nhịp chạy thoải mái và tự tin hơn trên mọi cung đường.\r\n\r\nĐiểm nổi bật của GT-1000 14 nằm ở 3D GUIDANCE SYSTEM™, công nghệ hỗ trợ giúp định hướng chuyển động của bàn chân theo cách tự nhiên. Hệ thống này giúp tăng độ ổn định trong từng bước chạy, đồng thời hỗ trợ người chạy duy trì tư thế và nhịp độ hiệu quả hơn.\r\n\r\nĐế giữa của giày kết hợp PureGEL™ technology và lớp đệm FF BLAST™ foam, mang lại cảm giác tiếp đất mềm mại và khả năng hấp thụ lực tốt. Nhờ đó, áp lực lên khớp và bàn chân được giảm đáng kể, giúp người chạy cảm thấy thoải mái hơn khi chạy trên các bề mặt cứng.\r\n\r\nBên cạnh đó, thiết kế tổng thể của giày tập trung vào sự cân bằng giữa hỗ trợ và độ êm, giúp bạn có thể chạy xa hơn mà vẫn giữ được cảm giác dễ chịu trong từng bước di chuyển', 0, 1),
 (28, 'Asics Gel-Contend - Nam', 2, 1, 1100000, 6, 5, 14, 'Giày Asics Gel-Contend 9 được thiết kế để mang lại sự cân bằng giữa độ êm, khả năng hỗ trợ và độ bền, phù hợp cho chạy bộ, tập luyện thể thao hoặc sử dụng hằng ngày. Với cấu trúc ổn định cùng các công nghệ đệm đặc trưng của Asics, đôi giày giúp người dùng cảm nhận được sự thoải mái trong từng bước di chuyển.\r\n\r\nPhần thân giày sử dụng engineered mesh co giãn theo chuyển động tự nhiên của bàn chân, giúp ôm chân vừa vặn và tăng độ thoáng khí. Các đường khâu tổng hợp trên lớp overlay giúp tăng độ chắc chắn, hỗ trợ bàn chân ổn định hơn trong quá trình vận động.\r\n\r\nĐế giữa của giày kết hợp công nghệ GEL™ và lớp đệm AMPLIFOAM+, mang lại khả năng hấp thụ lực tốt và cảm giác êm ái khi tiếp đất. Sự kết hợp này giúp tăng độ bền cho đôi giày đồng thời tạo cảm giác mềm mại và thoải mái dưới bàn chân.', 0, 1),
 (29, 'Asics Gel-Challenger - Nữ ', 1, 0, 1100000, 0, 5, 12, 'Giày Asics Gel-Challenger 15 được thiết kế để mang lại sự ổn định và cảm giác thoải mái tối đa cho người chơi tennis và pickleball. Với cấu trúc chắc chắn và khả năng hỗ trợ tốt trong các chuyển động ngang, đôi giày giúp bạn tự tin di chuyển và kiểm soát trận đấu hiệu quả hơn.\r\n\r\nPhần upper mềm mại nhưng vẫn đảm bảo độ nâng đỡ kết hợp cùng cổ giày dày hơn giúp ôm chân chắc chắn và tạo cảm giác êm ái khi thi đấu trong thời gian dài. Thiết kế này giúp bàn chân luôn ổn định khi bạn tăng tốc hoặc đổi hướng nhanh trên sân.\r\n\r\nCông nghệ WINGWALL™ được tích hợp ở phần hông đế giày giúp tăng độ vững chắc khi di chuyển ngang – một yếu tố quan trọng trong các pha bóng tốc độ cao. Nhờ đó, người chơi có thể bước vào cú đánh với sự tự tin và tạo ra lực đánh mạnh mẽ hơn.\r\n\r\nĐế ngoài thiết kế full-length outsole kết hợp rãnh tách (separated groove) giúp tăng diện tích tiếp xúc với mặt sân, mang lại cảm giác tiếp đất êm hơn và ổn định hơn trong mỗi bước di chuyển.', 0, 1),
-(30, 'Asics GeL-Resolution X - Nữ', 1, 0, 1800000, 2, 5, 2, 'Giày Asics GEL-RESOLUTION X được thiết kế dành cho những người chơi thích kiểm soát trận đấu từ cuối sân, nơi đòi hỏi sự ổn định, độ bám và khả năng di chuyển ngang liên tục. Đây là mẫu giày lý tưởng cho cả tennis và pickleball, đặc biệt phù hợp với lối chơi thiên về phòng thủ – phản công và giữ nhịp độ cao trong suốt trận đấu.\r\n\r\nĐế giữa hai lớp giúp tăng độ ổn định khi tiếp đất, trong khi công nghệ DYNALACING™ được tối ưu để tăng độ ôm và độ bám bàn chân khi cần hỗ trợ thêm, giúp bạn tự tin thực hiện các pha bứt tốc và đổi hướng nhanh. Khi di chuyển ngang, công nghệ DYNAWALL™ kéo dài đến gót chân giúp giữ vững sự ổn định, hạn chế trượt và mất thăng bằng – yếu tố đặc biệt quan trọng trong pickleball và tennis hiện đại.\r\n\r\nThiết kế cổ giày cao hơn ở mặt trong giúp giảm nguy cơ lật cổ chân khi đổi hướng đột ngột, mang lại cảm giác an toàn và kiểm soát tốt hơn trong những pha bóng căng thẳng.', 0, 1),
+(30, 'Asics GeL-Resolution X - Nữ', 1, 0, 1800000, 2, 5, 2, 'Giày Asics GEL-RESOLUTION X được thiết kế dành cho những người chơi thích kiểm soát trận đấu từ cuối sân, nơi đòi hỏi sự ổn định, độ bám và khả năng di chuyển ngang liên tục. Đây là mẫu giày lý tưởng cho cả tennis và pickleball, đặc biệt phù hợp với lối chơi thiên về phòng thủ – phản công và giữ nhịp độ cao trong suốt trận đấu.\r\n\r\nĐế giữa hai lớp giúp tăng độ ổn định khi tiếp đất, trong khi công nghệ DYNALACING™ được tối ưu để tăng độ ôm và độ bám bàn chân khi cần hỗ trợ thêm, giúp bạn tự tin thực hiện các pha bứt tốc và đổi hướng nhanh. Khi di chuyển ngang, công nghệ DYNAWALL™ kéo dài đến gót chân giúp giữ vững sự ổn định, hạn chế trượt và mất thăng bằng – yếu tố đặc biệt quan trọng trong pickleball và tennis hiện đại.\r\n\r\nThiết kế cổ giày cao hơn ở mặt trong giúp giảm nguy cơ lật cổ chân khi đổi hướng đột ngột, mang lại cảm giác an toàn và kiểm soát tốt hơn trong những pha bóng căng thẳng.', 1, 1),
 (31, 'Clarks Tilden Plain - Nam', 4, 1, 1800000, 0, 6, 19, 'Giày Clarks Tilden Plain mang phong cách Derby cổ điển với đường nét tinh giản, bóng mịn và sang trọng. Được chế tác từ da thật cao cấp cùng độ hoàn thiện tỉ mỉ, đôi giày toát lên vẻ lịch lãm, chuyên nghiệp – phù hợp hoàn hảo cho môi trường công sở, các buổi gặp gỡ đối tác hay sự kiện trang trọng.\r\n\r\nBên trong giày, lớp đệm Cushion Soft™ kết hợp công nghệ OrthoLite® Hybrid™ mang đến cảm giác êm ái vượt trội, hỗ trợ giảm áp lực và tăng khả năng thoáng khí. Thiết kế này giúp bàn chân luôn dễ chịu, khô thoáng kể cả khi mang suốt ngày dài.\r\n\r\nPhần đế ngoài bằng cao su bền chắc, mang lại độ bám ổn định và độ đàn hồi cao, đảm bảo bước đi linh hoạt và tự tin trên nhiều bề mặt. Với sự kết hợp giữa thiết kế cổ điển và công nghệ hiện đại, Clarks Tilden Plain là lựa chọn hoàn hảo cho quý ông yêu thích sự tinh tế và thoải mái trong từng chi tiết.', 0, 1),
 (32, 'Clarks Howard Walk - Nam', 4, 1, 2200000, 7, 6, 20, 'Giày Clarks Howard Walk là mẫu giày tây cổ điển đậm chất quý ông, mang đến phong cách trang trọng, lịch lãm và tinh tế trong mọi hoàn cảnh. Được chế tác từ da thật cao cấp, đôi giày mang lại vẻ ngoài sang trọng cùng độ bền vượt trội – hoàn hảo cho môi trường công sở, sự kiện quan trọng hay những buổi gặp gỡ đối tác.\r\n\r\nThiết kế lace-up buộc dây truyền thống đảm bảo sự vừa vặn và chỉn chu, trong khi phần chun ẩn tinh tế giúp dễ dàng điều chỉnh ôm chân thoải mái hơn. Lớp đệm Cushion Plus™ với foam tái chế 20% mang đến cảm giác êm ái, hấp thụ lực tốt và giảm áp lực lên bàn chân, giúp bạn luôn thoải mái kể cả khi di chuyển suốt ngày dài.\r\n\r\nPhần cổ giày có đệm (padded topline) bảo vệ mắt cá chân, hạn chế ma sát, tăng cảm giác êm nhẹ khi sử dụng. Đế ngoài bằng cao su TPR bền chắc và bám tốt, hỗ trợ bước đi vững vàng và linh hoạt trên nhiều bề mặt.', 0, 1),
-(33, 'Clarks Tilden Walk - Nam ', 4, 1, 2000000, 6, 6, 20, 'Giày Clarks Tilden Walk là mẫu giày tây cổ điển với thiết kế mũi vuông tinh tế, mang đến phong thái lịch lãm và chuyên nghiệp cho phái mạnh. Được chế tác từ da thật cao cấp, đôi giày không chỉ bền đẹp mà còn dễ dàng kết hợp cùng vest, quần âu hay trang phục công sở, giúp quý ông tự tin trong mọi hoàn cảnh – từ những sự kiện trang trọng đến những ngày đi làm thường nhật.\r\n\r\nTrang bị Cushion Soft™ footbed kết hợp công nghệ OrthoLite® Hybrid™, giày mang đến sự êm ái vượt trội, hỗ trợ giảm áp lực và giữ cho bàn chân luôn thoải mái, thoáng khí cả ngày dài. Đế ngoài bằng cao su bền chắc với độ bám tốt, giúp bước đi vững vàng và linh hoạt trên nhiều bề mặt.\r\n\r\nVới sự kết hợp giữa thiết kế sang trọng, chất liệu cao cấp và công nghệ hiện đại, Clarks Tilden Walk chính là lựa chọn lý tưởng cho những ai tìm kiếm một đôi giày tây vừa đẹp mắt vừa thoải mái để sử dụng hàng ngày.', 0, 1),
+(33, 'Clarks Tilden Walk - Nam ', 4, 1, 2000000, 6, 6, 20, 'Giày Clarks Tilden Walk là mẫu giày tây cổ điển với thiết kế mũi vuông tinh tế, mang đến phong thái lịch lãm và chuyên nghiệp cho phái mạnh. Được chế tác từ da thật cao cấp, đôi giày không chỉ bền đẹp mà còn dễ dàng kết hợp cùng vest, quần âu hay trang phục công sở, giúp quý ông tự tin trong mọi hoàn cảnh – từ những sự kiện trang trọng đến những ngày đi làm thường nhật.\r\n\r\nTrang bị Cushion Soft™ footbed kết hợp công nghệ OrthoLite® Hybrid™, giày mang đến sự êm ái vượt trội, hỗ trợ giảm áp lực và giữ cho bàn chân luôn thoải mái, thoáng khí cả ngày dài. Đế ngoài bằng cao su bền chắc với độ bám tốt, giúp bước đi vững vàng và linh hoạt trên nhiều bề mặt.\r\n\r\nVới sự kết hợp giữa thiết kế sang trọng, chất liệu cao cấp và công nghệ hiện đại, Clarks Tilden Walk chính là lựa chọn lý tưởng cho những ai tìm kiếm một đôi giày tây vừa đẹp mắt vừa thoải mái để sử dụng hàng ngày.', 1, 1),
 (34, 'Puma Softride Enzo NXT - Nữ ', 2, 0, 1600000, 12, 2, 14, 'Giày Puma Softride Enzo NXT là sự kết hợp hoàn hảo giữa hiệu năng thể thao và phong cách thời trang hiện đại, kết tinh từ hai dòng nổi tiếng của Puma: Softride và Enzo. Thiết kế năng động cùng công nghệ đệm tiên tiến mang đến trải nghiệm êm ái vượt trội và cảm giác thoải mái suốt cả ngày, dù bạn tập luyện trong phòng gym hay di chuyển ngoài phố.\r\n\r\nPhần đế sử dụng công nghệ Softride EVA độc quyền giúp hấp thụ lực cực tốt, giảm áp lực lên bàn chân và đầu gối trong từng bước chạy. Thân giày được thiết kế hiện đại, ôm chân vừa vặn, với điểm nhấn là logo Puma nổi bật và form dáng thể thao mạnh mẽ giúp bạn tự tin thể hiện phong cách.\r\n\r\nKhông chỉ là một đôi giày chạy bộ, Puma Softride Enzo NXT còn là lựa chọn lý tưởng cho phong cách sống năng động – kết hợp hoàn hảo giữa sự êm ái, bền bỉ và gu thời trang thể thao cao cấp.', 0, 1),
 (35, 'Puma Aviator ProFoam Sky - Nam', 2, 1, 1600000, 0, 2, 1, 'Puma Aviator ProFoam Sky là đôi giày chạy bộ siêu nhẹ, mang đến sự thoáng khí và độ êm vượt trội. Lấy cảm hứng từ dòng Magnify Nitro, sản phẩm sở hữu upper lưới kỹ thuật thoáng khí, đệm ProFoam Lite đàn hồi và đế cao su bền chắc, hỗ trợ bạn tự tin chinh phục từng km chạy.\r\n\r\nƯu điểm nổi bật:\r\nUpper lưới thoáng khí: Giữ bàn chân luôn mát mẻ khi vận động.\r\n\r\nĐệm ProFoam Lite siêu nhẹ: Tạo cảm giác đàn hồi và êm ái suốt quá trình chạy.\r\n\r\nĐế cao su bền bỉ: Bám tốt, tăng độ ổn định trên nhiều bề mặt.\r\n\r\nThiết kế gọn gàng, hiện đại: Dễ dàng kết hợp với outfit thể thao năng động.', 0, 1),
 (36, 'Puma Electrify NITRO™ - Nam', 2, 1, 1200000, 2, 2, 1, 'Giày Puma Electrify NITRO™ 4 – Năng Lượng Bùng Nổ, Êm Ái Mỗi Bước Chạy\r\nPuma Electrify NITRO™ 4 được thiết kế để mang đến trải nghiệm chạy bộ nhẹ nhàng, linh hoạt và đầy sức bật. Nhờ sự kết hợp giữa công nghệ NITROFOAM™ và PROFOAMLITE, đôi giày giúp hấp thụ lực tối ưu, hoàn trả năng lượng mạnh mẽ và duy trì độ ổn định trên từng sải bước.\r\n\r\nƯu điểm nổi bật:\r\nNITROFOAM™ siêu nhẹ: Đệm chứa nitơ tiên tiến, mang lại cảm giác đàn hồi và bùng nổ khi chạy.\r\n\r\nPROFOAMLITE EVA: Tăng khả năng hấp thụ chấn động, hỗ trợ bước chuyển mượt mà và ổn định.\r\n\r\nUpper lưới thoáng khí: Giữ chân luôn mát mẻ, khô ráo ngay cả khi vận động cường độ cao.\r\n\r\nĐế ngoài PUMAGRIP cao su đặc biệt: Cung cấp độ bám vượt trội, phù hợp nhiều bề mặt.\r\n\r\nHướng đến bền vững: Sử dụng ít nhất 30% vật liệu tái chế trong cấu trúc giày.', 0, 1),
@@ -756,25 +695,25 @@ INSERT INTO `sanphamsize` (`masp`, `masize`, `soluong`) VALUES
 (3, 1, 44),
 (3, 2, 19),
 (3, 3, 7),
-(3, 4, 33),
-(4, 1, 13),
+(3, 4, 32),
+(4, 1, 12),
 (4, 2, 9),
-(5, 1, 48),
-(5, 2, 27),
+(5, 1, 49),
+(5, 2, 26),
 (5, 3, 7),
 (5, 4, 43),
-(6, 1, 36),
-(6, 2, 11),
+(6, 1, 38),
+(6, 2, 10),
 (6, 3, 13),
 (6, 4, 33),
-(7, 1, 26),
-(8, 1, 14),
+(7, 1, 25),
+(8, 1, 15),
 (8, 2, 30),
 (8, 3, 46),
 (8, 4, 5),
-(11, 2, 36),
-(12, 1, 49),
-(12, 2, 44),
+(11, 2, 25),
+(12, 1, 51),
+(12, 2, 30),
 (13, 1, 13),
 (13, 2, 23),
 (13, 3, 30),
@@ -788,53 +727,53 @@ INSERT INTO `sanphamsize` (`masp`, `masize`, `soluong`) VALUES
 (16, 1, 22),
 (16, 2, 28),
 (16, 4, 10),
-(17, 1, 20),
+(17, 1, 18),
 (18, 1, 19),
 (18, 2, 13),
 (18, 3, 33),
-(19, 1, 16),
+(19, 1, 19),
 (19, 4, 25),
 (20, 1, 9),
 (20, 2, 31),
 (20, 3, 6),
 (20, 4, 17),
-(21, 1, 6),
+(21, 1, 7),
 (22, 2, 7),
 (22, 3, 35),
 (23, 2, 18),
 (24, 3, 15),
-(24, 4, 27),
+(24, 4, 24),
 (25, 2, 5),
 (25, 3, 48),
 (26, 2, 11),
-(26, 3, 36),
-(26, 4, 24),
+(26, 3, 35),
+(26, 4, 17),
 (27, 1, 48),
 (27, 2, 7),
-(27, 3, 34),
+(27, 3, 26),
 (27, 4, 27),
 (28, 1, 19),
-(28, 2, 46),
-(29, 4, 40),
-(30, 1, 50),
+(28, 2, 45),
+(29, 4, 34),
+(30, 1, 51),
 (30, 2, 22),
 (30, 3, 7),
-(30, 4, 13),
+(30, 4, 12),
 (31, 1, 44),
 (31, 2, 9),
 (31, 4, 25),
 (32, 2, 32),
 (32, 4, 22),
-(33, 1, 50),
-(33, 2, 27),
-(34, 1, 42),
-(34, 2, 39),
-(35, 1, 32),
+(33, 1, 52),
+(33, 2, 21),
+(34, 1, 46),
+(34, 2, 36),
+(35, 1, 35),
 (35, 4, 43),
-(36, 2, 24),
+(36, 2, 27),
 (36, 4, 30),
-(37, 1, 13),
-(37, 4, 45);
+(37, 1, 12),
+(37, 4, 39);
 
 -- --------------------------------------------------------
 
@@ -845,7 +784,7 @@ INSERT INTO `sanphamsize` (`masp`, `masize`, `soluong`) VALUES
 CREATE TABLE `size` (
   `masize` int(11) NOT NULL,
   `tensize` int(20) NOT NULL,
-  `trangthai` int(1) NOT NULL 
+  `trangthai` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -982,7 +921,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `madh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `madh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `hang`
@@ -1024,7 +963,7 @@ ALTER TABLE `nhacungcap`
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sanpham`
