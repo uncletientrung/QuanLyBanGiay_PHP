@@ -219,10 +219,28 @@ Dashmix.onLoad(() =>
                 return result;
             }
 
+            // Ấn hiện pass
+            $("#btn-toggle-password").on("click", function () {
+                let passInput = $("#matkhau");
+                let eyeIcon = $("#eye-icon");
+                if (passInput.attr("type") === "password") {
+                    passInput.attr("type", "text");
+                    eyeIcon.removeClass("fa-eye").addClass("fa-eye-slash");
+                } else {
+                    passInput.attr("type", "password");
+                    eyeIcon.removeClass("fa-eye-slash").addClass("fa-eye");
+                }
+            });
+            function resetPasswordStatus() {
+                $("#matkhau").attr("type", "password");
+                $("#eye-icon").removeClass("fa-eye-slash").addClass("fa-eye");
+            }
+
             // Model Thêm
             $("#btn-add-modal").on("click", function () {
                 $("#form-user")[0].reset();
                 $("#user_id").val("");
+                resetPasswordStatus();
                 $("#form-user").validate().resetForm();
                 $("#form-user").find(".is-invalid").removeClass("is-invalid");
                 $("#modal-title").text("Thêm khách hàng");
@@ -270,6 +288,7 @@ Dashmix.onLoad(() =>
             $(document).on("click", ".btn-edit-user", function () {
                 let id = $(this).data("id");
 
+                resetPasswordStatus();
                 $("#form-user").validate().resetForm();
                 $("#form-user").find(".is-invalid").removeClass("is-invalid");
 

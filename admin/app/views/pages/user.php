@@ -79,7 +79,12 @@
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label" for="matkhau">Mật khẩu</label>
-                                        <input type="password" class="form-control" id="matkhau" name="matkhau" required>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="matkhau" name="matkhau" required>
+                                            <button type="button" class="btn btn-alt-secondary" id="btn-toggle-password">
+                                                <i class="fa fa-eye" id="eye-icon"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Giới tính</label>
