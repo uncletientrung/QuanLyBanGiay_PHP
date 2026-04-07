@@ -50,7 +50,7 @@ Dashmix.onLoad(() =>
                         className: 'text-center',
                         type:'num',
                         render: function(data, type, row) {
-                            if (type === 'display '){
+                            if (type === 'display'){
                             return `<strong class="text-primary">L-${data}</strong>`
                             }
                             return data;

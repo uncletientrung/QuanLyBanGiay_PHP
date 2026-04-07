@@ -68,6 +68,7 @@ Dashmix.onLoad(() =>
                     emptyTable: "Không tìm thấy sản phẩm",
                     zeroRecords: "Không có sản phẩm thỏa bộ lọc"
                 },
+		order: [[1, 'desc']],
                 columns: [
                     {
                         data: 'masp',

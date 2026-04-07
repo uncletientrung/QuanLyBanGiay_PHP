@@ -58,11 +58,10 @@ Dashmix.onLoad(() =>
             // khởi tạo table trên element có class js-dataTable-responsive
             const userTable = jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
-                pageLength: 6,
-                lengthMenu: [[4, 6, 20], [4, 6, 20]],
+                pageLength: 7,
                 autoWidth: !1,
                 responsive: !0,
-                order: [[5, 'asc']],
+                order: [[1, 'desc']],
                 dom: "<'row'<'col-sm-12 col-md-3'<'#status-filter-place'>><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-3'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './don_hang/getData', // gọi đến url này
