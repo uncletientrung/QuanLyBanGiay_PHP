@@ -10,7 +10,6 @@ Dashmix.onLoad(() =>
             // Cập nhật trạng thái đơn hàng
             $(document).on('click', '.btn-update-status', function () {
                 const id = $(this).data('id');
-                console.log(id);
                 const status = $(this).data('status');
                 const message = $(this).data('confirm');
 

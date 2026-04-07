@@ -1,7 +1,7 @@
 <?php
 class Don_hang extends Controller
 {
-    private $donhangModel;
+    private $donhangModel; // biến model
 
     public function __construct()
     {
@@ -10,7 +10,7 @@ class Don_hang extends Controller
 
     public function default($id = null)
     {
-        if ($id !== null) {
+        if ($id !== null) { // Nếu có tham số
             return $this->detail($id);
         }
 
@@ -28,9 +28,10 @@ class Don_hang extends Controller
         ]);
     }
 
+    // Dữ liệu cho table
     public function getData()
     {
-        echo json_encode($this->donhangModel->getAll());
+        echo json_encode($this->donhangModel->getAll()); // mảng model.getAll() -> JSON
         exit;
     }
 
@@ -82,11 +83,11 @@ class Don_hang extends Controller
 
     public function detail($id = null)
     {
-        $order = $this->donhangModel->getDetail($id);
-        $items = $this->donhangModel->getItems($id);
+        $order = $this->donhangModel->getDetail($id); // đơn
+        $items = $this->donhangModel->getItems($id); // ds sp đơn
 
         if (!$order) {
-            header('Location: /don_hang');
+            header("Location: " . ROOT_URL_ADMIN . "don_hang");
             exit;
         }
 

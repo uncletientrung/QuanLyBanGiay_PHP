@@ -65,14 +65,15 @@ Dashmix.onLoad(() =>
                 dom: "<'row'<'col-sm-12 col-md-3'<'#status-filter-place'>><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-3'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
                     url: './don_hang/getData', // gọi đến url này
-                    dataSrc: '' // default: trả về mảng
+                    dataSrc: '' // trả về mảng chứa toàn bộ dữ liệu json string
                 },
                 columns: [
                     {
+                        // checkbox, không có trong JSON -> data null
                         data: null,
                         className: 'text-center',
                         orderable: false,
-                        render: function (data, type, row) {
+                        render: function (data, type, row) { // row: toàn bộ cột
                             return `
                                 <div class="form-check d-inline-block">
                                     <input class="form-check-input js-check-row" type="checkbox" 
@@ -184,6 +185,7 @@ Dashmix.onLoad(() =>
                         }
                     },
                     {
+                        // Thao tác, thao tác với mã đơn
                         data: 'madh',
                         className: 'text-center',
                         orderable: false,
