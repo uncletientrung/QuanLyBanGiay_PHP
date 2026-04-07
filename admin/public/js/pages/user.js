@@ -77,7 +77,7 @@ Dashmix.onLoad(() =>
                         last: '<i class="fa fa-angle-double-right"></i>',
                     },
                 },
-                pageLength: 10,
+                pageLength: 7,
                 lengthChange: false,
                 autoWidth: false
             });

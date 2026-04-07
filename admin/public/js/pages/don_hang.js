@@ -55,17 +55,18 @@ Dashmix.onLoad(() =>
             `;
 
 
+            // khởi tạo table trên element có class js-dataTable-responsive
             const userTable = jQuery(".js-dataTable-responsive").DataTable({
                 pagingType: "full_numbers",
-                pageLength: 10,
-                lengthMenu: [[5, 10, 20], [5, 10, 20]],
+                pageLength: 6,
+                lengthMenu: [[4, 6, 20], [4, 6, 20]],
                 autoWidth: !1,
                 responsive: !0,
-                order: [[1]],
+                order: [[5, 'asc']],
                 dom: "<'row'<'col-sm-12 col-md-3'<'#status-filter-place'>><'col-sm-12 col-md-6'<'#date-filter-box'>><'col-sm-12 col-md-3'f>><'row'<'col-sm-12'tr>><'row mt-3'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 ajax: {
-                    url: './don_hang/getData',
-                    dataSrc: ''
+                    url: './don_hang/getData', // gọi đến url này
+                    dataSrc: '' // default: trả về mảng
                 },
                 columns: [
                     {
@@ -142,7 +143,24 @@ Dashmix.onLoad(() =>
                     {
                         data: 'diachigiaohang',
                         className: 'd-none d-lg-table-cell',
-                        defaultContent: "Chưa có"
+                        defaultContent: "Chưa có",
+                        render: function (data, type, row) {
+                            if (type === 'sort' || type === 'filter') {
+                                if (!data) return "";
+
+                                // "Số nhà, Phường/Xã, Quận/Huyện, Tỉnh/Thành"
+                                let parts = data.split(',');
+
+                                if (parts.length >= 3) {
+                                    return parts[parts.length - 3].trim();
+                                }
+
+                                // Từ khoá "Phường" hoặc "P"
+                                let match = data.match(/(Phường\s+[^,]+|P\.\s+[^,]+)/i);
+                                return match ? match[0].trim() : data;
+                            }
+                            return data;
+                        }
                     },
                     {
                         data: 'hinhthucthanhtoan',
