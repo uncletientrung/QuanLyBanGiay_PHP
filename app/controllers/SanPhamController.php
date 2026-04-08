@@ -153,7 +153,7 @@ class SanPhamController
         $listMau = $this->mauModel->getAll();
         $listLoai = $this->loaiModel->getAll();
         $listSP = $this->model->getAll();
-        $listSize = $this->sizeModel->getSizeBySanPham($masp);
+        $listSize = $this->sizeModel->getSizeBySanPham2($masp);
         $listHinh = $this->hinhAnhModel->getImageById($masp);
         $currentSP= $this->model->getSpById($masp);
         $hang=$this->hangModel->getNameById($currentSP['hang']);

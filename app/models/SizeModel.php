@@ -26,6 +26,18 @@ class SizeModel
         $stmt->execute([$maSP]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getSizeBySanPham2($maSP)
+    {
+        $sql = "
+            SELECT s.masize, s.tensize, ss.soluong
+            FROM sanphamsize ss
+            JOIN size s ON ss.masize = s.masize
+            WHERE ss.masp = ? AND s.trangthai = 1
+        ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$maSP]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getSoLuongSize($maSP, $maSize)
     {
