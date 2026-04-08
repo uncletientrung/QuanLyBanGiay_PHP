@@ -212,7 +212,7 @@
           <?php if (empty($img)) { ?>
             <h3 id="gallery-state">Chưa có hình ảnh</h3>
           <?php } ?>
-          <div class="row items-push js-gallery justify-content-start">
+          <div class="w-100 row items-push js-gallery justify-content-start">
             <?php if (!empty($img)) {
               foreach ($img as $index => $val) { ?>
                 <?php if ($val['ismain']) { ?>

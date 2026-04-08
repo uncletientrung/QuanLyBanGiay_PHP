@@ -340,7 +340,6 @@ Dashmix.onLoad(() => {
         success: function (response) {
           if (response.status === "success") {
             const gallery = $(".js-gallery");
-
             response.files.forEach(function (filePath) {
               const newHtml = `
                                 <div class="col-lg-2 border border-3 rounded-4 animated fadeIn p-0 overflow-hidden me-4">
@@ -357,6 +356,11 @@ Dashmix.onLoad(() => {
                                     </div>
                                 </div>`;
               gallery.append(newHtml);
+              const remainingImages = document.querySelectorAll('.js-gallery .col-lg-2');
+              
+              if (remainingImages.length !== 0) {
+                $("#gallery-state").prop('hidden', true);
+              }
             });
           } else {
             alert("Upload failed: " + response.message);
@@ -493,6 +497,10 @@ Dashmix.onLoad(() => {
           btn.closest(".options-container").parent().addClass("fadeOut");
           setTimeout(function () {
             btn.closest(".options-container").parent().remove();
+            const remainingImages = document.querySelectorAll('.js-gallery .col-lg-2');
+            if (remainingImages.length === 0) {
+              $("#gallery-state").prop('hidden', false);
+            }
           }, 1000);
         }
       },
