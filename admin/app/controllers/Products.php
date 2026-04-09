@@ -79,7 +79,7 @@ class Products extends Controller
         $productSize = $this->sizeModel->getSizeBySanPham($id);
         $size = $this->sizeModel->getAll();
         $brands = $this->brandsModel->getAll();
-        $colors = $this->colorsModel->getAll();
+        $colors = $this->colorsModel->getAllForAdmin();
         $categories = $this->categoriesModel->getAll();
 
         $this->renderView("main_layout", [
