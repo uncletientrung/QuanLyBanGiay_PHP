@@ -339,6 +339,7 @@ Dashmix.onLoad(() => {
         dataType: "json",
         success: function (response) {
           if (response.status === "success") {
+		$("#gallery-state").prop('hidden', true);
             const gallery = $(".js-gallery");
             response.files.forEach(function (filePath) {
               const newHtml = `

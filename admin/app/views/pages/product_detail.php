@@ -209,9 +209,9 @@
           </form>
         </div>
         <div class="block-content d-flex justify-content-center flex-wrap">
-          <?php if (empty($img)) { ?>
-            <h3 id="gallery-state">Chưa có hình ảnh</h3>
-          <?php } ?>
+          
+            <h3 id="gallery-state" class="<?= !empty($img) ? 'd-none' : '' ?>">Chưa có hình ảnh</h3>
+         
           <div class="w-100 row items-push js-gallery justify-content-start">
             <?php if (!empty($img)) {
               foreach ($img as $index => $val) { ?>

@@ -68,7 +68,7 @@ Dashmix.onLoad(() =>
                     url: './products/getData',
                     dataSrc: ''
                 },
-                order: [[1, 'asc']],
+                order: [[1, 'desc']],
                 columns: [
                     {
                         data: null,
