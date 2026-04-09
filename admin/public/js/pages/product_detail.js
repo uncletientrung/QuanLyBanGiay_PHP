@@ -16,6 +16,9 @@ Dashmix.onLoad(() => {
             tensp: function () {
               return $("#tensp").val();
             },
+            masp: function() { 
+              return $("#masp").text().split("-")[1];
+            },
           },
         },
       },

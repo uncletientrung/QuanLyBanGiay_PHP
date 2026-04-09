@@ -724,11 +724,11 @@ class SanPhamModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function checkDuplicateName($tensp)
+    public function checkDuplicateName($tensp, $masp)
     {
-        $sql = "SELECT masp FROM sanpham WHERE tensp = ?";
+        $sql = "SELECT masp FROM sanpham WHERE tensp = ? AND masp != ?";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$tensp]);
-        return $stmt->rowCount() > 1;
+        $stmt->execute([$tensp, $masp]);
+        return $stmt->rowCount() > 0;
     }
 }

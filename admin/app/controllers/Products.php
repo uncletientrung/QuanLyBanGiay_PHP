@@ -238,8 +238,9 @@ class Products extends Controller
 
     public function checkDuplicateName() {
         $tensp = $_POST['tensp'];
-        if (isset($tensp)) {
-            echo json_encode(!$this->productsModel->checkDuplicateName($tensp));
+        $masp = $_POST['masp'];
+        if (isset($tensp) && isset($masp)) {
+            echo json_encode(!$this->productsModel->checkDuplicateName($tensp, $masp));
             exit();
         }
         echo json_encode(false);
