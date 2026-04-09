@@ -78,9 +78,9 @@ class Products extends Controller
 
         $productSize = $this->sizeModel->getSizeBySanPham($id);
         $size = $this->sizeModel->getAll();
-        $brands = $this->brandsModel->getAll();
+        $brands = $this->brandsModel->getAllForAdmin();
         $colors = $this->colorsModel->getAllForAdmin();
-        $categories = $this->categoriesModel->getAll();
+        $categories = $this->categoriesModel->getAllForAdmin();
 
         $this->renderView("main_layout", [
             "page" => "product_detail",
